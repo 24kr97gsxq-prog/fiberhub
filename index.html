@@ -1,1 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dalmex Fiber Hub AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --ai-purple: #8b5cf6;
+            --ai-purple-dark: #7c3aed;
+            --light: #dcfce7;
+            --bg: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%);
+            --card-bg: rgba(255,255,255,0.9);
+            --card-border: rgba(255,255,255,0.6);
+            --text: #1e293b;
+            --text-muted: #64748b;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text);
+        }
+        .login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .login-screen.hidden { display: none; }
+        .login-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 48px;
+            width: 100%;
+            max-width: 420px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+        }
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 24px;
+            box-shadow: 0 12px 30px rgba(139,92,246,0.4);
+        }
+        .login-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .login-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--ai-purple);
+        }
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .login-btn.green {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+        .login-error {
+            background: #fef2f2;
+            color: #dc2626;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+        .login-error.show { display: block; }
+        .login-footer {
+            text-align: center;
+            margin-top: 28px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .app-container { display: none; }
+        .app-container.active { display: block; }
+        .header {
+            background: rgba(255,255,255,0.95);
+            padding: 16px 24px;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+        }
+        .brand-title {
+            font-size: 22px;
+            font-weight: 800;
+        }
+        .brand-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .user-badge {
+            background: var(--light);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        .logout-btn {
+            padding: 8px 16px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .nav {
+            display: flex;
+            gap: 8px;
+            padding: 16px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+        .nav-btn {
+            padding: 10px 18px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .nav-btn.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+        }
+        .nav-btn.ai-tab {
+            background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+            color: white;
+            border: none;
+        }
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px 40px;
+        }
+        .chat-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 20px;
+        }
+        @media (max-width: 900px) {
+            .chat-container { grid-template-columns: 1fr; }
+        }
+        .chat-panel {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+        .chat-header {
+            background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+            padding: 18px 24px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .chat-avatar {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+        .chat-title { font-size: 18px; font-weight: 700; }
+        .chat-status { font-size: 12px; opacity: 0.9; }
+        .chat-messages {
+            padding: 20px;
+            min-height: 400px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .message {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            max-width: 90%;
+        }
+        .message.user {
+            margin-left: auto;
+            flex-direction: row-reverse;
+        }
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .message.ai .message-avatar { background: var(--ai-purple); }
+        .message.user .message-avatar { background: var(--primary); }
+        .message-content {
+            padding: 14px 18px;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .message.ai .message-content {
+            background: #f1f5f9;
+        }
+        .message.user .message-content {
+            background: var(--primary);
+            color: white;
+        }
+        .chat-input-area {
+            padding: 16px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 12px;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: inherit;
+        }
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--ai-purple);
+        }
+        .chat-send {
+            padding: 14px 24px;
+            background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .quick-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        .quick-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        .quick-btn {
+            width: 100%;
+            padding: 12px 14px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 13px;
+            cursor: pointer;
+            text-align: left;
+            margin-bottom: 8px;
+        }
+        .quick-btn:hover {
+            background: var(--light);
+            border-color: var(--primary);
+        }
+        .rec-card {
+            background: linear-gradient(135deg, rgba(139,92,246,0.1) 0%, rgba(124,58,237,0.05) 100%);
+            border: 1px solid rgba(139,92,246,0.2);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 10px;
+        }
+        .rec-label { font-size: 11px; color: var(--ai-purple); font-weight: 600; }
+        .rec-value { font-size: 18px; font-weight: 700; }
+        .rec-detail { font-size: 12px; color: var(--text-muted); }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        .stat-icon { font-size: 28px; margin-bottom: 8px; }
+        .stat-value { font-size: 28px; font-weight: 800; }
+        .stat-label { font-size: 12px; color: var(--text-muted); }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+        .contact-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+        }
+        .contact-card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        .contact-card.priority {
+            border-left: 4px solid #f59e0b;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        .card-avatar {
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+        .badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-mill { background: #dbeafe; color: #1d4ed8; }
+        .badge-broker { background: #fef3c7; color: #92400e; }
+        .badge-export { background: #ede9fe; color: #6d28d9; }
+        .card-company { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+        .card-contact { font-size: 14px; color: var(--primary-dark); font-weight: 600; margin-bottom: 10px; }
+        .card-info { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+        .card-prices {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #f1f5f9;
+        }
+        .price-tag {
+            background: var(--light);
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 14px;
+        }
+        .btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+        .btn-ai {
+            background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+            color: white;
+        }
+        .btn-secondary {
+            background: #f1f5f9;
+            color: var(--text);
+        }
+        .footer {
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            padding: 20px 24px;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <div class="login-logo">🤖</div>
+            <h1 class="login-title">Dalmex Fiber Hub</h1>
+            <p class="login-subtitle">AI-Powered Recovered Paper Trading</p>
+            <div class="login-error" id="loginError">Invalid username or password</div>
+            <div class="form-group">
+                <label class="form-label">Username</label>
+                <input type="text" id="username" class="form-input" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" id="password" class="form-input" placeholder="Enter password">
+            </div>
+            <button class="login-btn" onclick="handleLogin()">Sign In</button>
+            <button class="login-btn green" onclick="quickLogin()">Quick Access (No Password)</button>
+            <div class="login-footer">
+                <strong>Dalmex Recycling LLC</strong><br>
+                2828 Nagle St. Dallas, TX 75220 • 214-352-2000
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container" id="appContainer">
+        <header class="header">
+            <div class="header-inner">
+                <div class="header-left">
+                    <div class="logo">🤖</div>
+                    <div>
+                        <div class="brand-title">Dalmex Fiber Hub</div>
+                        <div class="brand-sub">AI-Powered • Dallas, TX</div>
+                    </div>
+                </div>
+                <div style="display:flex;gap:10px;align-items:center;">
+                    <div class="user-badge" id="userBadge">User</div>
+                    <button class="logout-btn" onclick="handleLogout()">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <nav class="nav" id="navBar"></nav>
+        <main class="main" id="mainContent"></main>
+
+        <footer class="footer">
+            © 2025 Dalmex Recycling LLC • Created by Robert Vandling • AI-Powered by Claude
+        </footer>
+    </div>
+
+    <script>
+        const users = [
+            { id: 1, username: 'Dalmex', password: '2828', role: 'user', name: 'Dalmex User' },
+            { id: 2, username: 'RJVandling', password: 'Sailer66', role: 'admin', name: 'Robert Vandling' }
+        ];
+
+        const buyers = [
+            { id: 1, company: "Georgia Pacific", contact: "Jake Walker", email: "jacob.walker1@gapac.com", phone: "(404) 652-4000", type: "Mill", priority: true, commodities: ["OCC", "DLK", "PM", "SOP", "SWL", "HWEC"], prices: { OCC: 65, PM: 155, SWL: 215, DLK: 90, SOP: 150, HWEC: 370 }, notes: "World's largest de-ink fiber user." },
+            { id: 2, company: "Smurfit Westrock", contact: "Cynthia Torres", email: "cynthia.torres@smurfitwestrock.com", phone: "(972) 686-7649", type: "Mill", priority: true, commodities: ["OCC", "PM"], prices: { OCC: 60, PM: 180, SWL: null, DLK: null, SOP: null, HWEC: null }, notes: "LOCAL contact. Best PM price at $180!" },
+            { id: 3, company: "Greenside (Goldbergs)", contact: "Casandra Espinoza", email: "grupocartonero.mty@gmail.com", phone: "+52 81 8123-4567", type: "Export", priority: true, commodities: ["OCC", "PM", "SWL"], prices: { OCC: 58, PM: 165, SWL: 215, DLK: null, SOP: null, HWEC: null }, notes: "Mexico export." },
+            { id: 4, company: "American Fiber", contact: "Steve Minor", email: "SMinor@amfiberservices.com", phone: "(678) 555-1234", type: "Broker", priority: true, commodities: ["OCC", "PM", "SWL", "HWEC"], prices: { OCC: 62, PM: 160, SWL: 220, DLK: null, SOP: null, HWEC: 365 }, notes: "Best SWL at $220!" },
+            { id: 5, company: "Graphic Packaging - Waco", contact: "Fiber Procurement", email: "fiberprocurement@graphicpkg.com", phone: "(770) 240-7200", type: "Mill", priority: true, commodities: ["OCC", "Mixed Paper"], prices: { OCC: 70, PM: 55, SWL: null, DLK: null, SOP: null, HWEC: null }, notes: "NEW MILL 2026! Best OCC at $70!" },
+            { id: 6, company: "Green Bay Packaging", contact: "Fiber Procurement", email: "info@gbp.com", phone: "(501) 354-2131", type: "Mill", priority: true, commodities: ["OCC"], prices: { OCC: 68, PM: null, SWL: null, DLK: null, SOP: null, HWEC: null }, notes: "$1B expansion!" },
+            { id: 7, company: "Pratt Industries", contact: "Fiber Procurement", email: "recyclingcs@prattindustries.com", phone: "(888) 347-7288", type: "Mill", priority: false, commodities: ["OCC", "Mixed Paper"], prices: { OCC: 65, PM: 50, SWL: null, DLK: null, SOP: null, HWEC: null }, notes: "100% recycled." },
+            { id: 8, company: "International Paper", contact: "Recycling Division", email: "recycling@ipaper.com", phone: "(972) 245-3000", type: "Mill", priority: false, commodities: ["OCC", "DLK", "SOP", "PM"], prices: { OCC: 65, PM: 52, SWL: null, DLK: 95, SOP: 145, HWEC: null }, notes: "LOCAL Carrollton." },
+            { id: 9, company: "Texas Recycling", contact: "Joel/Craig Litman", email: "info@texasrecycling.com", phone: "(214) 357-0262", type: "Broker", priority: false, commodities: ["OCC", "PM", "SOP", "SWL"], prices: { OCC: 62, PM: 48, SWL: 205, DLK: null, SOP: 140, HWEC: null }, notes: "25+ years DFW." }
+        ];
+
+        let currentUser = null;
+        let currentTab = 'ai';
+        let chatHistory = [];
+
+        function handleLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const user = users.find(u => u.username === username && u.password === password);
+            if (user) {
+                currentUser = user;
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('appContainer').classList.add('active');
+                document.getElementById('userBadge').textContent = (user.role === 'admin' ? '👑 ' : '👤 ') + user.name;
+                initApp();
+            } else {
+                document.getElementById('loginError').classList.add('show');
+            }
+        }
+
+        function quickLogin() {
+            currentUser = users[1];
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('appContainer').classList.add('active');
+            document.getElementById('userBadge').textContent = '👑 Robert Vandling';
+            initApp();
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            chatHistory = [];
+            document.getElementById('appContainer').classList.remove('active');
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('loginError').classList.remove('show');
+        }
+
+        function initApp() {
+            if (chatHistory.length === 0) {
+                chatHistory.push({
+                    role: 'ai',
+                    content: 'Hi ' + currentUser.name + '! I can help you with pricing, buyer info, and drafting emails. Try asking "Who pays most for OCC?" or "Draft email to Jake at GP".'
+                });
+            }
+            renderNav();
+            renderContent();
+        }
+
+        function renderNav() {
+            const tabs = [
+                { id: 'ai', label: '🤖 AI Assistant', ai: true },
+                { id: 'dashboard', label: '📊 Dashboard' },
+                { id: 'contacts', label: '👥 Contacts' }
+            ];
+            document.getElementById('navBar').innerHTML = tabs.map(t => 
+                '<button class="nav-btn ' + (currentTab === t.id ? 'active' : '') + (t.ai && currentTab !== t.id ? ' ai-tab' : '') + '" onclick="setTab(\'' + t.id + '\')">' + t.label + '</button>'
+            ).join('');
+        }
+
+        function setTab(tab) {
+            currentTab = tab;
+            renderNav();
+            renderContent();
+        }
+
+        function renderContent() {
+            const main = document.getElementById('mainContent');
+            if (currentTab === 'ai') {
+                main.innerHTML = renderAI();
+            } else if (currentTab === 'dashboard') {
+                main.innerHTML = renderDashboard();
+            } else if (currentTab === 'contacts') {
+                main.innerHTML = renderContacts();
+            }
+        }
+
+        function renderAI() {
+            const bestOCC = buyers.filter(b => b.prices.OCC).sort((a,b) => b.prices.OCC - a.prices.OCC)[0];
+            const bestSWL = buyers.filter(b => b.prices.SWL).sort((a,b) => b.prices.SWL - a.prices.SWL)[0];
+            const bestPM = buyers.filter(b => b.prices.PM).sort((a,b) => b.prices.PM - a.prices.PM)[0];
+
+            return '<div class="chat-container">' +
+                '<div class="chat-panel">' +
+                    '<div class="chat-header">' +
+                        '<div class="chat-avatar">🤖</div>' +
+                        '<div><div class="chat-title">Fiber Hub AI</div><div class="chat-status">Powered by Claude</div></div>' +
+                    '</div>' +
+                    '<div class="chat-messages" id="chatMessages">' +
+                        chatHistory.map(m => 
+                            '<div class="message ' + m.role + '">' +
+                                '<div class="message-avatar">' + (m.role === 'ai' ? '🤖' : '👤') + '</div>' +
+                                '<div class="message-content">' + m.content + '</div>' +
+                            '</div>'
+                        ).join('') +
+                    '</div>' +
+                    '<div class="chat-input-area">' +
+                        '<input type="text" class="chat-input" id="chatInput" placeholder="Ask about buyers, prices, or to draft emails...">' +
+                        '<button class="chat-send" onclick="sendChat()">Send</button>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="sidebar">' +
+                    '<div class="quick-card">' +
+                        '<div class="quick-title">⚡ Quick Actions</div>' +
+                        '<button class="quick-btn" onclick="askAI(\'Who pays most for OCC?\')">📦 Best OCC buyer?</button>' +
+                        '<button class="quick-btn" onclick="askAI(\'Best buyer for SWL and high grades?\')">📄 Best for high grades?</button>' +
+                        '<button class="quick-btn" onclick="askAI(\'Draft price request email\')">✉️ Draft price request</button>' +
+                        '<button class="quick-btn" onclick="askAI(\'Q1 2026 market outlook\')">📈 Market outlook</button>' +
+                    '</div>' +
+                    '<div class="quick-card">' +
+                        '<div class="quick-title">🎯 AI Recommendations</div>' +
+                        '<div class="rec-card"><div class="rec-label">Best OCC</div><div class="rec-value">$' + bestOCC.prices.OCC + '/ton</div><div class="rec-detail">' + bestOCC.company + '</div></div>' +
+                        '<div class="rec-card"><div class="rec-label">Best SWL</div><div class="rec-value">$' + bestSWL.prices.SWL + '/ton</div><div class="rec-detail">' + bestSWL.company + '</div></div>' +
+                        '<div class="rec-card"><div class="rec-label">Best PM</div><div class="rec-value">$' + bestPM.prices.PM + '/ton</div><div class="rec-detail">' + bestPM.company + '</div></div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        }
+
+        function renderDashboard() {
+            const mills = buyers.filter(b => b.type === 'Mill').length;
+            const priority = buyers.filter(b => b.priority).length;
+            return '<div class="stats-grid">' +
+                '<div class="stat-card"><div class="stat-icon">🏭</div><div class="stat-value">' + mills + '</div><div class="stat-label">Mills</div></div>' +
+                '<div class="stat-card"><div class="stat-icon">👥</div><div class="stat-value">' + buyers.length + '</div><div class="stat-label">Total Contacts</div></div>' +
+                '<div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-value">' + priority + '</div><div class="stat-label">Priority</div></div>' +
+                '<div class="stat-card"><div class="stat-icon">💰</div><div class="stat-value">$70</div><div class="stat-label">Best OCC</div></div>' +
+            '</div>' +
+            '<h3 style="margin-bottom:16px;font-size:18px;">⭐ Priority Contacts</h3>' +
+            '<div class="cards-grid">' + buyers.filter(b => b.priority).map(b => renderCard(b)).join('') + '</div>';
+        }
+
+        function renderContacts() {
+            return '<h3 style="margin-bottom:16px;font-size:18px;">👥 All Contacts</h3>' +
+            '<div class="cards-grid">' + buyers.map(b => renderCard(b)).join('') + '</div>';
+        }
+
+        function renderCard(b) {
+            const initials = b.company.split(' ').map(w => w[0]).join('').slice(0,2);
+            const badgeClass = b.type === 'Mill' ? 'badge-mill' : b.type === 'Export' ? 'badge-export' : 'badge-broker';
+            const prices = Object.entries(b.prices).filter(([k,v]) => v !== null);
+            return '<div class="contact-card ' + (b.priority ? 'priority' : '') + '">' +
+                '<div class="card-header">' +
+                    '<div class="card-avatar">' + initials + '</div>' +
+                    '<span class="badge ' + badgeClass + '">' + b.type + '</span>' +
+                '</div>' +
+                '<div class="card-company">' + b.company + '</div>' +
+                '<div class="card-contact">' + b.contact + '</div>' +
+                '<div class="card-info">📧 ' + b.email + '<br>📞 ' + b.phone + '</div>' +
+                (prices.length ? '<div class="card-prices">' + prices.slice(0,4).map(([k,v]) => '<span class="price-tag">' + k + ': $' + v + '</span>').join('') + '</div>' : '') +
+                '<div class="card-actions">' +
+                    '<button class="btn btn-primary" onclick="window.open(\'mailto:' + b.email + '\')">📧 Email</button>' +
+                    '<button class="btn btn-ai" onclick="setTab(\'ai\');setTimeout(function(){askAI(\'Tell me about ' + b.company + '\')},100)">🤖 Ask AI</button>' +
+                '</div>' +
+            '</div>';
+        }
+
+        function askAI(question) {
+            document.getElementById('chatInput').value = question;
+            sendChat();
+        }
+
+        function sendChat() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim();
+            if (!msg) return;
+            chatHistory.push({ role: 'user', content: msg });
+            input.value = '';
+            const response = generateResponse(msg);
+            chatHistory.push({ role: 'ai', content: response });
+            renderContent();
+            document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+        }
+
+        function generateResponse(msg) {
+            const m = msg.toLowerCase();
+            if (m.includes('occ') && (m.includes('best') || m.includes('most') || m.includes('who'))) {
+                const sorted = buyers.filter(b => b.prices.OCC).sort((a,b) => b.prices.OCC - a.prices.OCC);
+                return '<strong>Best OCC Buyers:</strong><br><br>1. ' + sorted[0].company + ' - <strong>$' + sorted[0].prices.OCC + '/ton</strong> ⭐<br>Contact: ' + sorted[0].contact + ' | ' + sorted[0].phone + '<br><br>2. ' + sorted[1].company + ' - $' + sorted[1].prices.OCC + '/ton<br><br>3. ' + sorted[2].company + ' - $' + sorted[2].prices.OCC + '/ton';
+            }
+            if (m.includes('swl') || m.includes('high grade')) {
+                const sorted = buyers.filter(b => b.prices.SWL).sort((a,b) => b.prices.SWL - a.prices.SWL);
+                return '<strong>Best SWL Buyers:</strong><br><br>1. ' + sorted[0].company + ' - <strong>$' + sorted[0].prices.SWL + '/ton</strong> ⭐<br>2. ' + sorted[1].company + ' - $' + sorted[1].prices.SWL + '/ton';
+            }
+            if (m.includes('draft') || m.includes('email')) {
+                return '<strong>Draft Price Request Email:</strong><br><br>Subject: Dalmex Recycling - Price Request<br><br>Hello,<br><br>I\'m reaching out from Dalmex Recycling to request your current pricing for recovered paper.<br><br>We have consistent volume in OCC, PM, SWL, and DLK. Typical loads are 43,000-45,000 lbs.<br><br>Please send your current buy prices.<br><br>Thank you,<br>Robert Vandling<br>Dalmex Recycling LLC<br>214-352-2000';
+            }
+            if (m.includes('outlook') || m.includes('market') || m.includes('2026')) {
+                return '<strong>Q1 2026 Market Outlook:</strong><br><br>✅ <strong>Bullish for sellers</strong><br><br>• ~10% of NA capacity eliminated in 2025<br>• Graphic Packaging Waco opening 2026<br>• Green Bay $1B expansion<br>• OCC expected to rise to $120-150/ton<br><br>💡 Lock in relationships with expanding mills now!';
+            }
+            for (const b of buyers) {
+                if (m.includes(b.company.toLowerCase()) || m.includes(b.contact.split(' ')[0].toLowerCase())) {
+                    const prices = Object.entries(b.prices).filter(([k,v]) => v !== null).map(([k,v]) => k + ': $' + v).join(', ');
+                    return '<strong>' + b.company + '</strong><br><br>Contact: ' + b.contact + '<br>Phone: ' + b.phone + '<br>Email: ' + b.email + '<br>Type: ' + b.type + '<br><br>Prices: ' + (prices || 'Contact for pricing') + '<br><br>Notes: ' + b.notes;
+                }
+            }
+            return 'I can help with:<br><br>• "Who pays most for OCC?"<br>• "Best buyer for SWL?"<br>• "Draft price request email"<br>• "Tell me about Georgia Pacific"<br>• "Q1 2026 market outlook"';
+        }
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                if (!currentUser) handleLogin();
+                else if (document.getElementById('chatInput') === document.activeElement) sendChat();
+            }
+        });
+    </script>
+</body>
+</html>
 
