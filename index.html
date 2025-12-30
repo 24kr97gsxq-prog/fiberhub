@@ -416,14 +416,13 @@ const users = [
 ];
 
 const defaultBuyers = [
-    { id: 1, company: 'Smurfit Westrock - Forney', contact: 'Mike Johnson', email: 'mjohnson@smurfitwestrock.com', phone: '972-555-1234', type: 'mill', priority: true, commodities: ['OCC', 'SWL'], notes: 'Largest regional buyer', prices: { OCC: 95, SWL: 180 } },
-    { id: 2, company: 'Pratt Industries - Conroe', contact: 'Sarah Williams', email: 'swilliams@prattindustries.com', phone: '936-555-2345', type: 'mill', priority: true, commodities: ['OCC', 'PM'], notes: '100% recycled content mill', prices: { OCC: 92, PM: 45 } },
-    { id: 3, company: 'Graphic Packaging - Waco', contact: 'David Chen', email: 'dchen@graphicpkg.com', phone: '254-555-3456', type: 'mill', priority: false, commodities: ['SWL', 'SOP'], notes: 'Coated recycled board', prices: { SWL: 175, SOP: 120 } },
-    { id: 4, company: 'International Paper', contact: 'Lisa Martinez', email: 'lmartinez@ipaper.com', phone: '903-555-4567', type: 'mill', priority: false, commodities: ['OCC', 'ONP'], notes: 'Multiple facilities', prices: { OCC: 90, ONP: 55 } },
-    { id: 5, company: 'Friedman Recycling', contact: 'Tom Friedman', email: 'tom@friedmanrecycling.com', phone: '214-555-5678', type: 'broker', priority: true, commodities: ['OCC', 'SWL', 'PM'], notes: 'Regional broker - good relationships', prices: { OCC: 88, SWL: 165, PM: 40 } },
-    { id: 6, company: 'Gulf Coast Paper', contact: 'Carlos Rodriguez', email: 'carlos@gulfcoastpaper.com', phone: '713-555-6789', type: 'broker', priority: false, commodities: ['OCC', 'PM'], notes: 'Export connections', prices: { OCC: 85, PM: 38 } },
-    { id: 7, company: 'Asia Pulp Trading', contact: 'Jennifer Wu', email: 'jwu@asiapulp.com', phone: '310-555-7890', type: 'export', priority: false, commodities: ['OCC', 'SWL', 'PM', 'ONP'], notes: 'China/SE Asia markets', prices: { OCC: 82, SWL: 155, PM: 35, ONP: 48 } },
-    { id: 8, company: 'Mexico Paper Export', contact: 'Roberto Sanchez', email: 'rsanchez@mexpaper.com', phone: '956-555-8901', type: 'export', priority: false, commodities: ['OCC', 'PM'], notes: 'Mexico mills', prices: { OCC: 80, PM: 32 } }
+    { id: 1, company: 'Georgia Pacific', contact: 'Jake Walker', email: 'jacob.walker1@gapac.com', phone: '', type: 'mill', priority: true, commodities: ['OCC', 'DLK', 'PM', 'SOP', 'SWL', 'HWEC'], notes: 'Multiple commodities - best OCC price', prices: { OCC: 65, PM: 155, SWL: 215, HWEC: 370 } },
+    { id: 2, company: 'SKG Westrock', contact: 'Cynthia Torres', email: 'cynthia.torres@smurfitwestrock.com', phone: '', type: 'mill', priority: true, commodities: ['OCC', 'PM'], notes: 'Major mill buyer', prices: { OCC: 60 } },
+    { id: 3, company: 'Greenside (Grupo Cartonero)', contact: 'Casandra Espinoza', email: 'grupocartonero.mty@gmail.com', phone: '', type: 'export', priority: true, commodities: ['OCC', 'PM', 'SWL'], notes: 'Mexico - Monterrey', prices: { OCC: 58, PM: 165, SWL: 215 } },
+    { id: 4, company: 'American Fiber', contact: 'Steve Minor', email: 'sminor@amfiberservices.com', phone: '', type: 'broker', priority: true, commodities: ['OCC', 'PM', 'SWL', 'CBS PM', 'HWEC'], notes: 'Broker - multiple grades', prices: { SWL: 215, 'CBS PM': 160, HWEC: 250 } },
+    { id: 5, company: 'Marck', contact: 'Don Langley', email: 'dlongley@marck.net', phone: '', type: 'broker', priority: false, commodities: ['OCC', 'SWL'], notes: 'Best SWL price', prices: { OCC: 55, SWL: 230 } },
+    { id: 6, company: 'Pratt Industries', contact: '', email: '', phone: '', type: 'mill', priority: false, commodities: ['OCC'], notes: 'Need to get contact info', prices: {} },
+    { id: 7, company: 'Future Foam', contact: 'Tina Aaron', email: 'tmaaron@futurefoam.com', phone: '', type: 'mill', priority: false, commodities: ['Foam'], notes: 'Foam buyer only', prices: {} }
 ];
 
 const translations = {
@@ -457,24 +456,36 @@ const newsItems = [
 ];
 
 const tickerItems = [
-    { type: 'price', text: 'OCC: $95/ton (+$3)' },
-    { type: 'price', text: 'SWL: $175/ton (-$5)' },
-    { type: 'price', text: 'Mixed Paper: $42/ton (Flat)' },
-    { type: 'news', text: 'Smurfit Westrock announces capacity expansion' },
-    { type: 'alert', text: 'PPI Report due January 14, 2025' },
-    { type: 'news', text: 'China import restrictions continue into 2025' },
-    { type: 'price', text: 'ONP: $52/ton (+$2)' },
-    { type: 'news', text: 'Pratt Industries reports record recycled content usage' }
+    { type: 'price', text: 'OCC: $58-65/ton (Dec 2025)' },
+    { type: 'price', text: 'SWL: $215-230/ton (Dec 2025)' },
+    { type: 'price', text: 'Mixed Paper: $155-165/ton' },
+    { type: 'news', text: 'Georgia Pacific paying top OCC at $65/ton' },
+    { type: 'alert', text: 'SWL prices up - Marck paying $230/ton' },
+    { type: 'news', text: 'HWEC strong at $250-370/ton' },
+    { type: 'price', text: 'CBS PM: $160/ton' },
+    { type: 'news', text: 'January 2026 pricing coming soon' }
 ];
 
 const ppiPrices = [
-    { commodity: 'OCC (PS 11)', price: '$95', range: '$90 - $100', trend: '📈', change: '+3.2%', source: 'BLS PPI December 2024' },
-    { commodity: 'Sorted White Ledger', price: '$175', range: '$165 - $185', trend: '📉', change: '-2.8%', source: 'BLS PPI December 2024' },
-    { commodity: 'Mixed Paper (PS 54)', price: '$42', range: '$38 - $48', trend: '➡️', change: '0.0%', source: 'BLS PPI December 2024' },
-    { commodity: 'ONP (PS 8)', price: '$52', range: '$48 - $58', trend: '📈', change: '+4.0%', source: 'BLS PPI December 2024' },
-    { commodity: 'Sorted Office Paper', price: '$115', range: '$105 - $125', trend: '📈', change: '+1.8%', source: 'BLS PPI December 2024' },
-    { commodity: 'DLK (PS 47)', price: '$135', range: '$125 - $145', trend: '➡️', change: '-0.5%', source: 'BLS PPI December 2024' }
+    { commodity: 'OCC (PS 11)', price: '$55-65', range: '$55 - $65', trend: '📉', change: '-8%', source: 'Dalmex DFW Market Dec 2025', ppiCode: 'WPU09120325', ppiIndex: '78.2' },
+    { commodity: 'Sorted White Ledger (SWL)', price: '$215-230', range: '$215 - $230', trend: '📈', change: '+30%', source: 'Dalmex DFW Market Dec 2025', ppiCode: 'WPU09120301', ppiIndex: 'N/A' },
+    { commodity: 'Mixed Paper (PM/PS 54)', price: '$155-165', range: '$155 - $165', trend: '📈', change: '+3%', source: 'Dalmex DFW Market Dec 2025', ppiCode: 'WPU0912', ppiIndex: '92.4' },
+    { commodity: 'CBS/Coated Book Stock', price: '$160', range: '$155 - $165', trend: '📉', change: '-24%', source: 'Dalmex DFW Market Dec 2025', ppiCode: 'N/A', ppiIndex: 'N/A' },
+    { commodity: 'HWEC (Hard White Env Cut)', price: '$250-370', range: '$250 - $370', trend: '➡️', change: '0%', source: 'Dalmex DFW Market Dec 2025', ppiCode: 'N/A', ppiIndex: 'N/A' },
+    { commodity: 'DLK (Double Lined Kraft)', price: 'Call', range: 'Market Rate', trend: '➡️', change: 'TBD', source: 'Dalmex DFW Market Dec 2025', ppiCode: 'N/A', ppiIndex: 'N/A' }
 ];
+
+// Official BLS PPI Series Codes for reference
+const ppiSeriesCodes = {
+    'WPU0912': 'Recyclable Paper (All Grades)',
+    'WPU09120325': 'Corrugated Recyclable Paper (OCC)',
+    'WPU09120301': 'High Grade Deinking Paper',
+    'WPU09141105': 'Recycled Paperboard',
+    'PCU42993042993033': 'Material Recyclers: Corrugated'
+};
+
+// Next PPI Release Date
+const nextPPIRelease = 'January 14, 2026';
 
 // ==================== STATE ====================
 let lang = 'en';
@@ -772,11 +783,25 @@ function renderContacts() {
 function renderPrices() {
     return `<div class="prices-header">
         <div>
-            <div class="prices-title">${t('ppiReport')}</div>
-            <div class="prices-date">${lang === 'es' ? 'Última actualización: Diciembre 2024' : 'Last updated: December 2024'}</div>
+            <div class="prices-title">${lang === 'es' ? 'Precios de Mercado & Reporte PPI' : 'Market Prices & PPI Report'}</div>
+            <div class="prices-date">${lang === 'es' ? 'Última actualización: Diciembre 2025 | Próximo PPI: 14 de enero 2026' : 'Last updated: December 2025 | Next PPI Release: January 14, 2026'}</div>
         </div>
-        <a href="https://www.bls.gov/ppi/" target="_blank" class="btn btn-outline">🔗 ${lang === 'es' ? 'Ver BLS PPI' : 'View BLS PPI'}</a>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="https://fred.stlouisfed.org/series/WPU09120325" target="_blank" class="btn btn-outline">📊 FRED OCC Index</a>
+            <a href="https://www.bls.gov/ppi/" target="_blank" class="btn btn-outline">🔗 BLS PPI</a>
+        </div>
     </div>
+    
+    <div class="panel-card" style="margin-bottom: 20px;">
+        <div class="panel-title">${lang === 'es' ? 'Códigos de Serie PPI Oficiales (BLS)' : 'Official BLS PPI Series Codes'}</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; font-size: 13px;">
+            <div style="padding: 10px; background: var(--bg); border-radius: 8px;"><strong>WPU0912</strong> - Recyclable Paper (All)</div>
+            <div style="padding: 10px; background: var(--bg); border-radius: 8px;"><strong>WPU09120325</strong> - OCC/Corrugated</div>
+            <div style="padding: 10px; background: var(--bg); border-radius: 8px;"><strong>WPU09120301</strong> - High Grade Deinking</div>
+            <div style="padding: 10px; background: var(--bg); border-radius: 8px;"><strong>WPU09141105</strong> - Recycled Paperboard</div>
+        </div>
+    </div>
+    
     <div class="prices-grid">
         ${ppiPrices.map(p => `<div class="price-card">
             <div class="price-card-header">
@@ -786,8 +811,37 @@ function renderPrices() {
             <div class="price-current">${p.price}/ton</div>
             <div class="price-range">${lang === 'es' ? 'Rango' : 'Range'}: ${p.range}</div>
             <div style="color: ${p.change.startsWith('+') ? 'var(--success)' : p.change.startsWith('-') ? 'var(--danger)' : 'var(--text-muted)'}; font-weight: 600; font-size: 13px; margin-top: 8px;">${p.change} ${lang === 'es' ? 'vs mes anterior' : 'vs last month'}</div>
+            ${p.ppiCode && p.ppiCode !== 'N/A' ? '<div style="font-size: 11px; color: var(--text-muted); margin-top: 6px;">PPI: ' + p.ppiCode + ' | Index: ' + p.ppiIndex + '</div>' : ''}
             <div class="price-source">📊 ${p.source}</div>
         </div>`).join('')}
+    </div>
+    
+    <div class="panel-card" style="margin-top: 20px;">
+        <div class="panel-title">${lang === 'es' ? 'Comparación de Precios por Comprador' : 'Buyer Price Comparison'}</div>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                <thead>
+                    <tr style="background: var(--bg);">
+                        <th style="padding: 12px; text-align: left;">${lang === 'es' ? 'Comprador' : 'Buyer'}</th>
+                        <th style="padding: 12px; text-align: right;">OCC</th>
+                        <th style="padding: 12px; text-align: right;">SWL</th>
+                        <th style="padding: 12px; text-align: right;">PM</th>
+                        <th style="padding: 12px; text-align: right;">HWEC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${buyers.filter(b => Object.keys(b.prices || {}).length > 0).sort((a, b) => (b.prices?.OCC || 0) - (a.prices?.OCC || 0)).map(b => 
+                        '<tr style="border-bottom: 1px solid var(--light);">' +
+                            '<td style="padding: 12px;"><strong>' + b.company + '</strong><br><span style="font-size: 11px; color: var(--text-muted);">' + (b.contact || '') + '</span></td>' +
+                            '<td style="padding: 12px; text-align: right; font-weight: 700; color: ' + (b.prices?.OCC ? 'var(--success)' : 'var(--text-muted)') + ';">' + (b.prices?.OCC ? '$' + b.prices.OCC : '-') + '</td>' +
+                            '<td style="padding: 12px; text-align: right; font-weight: 700; color: ' + (b.prices?.SWL ? 'var(--success)' : 'var(--text-muted)') + ';">' + (b.prices?.SWL ? '$' + b.prices.SWL : '-') + '</td>' +
+                            '<td style="padding: 12px; text-align: right; font-weight: 700; color: ' + (b.prices?.PM ? 'var(--success)' : 'var(--text-muted)') + ';">' + (b.prices?.PM ? '$' + b.prices.PM : '-') + '</td>' +
+                            '<td style="padding: 12px; text-align: right; font-weight: 700; color: ' + (b.prices?.HWEC ? 'var(--success)' : 'var(--text-muted)') + ';">' + (b.prices?.HWEC ? '$' + b.prices.HWEC : '-') + '</td>' +
+                        '</tr>'
+                    ).join('')}
+                </tbody>
+            </table>
+        </div>
     </div>`;
 }
 
@@ -866,8 +920,8 @@ function processAIQuery(query) {
     // PPI Report
     if (q.includes('ppi') || q.includes('report') || q.includes('reporte') || q.includes('prices') || q.includes('precios')) {
         return lang === 'es' 
-            ? `📊 **Reporte PPI - Diciembre 2024**\n\n• OCC: $95/ton (+3.2%)\n• SWL: $175/ton (-2.8%)\n• Mixed Paper: $42/ton (sin cambio)\n• ONP: $52/ton (+4.0%)\n\nPróxima publicación: 14 de enero 2025`
-            : `📊 **PPI Report - December 2024**\n\n• OCC: $95/ton (+3.2%)\n• SWL: $175/ton (-2.8%)\n• Mixed Paper: $42/ton (unchanged)\n• ONP: $52/ton (+4.0%)\n\nNext release: January 14, 2025`;
+            ? `📊 **Precios de Mercado - Diciembre 2025**\n\n• OCC: $55-65/ton (Georgia Pacific paga más)\n• SWL: $215-230/ton (Marck paga $230)\n• Mixed Paper: $155-165/ton\n• CBS PM: $160/ton\n• HWEC: $250-370/ton\n\n**Mejores compradores OCC:**\n1. Georgia Pacific - $65\n2. SKG Westrock - $60\n3. Greenside - $58`
+            : `📊 **Market Prices - December 2025**\n\n• OCC: $55-65/ton (Georgia Pacific pays most)\n• SWL: $215-230/ton (Marck pays $230)\n• Mixed Paper: $155-165/ton\n• CBS PM: $160/ton\n• HWEC: $250-370/ton\n\n**Top OCC buyers:**\n1. Georgia Pacific - $65\n2. SKG Westrock - $60\n3. Greenside - $58`;
     }
     
     // Add contact
@@ -993,6 +1047,354 @@ function deleteContact(id) {
 document.addEventListener('keypress', e => {
     if (e.key === 'Enter' && !currentUser) handleLogin();
 });
+</script>
+</body>
+</html>
+;">With Email</div>
+            </div>
+            <div style="padding: 15px; background: var(--bg); border-radius: 10px; text-align: center;">
+                <div style="font-size: 24px; font-weight: 800;">${buyers.filter(b => b.type === 'mill').length}</div>
+                <div style="font-size: 12px; color: var(--text-muted);">Mills</div>
+            </div>
+            <div style="padding: 15px; background: var(--bg); border-radius: 10px; text-align: center;">
+                <div style="font-size: 24px; font-weight: 800;">${buyers.filter(b => b.type === 'broker').length}</div>
+                <div style="font-size: 12px; color: var(--text-muted);">Brokers</div>
+            </div>
+        </div>
+    </div>`;
+}
+
+function addWelcomeMessage() {
+    const welcome = lang === 'es' 
+        ? `¡Hola! Soy tu asistente de Fiber Hub. Puedo ayudarte con:\n\n• "¿Quién paga más por OCC?" - Mejores precios\n• "Agregar comprador" - Nuevo contacto\n• "Reporte PPI" - Precios actuales\n• "Email de precios" - Plantilla de email\n• "Exportar CSV" - Descargar datos\n\n¿En qué puedo ayudarte?`
+        : `Hello! I'm your Fiber Hub assistant. I can help with:\n\n• "Who pays most for OCC?" - Best prices\n• "Add buyer" - New contact\n• "PPI Report" - Current prices\n• "Price request email" - Email template\n• "Export CSV" - Download data\n\nHow can I help you today?`;
+    chat.push({ role: 'ai', content: welcome });
+}
+
+function sendChat() {
+    const input = document.getElementById('chatInput');
+    const msg = input.value.trim();
+    if (!msg) return;
+    
+    chat.push({ role: 'user', content: msg });
+    input.value = '';
+    
+    setTimeout(() => {
+        const response = processAIQuery(msg);
+        chat.push({ role: 'ai', content: response });
+        render();
+        document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
+    }, 500);
+    
+    render();
+}
+
+function askAI(question) {
+    document.getElementById('chatInput').value = question;
+    sendChat();
+}
+
+function processAIQuery(query) {
+    const q = query.toLowerCase();
+    
+    if (q.includes('occ') && (q.includes('best') || q.includes('most') || q.includes('who') || q.includes('top'))) {
+        const best = buyers.filter(b => b.prices?.OCC).sort((a, b) => b.prices.OCC - a.prices.OCC).slice(0, 5);
+        return `📦 **Best OCC Prices (December 2025):**\n\n${best.map((b, i) => `${i + 1}. **${b.company}** - $${b.prices.OCC}/ton\n   📧 ${b.email || 'No email'}`).join('\n\n')}\n\n💡 Georgia Pacific is paying top dollar at $65/ton.`;
+    }
+    
+    if (q.includes('swl') || q.includes('white') || q.includes('ledger')) {
+        const best = buyers.filter(b => b.prices?.SWL).sort((a, b) => b.prices.SWL - a.prices.SWL).slice(0, 5);
+        return `📄 **Best SWL Prices (December 2025):**\n\n${best.map((b, i) => `${i + 1}. **${b.company}** - $${b.prices.SWL}/ton`).join('\n')}\n\n💡 Marck is paying top at $230/ton!`;
+    }
+    
+    if (q.includes('ppi') || q.includes('report') || q.includes('prices') || q.includes('market')) {
+        return `📊 **Market Prices - December 2025**\n\n• OCC: $55-65/ton (GP pays $65)\n• SWL: $215-230/ton (Marck pays $230)\n• Mixed Paper: $155-165/ton\n• CBS PM: $160/ton\n• HWEC: $250-370/ton\n\n📅 Next PPI Release: January 14, 2026\n\n**vs November:**\n• OCC: ↑ +$5-10\n• SWL: ↑ +$50-65\n• CBS: ↓ -$50`;
+    }
+    
+    if (q.includes('email') || q.includes('template') || q.includes('draft')) {
+        showEmailTemplate('priceRequest');
+        return `✉️ **Email Template Ready!**\n\nI've opened the Price Request template for you. You can:\n\n1. Click "Email All Buyers" to send to everyone\n2. Go to Contacts and click ✉️ on any buyer\n3. Go to Emails tab for all templates\n\nTemplates available:\n• Price Request\n• Follow Up\n• Thank You\n• Load Ready`;
+    }
+    
+    if (q.includes('add') || q.includes('new') || q.includes('contact') || q.includes('buyer')) {
+        setTimeout(() => openModal(), 100);
+        return `➕ Opening the contact form...\n\nYou can add:\n• Company name & contact\n• Email & phone\n• Type (Mill/Broker/Export)\n• Commodities they buy\n• Current prices for each commodity`;
+    }
+    
+    if (q.includes('export') || q.includes('csv') || q.includes('download')) {
+        exportCSV();
+        return `📥 **CSV Export Started!**\n\nYour contacts file is downloading with:\n• All ${buyers.length} contacts\n• Company, contact, email, phone\n• Type and commodities\n• Current prices\n\nOpen in Excel or Google Sheets.`;
+    }
+    
+    if (q.includes('november') || q.includes('compare') || q.includes('change')) {
+        return `📈 **November vs December Price Changes:**\n\n**OCC:**\n• Georgia Pacific: $55 → $65 (+$10)\n• Greenside: $60 → $58 (-$2)\n\n**SWL:**\n• Greenside: $165 → $215 (+$50)\n\n**CBS PM:**\n• American Fiber: $210 → $160 (-$50)\n\n💡 SWL saw the biggest gains this month!`;
+    }
+    
+    return `🤖 I can help you with:\n\n• **"Best OCC price"** - Top buyers\n• **"Best SWL price"** - White ledger\n• **"PPI report"** - All current prices\n• **"Email template"** - Price request\n• **"Add contact"** - New buyer\n• **"Export CSV"** - Download data\n• **"Compare November"** - Price changes\n\nWhat would you like to know?`;
+}
+
+function openModal(id = null) {
+    editId = id;
+    const modal = document.getElementById('contactModal');
+    const title = document.getElementById('modalTitle');
+    
+    if (id) {
+        const b = buyers.find(x => x.id === id);
+        if (b) {
+            title.textContent = 'Edit Contact';
+            document.getElementById('fCompany').value = b.company || '';
+            document.getElementById('fContact').value = b.contact || '';
+            document.getElementById('fEmail').value = b.email || '';
+            document.getElementById('fPhone').value = b.phone || '';
+            document.getElementById('fType').value = b.type || 'mill';
+            document.getElementById('fNotes').value = b.notes || '';
+            const sw = document.getElementById('fPrioritySwitch');
+            if (b.priority) sw.classList.add('active'); else sw.classList.remove('active');
+            document.querySelectorAll('input[name="comm"]').forEach(cb => cb.checked = (b.commodities || []).includes(cb.value));
+            allCommodities.forEach(c => {
+                const input = document.getElementById('p' + c);
+                if (input) input.value = b.prices?.[c] || '';
+            });
+        }
+    } else {
+        title.textContent = 'Add Contact';
+        document.getElementById('contactForm').reset();
+        document.getElementById('fPrioritySwitch').classList.remove('active');
+    }
+    
+    modal.classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('contactModal').classList.remove('active');
+    editId = null;
+}
+
+function toggleSwitch() { document.getElementById('fPrioritySwitch').classList.toggle('active'); }
+
+function saveContact() {
+    const comms = [];
+    document.querySelectorAll('input[name="comm"]:checked').forEach(cb => comms.push(cb.value));
+    
+    const prices = {};
+    const prevPrices = editId ? buyers.find(b => b.id === editId)?.prices || {} : {};
+    allCommodities.forEach(c => {
+        const input = document.getElementById('p' + c);
+        if (input && input.value) prices[c] = parseInt(input.value);
+    });
+    
+    const data = {
+        company: document.getElementById('fCompany').value,
+        contact: document.getElementById('fContact').value,
+        email: document.getElementById('fEmail').value,
+        phone: document.getElementById('fPhone').value,
+        type: document.getElementById('fType').value,
+        priority: document.getElementById('fPrioritySwitch').classList.contains('active'),
+        commodities: comms,
+        notes: document.getElementById('fNotes').value,
+        prices: prices,
+        prevPrices: prevPrices
+    };
+    
+    if (!data.company) { toast('Company name required'); return; }
+    
+    if (editId) {
+        const idx = buyers.findIndex(b => b.id === editId);
+        if (idx !== -1) buyers[idx] = { ...buyers[idx], ...data };
+        toast('Contact updated');
+    } else {
+        data.id = buyers.length ? Math.max(...buyers.map(b => b.id)) + 1 : 1;
+        data.prevPrices = {};
+        buyers.push(data);
+        toast('Contact added');
+    }
+    
+    saveData();
+    closeModal();
+    renderNav();
+    render();
+}
+
+function editContact(id) { openModal(id); }
+
+function deleteContact(id) {
+    if (confirm('Delete this contact?')) {
+        buyers = buyers.filter(b => b.id !== id);
+        saveData();
+        renderNav();
+        render();
+        toast('Contact deleted');
+    }
+}
+
+function sendEmailTo(id) {
+    const b = buyers.find(x => x.id === id);
+    if (!b || !b.email) { toast('No email address'); return; }
+    
+    const commodities = (b.commodities || ['OCC', 'PM', 'SWL']).map(c => `• ${c}`).join('\n');
+    const subject = encodeURIComponent(`Price Request - Dalmex Recycling - January 2026`);
+    const body = encodeURIComponent(`Dear ${b.contact || 'Team'},
+
+I hope this message finds you well. As we prepare for January 2026, I am reaching out to request your current pricing for the following recovered paper grades:
+
+${(b.commodities || ['OCC', 'PM', 'SWL']).map(c => `• ${c}`).join('\n')}
+
+Our approximate monthly volumes:
+- OCC: 200-300 tons
+- Mixed Paper: 50-100 tons
+- SWL: 20-50 tons
+
+Please send your updated price list at your earliest convenience.
+
+Best regards,
+Dalmex Recycling LLC
+2828 Nagle St, Dallas, TX 75220
+214-352-2000`);
+    
+    window.location.href = `mailto:${b.email}?subject=${subject}&body=${body}`;
+    toast('Opening email to ' + b.company);
+}
+
+function emailAllBuyers() {
+    const withEmail = buyers.filter(b => b.email);
+    if (withEmail.length === 0) { toast('No contacts with email'); return; }
+    
+    const emails = withEmail.map(b => b.email).join(',');
+    const subject = encodeURIComponent('Price Request - Dalmex Recycling - January 2026');
+    const body = encodeURIComponent(`Dear Valued Partners,
+
+I hope this message finds you well. As we prepare for January 2026, I am reaching out to request your current pricing for recovered paper grades.
+
+Grades of interest:
+• OCC (PS 11)
+• Sorted White Ledger (SWL)
+• Mixed Paper (PM)
+• CBS/Coated Book Stock
+• HWEC
+
+Our approximate monthly volumes:
+- OCC: 200-300 tons
+- Mixed Paper: 50-100 tons
+- SWL: 20-50 tons
+
+Please send your updated price list at your earliest convenience.
+
+Best regards,
+Dalmex Recycling LLC
+2828 Nagle St, Dallas, TX 75220
+214-352-2000`);
+    
+    window.location.href = `mailto:${emails}?subject=${subject}&body=${body}`;
+    toast(`Opening email to ${withEmail.length} contacts`);
+}
+
+function showEmailTemplate(type) {
+    const tmpl = emailTemplates[type];
+    if (!tmpl) return;
+    
+    const modal = document.getElementById('emailModal');
+    const title = document.getElementById('emailModalTitle');
+    const body = document.getElementById('emailModalBody');
+    
+    title.textContent = type.replace(/([A-Z])/g, ' $1').trim() + ' Template';
+    
+    const previewSubject = tmpl.subject.replace('{month}', 'January 2026');
+    const previewBody = tmpl.body
+        .replace(/{contact}/g, '[Contact Name]')
+        .replace(/{month}/g, 'January 2026')
+        .replace(/{commodities}/g, '• OCC\n• SWL\n• Mixed Paper')
+        .replace(/{commodity}/g, 'OCC')
+        .replace(/{weight}/g, '20')
+        .replace(/{sender}/g, 'Robert Vandling');
+    
+    body.innerHTML = `
+        <div class="form-group">
+            <label class="form-label">Subject</label>
+            <input type="text" class="form-input" value="${previewSubject}" readonly>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Body</label>
+            <div class="email-template-content">${previewBody}</div>
+        </div>
+        <div style="margin-top: 15px;">
+            <button class="btn btn-primary" onclick="copyEmailTemplate('${type}')">📋 Copy Template</button>
+            <button class="btn btn-success" onclick="emailAllBuyers()">✉️ Send to All</button>
+        </div>
+    `;
+    
+    modal.classList.add('active');
+}
+
+function closeEmailModal() { document.getElementById('emailModal').classList.remove('active'); }
+
+function copyEmailTemplate(type) {
+    const tmpl = emailTemplates[type];
+    const text = `Subject: ${tmpl.subject.replace('{month}', 'January 2026')}\n\n${tmpl.body.replace(/{contact}/g, '[Name]').replace(/{month}/g, 'January 2026').replace(/{commodities}/g, '• OCC\n• SWL\n• Mixed Paper').replace(/{sender}/g, 'Robert Vandling')}`;
+    navigator.clipboard.writeText(text).then(() => toast('Template copied!')).catch(() => toast('Copy failed'));
+}
+
+function exportCSV() {
+    const headers = ['Company', 'Contact', 'Email', 'Phone', 'Type', 'Priority', 'Commodities', 'OCC', 'SWL', 'PM', 'CBS', 'HWEC', 'Notes'];
+    const rows = buyers.map(b => [
+        b.company,
+        b.contact || '',
+        b.email || '',
+        b.phone || '',
+        b.type,
+        b.priority ? 'Yes' : 'No',
+        (b.commodities || []).join('; '),
+        b.prices?.OCC || '',
+        b.prices?.SWL || '',
+        b.prices?.PM || '',
+        b.prices?.CBS || '',
+        b.prices?.HWEC || '',
+        (b.notes || '').replace(/,/g, ';')
+    ]);
+    
+    const csv = [headers.join(','), ...rows.map(r => r.map(c => `"${c}"`).join(','))].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `dalmex_contacts_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast('CSV downloaded');
+}
+
+function updateMarketPrices() {
+    marketPrices.current.OCC.low = parseInt(document.getElementById('mOCCLow').value) || null;
+    marketPrices.current.OCC.high = parseInt(document.getElementById('mOCCHigh').value) || null;
+    marketPrices.current.SWL.low = parseInt(document.getElementById('mSWLLow').value) || null;
+    marketPrices.current.SWL.high = parseInt(document.getElementById('mSWLHigh').value) || null;
+    marketPrices.current.PM.low = parseInt(document.getElementById('mPMLow').value) || null;
+    marketPrices.current.PM.high = parseInt(document.getElementById('mPMHigh').value) || null;
+    toast('Market prices updated');
+}
+
+function resetToDefaults() {
+    if (confirm('Reset all contacts to defaults? This cannot be undone.')) {
+        buyers = JSON.parse(JSON.stringify(defaultBuyers));
+        saveData();
+        renderNav();
+        render();
+        toast('Reset to defaults');
+    }
+}
+
+function clearAllData() {
+    if (confirm('DELETE ALL DATA? This cannot be undone!')) {
+        if (confirm('Are you REALLY sure?')) {
+            localStorage.removeItem('fiberhub_buyers_v2');
+            buyers = [];
+            renderNav();
+            render();
+            toast('All data cleared');
+        }
+    }
+}
+
+document.addEventListener('keypress', e => { if (e.key === 'Enter' && !currentUser) handleLogin(); });
 </script>
 </body>
 </html>
