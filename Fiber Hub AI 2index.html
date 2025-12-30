@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dalmex Fiber Hub AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+```
+    :root {
+        --primary: #10b981;
+        --primary-dark: #059669;
+        --ai-purple: #8b5cf6;
+        --ai-purple-dark: #7c3aed;
+        --light: #dcfce7;
+        --bg: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%);
+        --card-bg: rgba(255,255,255,0.9);
+        --card-border: rgba(255,255,255,0.6);
+        --text: #1e293b;
+        --text-muted: #64748b;
+    }
+    
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background: var(--bg);
+        min-height: 100vh;
+        color: var(--text);
+    }
+    
+    /* ============ LOGIN ============ */
+    .login-screen {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    
+    .login-screen.hidden { display: none; }
+    
+    .login-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        border-radius: 28px;
+        padding: 48px;
+        width: 100%;
+        max-width: 420px;
+        border: 1px solid var(--card-border);
+        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+    }
+    
+    .login-logo {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+        border-radius: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        margin: 0 auto 24px;
+        box-shadow: 0 12px 30px rgba(139,92,246,0.4);
+        position: relative;
+    }
+    
+    .login-logo::after {
+        content: '✨';
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        font-size: 20px;
+    }
+    
+    .login-title {
+        text-align: center;
+        font-size: 28px;
+        font-weight: 800;
+        margin-bottom: 4px;
+    }
+    
+    .login-ai-badge {
+        text-align: center;
+        margin-bottom: 8px;
+    }
+    
+    .ai-badge {
+        background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .login-subtitle {
+        text-align: center;
+        color: var(--text-muted);
+        margin-bottom: 32px;
+        font-size: 14px;
+    }
+    
+    .form-group { margin-bottom: 20px; }
+    
+    .form-label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+    }
+    
+    .form-input {
+        width: 100%;
+        padding: 14px 18px;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        font-size: 16px;
+        font-family: inherit;
+        transition: all 0.2s;
+    }
+    
+    .form-input:focus {
+        outline: none;
+        border-color: var(--ai-purple);
+        box-shadow: 0 0 0 4px rgba(139,92,246,0.15);
+    }
+    
+    .login-btn {
+        width: 100%;
+        padding: 16px;
+        background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 6px 20px rgba(139,92,246,0.4);
+    }
+    
+    .login-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(139,92,246,0.5);
+    }
+    
+    .login-error {
+        background: #fef2f2;
+        color: #dc2626;
+        padding: 12px 16px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        display: none;
+    }
+    
+    .login-error.show { display: block; }
+    
+    .login-footer {
+        text-align: center;
+        margin-top: 28px;
+        font-size: 12px;
+        color: var(--text-muted);
+    }
+    
+    /* ============ APP ============ */
+    .app-container { display: none; }
+    .app-container.active { display: block; }
+    
+    /* ============ TICKER ============ */
+    .ticker {
+        background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
+        padding: 12px 0;
+        overflow: hidden;
+    }
+    
+    .ticker-track {
+        display: flex;
+        animation: scroll 100s linear infinite;
+        white-space: nowrap;
+    }
+    
+    @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    
+    .ticker-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-right: 60px;
+        color: #f1f5f9;
+        font-size: 13px;
+    }
+    
+    .ticker-badge {
+        padding: 3px 10px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    
+    .ticker-badge.price { background: #f59e0b; }
+    .ticker-badge.alert { background: #ef4444; }
+    .ticker-badge.ai { background: var(--ai-purple); }
+    
+    /* ============ HEADER ============ */
+    .header {
+        background: rgba(255,255,255,0.9);
+        backdrop-filter: blur(20px);
+        padding: 14px 24px;
+        border-bottom: 1px solid var(--card-border);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    
+    .header-inner {
+        max-width: 1700px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+    
+    .logo {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        box-shadow: 0 6px 20px rgba(139,92,246,0.35);
+    }
+    
+    .brand-title {
+        font-size: 22px;
+        font-weight: 800;
+    }
+    
+    .brand-sub {
+        font-size: 12px;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .user-badge {
+        background: var(--light);
+        padding: 8px 14px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--primary-dark);
+    }
+    
+    .logout-btn {
+        padding: 8px 16px;
+        background: #ef4444;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    
+    /* ============ NAV ============ */
+    .nav {
+        display: flex;
+        gap: 6px;
+        padding: 14px 24px;
+        max-width: 1700px;
+        margin: 0 auto;
+        overflow-x: auto;
+    }
+    
+    .nav-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 16px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-muted);
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.2s;
+    }
+    
+    .nav-btn:hover { background: white; color: var(--text); }
+    
+    .nav-btn.active {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: white;
+        border-color: transparent;
+    }
+    
+    .nav-btn.ai-tab {
+        background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 4px 15px rgba(139,92,246,0.3);
+    }
+    
+    .nav-btn.ai-tab:hover {
+        box-shadow: 0 6px 20px rgba(139,92,246,0.4);
+    }
+    
+    .nav-count {
+        background: rgba(255,255,255,0.25);
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 11px;
+    }
+    
+    .nav-btn:not(.active):not(.ai-tab) .nav-count { background: #e2e8f0; }
+    
+    /* ============ MAIN ============ */
+    .main {
+        max-width: 1700px;
+        margin: 0 auto;
+        padding: 0 24px 40px;
+    }
+    
+    .section { display: none; }
+    .section.active { display: block; }
+    
+    /* ============ AI CHAT ============ */
+    .ai-container {
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: 20px;
+        min-height: 600px;
+    }
+    
+    @media (max-width: 900px) {
+        .ai-container {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    .chat-panel {
+        background: var(--card-bg);
+        border-radius: 20px;
+        border: 1px solid var(--card-border);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    
+    .chat-header {
+        background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+        padding: 18px 24px;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .chat-avatar {
+        width: 44px;
+        height: 44px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+    }
+    
+    .chat-title { font-size: 18px; font-weight: 700; }
+    .chat-status { font-size: 12px; opacity: 0.9; }
+    
+    .chat-messages {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        max-height: 450px;
+    }
+    
+    .message {
+        display: flex;
+        gap: 12px;
+        max-width: 85%;
+    }
+    
+    .message.user {
+        align-self: flex-end;
+        flex-direction: row-reverse;
+    }
+    
+    .message-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        flex-shrink: 0;
+    }
+    
+    .message.ai .message-avatar {
+        background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+    }
+    
+    .message.user .message-avatar {
+        background: var(--primary);
+    }
+    
+    .message-content {
+        padding: 14px 18px;
+        border-radius: 16px;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    
+    .message.ai .message-content {
+        background: #f1f5f9;
+        border-bottom-left-radius: 4px;
+    }
+    
+    .message.user .message-content {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: white;
+        border-bottom-right-radius: 4px;
+    }
+    
+    .message-content strong { font-weight: 700; }
+    .message-content ul { margin: 8px 0 8px 20px; }
+    .message-content li { margin: 4px 0; }
+    
+    .typing-indicator {
+        display: flex;
+        gap: 4px;
+        padding: 14px 18px;
+        background: #f1f5f9;
+        border-radius: 16px;
+        width: fit-content;
+    }
+    
+    .typing-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--ai-purple);
+        border-radius: 50%;
+        animation: typing 1.4s infinite;
+    }
+    
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    
+    @keyframes typing {
+        0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+        30% { transform: translateY(-6px); opacity: 1; }
+    }
+    
+    .chat-input-area {
+        padding: 16px 20px;
+        border-top: 1px solid #e2e8f0;
+        display: flex;
+        gap: 12px;
+    }
+    
+    .chat-input {
+        flex: 1;
+        padding: 14px 18px;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        font-size: 15px;
+        font-family: inherit;
+        resize: none;
+        min-height: 52px;
+        max-height: 120px;
+    }
+    
+    .chat-input:focus {
+        outline: none;
+        border-color: var(--ai-purple);
+    }
+    
+    .chat-send {
+        padding: 14px 24px;
+        background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    
+    .chat-send:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(139,92,246,0.4);
+    }
+    
+    .chat-send:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+    
+    /* Quick Actions */
+    .quick-actions {
+        background: var(--card-bg);
+        border-radius: 20px;
+        border: 1px solid var(--card-border);
+        padding: 20px;
+    }
+    
+    .quick-title {
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .quick-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .quick-btn {
+        padding: 14px 16px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .quick-btn:hover {
+        background: var(--light);
+        border-color: var(--primary);
+        transform: translateX(4px);
+    }
+    
+    .quick-icon {
+        font-size: 18px;
+    }
+    
+    /* AI Recommendations */
+    .ai-recommendations {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #e2e8f0;
+    }
+    
+    .rec-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--ai-purple);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    
+    .rec-card {
+        background: linear-gradient(135deg, rgba(139,92,246,0.1) 0%, rgba(124,58,237,0.05) 100%);
+        border: 1px solid rgba(139,92,246,0.2);
+        border-radius: 12px;
+        padding: 14px;
+        margin-bottom: 10px;
+    }
+    
+    .rec-label { font-size: 11px; color: var(--ai-purple); font-weight: 600; text-transform: uppercase; }
+    .rec-value { font-size: 16px; font-weight: 700; color: var(--text); margin: 4px 0; }
+    .rec-detail { font-size: 12px; color: var(--text-muted); }
+    
+    /* ============ STATS ============ */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+    
+    .stat-card {
+        background: var(--card-bg);
+        border-radius: 14px;
+        padding: 18px;
+        text-align: center;
+        border: 1px solid var(--card-border);
+    }
+    
+    .stat-icon { font-size: 26px; margin-bottom: 6px; }
+    .stat-value { font-size: 26px; font-weight: 800; }
+    .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+    
+    /* ============ MARKET BOX ============ */
+    .market-box {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid var(--card-border);
+    }
+    
+    .market-title {
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 14px;
+    }
+    
+    .market-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 10px;
+    }
+    
+    .market-item {
+        background: #f8fafc;
+        padding: 12px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    .market-label { font-size: 10px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+    .market-price { font-size: 18px; font-weight: 800; color: var(--primary-dark); margin: 4px 0; }
+    .market-change { font-size: 10px; font-weight: 600; }
+    .market-change.up { color: #10b981; }
+    .market-change.down { color: #ef4444; }
+    
+    /* ============ TABLE ============ */
+    .table-wrapper {
+        background: var(--card-bg);
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid var(--card-border);
+        margin-bottom: 20px;
+    }
+    
+    .table-header {
+        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        padding: 14px 18px;
+        color: white;
+    }
+    
+    .table-title { font-size: 16px; font-weight: 700; }
+    .table-sub { font-size: 11px; opacity: 0.8; }
+    
+    .table-scroll { overflow-x: auto; }
+    
+    .comp-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 750px;
+    }
+    
+    .comp-table th {
+        background: #f1f5f9;
+        padding: 12px 10px;
+        text-align: center;
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--text-muted);
+        text-transform: uppercase;
+    }
+    
+    .comp-table th:first-child { text-align: left; min-width: 140px; }
+    
+    .comp-table td {
+        padding: 12px 10px;
+        text-align: center;
+        border-bottom: 1px solid #f1f5f9;
+        font-size: 13px;
+    }
+    
+    .comp-table td:first-child { text-align: left; }
+    .comp-table tr:hover { background: #f8fafc; cursor: pointer; }
+    
+    .buyer-name { font-weight: 700; font-size: 13px; }
+    .buyer-contact { font-size: 10px; color: var(--text-muted); }
+    
+    .price-best {
+        background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+        color: #15803d;
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-weight: 700;
+    }
+    
+    .price-na { color: #cbd5e1; font-size: 11px; }
+    
+    .type-badge {
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    
+    .type-mill { background: #dbeafe; color: #1d4ed8; }
+    .type-broker { background: #fef3c7; color: #92400e; }
+    .type-export { background: #ede9fe; color: #6d28d9; }
+    
+    /* ============ CARDS ============ */
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 16px;
+    }
+    
+    .contact-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 20px;
+        border: 1px solid var(--card-border);
+        transition: all 0.2s;
+        cursor: pointer;
+    }
+    
+    .contact-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+    
+    .contact-card.priority { border-left: 4px solid #f59e0b; }
+    
+    .card-top {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+    }
+    
+    .card-avatar {
+        width: 46px;
+        height: 46px;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: white;
+        font-weight: 700;
+    }
+    
+    .card-badges { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+    
+    .badge {
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    
+    .badge-mill { background: #dbeafe; color: #1d4ed8; }
+    .badge-broker { background: #fef3c7; color: #92400e; }
+    .badge-export { background: #ede9fe; color: #6d28d9; }
+    .badge-priority { background: #fef3c7; color: #b45309; }
+    
+    .card-company { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+    .card-contact { font-size: 13px; color: var(--primary-dark); font-weight: 600; margin-bottom: 10px; }
+    
+    .card-commodities { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+    
+    .commodity {
+        background: var(--light);
+        color: var(--primary-dark);
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-size: 10px;
+        font-weight: 600;
+    }
+    
+    .card-info { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+    
+    .card-prices {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
+        gap: 6px;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #f1f5f9;
+    }
+    
+    .price-box {
+        background: #f8fafc;
+        padding: 6px;
+        border-radius: 6px;
+        text-align: center;
+    }
+    
+    .price-box-label { font-size: 9px; color: var(--text-muted); font-weight: 600; }
+    .price-box-value { font-size: 14px; font-weight: 700; color: var(--primary-dark); }
+    
+    .card-actions { display: flex; gap: 6px; margin-top: 12px; }
+    
+    .btn {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: white;
+    }
+    
+    .btn-ai {
+        background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+        color: white;
+    }
+    
+    .btn-secondary { background: #f1f5f9; color: var(--text); }
+    
+    /* ============ EMAIL ============ */
+    .email-panel {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 20px;
+        border: 1px solid var(--card-border);
+    }
+    
+    .email-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .email-title { font-size: 16px; font-weight: 700; }
+    
+    .email-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+    
+    .select-btn {
+        padding: 6px 12px;
+        background: var(--light);
+        color: var(--primary-dark);
+        border: none;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    
+    .select-btn:hover { background: var(--primary); color: white; }
+    
+    .email-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        max-height: 350px;
+        overflow-y: auto;
+        margin-bottom: 16px;
+    }
+    
+    .email-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 14px;
+        background: white;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 2px solid transparent;
+    }
+    
+    .email-item:hover { background: var(--light); }
+    .email-item.selected { border-color: var(--primary); background: var(--light); }
+    
+    .email-checkbox { width: 18px; height: 18px; accent-color: var(--primary); }
+    .email-info { flex: 1; }
+    .email-name { font-weight: 600; font-size: 13px; }
+    .email-addr { font-size: 11px; color: var(--text-muted); }
+    
+    .send-btn {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    
+    .send-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+    
+    .ai-email-btn {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, var(--ai-purple) 0%, var(--ai-purple-dark) 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    /* ============ SEARCH ============ */
+    .search-box {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 12px 16px;
+        margin-bottom: 16px;
+        border: 1px solid var(--card-border);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .search-input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        font-size: 14px;
+        font-family: inherit;
+    }
+    
+    .search-input:focus { outline: none; }
+    
+    /* ============ FOOTER ============ */
+    .footer {
+        background: rgba(255,255,255,0.8);
+        border-top: 1px solid var(--card-border);
+        padding: 16px 24px;
+        margin-top: 40px;
+    }
+    
+    .footer-inner {
+        max-width: 1700px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        font-size: 11px;
+        color: var(--text-muted);
+    }
+    
+    /* ============ MODAL ============ */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(4px);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    
+    .modal-overlay.active { display: flex; }
+    
+    .modal-content {
+        background: white;
+        border-radius: 20px;
+        padding: 24px;
+        width: 100%;
+        max-width: 550px;
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+    
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+    
+    .modal-title { font-size: 20px; font-weight: 700; }
+    
+    .modal-close {
+        width: 36px; height: 36px;
+        background: #f1f5f9;
+        border: none;
+        border-radius: 10px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    
+    .modal-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+    .modal-info { display: grid; gap: 8px; font-size: 13px; }
+    .modal-info a { color: var(--primary); text-decoration: none; }
+    
+    .modal-prices {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid #e2e8f0;
+    }
+    
+    .modal-price {
+        background: #f0fdf4;
+        padding: 10px 14px;
+        border-radius: 8px;
+        text-align: center;
+    }
+    
+    .modal-price-label { font-size: 10px; color: #64748b; font-weight: 600; }
+    .modal-price-value { font-size: 16px; font-weight: 700; color: #059669; }
+    
+    .modal-notes {
+        background: #f8fafc;
+        padding: 12px;
+        border-radius: 10px;
+        margin-top: 16px;
+        font-size: 12px;
+    }
+    
+    .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+    
+    /* ============ AI EMAIL MODAL ============ */
+    .ai-email-modal {
+        background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(124,58,237,0.02) 100%);
+        border: 1px solid rgba(139,92,246,0.2);
+        border-radius: 16px;
+        padding: 20px;
+        margin-top: 16px;
+    }
+    
+    .ai-email-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+    
+    .ai-email-header span {
+        font-size: 24px;
+    }
+    
+    .ai-email-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--ai-purple);
+    }
+    
+    .ai-email-content {
+        background: white;
+        border-radius: 12px;
+        padding: 16px;
+        font-size: 13px;
+        line-height: 1.7;
+        white-space: pre-wrap;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    
+    .ai-email-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 16px;
+    }
+    
+    @media (max-width: 768px) {
+        .comp-table { min-width: 600px; }
+        .cards-grid { grid-template-columns: 1fr; }
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- LOGIN -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <div class="login-logo">🤖</div>
+            <h1 class="login-title">Dalmex Fiber Hub</h1>
+            <div class="login-ai-badge"><span class="ai-badge">✨ AI-Powered</span></div>
+            <p class="login-subtitle">Intelligent Recovered Paper Trading</p>
+
+```
+        <div class="login-error" id="loginError">Invalid credentials</div>
+        
+        <div class="form-group">
+            <label class="form-label">Username</label>
+            <input type="text" id="username" class="form-input" placeholder="Enter username">
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" id="password" class="form-input" placeholder="Enter password">
+        </div>
+        
+        <button class="login-btn" onclick="handleLogin()">Sign In</button>
+        
+        <div class="login-footer">
+            <strong>Dalmex Recycling LLC</strong><br>
+            2828 Nagle St. Dallas, TX 75220 • 214-352-2000
+        </div>
+    </div>
+</div>
+
+<!-- APP -->
+<div class="app-container" id="appContainer">
+    <div class="ticker">
+        <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+    
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-left">
+                <div class="logo">🤖</div>
+                <div>
+                    <div class="brand-title">Dalmex Fiber Hub</div>
+                    <div class="brand-sub"><span class="ai-badge">✨ AI</span> Dallas, TX</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="user-badge" id="userBadge">👤 User</div>
+                <button class="logout-btn" onclick="handleLogout()">Logout</button>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="nav" id="navBar"></nav>
+    <main class="main" id="mainContent"></main>
+    
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>© 2025 Dalmex Recycling LLC • 2828 Nagle St. Dallas, TX 75220</div>
+            <div>Created by Robert Vandling • AI-Powered by Claude</div>
+        </div>
+    </footer>
+</div>
+
+<div class="modal-overlay" id="modal">
+    <div class="modal-content" id="modalContent"></div>
+</div>
+
+<script>
+    // ============================================
+    // DATA
+    // ============================================
+    
+    const users = [
+        { id: 1, username: 'Dalmex', password: '2828', role: 'user', name: 'Dalmex User' },
+        { id: 2, username: 'RJVandling', password: 'Sailer66', role: 'admin', name: 'Robert Vandling' }
+    ];
+    
+    const buyers = [
+        { id: 1, company: "Georgia Pacific", contact: "Jake Walker", email: "jacob.walker1@gapac.com", phone: "(404) 652-4000", address: "Atlanta, GA", type: "Mill", priority: true, commodities: ["OCC", "DLK", "PM", "SOP", "SWL", "HWEC"], prices: { OCC: 65, PM: 155, SWL: 215, DLK: 90, SOP: 150, HWEC: 370 }, notes: "World's largest de-ink fiber user. Buys ALL grades." },
+        { id: 2, company: "Smurfit Westrock", contact: "Cynthia Torres", email: "cynthia.torres@smurfitwestrock.com", phone: "(972) 686-7649", address: "Mesquite, TX", type: "Mill", priority: true, commodities: ["OCC", "PM"], prices: { OCC: 60, PM: 180, SWL: null, DLK: null, SOP: null, HWEC: null }, notes: "LOCAL contact. Best PM price at $180!" },
+        { id: 3, company: "Greenside (Goldbergs)", contact: "Casandra Espinoza", email: "grupocartonero.mty@gmail.com", phone: "+52 81 8123-4567", address: "Monterrey, Mexico", type: "Export", priority: true, commodities: ["OCC", "PM", "SWL"], prices: { OCC: 58, PM: 165, SWL: 215, DLK: null, SOP: null, HWEC: null }, notes: "Mexico export. Consistent buyer." },
+        { id: 4, company: "American Fiber", contact: "Steve Minor", email: "SMinor@amfiberservices.com", phone: "(678) 555-1234", address: "Texas Region", type: "Broker", priority: true, commodities: ["OCC", "PM", "SWL", "HWEC"], prices: { OCC: 62, PM: 160, SWL: 220, DLK: null, SOP: null, HWEC: 365 }, notes: "Best SWL at $220! Texas-based." },
+        { id: 5, company: "Graphic Packaging - Waco", contact: "Fiber Procurement", email: "fiberprocurement@graphicpkg.com", phone: "(770) 240-7200", address: "Waco, TX", type: "Mill", priority: true, expanding: true, commodities: ["OCC", "Mixed Paper"], prices: { OCC: 70, PM: 55, SWL: null, DLK: null, SOP: null, HWEC: null }, notes: "⭐ NEW MILL 2026! Best OCC at $70!" },
+        { id: 6, company: "Green Bay Packaging", contact: "Fiber Procurement", email: "info@gbp.com", phone: "(501) 354-2131", address: "Morrilton, AR", type: "Mill", priority: true, expanding: true, commodities: ["OCC"], prices: { OCC: 68, PM: null, SWL: null, DLK: null, SOP: null, HWEC: null }, notes: "⭐ $1B expansion! Strong OCC buyer." },
+        { id: 7, company: "Pratt Industries", contact: "Fiber Procurement", email: "recyclingcs@prattindustries.com", phone: "(888) 347-7288", address: "Dallas/Shreveport", type: "Mill", priority: false, commodities: ["OCC", "Mixed Paper"], prices: { OCC: 65, PM: 50, SWL: null, DLK: null, SOP: null, HWEC: null }, notes: "100% recycled. Green manufacturer." },
+        { id: 8, company: "International Paper", contact: "Recycling Division", email: "recycling@ipaper.com", phone: "(972) 245-3000", address: "Carrollton, TX", type: "Mill", priority: false, commodities: ["OCC", "DLK", "SOP", "PM"], prices: { OCC: 65, PM: 52, SWL: null, DLK: 95, SOP: 145, HWEC: null }, notes: "LOCAL Carrollton. Best DLK at $95!" },
+        { id: 9, company: "Mark", contact: "Don Langley", email: "dlangley@markrecycling.com", phone: "(555) 987-6543", address: "Regional", type: "Broker", priority: false, commodities: ["OCC", "SWL"], prices: { OCC: 60, PM: null, SWL: 210, DLK: null, SOP: null, HWEC: null }, notes: "Regional broker. Spot market." },
+        { id: 10, company: "Texas Recycling", contact: "Joel/Craig Litman", email: "info@texasrecycling.com", phone: "(214) 357-0262", address: "Dallas, TX", type: "Broker", priority: false, commodities: ["OCC", "PM", "SOP", "SWL"], prices: { OCC: 62, PM: 48, SWL: 205, DLK: null, SOP: 140, HWEC: null }, notes: "25+ years DFW." },
+        { id: 11, company: "CellMark Recycling", contact: "Trading Desk", email: "info@cellmark.com", phone: "(203) 629-2005", address: "National", type: "Export", priority: false, commodities: ["OCC", "PM", "SWL"], prices: { OCC: 55, PM: 45, SWL: 190, DLK: null, SOP: null, HWEC: null }, notes: "Major exporter." },
+        { id: 12, company: "Future Foam", contact: "Tina Aaron", email: "taaron@futurefoam.com", phone: "(555) 123-4567", address: "Regional", type: "Buyer", priority: false, commodities: ["Foam", "Poly"], prices: { OCC: null, PM: null, SWL: null, DLK: null, SOP: null, HWEC: null }, notes: "Foam/poly only." }
+    ];
+    
+    const newsItems = [
+        { type: 'ai', text: '🤖 AI Assistant ready to help with pricing, recommendations & emails' },
+        { type: 'price', text: '💰 OCC: $70-85/ton | PM: $45-55 | SWL: $195-225' },
+        { type: 'alert', text: '🚨 ~10% NA capacity eliminated in 2025 mill closures' },
+        { type: 'ai', text: '✨ Ask AI: "Who pays most for OCC?" or "Draft email to Jake at GP"' },
+    ];
+    
+    const marketPrices = [
+        { code: 'OCC', price: '$70-85', change: '▼$5', dir: 'down' },
+        { code: 'PM', price: '$45-55', change: '▲$3', dir: 'up' },
+        { code: 'SWL', price: '$195-225', change: '▼$10', dir: 'down' },
+        { code: 'DLK', price: '$90-110', change: '—', dir: '' },
+        { code: 'HWEC', price: '$350-400', change: '▲$15', dir: 'up' },
+    ];
+    
+    // ============================================
+    // STATE
+    // ============================================
+    
+    let currentUser = null;
+    let currentTab = 'ai';
+    let selectedContacts = [];
+    let searchTerm = '';
+    let chatHistory = [];
+    let isTyping = false;
+    
+    // ============================================
+    // AUTH
+    // ============================================
+    
+    function handleLogin() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const user = users.find(u => u.username === username && u.password === password);
+        
+        if (user) {
+            currentUser = user;
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('appContainer').classList.add('active');
+            document.getElementById('userBadge').innerHTML = `${user.role === 'admin' ? '👑' : '👤'} ${user.name}`;
+            initApp();
+        } else {
+            document.getElementById('loginError').classList.add('show');
+        }
+    }
+    
+    function handleLogout() {
+        currentUser = null;
+        chatHistory = [];
+        document.getElementById('appContainer').classList.remove('active');
+        document.getElementById('loginScreen').classList.remove('hidden');
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('loginError').classList.remove('show');
+    }
+    
+    document.addEventListener('keypress', e => {
+        if (e.key === 'Enter' && !currentUser) handleLogin();
+    });
+    
+    // ============================================
+    // INIT
+    // ============================================
+    
+    function initApp() {
+        renderTicker();
+        renderNav();
+        renderContent();
+        
+        // Welcome message
+        if (chatHistory.length === 0) {
+            chatHistory.push({
+                role: 'ai',
+                content: `👋 Hi ${currentUser.name}! I'm your AI assistant for Dalmex Fiber Hub.
+```
+
+I can help you with:
+• **Price recommendations** - “Who’s paying most for OCC?”
+• **Buyer insights** - “Tell me about Georgia Pacific”
+• **Draft emails** - “Write an email to Cynthia at Smurfit”
+• **Market analysis** - “What’s the outlook for SWL?”
+• **Smart matching** - “I have 44,000 lbs of OCC, who should I call?”
+
+What would you like help with today?`
+});
+}
+}
+
+```
+    function renderTicker() {
+        const track = document.getElementById('tickerTrack');
+        const items = [...newsItems, ...newsItems, ...newsItems];
+        track.innerHTML = items.map(n => `
+            <div class="ticker-item">
+                <span class="ticker-badge ${n.type}">${n.type}</span>
+                ${n.text}
+            </div>
+        `).join('');
+    }
+    
+    function renderNav() {
+        const tabs = [
+            { id: 'ai', icon: '🤖', label: 'AI Assistant', ai: true },
+            { id: 'dashboard', icon: '📊', label: 'Dashboard' },
+            { id: 'comparison', icon: '💰', label: 'Prices' },
+            { id: 'contacts', icon: '👥', label: 'Contacts', count: buyers.length },
+            { id: 'email', icon: '📧', label: 'Email', count: selectedContacts.length },
+        ];
+        
+        document.getElementById('navBar').innerHTML = tabs.map(t => `
+            <button class="nav-btn ${currentTab === t.id ? 'active' : ''} ${t.ai && currentTab !== t.id ? 'ai-tab' : ''}" onclick="setTab('${t.id}')">
+                ${t.icon} ${t.label}
+                ${t.count !== undefined ? `<span class="nav-count">${t.count}</span>` : ''}
+            </button>
+        `).join('');
+    }
+    
+    function setTab(tab) {
+        currentTab = tab;
+        renderNav();
+        renderContent();
+    }
+    
+    function renderContent() {
+        const main = document.getElementById('mainContent');
+        switch(currentTab) {
+            case 'ai': main.innerHTML = renderAI(); break;
+            case 'dashboard': main.innerHTML = renderDashboard(); break;
+            case 'comparison': main.innerHTML = renderComparison(); break;
+            case 'contacts': main.innerHTML = renderContacts(); break;
+            case 'email': main.innerHTML = renderEmail(); break;
+        }
+    }
+    
+    // ============================================
+    // AI CHAT
+    // ============================================
+    
+    function renderAI() {
+        const bestOCC = buyers.filter(b => b.prices.OCC).sort((a,b) => b.prices.OCC - a.prices.OCC)[0];
+        const bestSWL = buyers.filter(b => b.prices.SWL).sort((a,b) => b.prices.SWL - a.prices.SWL)[0];
+        const bestPM = buyers.filter(b => b.prices.PM).sort((a,b) => b.prices.PM - a.prices.PM)[0];
+        
+        return `
+            <div class="ai-container">
+                <div class="chat-panel">
+                    <div class="chat-header">
+                        <div class="chat-avatar">🤖</div>
+                        <div>
+                            <div class="chat-title">Fiber Hub AI</div>
+                            <div class="chat-status">Powered by Claude • Always ready to help</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-messages" id="chatMessages">
+                        ${chatHistory.map(m => `
+                            <div class="message ${m.role}">
+                                <div class="message-avatar">${m.role === 'ai' ? '🤖' : '👤'}</div>
+                                <div class="message-content">${formatMessage(m.content)}</div>
+                            </div>
+                        `).join('')}
+                        ${isTyping ? `
+                            <div class="message ai">
+                                <div class="message-avatar">🤖</div>
+                                <div class="typing-indicator">
+                                    <div class="typing-dot"></div>
+                                    <div class="typing-dot"></div>
+                                    <div class="typing-dot"></div>
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="chat-input-area">
+                        <textarea class="chat-input" id="chatInput" placeholder="Ask me anything about buyers, prices, or to draft emails..." onkeydown="handleChatKey(event)"></textarea>
+                        <button class="chat-send" onclick="sendChat()" ${isTyping ? 'disabled' : ''}>Send</button>
+                    </div>
+                </div>
+                
+                <div class="quick-actions">
+                    <div class="quick-title">⚡ Quick Actions</div>
+                    <div class="quick-grid">
+                        <button class="quick-btn" onclick="askAI('Who is paying the most for OCC right now?')">
+                            <span class="quick-icon">📦</span> Best OCC buyer?
+                        </button>
+                        <button class="quick-btn" onclick="askAI('Who should I call for high-grade paper like SWL and HWEC?')">
+                            <span class="quick-icon">📄</span> Best for high grades?
+                        </button>
+                        <button class="quick-btn" onclick="askAI('I have 44,000 lbs of OCC ready to ship. Who should I call first?')">
+                            <span class="quick-icon">🚚</span> Ready to ship OCC
+                        </button>
+                        <button class="quick-btn" onclick="askAI('Draft a professional price request email to all my priority contacts')">
+                            <span class="quick-icon">✉️</span> Draft price request
+                        </button>
+                        <button class="quick-btn" onclick="askAI('What is the market outlook for recovered paper in Q1 2026?')">
+                            <span class="quick-icon">📈</span> Q1 2026 outlook
+                        </button>
+                        <button class="quick-btn" onclick="askAI('Compare Georgia Pacific vs American Fiber for selling mixed grades')">
+                            <span class="quick-icon">⚖️</span> Compare buyers
+                        </button>
+                    </div>
+                    
+                    <div class="ai-recommendations">
+                        <div class="rec-title">🎯 AI Recommendations</div>
+                        <div class="rec-card">
+                            <div class="rec-label">Best OCC Price</div>
+                            <div class="rec-value">$${bestOCC.prices.OCC}/ton</div>
+                            <div class="rec-detail">${bestOCC.company} - ${bestOCC.contact}</div>
+                        </div>
+                        <div class="rec-card">
+                            <div class="rec-label">Best SWL Price</div>
+                            <div class="rec-value">$${bestSWL.prices.SWL}/ton</div>
+                            <div class="rec-detail">${bestSWL.company} - ${bestSWL.contact}</div>
+                        </div>
+                        <div class="rec-card">
+                            <div class="rec-label">Best PM Price</div>
+                            <div class="rec-value">$${bestPM.prices.PM}/ton</div>
+                            <div class="rec-detail">${bestPM.company} - ${bestPM.contact}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    function formatMessage(text) {
+        return text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\n/g, '<br>')
+            .replace(/• /g, '<br>• ');
+    }
+    
+    function handleChatKey(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendChat();
+        }
+    }
+    
+    function askAI(question) {
+        document.getElementById('chatInput').value = question;
+        sendChat();
+    }
+    
+    async function sendChat() {
+        const input = document.getElementById('chatInput');
+        const message = input.value.trim();
+        if (!message || isTyping) return;
+        
+        chatHistory.push({ role: 'user', content: message });
+        input.value = '';
+        isTyping = true;
+        renderContent();
+        scrollChat();
+        
+        // Generate AI response
+        const response = await generateAIResponse(message);
+        
+        isTyping = false;
+        chatHistory.push({ role: 'ai', content: response });
+        renderContent();
+        scrollChat();
+    }
+    
+    function scrollChat() {
+        setTimeout(() => {
+            const messages = document.getElementById('chatMessages');
+            if (messages) messages.scrollTop = messages.scrollHeight;
+        }, 100);
+    }
+    
+    async function generateAIResponse(userMessage) {
+        const msg = userMessage.toLowerCase();
+        
+        // Simulate AI delay
+        await new Promise(r => setTimeout(r, 800 + Math.random() * 1200));
+        
+        // ===== SMART RESPONSES =====
+        
+        // Best OCC
+        if (msg.includes('occ') && (msg.includes('best') || msg.includes('most') || msg.includes('highest') || msg.includes('who'))) {
+            const sorted = buyers.filter(b => b.prices.OCC).sort((a,b) => b.prices.OCC - a.prices.OCC);
+            return `📦 **Best OCC Buyers (Current Prices):**
+```
+
+1. **${sorted[0].company}** - **$${sorted[0].prices.OCC}/ton** ⭐ BEST
+   Contact: ${sorted[0].contact} | ${sorted[0].phone}
+   ${sorted[0].notes}
+1. **${sorted[1].company}** - $${sorted[1].prices.OCC}/ton
+   Contact: ${sorted[1].contact}
+1. **${sorted[2].company}** - $${sorted[2].prices.OCC}/ton
+   Contact: ${sorted[2].contact}
+
+💡 **My Recommendation:** Call ${sorted[0].company} first - they’re paying $${sorted[0].prices.OCC - sorted[1].prices.OCC} more per ton than the next best option. For a 44,000 lb load, that’s an extra $${Math.round((sorted[0].prices.OCC - sorted[1].prices.OCC) * 22)}.
+
+Want me to draft an email to ${sorted[0].contact}?`;
+}
+
+```
+        // Best SWL/High grades
+        if (msg.includes('swl') || msg.includes('high grade') || msg.includes('hwec') || msg.includes('white ledger')) {
+            const swlBuyers = buyers.filter(b => b.prices.SWL).sort((a,b) => b.prices.SWL - a.prices.SWL);
+            const hwecBuyers = buyers.filter(b => b.prices.HWEC).sort((a,b) => b.prices.HWEC - a.prices.HWEC);
+            
+            return `📄 **Best High-Grade Buyers:**
+```
+
+**Sorted White Ledger (SWL):**
+
+1. **${swlBuyers[0].company}** - **$${swlBuyers[0].prices.SWL}/ton** ⭐ BEST
+1. ${swlBuyers[1].company} - $${swlBuyers[1].prices.SWL}/ton
+1. ${swlBuyers[2].company} - $${swlBuyers[2].prices.SWL}/ton
+
+**HWEC (Hard White Envelope Cuts):**
+
+1. **${hwecBuyers[0].company}** - **$${hwecBuyers[0].prices.HWEC}/ton** ⭐ BEST
+1. ${hwecBuyers[1].company} - $${hwecBuyers[1].prices.HWEC}/ton
+
+💡 **Recommendation:** For high grades, ${swlBuyers[0].company} (Steve Minor) is your best bet for SWL at $${swlBuyers[0].prices.SWL}. He’s Texas-based and specializes in high grades.
+
+For HWEC, ${hwecBuyers[0].company} pays top dollar at $${hwecBuyers[0].prices.HWEC}/ton.`;
+}
+
+```
+        // Ready to ship / load ready
+        if (msg.includes('ship') || msg.includes('load') || msg.includes('44,000') || msg.includes('ready')) {
+            const bestOCC = buyers.filter(b => b.prices.OCC).sort((a,b) => b.prices.OCC - a.prices.OCC)[0];
+            return `🚚 **Ready to Ship? Here's Your Action Plan:**
+```
+
+For a 44,000 lb OCC load, I recommend:
+
+**Call #1: ${bestOCC.company}** ⭐
+• Price: **$${bestOCC.prices.OCC}/ton** (best rate)
+• Contact: ${bestOCC.contact}
+• Phone: ${bestOCC.phone}
+• Est. Revenue: **$${Math.round(bestOCC.prices.OCC * 22).toLocaleString()}**
+
+**Backup Options:**
+• Green Bay Packaging: $68/ton ($1,496)
+• Georgia Pacific: $65/ton ($1,430)
+
+💡 **Pro Tip:** ${bestOCC.company}‘s new Waco mill is actively sourcing. They’re motivated buyers right now - perfect time to establish the relationship!
+
+Want me to draft a “load ready” email to ${bestOCC.contact}?`;
+}
+
+```
+        // Draft email / price request
+        if (msg.includes('draft') || msg.includes('email') || msg.includes('write')) {
+            const priorityBuyers = buyers.filter(b => b.priority);
+            let targetBuyer = null;
+            
+            // Check if specific buyer mentioned
+            for (const b of buyers) {
+                if (msg.includes(b.company.toLowerCase()) || msg.includes(b.contact.toLowerCase().split(' ')[0])) {
+                    targetBuyer = b;
+                    break;
+                }
+            }
+            
+            if (targetBuyer) {
+                return `✉️ **Draft Email to ${targetBuyer.contact} at ${targetBuyer.company}:**
+```
+
+-----
+
+Subject: Dalmex Recycling - Price Request for ${targetBuyer.commodities.slice(0,3).join(’, ’)}
+
+Hello ${targetBuyer.contact.split(’ ’)[0]},
+
+I hope this message finds you well. I’m reaching out from Dalmex Recycling in Dallas to request your current pricing for recovered paper commodities.
+
+We have consistent volume available in:
+${targetBuyer.commodities.map(c => `• ${c}`).join(’\n’)}
+
+Our typical load weights are 43,000-45,000 lbs, and we can arrange delivery to your facility.
+
+Could you please share your current buy prices? We’re looking to move material this week.
+
+Thank you for your time.
+
+Best regards,
+Robert Vandling
+Dalmex Recycling LLC
+214-352-2000
+
+-----
+
+📧 **Ready to send?** Click the button below or I can customize this further.`;
+}
+
+```
+            return `✉️ **Monthly Price Request Email (All Priority Contacts):**
+```
+
+-----
+
+Subject: Dalmex Recycling - January 2026 Price Request
+
+Hello,
+
+Happy New Year! I’m reaching out from Dalmex Recycling to request your current January pricing for recovered paper commodities.
+
+We’re interested in:
+• OCC (Old Corrugated Containers)
+• Mixed Paper / PM
+• Sorted White Ledger (SWL)
+• Double Lined Kraft (DLK)
+• Other grades you purchase
+
+Our typical loads are 43,000-45,000 lbs. We have consistent volume available.
+
+Please send your current buy prices when convenient.
+
+Thank you,
+Robert Vandling
+Dalmex Recycling LLC
+2828 Nagle St. Dallas, TX 75220
+214-352-2000
+
+-----
+
+💡 **Tip:** The next PPI releases Jan 14. Send this email Jan 15-16 for best timing!
+
+This would go to: ${priorityBuyers.map(b => b.contact).join(’, ’)}`;
+}
+
+```
+        // Market outlook
+        if (msg.includes('outlook') || msg.includes('forecast') || msg.includes('2026') || msg.includes('market')) {
+            return `📈 **Q1 2026 Market Outlook:**
+```
+
+**The setup is BULLISH for sellers:**
+
+✅ **Supply Tightening**
+• ~10% of NA containerboard capacity eliminated in 2025
+• IP Red River, GP Cedar Springs, SW Forney all closed
+• Less competition = your material more valuable
+
+✅ **New Demand Coming**
+• Graphic Packaging Waco (550K TPY) opening 2026
+• Green Bay Arkansas $1B expansion
+• These mills need fiber NOW
+
+✅ **Price Forecast**
+• OCC: Expected to rise $50-90/ton in Q1
+• Current $70-85 could reach $120-150 by spring
+• Mills announced $50-90/ton containerboard increases
+
+⚠️ **Watch Out For:**
+• Tariff uncertainty with Mexico/Canada
+• Economic slowdown could dampen box demand
+
+💡 **My Advice:** Lock in relationships with expanding mills (Graphic Packaging Waco, Green Bay) now. They’re actively sourcing and will reward early partners.`;
+}
+
+```
+        // Compare buyers
+        if (msg.includes('compare') || msg.includes('vs') || msg.includes('versus')) {
+            return `⚖️ **Buyer Comparison:**
+```
+
+|Grade|Georgia Pacific|American Fiber|Smurfit WR|
+|-----|---------------|--------------|----------|
+|OCC  |$65            |$62           |$60       |
+|PM   |$155           |$160          |**$180** ⭐|
+|SWL  |$215           |**$220** ⭐    |—         |
+|DLK  |**$90** ⭐      |—             |—         |
+|HWEC |**$370** ⭐     |$365          |—         |
+
+**Summary:**
+• **Georgia Pacific** - Best for DLK, HWEC, and variety of grades
+• **American Fiber** - Best for SWL, good all-around
+• **Smurfit Westrock** - Best PM price by far ($180 vs $155-160)
+
+💡 **Strategy:** Route OCC to Graphic Packaging ($70), PM to Smurfit ($180), and high grades to American Fiber or GP.`;
+}
+
+```
+        // Specific buyer info
+        for (const b of buyers) {
+            if (msg.includes(b.company.toLowerCase()) || msg.includes(b.contact.toLowerCase().split(' ')[0])) {
+                const priceList = Object.entries(b.prices).filter(([k,v]) => v !== null).map(([k,v]) => `• ${k}: $${v}/ton`).join('\n');
+                return `👤 **${b.company}**
+```
+
+**Contact:** ${b.contact}
+**Phone:** ${b.phone}
+**Email:** ${b.email}
+**Location:** ${b.address}
+**Type:** ${b.type}
+
+**Current Prices:**
+${priceList || ‘• Contact for pricing’}
+
+**Commodities:** ${b.commodities.join(’, ’)}
+
+**Notes:** ${b.notes}
+
+${b.priority ? ‘⭐ **This is a HIGH PRIORITY contact**’ : ‘’}
+
+Want me to draft an email to ${b.contact.split(’ ’)[0]}?`;
+}
+}
+
+```
+        // Default helpful response
+        return `I can help you with that! Here are some things I can do:
+```
+
+📦 **Pricing Questions**
+• “Who pays most for OCC/SWL/PM?”
+• “Compare buyers for high grades”
+
+👥 **Buyer Information**
+• “Tell me about Georgia Pacific”
+• “What’s Cynthia Torres’s contact info?”
+
+✉️ **Email Drafting**
+• “Draft email to Jake at GP”
+• “Write a price request for all contacts”
+
+📈 **Market Intelligence**
+• “What’s the Q1 2026 outlook?”
+• “Should I sell OCC now or wait?”
+
+🚚 **Shipping Decisions**
+• “I have 44,000 lbs OCC ready - who should I call?”
+
+Just ask me anything specific!`;
+}
+
+```
+    // ============================================
+    // OTHER SECTIONS
+    // ============================================
+    
+    function renderDashboard() {
+        const mills = buyers.filter(b => b.type === 'Mill');
+        const priority = buyers.filter(b => b.priority);
+        
+        return `
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-icon">🏭</div><div class="stat-value">${mills.length}</div><div class="stat-label">Mills</div></div>
+                <div class="stat-card"><div class="stat-icon">🤝</div><div class="stat-value">${buyers.length - mills.length}</div><div class="stat-label">Brokers</div></div>
+                <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-value">${priority.length}</div><div class="stat-label">Priority</div></div>
+                <div class="stat-card"><div class="stat-icon">📈</div><div class="stat-value">$70</div><div class="stat-label">Best OCC</div></div>
+                <div class="stat-card"><div class="stat-icon">🤖</div><div class="stat-value">AI</div><div class="stat-label">Ready</div></div>
+            </div>
+            
+            <div class="market-box">
+                <div class="market-title">📈 Current Prices (Dec 2025)</div>
+                <div class="market-grid">
+                    ${marketPrices.map(p => `
+                        <div class="market-item">
+                            <div class="market-label">${p.code}</div>
+                            <div class="market-price">${p.price}</div>
+                            <div class="market-change ${p.dir}">${p.change}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            
+            <h3 style="font-size:16px; font-weight:700; margin-bottom:14px;">⭐ Priority Contacts</h3>
+            <div class="cards-grid">${priority.slice(0,6).map(b => renderCard(b)).join('')}</div>
+        `;
+    }
+    
+    function renderComparison() {
+        const grades = ['OCC', 'PM', 'SWL', 'DLK', 'SOP', 'HWEC'];
+        const maxPrices = {};
+        grades.forEach(g => {
+            const prices = buyers.map(b => b.prices[g]).filter(p => p !== null);
+            maxPrices[g] = prices.length ? Math.max(...prices) : 0;
+        });
+        
+        const sorted = [...buyers].filter(b => b.prices.OCC !== null).sort((a,b) => (b.prices.OCC || 0) - (a.prices.OCC || 0));
+        
+        return `
+            <div class="market-box">
+                <div class="market-title">📈 Market Prices</div>
+                <div class="market-grid">
+                    ${marketPrices.map(p => `
+                        <div class="market-item">
+                            <div class="market-label">${p.code}</div>
+                            <div class="market-price">${p.price}</div>
+                            <div class="market-change ${p.dir}">${p.change}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            
+            <div class="table-wrapper">
+                <div class="table-header">
+                    <div class="table-title">💰 Buyer Price Comparison</div>
+                    <div class="table-sub">Green = best price for that grade</div>
+                </div>
+                <div class="table-scroll">
+                    <table class="comp-table">
+                        <thead><tr><th>Buyer</th><th>OCC</th><th>PM</th><th>SWL</th><th>DLK</th><th>SOP</th><th>HWEC</th><th>Type</th></tr></thead>
+                        <tbody>
+                            ${sorted.map(b => {
+                                const tc = b.type === 'Mill' ? 'type-mill' : b.type === 'Export' ? 'type-export' : 'type-broker';
+                                return `<tr onclick="showModal(${b.id})">
+                                    <td><div class="buyer-name">${b.company}</div><div class="buyer-contact">${b.contact}</div></td>
+                                    ${grades.map(g => {
+                                        const p = b.prices[g];
+                                        if (p === null) return `<td><span class="price-na">—</span></td>`;
+                                        return `<td><span class="${p === maxPrices[g] ? 'price-best' : ''}">${p === maxPrices[g] ? '$'+p+' ⭐' : '$'+p}</span></td>`;
+                                    }).join('')}
+                                    <td><span class="type-badge ${tc}">${b.type}</span></td>
+                                </tr>`;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `;
+    }
+    
+    function renderContacts() {
+        const filtered = buyers.filter(b =>
+            b.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            b.contact.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        return `
+            <div class="search-box">
+                <span>🔍</span>
+                <input type="text" class="search-input" placeholder="Search contacts..." value="${searchTerm}" oninput="handleSearch(this.value)">
+            </div>
+            <div class="cards-grid">${filtered.map(b => renderCard(b)).join('')}</div>
+        `;
+    }
+    
+    function renderCard(b) {
+        const initials = b.company.split(' ').map(w => w[0]).join('').slice(0,2);
+        const tc = b.type === 'Mill' ? 'badge-mill' : b.type === 'Export' ? 'badge-export' : 'badge-broker';
+        const prices = Object.entries(b.prices).filter(([k,v]) => v !== null);
+        
+        return `
+            <div class="contact-card ${b.priority ? 'priority' : ''}" onclick="showModal(${b.id})">
+                <div class="card-top">
+                    <div class="card-avatar">${initials}</div>
+                    <div class="card-badges">
+                        <span class="badge ${tc}">${b.type}</span>
+                        ${b.priority ? '<span class="badge badge-priority">⭐</span>' : ''}
+                    </div>
+                </div>
+                <div class="card-company">${b.company}</div>
+                <div class="card-contact">${b.contact}</div>
+                <div class="card-commodities">${b.commodities.slice(0,4).map(c => `<span class="commodity">${c}</span>`).join('')}</div>
+                <div class="card-info">📧 ${b.email}<br>📞 ${b.phone}</div>
+                ${prices.length ? `<div class="card-prices">${prices.slice(0,4).map(([k,v]) => `<div class="price-box"><div class="price-box-label">${k}</div><div class="price-box-value">$${v}</div></div>`).join('')}</div>` : ''}
+                <div class="card-actions">
+                    <button class="btn btn-primary" onclick="event.stopPropagation(); sendEmail('${b.email}')">📧</button>
+                    <button class="btn btn-ai" onclick="event.stopPropagation(); askAboutBuyer('${b.company}')">🤖 Ask AI</button>
+                    <button class="btn btn-secondary" onclick="event.stopPropagation(); toggleSelect(${b.id})">${selectedContacts.includes(b.id) ? '✓' : '+'}</button>
+                </div>
+            </div>
+        `;
+    }
+    
+    function renderEmail() {
+        return `
+            <div class="email-panel">
+                <div class="email-header">
+                    <h2 class="email-title">📧 Send Emails</h2>
+                    <div class="email-btns">
+                        <button class="select-btn" onclick="selectAll()">All</button>
+                        <button class="select-btn" onclick="selectPriority()">Priority</button>
+                        <button class="select-btn" onclick="clearSelection()">Clear</button>
+                    </div>
+                </div>
+                
+                <button class="ai-email-btn" onclick="goToAIEmail()">
+                    🤖 Ask AI to Draft Email
+                </button>
+                
+                <div class="email-list">
+                    ${buyers.map(b => {
+                        const tc = b.type === 'Mill' ? 'type-mill' : b.type === 'Export' ? 'type-export' : 'type-broker';
+                        return `<div class="email-item ${selectedContacts.includes(b.id) ? 'selected' : ''}" onclick="toggleSelect(${b.id})">
+                            <input type="checkbox" class="email-checkbox" ${selectedContacts.includes(b.id) ? 'checked' : ''}>
+                            <div class="email-info"><div class="email-name">${b.company}</div><div class="email-addr">${b.email}</div></div>
+                            <span class="type-badge ${tc}">${b.type}</span>
+                        </div>`;
+                    }).join('')}
+                </div>
+                
+                <button class="send-btn" onclick="sendBulkEmail()" ${selectedContacts.length === 0 ? 'disabled' : ''}>
+                    📤 Send to ${selectedContacts.length} Contact${selectedContacts.length !== 1 ? 's' : ''}
+                </button>
+            </div>
+        `;
+    }
+    
+    // ============================================
+    // ACTIONS
+    // ============================================
+    
+    function handleSearch(val) { searchTerm = val; renderContent(); }
+    
+    function toggleSelect(id) {
+        selectedContacts = selectedContacts.includes(id) ? selectedContacts.filter(c => c !== id) : [...selectedContacts, id];
+        renderNav();
+        if (currentTab === 'email' || currentTab === 'contacts') renderContent();
+    }
+    
+    function selectAll() { selectedContacts = buyers.map(b => b.id); renderNav(); renderContent(); }
+    function selectPriority() { selectedContacts = buyers.filter(b => b.priority).map(b => b.id); renderNav(); renderContent(); }
+    function clearSelection() { selectedContacts = []; renderNav(); renderContent(); }
+    
+    function askAboutBuyer(company) {
+        setTab('ai');
+        setTimeout(() => askAI(`Tell me about ${company}`), 300);
+    }
+    
+    function goToAIEmail() {
+        setTab('ai');
+        setTimeout(() => askAI('Draft a professional price request email to send to my contacts'), 300);
+    }
+    
+    function sendEmail(email) {
+        const subject = encodeURIComponent('Dalmex Recycling - Price Request');
+        const body = encodeURIComponent(`Hello,
+```
+
+I’m reaching out from Dalmex Recycling to request your current pricing.
+
+Interested in: OCC, PM, SWL, DLK
+
+Load weights: 43,000-45,000 lbs.
+
+Thank you,
+Robert Vandling
+Dalmex Recycling LLC
+214-352-2000`); window.open(`mailto:${email}?subject=${subject}&body=${body}`);
+}
+
+```
+    function sendBulkEmail() {
+        if (!selectedContacts.length) return;
+        const emails = selectedContacts.map(id => buyers.find(b => b.id === id)?.email).filter(Boolean).join(',');
+        sendEmail(emails);
+    }
+    
+    function showModal(id) {
+        const b = buyers.find(x => x.id === id);
+        if (!b) return;
+        const tc = b.type === 'Mill' ? 'badge-mill' : b.type === 'Export' ? 'badge-export' : 'badge-broker';
+        const prices = Object.entries(b.prices).filter(([k,v]) => v !== null);
+        
+        document.getElementById('modalContent').innerHTML = `
+            <div class="modal-header"><h2 class="modal-title">${b.company}</h2><button class="modal-close" onclick="closeModal()">✕</button></div>
+            <div class="modal-badges">
+                <span class="badge ${tc}">${b.type}</span>
+                ${b.priority ? '<span class="badge badge-priority">⭐ Priority</span>' : ''}
+            </div>
+            <div class="modal-info">
+                <div><strong>Contact:</strong> ${b.contact}</div>
+                <div><strong>Email:</strong> <a href="mailto:${b.email}">${b.email}</a></div>
+                <div><strong>Phone:</strong> <a href="tel:${b.phone}">${b.phone}</a></div>
+                <div><strong>Commodities:</strong> ${b.commodities.join(', ')}</div>
+            </div>
+            ${prices.length ? `<div class="modal-prices">${prices.map(([k,v]) => `<div class="modal-price"><div class="modal-price-label">${k}</div><div class="modal-price-value">$${v}</div></div>`).join('')}</div>` : ''}
+            <div class="modal-notes"><strong>Notes:</strong> ${b.notes}</div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="sendEmail('${b.email}'); closeModal();">📧 Email</button>
+                <button class="btn btn-ai" onclick="closeModal(); askAboutBuyer('${b.company}');">🤖 Ask AI</button>
+                <button class="btn btn-secondary" onclick="window.open('tel:${b.phone}')">📞 Call</button>
+            </div>
+        `;
+        document.getElementById('modal').classList.add('active');
+    }
+    
+    function closeModal() { document.getElementById('modal').classList.remove('active'); }
+    document.getElementById('modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
+</script>
+```
+
+</body>
+</html>
