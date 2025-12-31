@@ -1,932 +1,657 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  DiversionScan™ Enterprise Pro                                                ║
+║  © 2025 Dalmex Recycling, LLC. All Rights Reserved.                          ║
+║  UNAUTHORIZED COPYING, DISTRIBUTION, OR MODIFICATION IS STRICTLY PROHIBITED  ║
+║  Protected under US Copyright Law Title 17                                    ║
+║  Patent Pending                                                               ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dalmex Fiber Hub AI - Enterprise CRM</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        :root{--primary:#10b981;--primary-dark:#059669;--purple:#8b5cf6;--purple-dark:#7c3aed;--danger:#ef4444;--warning:#f59e0b;--blue:#3b82f6;--light:#dcfce7;--card:rgba(255,255,255,0.95);--text:#1e293b;--muted:#64748b}
-        body{font-family:'Plus Jakarta Sans',sans-serif;background:linear-gradient(135deg,#f0fdf4,#ecfdf5,#d1fae5);min-height:100vh;color:var(--text)}
-        .hidden{display:none!important}
-        .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-        .login-card{background:var(--card);border-radius:24px;padding:40px;width:100%;max-width:400px;box-shadow:0 25px 50px rgba(0,0,0,0.15)}
-        .login-logo{width:80px;height:80px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 20px}
-        .login-title{text-align:center;font-size:26px;font-weight:800;margin-bottom:8px}
-        .login-subtitle{text-align:center;color:var(--muted);margin-bottom:24px}
-        .form-group{margin-bottom:16px}
-        .form-label{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase}
-        .form-input,.form-select,.form-textarea{width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:10px;font-size:15px;font-family:inherit}
-        .form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--purple)}
-        .btn{padding:12px 20px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
-        .btn-purple{background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:white}
-        .btn-green{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white}
-        .btn-blue{background:linear-gradient(135deg,var(--blue),#2563eb);color:white}
-        .btn-gray{background:#f1f5f9;color:var(--text)}
-        .btn-danger{background:var(--danger);color:white}
-        .btn-warning{background:var(--warning);color:white}
-        .btn-full{width:100%;margin-bottom:10px}
-        .btn-sm{padding:8px 12px;font-size:12px}
-        .login-error{background:#fef2f2;color:#dc2626;padding:12px;border-radius:8px;margin-bottom:16px;display:none}
-        .login-error.show{display:block}
-        .login-footer{text-align:center;margin-top:20px;font-size:11px;color:var(--muted)}
-        .lang-toggle{display:flex;justify-content:center;gap:8px;margin-bottom:20px}
-        .lang-btn{padding:8px 16px;border:2px solid #e2e8f0;border-radius:8px;background:white;font-size:13px;font-weight:600;cursor:pointer}
-        .lang-btn.active{border-color:var(--purple);background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:white}
-        .app{display:none}
-        .app.active{display:block}
-        .ticker{background:linear-gradient(90deg,#0f172a,#1e293b);padding:10px 0;overflow:hidden}
-        .ticker-track{display:flex;animation:scroll 50s linear infinite;white-space:nowrap}
-        @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-        .ticker-item{display:inline-flex;align-items:center;gap:8px;margin-right:40px;color:#f1f5f9;font-size:12px}
-        .ticker-tag{padding:2px 6px;border-radius:4px;font-size:9px;font-weight:700}
-        .ticker-tag.price{background:var(--warning)}
-        .ticker-tag.news{background:#3b82f6}
-        .ticker-tag.alert{background:var(--danger)}
-        .header{background:var(--card);padding:12px 20px;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:100}
-        .header-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-        .header-left{display:flex;align-items:center;gap:10px}
-        .logo{width:42px;height:42px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
-        .brand h1{font-size:18px;font-weight:800}
-        .brand span{font-size:11px;color:var(--muted)}
-        .header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-        .user-badge{background:var(--light);padding:6px 12px;border-radius:8px;font-size:11px;font-weight:600;color:var(--primary-dark)}
-        .nav{display:flex;gap:6px;padding:12px 20px;max-width:1400px;margin:0 auto;overflow-x:auto}
-        .nav-btn{padding:8px 14px;background:white;border:1px solid #e2e8f0;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
-        .nav-btn:hover{background:#f8fafc}
-        .nav-btn.active{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;border:none}
-        .nav-btn.ai{background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:white;border:none}
-        .nav-btn.crm{background:linear-gradient(135deg,var(--blue),#2563eb);color:white;border:none}
-        .main{max-width:1400px;margin:0 auto;padding:0 20px 30px}
-        .grid{display:grid;gap:16px}
-        .grid-2{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
-        .grid-3{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
-        .grid-4{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
-        .card{background:var(--card);border-radius:16px;padding:18px;border:1px solid #e2e8f0}
-        .card:hover{box-shadow:0 8px 25px rgba(0,0,0,0.08)}
-        .card.priority{border-left:4px solid var(--warning)}
-        .card.prospect{border-left:4px solid var(--blue)}
-        .card-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px}
-        .avatar{width:42px;height:42px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
-        .avatar.prospect{background:linear-gradient(135deg,var(--blue),#2563eb)}
-        .badges{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
-        .badge{padding:3px 8px;border-radius:5px;font-size:9px;font-weight:700;text-transform:uppercase}
-        .badge-mill{background:#dbeafe;color:#1d4ed8}
-        .badge-broker{background:#fef3c7;color:#92400e}
-        .badge-export{background:#ede9fe;color:#6d28d9}
-        .badge-priority{background:#fef3c7;color:#b45309}
-        .badge-lead{background:#dbeafe;color:#1d4ed8}
-        .badge-contacted{background:#fef3c7;color:#92400e}
-        .badge-negotiating{background:#ede9fe;color:#6d28d9}
-        .badge-won{background:#dcfce7;color:#15803d}
-        .badge-lost{background:#fef2f2;color:#dc2626}
-        .badge-active{background:#dcfce7;color:#15803d}
-        .card-title{font-size:15px;font-weight:700;margin-bottom:2px}
-        .card-subtitle{font-size:12px;color:var(--primary-dark);font-weight:600;margin-bottom:8px}
-        .card-info{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:8px}
-        .tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
-        .tag{background:var(--light);color:var(--primary-dark);padding:3px 7px;border-radius:4px;font-size:9px;font-weight:600}
-        .prices{display:flex;flex-wrap:wrap;gap:6px;padding-top:8px;border-top:1px solid #f1f5f9;margin-bottom:10px}
-        .price{background:#f0fdf4;padding:4px 8px;border-radius:6px;font-size:10px;font-weight:600;color:var(--primary-dark)}
-        .card-actions{display:flex;gap:6px;flex-wrap:wrap}
-        .card-actions .btn{flex:1;padding:8px;font-size:11px;min-width:40px}
-        .stat-card{text-align:center}
-        .stat-icon{font-size:28px;margin-bottom:6px}
-        .stat-value{font-size:28px;font-weight:800}
-        .stat-label{font-size:11px;color:var(--muted)}
-        .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px}
-        .section-title{font-size:16px;font-weight:700}
-        .ai-container{display:grid;grid-template-columns:1fr 320px;gap:16px}
-        @media(max-width:900px){.ai-container{grid-template-columns:1fr}}
-        .chat-panel{background:var(--card);border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;display:flex;flex-direction:column}
-        .chat-header{background:linear-gradient(135deg,var(--purple),var(--purple-dark));padding:14px 18px;color:white;display:flex;align-items:center;gap:10px}
-        .chat-avatar{width:38px;height:38px;background:rgba(255,255,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
-        .chat-title{font-size:15px;font-weight:700}
-        .chat-status{font-size:11px;opacity:0.9}
-        .chat-messages{flex:1;padding:14px;overflow-y:auto;max-height:400px;min-height:300px}
-        .msg{display:flex;gap:10px;margin-bottom:12px;max-width:90%}
-        .msg.user{margin-left:auto;flex-direction:row-reverse}
-        .msg-avatar{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
-        .msg.ai .msg-avatar{background:var(--purple)}
-        .msg.user .msg-avatar{background:var(--primary)}
-        .msg-content{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5}
-        .msg.ai .msg-content{background:#f1f5f9}
-        .msg.user .msg-content{background:var(--primary);color:white}
-        .chat-input-area{padding:12px;border-top:1px solid #e2e8f0;display:flex;gap:8px}
-        .chat-input{flex:1;padding:10px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:13px;font-family:inherit}
-        .chat-input:focus{outline:none;border-color:var(--purple)}
-        .sidebar{display:flex;flex-direction:column;gap:14px}
-        .sidebar-card{background:var(--card);border-radius:14px;padding:16px;border:1px solid #e2e8f0}
-        .sidebar-title{font-size:13px;font-weight:700;margin-bottom:12px}
-        .quick-btn{width:100%;padding:10px 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;font-size:11px;cursor:pointer;text-align:left;margin-bottom:6px;display:flex;align-items:center;gap:8px}
-        .quick-btn:hover{background:var(--light);border-color:var(--primary)}
-        .rec-card{background:linear-gradient(135deg,rgba(139,92,246,0.1),rgba(124,58,237,0.05));border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:10px;margin-bottom:8px}
-        .rec-label{font-size:9px;color:var(--purple);font-weight:700;text-transform:uppercase}
-        .rec-value{font-size:18px;font-weight:800}
-        .rec-detail{font-size:10px;color:var(--muted)}
-        .market-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:16px}
-        .market-card{background:var(--card);border-radius:10px;padding:14px;text-align:center;border:1px solid #e2e8f0}
-        .market-code{font-size:11px;font-weight:700;color:var(--muted)}
-        .market-price{font-size:18px;font-weight:800;color:var(--primary-dark)}
-        .market-change{font-size:10px;font-weight:600}
-        .market-change.up{color:#15803d}
-        .market-change.down{color:#dc2626}
-        .search-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-        .search-input{flex:1;min-width:200px;padding:10px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:13px;font-family:inherit}
-        .search-input:focus{outline:none;border-color:var(--primary)}
-        .filter-btn{padding:10px 14px;background:white;border:2px solid #e2e8f0;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer}
-        .filter-btn.active{border-color:var(--primary);background:var(--light)}
-        .news-item{background:var(--card);border-radius:12px;padding:14px;border:1px solid #e2e8f0;margin-bottom:12px}
-        .news-date{font-size:10px;color:var(--muted);margin-bottom:4px}
-        .news-title{font-size:13px;font-weight:700;margin-bottom:6px}
-        .news-excerpt{font-size:11px;color:var(--muted);line-height:1.5}
-        .table-wrap{background:var(--card);border-radius:14px;overflow:hidden;border:1px solid #e2e8f0}
-        .table-header{background:linear-gradient(135deg,#1e293b,#334155);padding:12px 16px;color:white;font-weight:700;font-size:14px}
-        .table-scroll{overflow-x:auto}
-        table{width:100%;border-collapse:collapse;min-width:600px}
-        th{background:#f8fafc;padding:10px 8px;text-align:center;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase}
-        th:first-child{text-align:left}
-        td{padding:10px 8px;text-align:center;border-bottom:1px solid #f1f5f9;font-size:12px}
-        td:first-child{text-align:left}
-        tr:hover{background:#f8fafc}
-        .price-best{background:#dcfce7;color:#15803d;padding:4px 8px;border-radius:5px;font-weight:700}
-        .pipeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px}
-        .pipeline-col{background:#f8fafc;border-radius:12px;padding:12px;min-height:200px}
-        .pipeline-title{font-size:12px;font-weight:700;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid}
-        .pipeline-title.lead{border-color:var(--blue);color:var(--blue)}
-        .pipeline-title.contacted{border-color:var(--warning);color:var(--warning)}
-        .pipeline-title.negotiating{border-color:var(--purple);color:var(--purple)}
-        .pipeline-title.won{border-color:var(--primary);color:var(--primary)}
-        .pipeline-card{background:white;border-radius:8px;padding:10px;margin-bottom:8px;border:1px solid #e2e8f0;cursor:pointer}
-        .pipeline-card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.1)}
-        .pipeline-card h4{font-size:12px;font-weight:700;margin-bottom:4px}
-        .pipeline-card p{font-size:10px;color:var(--muted)}
-        .pipeline-card .value{font-size:11px;font-weight:700;color:var(--primary-dark);margin-top:4px}
-        .activity-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9}
-        .activity-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
-        .activity-icon.call{background:#dcfce7}
-        .activity-icon.email{background:#dbeafe}
-        .activity-icon.note{background:#fef3c7}
-        .activity-icon.meeting{background:#ede9fe}
-        .activity-content{flex:1}
-        .activity-title{font-size:12px;font-weight:600}
-        .activity-desc{font-size:11px;color:var(--muted)}
-        .activity-time{font-size:10px;color:var(--muted)}
-        .followup-item{background:#fef3c7;border-radius:8px;padding:10px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-        .followup-info h4{font-size:12px;font-weight:700}
-        .followup-info p{font-size:10px;color:var(--muted)}
-        .followup-date{font-size:11px;font-weight:700;color:var(--warning)}
-        .modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;padding:20px}
-        .modal-overlay.active{display:flex}
-        .modal{background:white;border-radius:20px;padding:24px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}
-        .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-        .modal-title{font-size:18px;font-weight:700}
-        .modal-close{width:32px;height:32px;background:#f1f5f9;border:none;border-radius:8px;font-size:16px;cursor:pointer}
-        .checkbox-group{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
-        .checkbox-item{display:flex;align-items:center;gap:6px;font-size:12px}
-        .checkbox-item input{width:16px;height:16px}
-        .tabs{display:flex;gap:4px;margin-bottom:16px;border-bottom:2px solid #e2e8f0;padding-bottom:8px}
-        .tab{padding:8px 16px;background:transparent;border:none;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);border-radius:8px 8px 0 0}
-        .tab.active{background:var(--light);color:var(--primary-dark)}
-        .footer{background:var(--card);border-top:1px solid #e2e8f0;padding:14px 20px;margin-top:30px;text-align:center;font-size:11px;color:var(--muted)}
-        .toast{position:fixed;bottom:20px;right:20px;background:#1e293b;color:white;padding:12px 18px;border-radius:10px;font-size:13px;z-index:2000;display:none}
-        .toast.show{display:block;animation:slideIn 0.3s ease}
-        @keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
-        .reminder-banner{background:linear-gradient(135deg,#fef3c7,#fde68a);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-        .reminder-text{font-size:13px;font-weight:600;color:#92400e}
-        .empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
-        .empty-state .icon{font-size:48px;margin-bottom:12px}
-        .empty-state h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--text)}
-        .empty-state p{font-size:13px}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="copyright" content="© 2025 Dalmex Recycling, LLC. All Rights Reserved.">
+<meta name="author" content="Dalmex Recycling, LLC">
+<meta name="robots" content="noindex,nofollow">
+<title>DiversionScan™ | LEED Waste Tracking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{--_0:#0a0f1a;--_1:#111827;--_2:#1a2234;--_3:#0d1421;--_4:#10b981;--_5:#059669;--_6:#3b82f6;--_7:#8b5cf6;--_8:#f59e0b;--_9:#ef4444;--_a:#06b6d4;--_b:#eab308;--_c:#6366f1;--_d:#f1f5f9;--_e:#94a3b8;--_f:#64748b;--_g:#2d3a4f;--_h:env(safe-area-inset-top,20px);--_i:env(safe-area-inset-bottom,20px)}
+[data-t="1"]{--_0:#0c1929;--_1:#132337;--_2:#1a3a5c;--_3:#0a1628;--_4:#00d4aa;--_6:#00b4d8;--_g:#234567}
+[data-t="2"]{--_0:#1a0a0a;--_1:#2d1515;--_2:#3d1f1f;--_3:#150808;--_4:#ff6b6b;--_8:#ffa500;--_6:#ff8c42;--_g:#4a2525}
+[data-t="3"]{--_0:#0a1a0a;--_1:#152815;--_2:#1f3d1f;--_3:#081408;--_4:#4ade80;--_6:#86efac;--_g:#2d4a2d}
+[data-t="4"]{--_0:#0f0f1a;--_1:#1a1a2e;--_2:#252547;--_3:#0a0a14;--_4:#a78bfa;--_6:#818cf8;--_7:#c084fc;--_g:#3d3d6b}
+[data-t="5"]{--_0:#f8fafc;--_1:#e2e8f0;--_2:#ffffff;--_3:#f1f5f9;--_d:#1e293b;--_e:#475569;--_f:#64748b;--_g:#cbd5e1;--_4:#059669}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;user-select:none;-webkit-user-select:none}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--_0);color:var(--_d);line-height:1.5;transition:background .3s,color .3s}
+.Z{height:100%;display:flex;flex-direction:column;padding-top:var(--_h);padding-bottom:var(--_i)}
+.H{background:linear-gradient(180deg,var(--_1) 0%,var(--_0) 100%);padding:12px 16px;border-bottom:1px solid var(--_g)}
+.Ht{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.L{display:flex;align-items:center;gap:10px}
+.Ls{width:36px;height:36px}
+.Lt{font-weight:800;font-size:17px;letter-spacing:-0.5px}
+.Lt span{color:var(--_4)}
+.Lb{display:flex;align-items:center;gap:4px;background:linear-gradient(135deg,#059669,#10b981);color:#fff;padding:2px 8px;border-radius:4px;font-size:9px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.Pb{background:var(--_2);border:1px solid var(--_c);color:var(--_c);padding:3px 8px;border-radius:16px;font-size:10px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.Hs{font-size:11px;color:var(--_f);font-family:'JetBrains Mono',monospace}
+.Si{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--_4);font-family:'JetBrains Mono',monospace}
+.Sd{width:8px;height:8px;border-radius:50%;background:var(--_4);animation:P 2s infinite}
+@keyframes P{0%,100%{opacity:1}50%{opacity:.5}}
+.Pr{background:var(--_2);padding:10px 16px;border-bottom:1px solid var(--_g);display:flex;gap:10px;align-items:center}
+.Ps{flex:1;background:var(--_3);border:1px solid var(--_g);border-radius:8px;padding:8px 12px;color:var(--_d);font-size:14px;font-family:inherit}
+.Nb{background:var(--_8);border:none;color:#fff;width:36px;height:36px;border-radius:8px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.Tb{background:var(--_3);border:1px solid var(--_g);color:var(--_e);width:36px;height:36px;border-radius:8px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.M{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px}
+.C{background:var(--_2);border-radius:14px;padding:16px;margin-bottom:12px;border:1px solid var(--_g);box-shadow:0 4px 24px rgba(0,0,0,.4)}
+.Ch{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.Ci{width:28px;height:28px;background:var(--_3);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.Ct{font-size:14px;font-weight:700}
+.Cb{margin-left:auto;padding:2px 6px;border-radius:4px;font-size:9px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.Cb1{background:rgba(16,185,129,.15);color:var(--_4)}
+.Cb2{background:rgba(234,179,8,.15);color:var(--_b)}
+.Cb3{background:rgba(6,182,212,.15);color:var(--_a)}
+.Cb4{background:rgba(245,158,11,.15);color:var(--_8)}
+.Cb5{background:rgba(139,92,246,.15);color:var(--_7)}
+.Fg{margin-bottom:12px}
+.Fl{display:block;font-size:11px;font-weight:600;color:var(--_e);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.Fs,.Fi{width:100%;background:var(--_3);border:2px solid var(--_g);border-radius:8px;padding:12px 14px;color:var(--_d);font-size:15px;font-family:inherit}
+.Fs:focus,.Fi:focus{outline:none;border-color:var(--_6)}
+.Fi::placeholder{color:var(--_f)}
+.Fr{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.Tn{display:flex;background:var(--_3);border-radius:8px;padding:3px;margin-bottom:12px;overflow-x:auto}
+.Tt{flex:1;padding:8px 4px;background:transparent;border:none;border-radius:6px;color:var(--_f);font-size:10px;font-weight:600;cursor:pointer;white-space:nowrap;min-width:48px}
+.Tt.A{background:var(--_2);color:var(--_d);box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.Tc{display:none}
+.Tc.A{display:block}
+.Lc{background:linear-gradient(135deg,rgba(234,179,8,.1) 0%,rgba(234,179,8,.05) 100%);border:1px solid var(--_b)}
+.Lp{margin-bottom:16px}
+.Lph{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.Lpt{font-size:12px;color:var(--_e)}
+.Lpv{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:800;color:var(--_b)}
+.Lpb{height:12px;background:var(--_3);border-radius:6px;overflow:hidden}
+.Lpf{height:100%;border-radius:6px;transition:width .5s}
+.Lpf.low{background:var(--_9)}
+.Lpf.med{background:var(--_8)}
+.Lpf.good{background:var(--_b)}
+.Lpf.exc{background:var(--_4)}
+.Lth{display:flex;justify-content:space-between;margin-top:6px;font-size:9px;color:var(--_f);font-family:'JetBrains Mono',monospace}
+.Ls2{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.Lst{background:var(--_3);border-radius:8px;padding:10px;text-align:center}
+.Lsv{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--_4)}
+.Lsl{font-size:9px;color:var(--_f);text-transform:uppercase;margin-top:2px}
+.Vm{display:flex;gap:6px;margin-bottom:12px}
+.Vmb{flex:1;padding:10px 8px;background:var(--_3);border:2px solid var(--_g);border-radius:8px;color:var(--_f);font-size:11px;font-weight:600;cursor:pointer;text-align:center;transition:all .2s}
+.Vmb.A{border-color:var(--_6);color:var(--_6);background:rgba(59,130,246,.1)}
+.Vmi{font-size:18px;display:block;margin-bottom:4px}
+.Dg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.Di{text-align:center}
+.Di .Fl{text-align:center}
+.Pg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;padding:12px;background:var(--_3);border-radius:8px}
+.Pgi{text-align:center}
+.Pgi .Fl{font-size:10px;margin-bottom:4px}
+.Pgi .Fi{padding:8px;text-align:center;font-size:14px}
+.Li{background:linear-gradient(135deg,rgba(99,102,241,.1) 0%,rgba(139,92,246,.1) 100%);border:2px dashed var(--_c);border-radius:10px;padding:20px;text-align:center;cursor:pointer}
+.Lii{font-size:32px;margin-bottom:8px}
+.Lit{font-size:12px;color:var(--_e)}
+.Lih{font-size:10px;color:var(--_f);margin-top:4px}
+.Cr{background:linear-gradient(135deg,rgba(16,185,129,.1) 0%,rgba(59,130,246,.1) 100%);border:1px solid var(--_4);border-radius:10px;padding:16px;text-align:center}
+.Cr.E{background:var(--_3);border-color:var(--_g)}
+.Crl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--_e);margin-bottom:4px}
+.Crt{font-size:36px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--_4);line-height:1}
+.Cr.E .Crt{color:var(--_f);font-size:24px}
+.Cru{font-size:12px;color:var(--_e);font-family:'JetBrains Mono',monospace}
+.Crb{margin-top:12px;padding-top:12px;border-top:1px solid var(--_g);font-size:11px;color:var(--_f);font-family:'JetBrains Mono',monospace}
+.Bp{width:100%;padding:14px;background:linear-gradient(135deg,var(--_4) 0%,var(--_5) 100%);border:none;border-radius:10px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 16px rgba(16,185,129,.3)}
+.Bp:disabled{opacity:.5;pointer-events:none}
+.Bs{background:var(--_3);color:var(--_e);box-shadow:none}
+.Bo{background:linear-gradient(135deg,var(--_8) 0%,#d97706 100%)}
+.Bv{background:linear-gradient(135deg,var(--_7) 0%,#7c3aed 100%);box-shadow:0 4px 16px rgba(139,92,246,.3)}
+.Bc{background:linear-gradient(135deg,var(--_a) 0%,#0891b2 100%);box-shadow:0 4px 16px rgba(6,182,212,.3)}
+.Sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.Ss{background:var(--_3);border-radius:8px;padding:12px;text-align:center;border:1px solid var(--_g)}
+.Ss.H{border-color:var(--_4);background:rgba(16,185,129,.1)}
+.Sv{font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--_4);line-height:1}
+.Sl{font-size:9px;color:var(--_f);text-transform:uppercase;margin-top:4px}
+.El,.Tl{max-height:300px;overflow-y:auto}
+.Ei,.Ti{background:var(--_3);border-radius:8px;padding:12px;margin-bottom:8px;border:1px solid var(--_g)}
+.Eh,.Th{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.Em,.Tn2{font-weight:700;font-size:13px}
+.Tn2{color:var(--_a);font-family:'JetBrains Mono',monospace}
+.Es{font-size:9px;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace}
+.Es1{background:rgba(59,130,246,.15);color:var(--_6)}
+.Es2{background:rgba(99,102,241,.15);color:var(--_c)}
+.Es3{background:rgba(6,182,212,.15);color:var(--_a)}
+.Es4{background:rgba(234,179,8,.15);color:var(--_b)}
+.Et,.Td{font-size:10px;color:var(--_f);font-family:'JetBrains Mono',monospace}
+.Ed{display:flex;gap:12px;font-size:12px;font-family:'JetBrains Mono',monospace}
+.Edt{color:var(--_e)}
+.Edt strong{color:var(--_4)}
+.Ep{font-size:10px;color:var(--_8);margin-top:4px}
+.Edl,.Tdl{background:rgba(239,68,68,.15);border:none;color:var(--_9);padding:4px 8px;border-radius:4px;font-size:10px;cursor:pointer;margin-top:6px}
+.Os{background:rgba(6,182,212,.1);border:2px dashed var(--_a);border-radius:12px;padding:24px 16px;text-align:center;cursor:pointer}
+.Osi{font-size:40px;margin-bottom:8px}
+.Ost{font-size:14px;font-weight:700;color:var(--_a)}
+.Osx{font-size:12px;color:var(--_f)}
+.Op{text-align:center;padding:24px}
+.Osp{width:50px;height:50px;border:4px solid var(--_g);border-top-color:var(--_a);border-radius:50%;animation:S 1s linear infinite;margin:0 auto 12px}
+@keyframes S{to{transform:rotate(360deg)}}
+.Opr{font-size:13px;color:var(--_a);font-weight:600}
+.Opb{width:100%;height:6px;background:var(--_3);border-radius:3px;overflow:hidden;margin-top:10px}
+.Opf{height:100%;background:var(--_a);transition:width .3s}
+.Or{background:var(--_3);border-radius:10px;padding:14px;margin-top:12px}
+.Orr{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--_g)}
+.Orr:last-child{border-bottom:none}
+.Orl{font-size:11px;color:var(--_f);text-transform:uppercase}
+.Orv{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;color:var(--_a)}
+.Orv.Ed{background:var(--_2);border:1px solid var(--_g);border-radius:6px;padding:6px 10px;min-width:100px;text-align:right;color:var(--_d)}
+.Il{max-height:250px;overflow-y:auto}
+.It{background:var(--_3);border-radius:10px;padding:12px;margin-bottom:8px;border:1px solid var(--_g);cursor:pointer}
+.It.A{border-color:var(--_8);background:rgba(245,158,11,.1)}
+.Ith{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.Itn{font-weight:700;font-size:14px}
+.Itb{font-size:9px;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace}
+.Itb.A{background:rgba(16,185,129,.15);color:var(--_4)}
+.Itb.C{background:rgba(59,130,246,.15);color:var(--_6)}
+.Itd{font-size:11px;color:var(--_f)}
+.Its{display:flex;gap:12px;margin-top:8px;font-size:11px;font-family:'JetBrains Mono',monospace}
+.Itst{color:var(--_e)}
+.Itst strong{color:var(--_4)}
+.Rp{background:var(--_3);border-radius:10px;padding:16px;margin-bottom:12px}
+.Rsg{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+.Rs{background:var(--_2);border-radius:6px;padding:10px;text-align:center}
+.Rsv{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700}
+.Rsv.G{color:var(--_4)}
+.Rsv.O{color:var(--_8)}
+.Rsv.B{color:var(--_6)}
+.Rsl{font-size:9px;color:var(--_f);text-transform:uppercase;margin-top:2px}
+.Cc{background:var(--_2);border-radius:8px;padding:12px;margin-bottom:12px;height:180px}
+.Sst{display:flex;align-items:center;gap:12px;padding:16px;background:var(--_3);border-radius:10px;margin-bottom:12px}
+.Ssi{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;background:rgba(16,185,129,.15)}
+.Sst2{font-weight:700;font-size:14px}
+.Ssx{font-size:11px;color:var(--_f)}
+.Ds{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.Dst{background:var(--_3);border-radius:8px;padding:10px;text-align:center}
+.Dsv{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--_c)}
+.Dsl{font-size:8px;color:var(--_f);text-transform:uppercase}
+.Sab{display:flex;align-items:center;gap:12px;padding:14px;background:var(--_3);border-radius:10px;border:1px solid var(--_g);cursor:pointer;margin-bottom:8px}
+.Sai{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.Sai.Ex{background:rgba(16,185,129,.15)}
+.Sai.Im{background:rgba(59,130,246,.15)}
+.Sai.Cl{background:rgba(239,68,68,.15)}
+.Sat{font-weight:700;font-size:13px}
+.Sad{font-size:10px;color:var(--_f)}
+.Ths{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.Tho{padding:12px 8px;background:var(--_3);border:2px solid var(--_g);border-radius:8px;text-align:center;cursor:pointer;font-size:11px;font-weight:600}
+.Tho.A{border-color:var(--_4)}
+.Thp{width:24px;height:24px;border-radius:50%;margin:0 auto 6px}
+.Ey{text-align:center;padding:30px 16px;color:var(--_f)}
+.Eyi{font-size:40px;margin-bottom:10px;opacity:.5}
+.To{position:fixed;bottom:calc(var(--_i) + 16px);left:50%;transform:translateX(-50%) translateY(100px);background:var(--_4);color:#fff;padding:10px 20px;border-radius:8px;font-weight:600;font-size:13px;opacity:0;transition:all .3s;z-index:1000}
+.To.S{transform:translateX(-50%) translateY(0);opacity:1}
+.To.Er{background:var(--_9)}
+.To.Oc{background:var(--_a)}
+.To.Pu{background:var(--_7)}
+.Mo{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:1000;opacity:0;visibility:hidden;transition:all .3s;padding:16px}
+.Mo.S{opacity:1;visibility:visible}
+.Md{background:var(--_2);border-radius:14px;padding:20px;max-width:380px;width:100%;border:1px solid var(--_g);max-height:90vh;overflow-y:auto}
+.Mt{font-size:16px;font-weight:700;margin-bottom:16px}
+.Mb{display:flex;gap:10px;margin-top:16px}
+.Mbc{flex:1;padding:12px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:var(--_3);color:var(--_e)}
+.Mbf{background:var(--_8);color:#fff}
+.Hi{display:none}
+.Cp{text-align:center;padding:16px;font-size:10px;color:var(--_f);border-top:1px solid var(--_g);margin-top:20px}
+.Cp strong{color:var(--_4)}
+/* Stream breakdown table */
+.Stb{width:100%;border-collapse:collapse;margin:12px 0;font-size:11px}
+.Stb th{background:var(--_3);padding:8px 6px;text-align:left;font-weight:600;color:var(--_e);text-transform:uppercase;font-size:9px;border-bottom:2px solid var(--_g)}
+.Stb td{padding:8px 6px;border-bottom:1px solid var(--_g)}
+.Stb tr:last-child td{border-bottom:none;font-weight:700;background:rgba(16,185,129,.1)}
+.Stb .num{text-align:right;font-family:'JetBrains Mono',monospace}
+.Stb .rate{color:var(--_4);font-weight:600}
+.Stb .rate.low{color:var(--_9)}
+.Stb .rate.med{color:var(--_8)}
+</style>
 </head>
-<body>
-<div class="login-screen" id="loginScreen">
-    <div class="login-card">
-        <div class="login-logo">🤖</div>
-        <h1 class="login-title">Dalmex Fiber Hub</h1>
-        <p class="login-subtitle" id="loginSub">Enterprise CRM & AI Trading</p>
-        <div class="lang-toggle">
-            <button class="lang-btn active" onclick="setLang('en')">🇺🇸 English</button>
-            <button class="lang-btn" onclick="setLang('es')">🇲🇽 Español</button>
-        </div>
-        <div class="login-error" id="loginError">Invalid username or password</div>
-        <div class="form-group">
-            <label class="form-label" id="lblUser">Username</label>
-            <input type="text" id="username" class="form-input">
-        </div>
-        <div class="form-group">
-            <label class="form-label" id="lblPass">Password</label>
-            <input type="password" id="password" class="form-input">
-        </div>
-        <button class="btn btn-purple btn-full" onclick="handleLogin()" id="btnLogin">Sign In</button>
-        <button class="btn btn-green btn-full" onclick="quickLogin()">⚡ Quick Access</button>
-        <div class="login-footer"><strong>Dalmex Recycling LLC</strong><br>2828 Nagle St. Dallas, TX 75220 • 214-352-2000</div>
-    </div>
+<body oncontextmenu="return false" oncopy="return false" oncut="return false">
+<div class="Z">
+<header class="H">
+<div class="Ht">
+<div class="L">
+<svg class="Ls" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="45" stroke="url(#g1)" stroke-width="4" fill="none"/><path d="M50 15 L70 45 L58 45 L58 65 L42 65 L42 45 L30 45 Z" fill="var(--_4)"/><path d="M50 15 L70 45 L58 45 L58 65 L42 65 L42 45 L30 45 Z" fill="var(--_6)" transform="rotate(120 50 50)"/><path d="M50 15 L70 45 L58 45 L58 65 L42 65 L42 45 L30 45 Z" fill="var(--_4)" transform="rotate(240 50 50)"/><text x="50" y="58" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="22" fill="var(--_4)">D</text><defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:var(--_4)"/><stop offset="100%" style="stop-color:var(--_6)"/></linearGradient></defs></svg>
+<div class="Lt">Diversion<span>Scan</span>™</div>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div class="Lb">✓ LEED v4.1</div>
+<div class="Pb">ENTERPRISE</div>
+</div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<div class="Hs">C&D Waste Stream Tracking</div>
+<div class="Si"><div class="Sd"></div><span id="st">Synced</span></div>
+</div>
+</header>
+<div class="Pr">
+<select id="ps" class="Ps"><option value="">— Select Project —</option></select>
+<button class="Nb" onclick="$('pm').classList.add('S')">+</button>
+<button class="Tb" onclick="$('tm').classList.add('S')">🎨</button>
+</div>
+<main class="M">
+<div class="Tn">
+<button class="Tt A" data-t="calc">⚖️ Calc</button>
+<button class="Tt" data-t="ocr">🎫 OCR</button>
+<button class="Tt" data-t="proj">📁</button>
+<button class="Tt" data-t="log">📋</button>
+<button class="Tt" data-t="strm">📊</button>
+<button class="Tt" data-t="rpt">📄</button>
+<button class="Tt" data-t="set">⚙️</button>
 </div>
 
-<div class="app" id="app">
-    <div class="ticker"><div class="ticker-track" id="ticker"></div></div>
-    <div class="reminder-banner" id="reminderBanner" style="display:none">
-        <span class="reminder-text" id="reminderText">📞 You have follow-ups due today!</span>
-        <button class="btn btn-warning btn-sm" onclick="setTab('crm')">View CRM</button>
-    </div>
-    <header class="header">
-        <div class="header-inner">
-            <div class="header-left">
-                <div class="logo">🤖</div>
-                <div class="brand"><h1>Dalmex Fiber Hub</h1><span>Enterprise CRM • Dallas, TX</span></div>
-            </div>
-            <div class="header-right">
-                <button class="lang-btn" onclick="toggleLang()" id="langToggle">🇲🇽 Español</button>
-                <div class="user-badge" id="userBadge">User</div>
-                <button class="btn btn-danger btn-sm" onclick="logout()">Logout</button>
-            </div>
-        </div>
-    </header>
-    <nav class="nav" id="nav"></nav>
-    <main class="main" id="main"></main>
-    <footer class="footer">© 2025 Dalmex Recycling LLC • Robert Vandling • AI-Powered by Claude</footer>
+<div id="calc" class="Tc A">
+<div id="lc" class="C Lc" style="display:none">
+<div class="Ch"><div class="Ci">🏆</div><div class="Ct">LEED v4.1 MRc5</div><div class="Cb Cb2">TRACKING</div></div>
+<div class="Lp">
+<div class="Lph"><span class="Lpt">Diversion Rate</span><span class="Lpv" id="lr">0%</span></div>
+<div class="Lpb"><div class="Lpf" id="lf" style="width:0%"></div></div>
+<div class="Lth"><span>0%</span><span>50% (1pt)</span><span>75% (2pts)</span><span>100%</span></div>
+</div>
+<div class="Ls2">
+<div class="Lst"><div class="Lsv" id="ld">0</div><div class="Lsl">Diverted</div></div>
+<div class="Lst"><div class="Lsv" id="ll">0</div><div class="Lsl">Landfill</div></div>
+<div class="Lst"><div class="Lsv" id="lt">0</div><div class="Lsl">Total</div></div>
+</div>
+</div>
+<div class="C">
+<div class="Ch"><div class="Ci">🏗️</div><div class="Ct">Material Stream</div></div>
+<div class="Fg">
+<label class="Fl">C&D Material Type</label>
+<select id="ms" class="Fs">
+<option value="">Select material stream...</option>
+<optgroup label="🪨 Concrete & Masonry">
+<option value="Concrete" data-d="1.10" data-cat="Concrete">Concrete (Clean) - 1.10 t/CY</option>
+<option value="Concrete w/Rebar" data-d="1.25" data-cat="Concrete">Concrete w/ Rebar - 1.25 t/CY</option>
+<option value="Brick/CMU" data-d="1.00" data-cat="Concrete">Brick/CMU - 1.00 t/CY</option>
+</optgroup>
+<optgroup label="🛣️ Asphalt">
+<option value="Asphalt" data-d="1.10" data-cat="Asphalt">Asphalt Pavement - 1.10 t/CY</option>
+<option value="Shingles" data-d="0.40" data-cat="Asphalt">Roofing Shingles - 0.40 t/CY</option>
+</optgroup>
+<optgroup label="🪵 Wood">
+<option value="Clean Wood" data-d="0.30" data-cat="Wood">Clean Wood - 0.30 t/CY</option>
+<option value="Painted Wood" data-d="0.35" data-cat="Wood">Painted/Treated Wood - 0.35 t/CY</option>
+<option value="Pallets" data-d="0.25" data-cat="Wood">Pallets - 0.25 t/CY</option>
+</optgroup>
+<optgroup label="🔩 Metal">
+<option value="Heavy Metal" data-d="0.50" data-cat="Metal">Heavy Metal/Steel - 0.50 t/CY</option>
+<option value="Light Gauge Metal" data-d="0.35" data-cat="Metal">Light Gauge Metal - 0.35 t/CY</option>
+<option value="Mixed Metal" data-d="0.40" data-cat="Metal">Mixed Metals - 0.40 t/CY</option>
+</optgroup>
+<optgroup label="🧱 Drywall">
+<option value="Clean Drywall" data-d="0.35" data-cat="Drywall">Clean Drywall - 0.35 t/CY</option>
+<option value="Contaminated Drywall" data-d="0.40" data-cat="Drywall">Contaminated Drywall - 0.40 t/CY</option>
+</optgroup>
+<optgroup label="📦 Cardboard/Paper">
+<option value="Cardboard/OCC" data-d="0.10" data-cat="Cardboard">Cardboard/OCC - 0.10 t/CY</option>
+<option value="Mixed Paper" data-d="0.12" data-cat="Cardboard">Mixed Paper - 0.12 t/CY</option>
+</optgroup>
+<optgroup label="♻️ Plastic">
+<option value="Plastic Film" data-d="0.08" data-cat="Plastic">Plastic Film - 0.08 t/CY</option>
+<option value="Rigid Plastic" data-d="0.15" data-cat="Plastic">Rigid Plastic - 0.15 t/CY</option>
+</optgroup>
+<optgroup label="🏔️ Other">
+<option value="Fill Dirt" data-d="1.10" data-cat="Soil">Clean Fill Dirt - 1.10 t/CY</option>
+<option value="Land Clearing" data-d="0.35" data-cat="Organics">Land Clearing Debris - 0.35 t/CY</option>
+<option value="Mixed C&D" data-d="0.40" data-cat="Mixed">Mixed C&D - 0.40 t/CY</option>
+</optgroup>
+</select>
+</div>
+<div class="Vm">
+<button class="Vmb A" data-m="man"><span class="Vmi">✏️</span>Manual</button>
+<button class="Vmb" data-m="dim"><span class="Vmi">📏</span>L×W×H</button>
+<button class="Vmb" data-m="lid"><span class="Vmi">📱</span>LiDAR</button>
+<button class="Vmb" data-m="pct"><span class="Vmi">%</span>Split</button>
+</div>
+<div id="vi-man">
+<div class="Fg"><label class="Fl">Volume (CY)</label><input type="number" id="vi" class="Fi" placeholder="0.00" step="0.01" min="0" inputmode="decimal"></div>
+</div>
+<div id="vi-dim" style="display:none">
+<div class="Dg">
+<div class="Di"><label class="Fl">Length (ft)</label><input type="number" id="vl" class="Fi" placeholder="0" step="0.5" min="0" inputmode="decimal"></div>
+<div class="Di"><label class="Fl">Width (ft)</label><input type="number" id="vw" class="Fi" placeholder="0" step="0.5" min="0" inputmode="decimal"></div>
+<div class="Di"><label class="Fl">Height (ft)</label><input type="number" id="vh" class="Fi" placeholder="0" step="0.5" min="0" inputmode="decimal"></div>
+</div>
+<div style="text-align:center;font-size:11px;color:var(--_f)">Volume: <span id="cv">0.00</span> CY</div>
+</div>
+<div id="vi-lid" style="display:none">
+<div class="Li" onclick="$('lf2').click()">
+<div class="Lii">📱</div>
+<div class="Lit">Import from 3D Scanner</div>
+<div class="Lih">Polycam, Canvas, or manual</div>
+</div>
+<input type="file" id="lf2" class="Hi" accept=".json,.csv,.txt">
+<div class="Fg" style="margin-top:12px"><label class="Fl">Or Enter LiDAR Volume (CY)</label><input type="number" id="vli" class="Fi" placeholder="0.00" step="0.01" min="0" inputmode="decimal"></div>
+</div>
+<div id="vi-pct" style="display:none">
+<div class="Fg"><label class="Fl">Total Weight (tons)</label><input type="number" id="tw" class="Fi" placeholder="0.00" step="0.01" min="0" inputmode="decimal"></div>
+<div class="Pg">
+<div class="Pgi"><label class="Fl">♻️ Diverted %</label><input type="number" id="dp" class="Fi" value="75" min="0" max="100"></div>
+<div class="Pgi"><label class="Fl">🗑️ Landfill %</label><input type="number" id="lp" class="Fi" value="25" min="0" max="100"></div>
+</div>
+<div id="pb" style="font-size:11px;color:var(--_f);text-align:center;font-family:'JetBrains Mono',monospace">Diverted: 0.00t | Landfill: 0.00t</div>
+</div>
+<div class="Fg" id="dg">
+<label class="Fl">Destination</label>
+<select id="ds" class="Fs"><option value="d">♻️ Diverted/Recycled</option><option value="l">🗑️ Landfill</option></select>
+</div>
+</div>
+<div class="C">
+<div class="Ch"><div class="Ci">⚖️</div><div class="Ct">Tonnage</div></div>
+<div id="cr" class="Cr E">
+<div class="Crl">Estimated Weight</div>
+<div id="td" class="Crt">--</div>
+<div class="Cru">tons</div>
+<div id="cb" class="Crb" style="display:none"></div>
+</div>
+<button id="ab" class="Bp" style="margin-top:12px" disabled>➕ Add Entry</button>
+</div>
 </div>
 
-<!-- Contact Modal -->
-<div class="modal-overlay" id="contactModal">
-    <div class="modal">
-        <div class="modal-header">
-            <h3 class="modal-title" id="contactModalTitle">Add Contact</h3>
-            <button class="modal-close" onclick="closeModal('contactModal')">✕</button>
-        </div>
-        <form id="contactForm">
-            <div class="form-group">
-                <label class="form-label">Company *</label>
-                <input type="text" id="fCompany" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Contact Person *</label>
-                <input type="text" id="fContact" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Email *</label>
-                <input type="email" id="fEmail" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Phone</label>
-                <input type="tel" id="fPhone" class="form-input">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Type *</label>
-                <select id="fType" class="form-select" required>
-                    <option value="">Select...</option>
-                    <option value="Mill">Mill</option>
-                    <option value="Broker">Broker</option>
-                    <option value="Export">Export</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Commodities</label>
-                <div class="checkbox-group">
-                    <label class="checkbox-item"><input type="checkbox" name="comm" value="OCC"> OCC</label>
-                    <label class="checkbox-item"><input type="checkbox" name="comm" value="PM"> PM</label>
-                    <label class="checkbox-item"><input type="checkbox" name="comm" value="SWL"> SWL</label>
-                    <label class="checkbox-item"><input type="checkbox" name="comm" value="DLK"> DLK</label>
-                    <label class="checkbox-item"><input type="checkbox" name="comm" value="SOP"> SOP</label>
-                    <label class="checkbox-item"><input type="checkbox" name="comm" value="HWEC"> HWEC</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="checkbox-item"><input type="checkbox" id="fPriority"> Priority Contact</label>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Notes</label>
-                <textarea id="fNotes" class="form-textarea" rows="2"></textarea>
-            </div>
-            <div style="display:flex;gap:10px;margin-top:16px">
-                <button type="button" class="btn btn-gray" style="flex:1" onclick="closeModal('contactModal')">Cancel</button>
-                <button type="submit" class="btn btn-green" style="flex:1">Save</button>
-            </div>
-        </form>
-    </div>
+<div id="ocr" class="Tc">
+<div class="C">
+<div class="Ch"><div class="Ci">📷</div><div class="Ct">Scan Scale Ticket</div><div class="Cb Cb3">OCR</div></div>
+<div id="osa">
+<div class="Os" onclick="$('ci').click()">
+<div class="Osi">📷</div>
+<div class="Ost">Tap to Scan Ticket</div>
+<div class="Osx">Camera captures scale ticket</div>
+</div>
+</div>
+<div id="opr" class="Op" style="display:none">
+<div class="Osp"></div>
+<div class="Opr" id="opt">Processing...</div>
+<div class="Opb"><div class="Opf" id="opf" style="width:0%"></div></div>
+</div>
+<div id="ors" class="Or" style="display:none">
+<div class="Orr"><span class="Orl">Ticket #</span><input type="text" id="ot" class="Orv Ed"></div>
+<div class="Orr"><span class="Orl">Gross (lbs)</span><input type="number" id="og" class="Orv Ed"></div>
+<div class="Orr"><span class="Orl">Tare (lbs)</span><input type="number" id="ota" class="Orv Ed"></div>
+<div class="Orr"><span class="Orl">Net Weight</span><span id="on" class="Orv" style="color:var(--_4)">-- tons</span></div>
+<div style="display:flex;gap:8px;margin-top:12px">
+<button class="Bp Bc" onclick="_st()" style="flex:1">💾 Save</button>
+<button class="Bp Bs" onclick="_ro()" style="flex:.4">🔄</button>
+</div>
+</div>
+</div>
+<div class="C">
+<div class="Ch"><div class="Ci">🎫</div><div class="Ct">Saved Tickets</div></div>
+<div id="tl" class="Tl"><div class="Ey"><div class="Eyi">🎫</div><div>No tickets</div></div></div>
+</div>
 </div>
 
-<!-- Prospect Modal -->
-<div class="modal-overlay" id="prospectModal">
-    <div class="modal">
-        <div class="modal-header">
-            <h3 class="modal-title" id="prospectModalTitle">Add Prospect</h3>
-            <button class="modal-close" onclick="closeModal('prospectModal')">✕</button>
-        </div>
-        <form id="prospectForm">
-            <div class="form-group">
-                <label class="form-label">Company *</label>
-                <input type="text" id="pCompany" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Contact Person *</label>
-                <input type="text" id="pContact" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Email</label>
-                <input type="email" id="pEmail" class="form-input">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Phone</label>
-                <input type="tel" id="pPhone" class="form-input">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Type</label>
-                <select id="pType" class="form-select">
-                    <option value="Mill">Mill</option>
-                    <option value="Broker">Broker</option>
-                    <option value="Export">Export</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Pipeline Stage *</label>
-                <select id="pStage" class="form-select" required>
-                    <option value="lead">Lead</option>
-                    <option value="contacted">Contacted</option>
-                    <option value="negotiating">Negotiating</option>
-                    <option value="won">Won</option>
-                    <option value="lost">Lost</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Estimated Value ($)</label>
-                <input type="number" id="pValue" class="form-input" placeholder="Monthly potential">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Follow-up Date</label>
-                <input type="date" id="pFollowup" class="form-input">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Notes</label>
-                <textarea id="pNotes" class="form-textarea" rows="2"></textarea>
-            </div>
-            <div style="display:flex;gap:10px;margin-top:16px">
-                <button type="button" class="btn btn-gray" style="flex:1" onclick="closeModal('prospectModal')">Cancel</button>
-                <button type="submit" class="btn btn-blue" style="flex:1">Save Prospect</button>
-            </div>
-        </form>
-    </div>
+<div id="proj" class="Tc">
+<div class="C">
+<div class="Ch"><div class="Ci">🏢</div><div class="Ct">Customers</div><button class="Cb Cb4" style="cursor:pointer;border:none" onclick="$('cm').classList.add('S')">+ ADD</button></div>
+<div id="cl" class="Il"><div class="Ey"><div class="Eyi">🏢</div><div>No customers</div></div></div>
+</div>
+<div class="C">
+<div class="Ch"><div class="Ci">📁</div><div class="Ct">Projects</div><button class="Cb Cb4" style="cursor:pointer;border:none" onclick="$('pm').classList.add('S')">+ ADD</button></div>
+<div id="pl" class="Il"><div class="Ey"><div class="Eyi">📁</div><div>No projects</div></div></div>
+</div>
 </div>
 
-<!-- Activity Modal -->
-<div class="modal-overlay" id="activityModal">
-    <div class="modal">
-        <div class="modal-header">
-            <h3 class="modal-title">Log Activity</h3>
-            <button class="modal-close" onclick="closeModal('activityModal')">✕</button>
-        </div>
-        <form id="activityForm">
-            <input type="hidden" id="aProspectId">
-            <div class="form-group">
-                <label class="form-label">Activity Type *</label>
-                <select id="aType" class="form-select" required>
-                    <option value="call">📞 Phone Call</option>
-                    <option value="email">📧 Email</option>
-                    <option value="meeting">🤝 Meeting</option>
-                    <option value="note">📝 Note</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Description *</label>
-                <textarea id="aDesc" class="form-textarea" rows="3" required></textarea>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Next Follow-up</label>
-                <input type="date" id="aFollowup" class="form-input">
-            </div>
-            <div style="display:flex;gap:10px;margin-top:16px">
-                <button type="button" class="btn btn-gray" style="flex:1" onclick="closeModal('activityModal')">Cancel</button>
-                <button type="submit" class="btn btn-green" style="flex:1">Save Activity</button>
-            </div>
-        </form>
-    </div>
+<div id="log" class="Tc">
+<div class="C">
+<div class="Ch"><div class="Ci">📊</div><div class="Ct">Summary</div></div>
+<div class="Sg">
+<div class="Ss H"><div id="tt" class="Sv">0</div><div class="Sl">Total Tons</div></div>
+<div class="Ss"><div id="dt" class="Sv">0</div><div class="Sl">Diverted</div></div>
+<div class="Ss"><div id="ec" class="Sv">0</div><div class="Sl">Entries</div></div>
+<div class="Ss"><div id="dr" class="Sv">0%</div><div class="Sl">Rate</div></div>
+</div>
+</div>
+<div class="C">
+<div class="Ch"><div class="Ci">📝</div><div class="Ct">Entry Log</div><button id="clb" class="Cb" style="cursor:pointer;background:rgba(239,68,68,.15);color:var(--_9);border:none">CLEAR</button></div>
+<div id="el" class="El"><div class="Ey"><div class="Eyi">📋</div><div>No entries</div></div></div>
+</div>
 </div>
 
-<div class="toast" id="toast"></div>
+<!-- NEW: Stream Breakdown Tab -->
+<div id="strm" class="Tc">
+<div class="C">
+<div class="Ch"><div class="Ci">📊</div><div class="Ct">Material Stream Breakdown</div><div class="Cb Cb2">LEED</div></div>
+<div id="strm-empty" class="Ey"><div class="Eyi">📊</div><div>No data yet</div></div>
+<div id="strm-data" style="display:none">
+<table class="Stb">
+<thead>
+<tr><th>Material Stream</th><th class="num">Total</th><th class="num">Diverted</th><th class="num">Landfill</th><th class="num">Rate</th></tr>
+</thead>
+<tbody id="strm-body"></tbody>
+</table>
+</div>
+</div>
+<div class="C">
+<div class="Ch"><div class="Ci">📈</div><div class="Ct">Stream Composition</div></div>
+<div class="Cc"><canvas id="strm-chart"></canvas></div>
+</div>
+</div>
+
+<div id="rpt" class="Tc">
+<div class="C">
+<div class="Ch"><div class="Ci">📄</div><div class="Ct">LEED MRc5 Report</div><div class="Cb Cb5">PDF</div></div>
+<div id="rnp" class="Ey"><div class="Eyi">📁</div><div>Select project first</div></div>
+<div id="rc" style="display:none">
+<div class="Fg"><label class="Fl">Prepared By</label><input type="text" id="pby" class="Fi" placeholder="Your Name"></div>
+<div class="Rp">
+<div class="Rsg">
+<div class="Rs"><div class="Rsv G" id="rt">0</div><div class="Rsl">Total Tons</div></div>
+<div class="Rs"><div class="Rsv G" id="rd">0</div><div class="Rsl">Diverted</div></div>
+<div class="Rs"><div class="Rsv O" id="rl">0</div><div class="Rsl">Landfill</div></div>
+<div class="Rs"><div class="Rsv B" id="rr">0%</div><div class="Rsl">Rate</div></div>
+</div>
+</div>
+<div class="Cc"><canvas id="ch"></canvas></div>
+<button class="Bp Bv" onclick="_gp()">📄 Generate LEED Report</button>
+</div>
+</div>
+</div>
+
+<div id="set" class="Tc">
+<div class="C">
+<div class="Ch"><div class="Ci">🎨</div><div class="Ct">Theme</div></div>
+<div class="Ths">
+<div class="Tho A" data-t="0" onclick="_th(0)"><div class="Thp" style="background:linear-gradient(135deg,#10b981,#3b82f6)"></div>Default</div>
+<div class="Tho" data-t="1" onclick="_th(1)"><div class="Thp" style="background:linear-gradient(135deg,#00d4aa,#00b4d8)"></div>Ocean</div>
+<div class="Tho" data-t="2" onclick="_th(2)"><div class="Thp" style="background:linear-gradient(135deg,#ff6b6b,#ffa500)"></div>Sunset</div>
+<div class="Tho" data-t="3" onclick="_th(3)"><div class="Thp" style="background:linear-gradient(135deg,#4ade80,#86efac)"></div>Forest</div>
+<div class="Tho" data-t="4" onclick="_th(4)"><div class="Thp" style="background:linear-gradient(135deg,#a78bfa,#818cf8)"></div>Night</div>
+<div class="Tho" data-t="5" onclick="_th(5)"><div class="Thp" style="background:linear-gradient(135deg,#f8fafc,#e2e8f0);border:1px solid #cbd5e1"></div>Light</div>
+</div>
+</div>
+<div class="C">
+<div class="Ch"><div class="Ci">☁️</div><div class="Ct">Data</div></div>
+<div class="Sst"><div class="Ssi">✅</div><div><div class="Sst2">Saved Locally</div><div class="Ssx">Last: <span id="ls">Just now</span></div></div></div>
+<div class="Ds">
+<div class="Dst"><div class="Dsv" id="sc">0</div><div class="Dsl">Customers</div></div>
+<div class="Dst"><div class="Dsv" id="sp">0</div><div class="Dsl">Projects</div></div>
+<div class="Dst"><div class="Dsv" id="se">0</div><div class="Dsl">Entries</div></div>
+<div class="Dst"><div class="Dsv" id="stk">0</div><div class="Dsl">Tickets</div></div>
+</div>
+<div class="Sab" onclick="_ex()"><div class="Sai Ex">📤</div><div><div class="Sat">Export</div><div class="Sad">Download backup</div></div></div>
+<div class="Sab" onclick="$('ii').click()"><div class="Sai Im">📥</div><div><div class="Sat">Import</div><div class="Sad">Restore backup</div></div></div>
+<div class="Sab" onclick="if(confirm('Clear ALL data?')){localStorage.clear();location.reload()}"><div class="Sai Cl">🗑️</div><div><div class="Sat">Clear All</div><div class="Sad">Remove data</div></div></div>
+</div>
+<div class="Cp"><strong>DiversionScan™</strong><br>Powered by <strong>Dalmex Recycling, LLC</strong><br>© 2025 All Rights Reserved<br>LEED v4.1 MRc5 Compliant</div>
+</div>
+</main>
+</div>
+
+<input type="file" id="ci" class="Hi" accept="image/*" capture="environment">
+<input type="file" id="ii" class="Hi" accept=".json">
+<div id="to" class="To"></div>
+
+<div id="cm" class="Mo"><div class="Md">
+<div class="Mt">🏢 Add Customer</div>
+<div class="Fg"><label class="Fl">Company</label><input type="text" id="cn" class="Fi" placeholder="ABC Construction"></div>
+<div class="Fg"><label class="Fl">Contact</label><input type="text" id="cc" class="Fi" placeholder="John Smith"></div>
+<div class="Fg"><label class="Fl">Phone</label><input type="tel" id="cp" class="Fi" placeholder="(214) 555-1234"></div>
+<div class="Mb"><button class="Mbc" onclick="this.closest('.Mo').classList.remove('S')">Cancel</button><button class="Mbc Mbf" onclick="_sc()">Save</button></div>
+</div></div>
+
+<div id="pm" class="Mo"><div class="Md">
+<div class="Mt">📁 Add Project</div>
+<div class="Fg"><label class="Fl">Project Name</label><input type="text" id="pn" class="Fi" placeholder="Downtown Demo"></div>
+<div class="Fg"><label class="Fl">Customer</label><select id="pc" class="Fs"><option value="">Select...</option></select></div>
+<div class="Fg"><label class="Fl">Address</label><input type="text" id="pa" class="Fi" placeholder="123 Main St"></div>
+<div class="Fr">
+<div class="Fg"><label class="Fl">LEED Target</label><select id="plt" class="Fs"><option value="n">No LEED</option><option value="50">50% (1pt)</option><option value="75">75% (2pts)</option></select></div>
+<div class="Fg"><label class="Fl">Status</label><select id="pst" class="Fs"><option value="a">Active</option><option value="c">Completed</option></select></div>
+</div>
+<div class="Mb"><button class="Mbc" onclick="this.closest('.Mo').classList.remove('S')">Cancel</button><button class="Mbc Mbf" onclick="_sp()">Save</button></div>
+</div></div>
+
+<div id="tm" class="Mo"><div class="Md">
+<div class="Mt">🎨 Theme</div>
+<div class="Ths">
+<div class="Tho A" data-t="0" onclick="_th(0);this.closest('.Mo').classList.remove('S')"><div class="Thp" style="background:linear-gradient(135deg,#10b981,#3b82f6)"></div>Default</div>
+<div class="Tho" data-t="1" onclick="_th(1);this.closest('.Mo').classList.remove('S')"><div class="Thp" style="background:linear-gradient(135deg,#00d4aa,#00b4d8)"></div>Ocean</div>
+<div class="Tho" data-t="2" onclick="_th(2);this.closest('.Mo').classList.remove('S')"><div class="Thp" style="background:linear-gradient(135deg,#ff6b6b,#ffa500)"></div>Sunset</div>
+<div class="Tho" data-t="3" onclick="_th(3);this.closest('.Mo').classList.remove('S')"><div class="Thp" style="background:linear-gradient(135deg,#4ade80,#86efac)"></div>Forest</div>
+<div class="Tho" data-t="4" onclick="_th(4);this.closest('.Mo').classList.remove('S')"><div class="Thp" style="background:linear-gradient(135deg,#a78bfa,#818cf8)"></div>Night</div>
+<div class="Tho" data-t="5" onclick="_th(5);this.closest('.Mo').classList.remove('S')"><div class="Thp" style="background:linear-gradient(135deg,#f8fafc,#e2e8f0);border:1px solid #cbd5e1"></div>Light</div>
+</div>
+<div class="Mb"><button class="Mbc" onclick="this.closest('.Mo').classList.remove('S')" style="flex:1">Close</button></div>
+</div></div>
 
 <script>
-// ============ DATA ============
-const defaultBuyers=[
-{id:1,company:"Georgia Pacific",contact:"Jake Walker",email:"jacob.walker1@gapac.com",phone:"(404) 652-4000",type:"Mill",priority:true,commodities:["OCC","DLK","PM","SOP","SWL","HWEC"],prices:{OCC:65,PM:155,SWL:215,DLK:90,SOP:150,HWEC:370},notes:"World's largest de-ink fiber user",status:"active"},
-{id:2,company:"Smurfit Westrock",contact:"Cynthia Torres",email:"cynthia.torres@smurfitwestrock.com",phone:"(972) 686-7649",type:"Mill",priority:true,commodities:["OCC","PM"],prices:{OCC:60,PM:180},notes:"LOCAL - Best PM at $180!",status:"active"},
-{id:3,company:"Greenside (Goldbergs)",contact:"Casandra Espinoza",email:"grupocartonero.mty@gmail.com",phone:"+52 81 8123-4567",type:"Export",priority:true,commodities:["OCC","PM","SWL"],prices:{OCC:58,PM:165,SWL:215},notes:"Mexico export",status:"active"},
-{id:4,company:"American Fiber",contact:"Steve Minor",email:"SMinor@amfiberservices.com",phone:"(678) 555-1234",type:"Broker",priority:true,commodities:["OCC","PM","SWL","HWEC"],prices:{OCC:62,PM:160,SWL:220,HWEC:365},notes:"Best SWL at $220!",status:"active"},
-{id:5,company:"Graphic Packaging - Waco",contact:"Fiber Procurement",email:"fiberprocurement@graphicpkg.com",phone:"(770) 240-7200",type:"Mill",priority:true,commodities:["OCC","Mixed Paper"],prices:{OCC:70,PM:55},notes:"NEW MILL 2026! Best OCC $70!",status:"active"},
-{id:6,company:"Green Bay Packaging",contact:"Fiber Procurement",email:"info@gbp.com",phone:"(501) 354-2131",type:"Mill",priority:true,commodities:["OCC"],prices:{OCC:68},notes:"$1B expansion!",status:"active"},
-{id:7,company:"Pratt Industries",contact:"Fiber Procurement",email:"recyclingcs@prattindustries.com",phone:"(888) 347-7288",type:"Mill",priority:false,commodities:["OCC","Mixed Paper"],prices:{OCC:65,PM:50},notes:"100% recycled",status:"active"},
-{id:8,company:"International Paper",contact:"Recycling Division",email:"recycling@ipaper.com",phone:"(972) 245-3000",type:"Mill",priority:false,commodities:["OCC","DLK","SOP","PM"],prices:{OCC:65,PM:52,DLK:95,SOP:145},notes:"LOCAL Carrollton",status:"active"},
-{id:9,company:"Texas Recycling",contact:"Joel/Craig Litman",email:"info@texasrecycling.com",phone:"(214) 357-0262",type:"Broker",priority:false,commodities:["OCC","PM","SOP","SWL"],prices:{OCC:62,PM:48,SWL:205,SOP:140},notes:"25+ years DFW",status:"active"}
-];
+/*! DiversionScan™ © 2025 Dalmex Recycling, LLC. All Rights Reserved. */
+const $=id=>document.getElementById(id),{jsPDF:_J}=window.jspdf;
+let _c=[],_p=[],_e=[],_t=[],_cp=null,_vm='man',_ch=null,_sch=null,_th_=0;
 
-const defaultProspects=[
-{id:1,company:"DS Smith",contact:"Regional Buyer",email:"procurement@dssmith.com",phone:"(555) 123-4567",type:"Mill",stage:"contacted",value:5000,followup:"2025-01-05",notes:"Interested in OCC volumes",activities:[{type:"call",desc:"Intro call - interested in OCC",date:"2024-12-28"},{type:"email",desc:"Sent pricing sheet",date:"2024-12-29"}]},
-{id:2,company:"Sonoco Products",contact:"Fiber Buyer",email:"fiber@sonoco.com",phone:"(555) 234-5678",type:"Mill",stage:"lead",value:8000,followup:"2025-01-03",notes:"Large mill, high potential",activities:[{type:"note",desc:"Found contact at trade show",date:"2024-12-27"}]},
-{id:3,company:"Cascades",contact:"US Procurement",email:"us.fiber@cascades.com",phone:"(555) 345-6789",type:"Mill",stage:"negotiating",value:12000,followup:"2025-01-02",notes:"Discussing long-term contract",activities:[{type:"meeting",desc:"Met at their facility",date:"2024-12-20"},{type:"call",desc:"Price negotiation",date:"2024-12-28"}]}
-];
+// Material categories for LEED reporting
+const _cats=['Concrete','Asphalt','Wood','Metal','Drywall','Cardboard','Plastic','Soil','Organics','Mixed'];
+const _catColors=['#6b7280','#374151','#92400e','#0891b2','#dc2626','#ca8a04','#7c3aed','#65a30d','#059669','#f59e0b'];
 
-const marketPrices=[{code:"OCC",price:77,range:"$70-85",change:-5},{code:"PM",price:50,range:"$45-55",change:3},{code:"SWL",price:210,range:"$195-225",change:-10},{code:"DLK",price:92,range:"$85-100",change:0},{code:"SOP",price:145,range:"$135-155",change:5},{code:"HWEC",price:375,range:"$350-400",change:15}];
+const _tn=document.querySelectorAll('.Tt'),_tc=document.querySelectorAll('.Tc');
+_tn.forEach(b=>b.onclick=()=>{_tn.forEach(x=>x.classList.remove('A'));_tc.forEach(x=>x.classList.remove('A'));b.classList.add('A');$(b.dataset.t).classList.add('A');if(b.dataset.t==='rpt')_ur();if(b.dataset.t==='strm')_usb()});
 
-const news=[
-{date:"Dec 30, 2025",title:"OCC Prices to Rise Q1 2026",titleEs:"Precios OCC Subirán Q1 2026",excerpt:"Mill closures point to tighter supply. Analysts predict $85-95/ton by March.",excerptEs:"Cierres de molinos apuntan a menor oferta. Analistas predicen $85-95/ton para marzo."},
-{date:"Dec 28, 2025",title:"Graphic Packaging Waco Update",titleEs:"Actualización Graphic Packaging Waco",excerpt:"New 550K TPY facility on track for mid-2026 opening.",excerptEs:"Nueva planta 550K TPY en camino para mediados de 2026."},
-{date:"Dec 26, 2025",title:"10% NA Capacity Eliminated",titleEs:"10% Capacidad NA Eliminada",excerpt:"2025 mill closures reshape recovered paper market dynamics.",excerptEs:"Cierres de molinos 2025 reforman la dinámica del mercado."},
-{date:"Dec 22, 2025",title:"Mexico Export Demand Strong",titleEs:"Demanda de Exportación a México Fuerte",excerpt:"Mexican mills continue strong buying despite tariff concerns.",excerptEs:"Molinos mexicanos continúan comprando fuerte a pesar de preocupaciones de tarifas."}
-];
+const _vb=document.querySelectorAll('.Vmb');
+_vb.forEach(b=>b.onclick=()=>{_vb.forEach(x=>x.classList.remove('A'));b.classList.add('A');_vm=b.dataset.m;$('vi-man').style.display=_vm==='man'?'block':'none';$('vi-dim').style.display=_vm==='dim'?'block':'none';$('vi-lid').style.display=_vm==='lid'?'block':'none';$('vi-pct').style.display=_vm==='pct'?'block':'none';$('dg').style.display=_vm==='pct'?'none':'block';_calc()});
 
-const tickerItems=[
-{type:"price",text:"💰 OCC: $70-85/ton (▼$5)"},
-{type:"price",text:"📄 PM: $45-55/ton (▲$3)"},
-{type:"news",text:"📰 Graphic Packaging Waco on track for 2026"},
-{type:"alert",text:"🚨 10% NA containerboard capacity eliminated"},
-{type:"price",text:"💎 HWEC: $350-400/ton (▲$15)"},
-{type:"news",text:"📈 Q1 2026 outlook: Bullish for sellers"}
-];
+function _th(t){_th_=t;if(t===0)document.body.removeAttribute('data-t');else document.body.setAttribute('data-t',t);document.querySelectorAll('.Tho').forEach(o=>o.classList.toggle('A',parseInt(o.dataset.t)===t));localStorage.setItem('_th',t)}
+const _sth=localStorage.getItem('_th');if(_sth)_th(parseInt(_sth));
 
-const users=[{id:1,username:"Dalmex",password:"2828",role:"user",name:"Dalmex User"},{id:2,username:"RJVandling",password:"Sailer66",role:"admin",name:"Robert Vandling"}];
+function _upb(){const tw=parseFloat($('tw').value)||0,dp=parseFloat($('dp').value)||0,lp=parseFloat($('lp').value)||0;$('pb').innerHTML=`♻️ <strong style="color:var(--_4)">${(tw*dp/100).toFixed(2)}</strong>t | 🗑️ <strong style="color:var(--_8)">${(tw*lp/100).toFixed(2)}</strong>t`;_calc()}
+$('tw')?.addEventListener('input',_upb);
+$('dp')?.addEventListener('input',()=>{$('lp').value=Math.max(0,100-parseFloat($('dp').value)||0);_upb()});
+$('lp')?.addEventListener('input',()=>{$('dp').value=Math.max(0,100-parseFloat($('lp').value)||0);_upb()});
 
-// ============ STATE ============
-let lang="en";
-let currentUser=null;
-let currentTab="ai";
-let buyers=[];
-let prospects=[];
-let chat=[];
-let searchTerm="";
-let filterType="all";
-let editId=null;
-let editProspectId=null;
+function _gv(){if(_vm==='man')return parseFloat($('vi').value)||0;if(_vm==='dim'){const l=parseFloat($('vl').value)||0,w=parseFloat($('vw').value)||0,h=parseFloat($('vh').value)||0;return(l*w*h)/27}if(_vm==='lid')return parseFloat($('vli').value)||0;return 0}
 
-// ============ TRANSLATIONS ============
-const T={
-en:{ai:"AI Assistant",dash:"Dashboard",contacts:"Buyers",crm:"CRM Pipeline",prices:"Prices",news:"News",add:"Add Buyer",addProspect:"Add Prospect",search:"Search...",all:"All",mills:"Mills",brokers:"Brokers",priority:"Priority",prospects:"Prospects",pipeline:"Sales Pipeline",activities:"Activities",followups:"Follow-ups",convert:"Convert to Buyer",logActivity:"Log Activity",lead:"Lead",contacted:"Contacted",negotiating:"Negotiating",won:"Won",lost:"Lost",total:"Total",value:"Value",dueToday:"Due Today",overdue:"Overdue",username:"Username",password:"Password",signin:"Sign In",subtitle:"Enterprise CRM & AI Trading"},
-es:{ai:"Asistente IA",dash:"Panel",contacts:"Compradores",crm:"Pipeline CRM",prices:"Precios",news:"Noticias",add:"Agregar",addProspect:"Agregar Prospecto",search:"Buscar...",all:"Todos",mills:"Molinos",brokers:"Brokers",priority:"Prioritarios",prospects:"Prospectos",pipeline:"Pipeline de Ventas",activities:"Actividades",followups:"Seguimientos",convert:"Convertir a Comprador",logActivity:"Registrar Actividad",lead:"Prospecto",contacted:"Contactado",negotiating:"Negociando",won:"Ganado",lost:"Perdido",total:"Total",value:"Valor",dueToday:"Hoy",overdue:"Vencido",username:"Usuario",password:"Contraseña",signin:"Iniciar Sesión",subtitle:"CRM Empresarial & Trading IA"}
-};
+function _calc(){if(_vm==='pct'){const tw=parseFloat($('tw').value)||0;if(tw>0){$('td').textContent=tw.toFixed(2);$('cr').classList.remove('E');$('cb').innerHTML='Split by %';$('cb').style.display='block';$('ab').disabled=false}else{$('td').textContent='--';$('cr').classList.add('E');$('cb').style.display='none';$('ab').disabled=true}return}const v=_gv(),o=$('ms').options[$('ms').selectedIndex],d=parseFloat(o?.dataset?.d)||0;if(_vm==='dim')$('cv').textContent=v.toFixed(2);if(v>0&&d>0){const t=v*d;$('td').textContent=t.toFixed(2);$('cr').classList.remove('E');$('cb').innerHTML=`${v.toFixed(2)} CY × ${d.toFixed(2)} t/CY`;$('cb').style.display='block';$('ab').disabled=false}else{$('td').textContent='--';$('cr').classList.add('E');$('cb').style.display='none';$('ab').disabled=true}}
 
-function t(k){return T[lang][k]||k}
+$('ms').onchange=_calc;$('vi').oninput=_calc;$('vl')?.addEventListener('input',_calc);$('vw')?.addEventListener('input',_calc);$('vh')?.addEventListener('input',_calc);$('vli')?.addEventListener('input',_calc);
 
-// ============ LANGUAGE ============
-function setLang(l){
-    lang=l;
-    document.querySelectorAll('.lang-btn').forEach(b=>{
-        b.classList.remove('active');
-        if((l==='en'&&b.textContent.includes('English'))||(l==='es'&&b.textContent.includes('Español')))b.classList.add('active');
-    });
-    document.getElementById('langToggle').innerHTML=l==='en'?'🇲🇽 Español':'🇺🇸 English';
-    document.getElementById('loginSub').textContent=t('subtitle');
-    document.getElementById('lblUser').textContent=t('username');
-    document.getElementById('lblPass').textContent=t('password');
-    document.getElementById('btnLogin').textContent=t('signin');
-    if(currentUser){renderNav();render()}
-}
-function toggleLang(){setLang(lang==='en'?'es':'en')}
+$('ab').onclick=()=>{const o=$('ms').options[$('ms').selectedIndex];const cat=o?.dataset?.cat||'Mixed';if(_vm==='pct'){const tw=parseFloat($('tw').value)||0,dp=parseFloat($('dp').value)||0,lp=parseFloat($('lp').value)||0;if(tw<=0)return;const dv=tw*dp/100,lv=tw*lp/100,mn=o?.value||'Mixed C&D';if(dv>0)_e.unshift({id:Date.now(),m:mn,cat:cat,v:0,d:0,t:dv,dst:'d',src:'pct',pid:_cp?.id||null,pn:_cp?.n||null,ts:new Date().toISOString()});if(lv>0)_e.unshift({id:Date.now()+1,m:mn,cat:cat,v:0,d:0,t:lv,dst:'l',src:'pct',pid:_cp?.id||null,pn:_cp?.n||null,ts:new Date().toISOString()});$('tw').value='';_upb()}else{const v=_gv(),d=parseFloat(o?.dataset?.d)||0,t=v*d;if(t<=0)return;_e.unshift({id:Date.now(),m:o.value,cat:cat,v,d,t,dst:$('ds').value,src:_vm,pid:_cp?.id||null,pn:_cp?.n||null,ts:new Date().toISOString()})}_sv();_ua();_rc();_to('✅ Entry added!')};
 
-// ============ STORAGE ============
-function loadData(){
-    const b=localStorage.getItem('fh_buyers');
-    const p=localStorage.getItem('fh_prospects');
-    buyers=b?JSON.parse(b):[...defaultBuyers];
-    prospects=p?JSON.parse(p):[...defaultProspects];
-}
-function saveData(){
-    localStorage.setItem('fh_buyers',JSON.stringify(buyers));
-    localStorage.setItem('fh_prospects',JSON.stringify(prospects));
-}
+function _rc(){$('ms').value='';$('vi').value='';$('vl').value='';$('vw').value='';$('vh').value='';$('vli').value='';_calc()}
+$('ps').onchange=()=>{_cp=_p.find(p=>p.id==$('ps').value)||null;_ua()};
 
-// ============ AUTH ============
-function handleLogin(){
-    const u=document.getElementById('username').value;
-    const p=document.getElementById('password').value;
-    const user=users.find(x=>x.username===u&&x.password===p);
-    if(user){
-        currentUser=user;
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('app').classList.add('active');
-        document.getElementById('userBadge').textContent=(user.role==='admin'?'👑 ':'👤 ')+user.name;
-        loadData();
-        initApp();
-    }else{
-        document.getElementById('loginError').classList.add('show');
-    }
-}
-function quickLogin(){
-    currentUser=users[1];
-    document.getElementById('loginScreen').classList.add('hidden');
-    document.getElementById('app').classList.add('active');
-    document.getElementById('userBadge').textContent='👑 Robert Vandling';
-    loadData();
-    initApp();
-}
-function logout(){
-    currentUser=null;chat=[];
-    document.getElementById('app').classList.remove('active');
-    document.getElementById('loginScreen').classList.remove('hidden');
-    document.getElementById('username').value='';
-    document.getElementById('password').value='';
-    document.getElementById('loginError').classList.remove('show');
-}
+// OCR
+$('ci').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('osa').style.display='none';$('opr').style.display='block';$('ors').style.display='none';try{const r=await Tesseract.recognize(f,'eng',{logger:m=>{if(m.status==='recognizing text'){const p=Math.round(m.progress*100);$('opt').textContent=`Processing... ${p}%`;$('opf').style.width=`${p}%`}}});const txt=r.data.text,pr=_pt(txt);$('ot').value=pr.tk||'';$('og').value=pr.gr||'';$('ota').value=pr.ta||'';_uon();$('opr').style.display='none';$('ors').style.display='block';_to('🎫 Scanned!','Oc')}catch(er){console.error(er);_ro();_to('❌ Failed','Er')}e.target.value=''};
+function _pt(t){const r={tk:'',gr:'',ta:''};const tm=t.match(/(?:ticket|#|no\.?)[:\s]*([A-Z0-9-]+)/i);if(tm)r.tk=tm[1];const ws=[];const wr=/(\d{1,3}(?:,?\d{3})*(?:\.\d{1,2})?)\s*(?:lbs?|#|pounds?)?/gi;let m;while((m=wr.exec(t))!==null){const n=parseFloat(m[1].replace(/,/g,''));if(n>1000&&n<200000)ws.push(n)}ws.sort((a,b)=>b-a);if(ws.length>=2){r.gr=ws[0];r.ta=ws[1]}else if(ws.length===1)r.gr=ws[0];return r}
+function _uon(){const g=parseFloat($('og').value)||0,ta=parseFloat($('ota').value)||0,n=g-ta;$('on').textContent=n>0?`${(n/2000).toFixed(2)} tons`:'-- tons'}
+$('og')?.addEventListener('input',_uon);$('ota')?.addEventListener('input',_uon);
+function _ro(){$('osa').style.display='block';$('opr').style.display='none';$('ors').style.display='none'}
+function _st(){const g=parseFloat($('og').value)||0,ta=parseFloat($('ota').value)||0,n=g-ta;if(n<=0){_to('❌ Invalid','Er');return}_t.unshift({id:Date.now(),tk:$('ot').value||`TKT-${Date.now()}`,gr:g,ta,n,nt:n/2000,pid:_cp?.id||null,ts:new Date().toISOString()});_sv();_utl();_ro();_to('🎫 Saved!','Oc')}
 
-// ============ INIT ============
-function initApp(){
-    renderTicker();
-    checkReminders();
-    if(chat.length===0){
-        chat.push({role:'ai',content:lang==='es'?
-            '👋 ¡Hola! Soy tu asistente IA de Fiber Hub.<br><br>Puedo ayudarte con:<br>• <b>"¿Quién paga más por OCC?"</b><br>• <b>"Agregar prospecto"</b><br>• <b>"Reporte PPI"</b><br>• <b>"Perspectiva 2026"</b><br>• <b>"Info de Georgia Pacific"</b>':
-            '👋 Hi! I\'m your Fiber Hub AI assistant.<br><br>I can help with:<br>• <b>"Who pays most for OCC?"</b><br>• <b>"Add prospect"</b><br>• <b>"PPI report"</b><br>• <b>"2026 outlook"</b><br>• <b>"Tell me about Georgia Pacific"</b>'
-        });
-    }
-    renderNav();
-    render();
-}
+// Customer/Project
+function _sc(){const n=$('cn').value.trim();if(!n){_to('❌ Enter name','Er');return}_c.push({id:Date.now(),n,ct:$('cc').value.trim(),ph:$('cp').value.trim()});_sv();_ucl();_upc();$('cm').classList.remove('S');$('cn').value='';$('cc').value='';$('cp').value='';_to('🏢 Added!')}
+function _sp(){const n=$('pn').value.trim();if(!n){_to('❌ Enter name','Er');return}const cid=$('pc').value,c=_c.find(x=>x.id==cid);_p.push({id:Date.now(),n,cid:cid?parseInt(cid):null,cn:c?.n||null,ad:$('pa').value.trim(),lt:$('plt').value,st:$('pst').value});_sv();_ua();$('pm').classList.remove('S');$('pn').value='';$('pa').value='';_to('📁 Added!')}
 
-function renderTicker(){
-    const items=[...tickerItems,...tickerItems,...tickerItems];
-    document.getElementById('ticker').innerHTML=items.map(i=>'<div class="ticker-item"><span class="ticker-tag '+i.type+'">'+i.type.toUpperCase()+'</span>'+i.text+'</div>').join('');
-}
+// Update all
+function _ua(){_uel();_us();_ulc();_upl();_ucl();_ups();_utl();_uss();_ur();_usb()}
 
-function checkReminders(){
-    const today=new Date().toISOString().split('T')[0];
-    const due=prospects.filter(p=>p.followup&&p.followup<=today&&p.stage!=='won'&&p.stage!=='lost');
-    if(due.length>0){
-        document.getElementById('reminderBanner').style.display='flex';
-        document.getElementById('reminderText').textContent=lang==='es'?
-            `📞 Tienes ${due.length} seguimiento(s) pendiente(s)!`:
-            `📞 You have ${due.length} follow-up(s) due!`;
-    }else{
-        document.getElementById('reminderBanner').style.display='none';
-    }
-}
+function _uel(){const l=$('el'),f=_cp?_e.filter(e=>e.pid===_cp.id):_e;if(!f.length){l.innerHTML='<div class="Ey"><div class="Eyi">📋</div><div>No entries</div></div>';return}l.innerHTML=f.slice(0,50).map(e=>`<div class="Ei"><div class="Eh"><div><div class="Em">${e.m}</div><span class="Es ${e.src==='lid'?'Es2':e.src==='ocr'?'Es3':e.src==='pct'?'Es4':'Es1'}">${e.src==='lid'?'📱 LiDAR':e.src==='ocr'?'🎫 OCR':e.src==='pct'?'% Split':'✏️ Manual'}</span></div><div class="Et">${new Date(e.ts).toLocaleDateString()}</div></div><div class="Ed"><div class="Edt"><strong>${e.t.toFixed(2)}</strong> tons</div>${e.v?`<div class="Edt">${e.v.toFixed(2)} CY</div>`:''}<div class="Edt">${e.dst==='d'?'♻️':'🗑️'}</div></div>${e.pn?`<div class="Ep">📁 ${e.pn}</div>`:''}<button class="Edl" onclick="_de(${e.id})">🗑️</button></div>`).join('')}
+function _de(id){_e=_e.filter(e=>e.id!==id);_sv();_ua();_to('🗑️ Deleted')}
 
-// ============ NAV ============
-function renderNav(){
-    const tabs=[
-        {id:'ai',icon:'🤖',label:t('ai'),cls:'ai'},
-        {id:'dashboard',icon:'📊',label:t('dash')},
-        {id:'crm',icon:'🎯',label:t('crm'),cls:'crm',count:prospects.length},
-        {id:'contacts',icon:'👥',label:t('contacts'),count:buyers.length},
-        {id:'prices',icon:'💰',label:t('prices')},
-        {id:'news',icon:'📰',label:t('news')}
-    ];
-    document.getElementById('nav').innerHTML=tabs.map(x=>
-        '<button class="nav-btn '+(currentTab===x.id?'active':'')+(x.cls&&currentTab!==x.id?' '+x.cls:'')+'" onclick="setTab(\''+x.id+'\')">'+
-        x.icon+' '+x.label+(x.count!==undefined?' <span style="background:rgba(255,255,255,0.3);padding:2px 6px;border-radius:4px;font-size:10px">'+x.count+'</span>':'')+
-        '</button>'
-    ).join('');
-}
+function _us(){const f=_cp?_e.filter(e=>e.pid===_cp.id):_e,tot=f.reduce((s,e)=>s+e.t,0),dv=f.filter(e=>e.dst==='d').reduce((s,e)=>s+e.t,0),rt=tot>0?(dv/tot)*100:0;$('tt').textContent=tot.toFixed(1);$('dt').textContent=dv.toFixed(1);$('ec').textContent=f.length;$('dr').textContent=rt.toFixed(0)+'%'}
 
-function setTab(tab){currentTab=tab;renderNav();render()}
+function _ulc(){const c=$('lc');if(!_cp||_cp.lt==='n'){c.style.display='none';return}c.style.display='block';const f=_e.filter(e=>e.pid===_cp.id),tot=f.reduce((s,e)=>s+e.t,0),dv=f.filter(e=>e.dst==='d').reduce((s,e)=>s+e.t,0),lf=tot-dv,rt=tot>0?(dv/tot)*100:0;$('lr').textContent=rt.toFixed(0)+'%';$('ld').textContent=dv.toFixed(1);$('ll').textContent=lf.toFixed(1);$('lt').textContent=tot.toFixed(1);const fl=$('lf');fl.style.width=Math.min(rt,100)+'%';fl.className='Lpf '+(rt>=75?'exc':rt>=50?'good':rt>=25?'med':'low')}
 
-function render(){
-    const m=document.getElementById('main');
-    switch(currentTab){
-        case 'ai':m.innerHTML=renderAI();break;
-        case 'dashboard':m.innerHTML=renderDash();break;
-        case 'crm':m.innerHTML=renderCRM();break;
-        case 'contacts':m.innerHTML=renderContacts();break;
-        case 'prices':m.innerHTML=renderPrices();break;
-        case 'news':m.innerHTML=renderNews();break;
-    }
-}
+function _upl(){const l=$('pl');if(!_p.length){l.innerHTML='<div class="Ey"><div class="Eyi">📁</div><div>No projects</div></div>';return}l.innerHTML=_p.map(p=>{const f=_e.filter(e=>e.pid===p.id),tot=f.reduce((s,e)=>s+e.t,0),dv=f.filter(e=>e.dst==='d').reduce((s,e)=>s+e.t,0),rt=tot>0?(dv/tot*100).toFixed(0):0;return`<div class="It ${_cp?.id===p.id?'A':''}" onclick="_selp(${p.id})"><div class="Ith"><div class="Itn">${p.n}</div><div class="Itb ${p.st==='a'?'A':'C'}">${p.st==='a'?'Active':'Done'}</div></div><div class="Itd">${p.cn||'No customer'}</div><div class="Its"><div class="Itst"><strong>${tot.toFixed(1)}</strong> tons</div><div class="Itst"><strong>${rt}%</strong></div></div></div>`}).join('')}
+function _selp(id){_cp=_p.find(p=>p.id===id)||null;$('ps').value=id;_ua();document.querySelector('[data-t="calc"]').click();_to(`📁 ${_cp.n}`)}
 
-// ============ AI ============
-function renderAI(){
-    const bO=buyers.filter(b=>b.prices?.OCC).sort((a,b)=>b.prices.OCC-a.prices.OCC)[0];
-    const bS=buyers.filter(b=>b.prices?.SWL).sort((a,b)=>b.prices.SWL-a.prices.SWL)[0];
-    return '<div class="ai-container"><div class="chat-panel"><div class="chat-header"><div class="chat-avatar">🤖</div><div><div class="chat-title">Fiber Hub AI</div><div class="chat-status">Powered by Claude</div></div></div><div class="chat-messages" id="chatBox">'+chat.map(m=>'<div class="msg '+m.role+'"><div class="msg-avatar">'+(m.role==='ai'?'🤖':'👤')+'</div><div class="msg-content">'+m.content+'</div></div>').join('')+'</div><div class="chat-input-area"><input type="text" class="chat-input" id="chatInput" placeholder="'+(lang==='es'?'Pregunta algo...':'Ask anything...')+'" onkeypress="if(event.key===\'Enter\')sendChat()"><button class="btn btn-purple" onclick="sendChat()">'+(lang==='es'?'Enviar':'Send')+'</button></div></div><div class="sidebar"><div class="sidebar-card"><div class="sidebar-title">⚡ '+(lang==='es'?'Acciones Rápidas':'Quick Actions')+'</div><button class="quick-btn" onclick="ask(\''+(lang==='es'?'¿Quién paga más por OCC?':'Who pays most for OCC?')+'\')">📦 '+(lang==='es'?'Mejor OCC':'Best OCC')+'</button><button class="quick-btn" onclick="ask(\''+(lang==='es'?'Agregar prospecto':'Add prospect')+'\')">🎯 '+(lang==='es'?'Agregar Prospecto':'Add Prospect')+'</button><button class="quick-btn" onclick="ask(\''+(lang==='es'?'Reporte PPI':'PPI report')+'\')">📊 '+(lang==='es'?'Reporte PPI':'PPI Report')+'</button><button class="quick-btn" onclick="ask(\''+(lang==='es'?'Redactar email':'Draft email')+'\')">✉️ '+(lang==='es'?'Redactar Email':'Draft Email')+'</button><button class="quick-btn" onclick="ask(\''+(lang==='es'?'Perspectiva 2026':'2026 outlook')+'\')">📈 '+(lang==='es'?'Perspectiva':'Outlook')+'</button></div><div class="sidebar-card"><div class="sidebar-title">🎯 '+(lang==='es'?'Mejores Precios':'Best Prices')+'</div>'+(bO?'<div class="rec-card"><div class="rec-label">'+(lang==='es'?'Mejor OCC':'Best OCC')+'</div><div class="rec-value">$'+bO.prices.OCC+'/ton</div><div class="rec-detail">'+bO.company+'</div></div>':'')+(bS?'<div class="rec-card"><div class="rec-label">'+(lang==='es'?'Mejor SWL':'Best SWL')+'</div><div class="rec-value">$'+bS.prices.SWL+'/ton</div><div class="rec-detail">'+bS.company+'</div></div>':'')+'</div></div></div>';
-}
+function _ucl(){const l=$('cl');if(!_c.length){l.innerHTML='<div class="Ey"><div class="Eyi">🏢</div><div>No customers</div></div>';return}l.innerHTML=_c.map(c=>{const pc=_p.filter(p=>p.cid===c.id).length;return`<div class="It"><div class="Ith"><div class="Itn">${c.n}</div><div class="Itb A">${pc} proj</div></div><div class="Itd">${c.ct||''} ${c.ph||''}</div></div>`}).join('')}
 
-function ask(q){document.getElementById('chatInput').value=q;sendChat()}
+function _ups(){$('ps').innerHTML='<option value="">— Select Project —</option>'+_p.filter(p=>p.st==='a').map(p=>`<option value="${p.id}" ${_cp?.id===p.id?'selected':''}>${p.n}</option>`).join('');$('pc').innerHTML='<option value="">Select...</option>'+_c.map(c=>`<option value="${c.id}">${c.n}</option>`).join('')}
+function _upc(){$('pc').innerHTML='<option value="">Select...</option>'+_c.map(c=>`<option value="${c.id}">${c.n}</option>`).join('')}
 
-function sendChat(){
-    const inp=document.getElementById('chatInput'),msg=inp.value.trim();
-    if(!msg)return;
-    chat.push({role:'user',content:msg});
-    inp.value='';
-    chat.push({role:'ai',content:aiResp(msg)});
-    render();
-    setTimeout(()=>{const b=document.getElementById('chatBox');if(b)b.scrollTop=b.scrollHeight},100);
-}
+function _utl(){const l=$('tl');if(!_t.length){l.innerHTML='<div class="Ey"><div class="Eyi">🎫</div><div>No tickets</div></div>';return}l.innerHTML=_t.slice(0,20).map(t=>`<div class="Ti"><div class="Th"><div class="Tn2">#${t.tk}</div><div class="Td">${new Date(t.ts).toLocaleDateString()}</div></div><div class="Ed"><div class="Edt"><strong>${t.nt.toFixed(2)}</strong> tons</div><div class="Edt">${t.n.toLocaleString()} lbs</div></div><button class="Tdl" onclick="_dt(${t.id})">🗑️</button></div>`).join('')}
+function _dt(id){_t=_t.filter(t=>t.id!==id);_sv();_utl();_to('🗑️ Deleted')}
 
-function aiResp(msg){
-    const m=msg.toLowerCase(),es=lang==='es';
-    
-    if(m.includes('add')||m.includes('agregar')||m.includes('new')||m.includes('nuevo')){
-        if(m.includes('prospect')||m.includes('prospecto')||m.includes('lead')){
-            setTimeout(()=>openProspectModal(),500);
-            return es?'✅ Abriendo formulario de prospecto...':'✅ Opening prospect form...';
-        }
-        setTimeout(()=>openContactModal(),500);
-        return es?'✅ Abriendo formulario de contacto...':'✅ Opening contact form...';
-    }
-    
-    if(m.includes('ppi')||m.includes('report')||m.includes('reporte')||m.includes('price')||m.includes('precio')){
-        return '<b>📊 '+(es?'Reporte PPI Diciembre 2025':'PPI Report December 2025')+'</b><br><br>'+marketPrices.map(p=>'<b>'+p.code+':</b> $'+p.price+'/ton '+(p.change>0?'<span style="color:#15803d">▲$'+p.change+'</span>':'<span style="color:#dc2626">▼$'+Math.abs(p.change)+'</span>')).join('<br>')+'<br><br><i>'+(es?'Fuente: Pulp & Paper Week':'Source: Pulp & Paper Week')+'</i>';
-    }
-    
-    if(m.includes('occ')&&(m.includes('best')||m.includes('most')||m.includes('mejor')||m.includes('who')||m.includes('quién'))){
-        const s=buyers.filter(b=>b.prices?.OCC).sort((a,b)=>b.prices.OCC-a.prices.OCC);
-        return '<b>📦 '+(es?'Mejores Compradores OCC':'Best OCC Buyers')+':</b><br><br>1. ⭐ <b>'+s[0].company+'</b> - $'+s[0].prices.OCC+'/ton<br>&nbsp;&nbsp;&nbsp;'+s[0].contact+' | '+s[0].phone+'<br><br>2. '+s[1]?.company+' - $'+s[1]?.prices.OCC+'/ton<br>3. '+s[2]?.company+' - $'+s[2]?.prices.OCC+'/ton<br><br>💡 <i>'+(es?'¡Llama a '+s[0].company+' primero!':'Call '+s[0].company+' first!')+'</i>';
-    }
-    
-    if(m.includes('swl')||m.includes('white')||m.includes('blanco')){
-        const s=buyers.filter(b=>b.prices?.SWL).sort((a,b)=>b.prices.SWL-a.prices.SWL);
-        return '<b>📄 '+(es?'Mejores Compradores SWL':'Best SWL Buyers')+':</b><br><br>1. ⭐ <b>'+s[0].company+'</b> - $'+s[0].prices.SWL+'/ton<br>2. '+s[1]?.company+' - $'+s[1]?.prices.SWL+'/ton';
-    }
-    
-    if(m.includes('email')||m.includes('draft')||m.includes('escribir')||m.includes('redactar')){
-        return '<b>✉️ '+(es?'Email de Solicitud':'Price Request Email')+':</b><br><br><div style="background:#f8fafc;padding:12px;border-radius:8px;font-size:12px">'+(es?
-            '<b>Asunto:</b> Dalmex Recycling - Solicitud de Precios<br><br>Hola,<br><br>Me comunico de Dalmex Recycling en Dallas para solicitar sus precios actuales de papel recuperado.<br><br>Tenemos volumen consistente en OCC, PM, SWL y DLK.<br>Cargas típicas: 43,000-45,000 lbs<br><br>Por favor envíen sus precios de compra.<br><br>Gracias,<br>Robert Vandling<br>Dalmex Recycling LLC<br>214-352-2000':
-            '<b>Subject:</b> Dalmex Recycling - Price Request<br><br>Hello,<br><br>I\'m reaching out from Dalmex Recycling in Dallas to request your current pricing for recovered paper.<br><br>We have consistent volume in OCC, PM, SWL, and DLK.<br>Typical loads: 43,000-45,000 lbs<br><br>Please send your current buy prices.<br><br>Thank you,<br>Robert Vandling<br>Dalmex Recycling LLC<br>214-352-2000')+'</div>';
-    }
-    
-    if(m.includes('outlook')||m.includes('2026')||m.includes('market')||m.includes('mercado')||m.includes('perspectiva')||m.includes('forecast')){
-        return '<b>📈 '+(es?'Perspectiva Q1 2026':'Q1 2026 Market Outlook')+':</b><br><br><b style="color:#15803d">'+(es?'ALCISTA para vendedores':'BULLISH for sellers')+'</b><br><br>✅ '+(es?'~10% capacidad NA eliminada en 2025':'~10% NA capacity eliminated in 2025')+'<br>✅ '+(es?'Graphic Packaging Waco abre 2026':'Graphic Packaging Waco opening 2026')+'<br>✅ '+(es?'Green Bay $1B expansión':'Green Bay $1B expansion')+'<br>✅ '+(es?'OCC esperado $85-95/ton en marzo':'OCC expected $85-95/ton by March')+'<br><br>💡 <i>'+(es?'¡Asegure relaciones con molinos en expansión AHORA!':'Lock in relationships with expanding mills NOW!')+'</i>';
-    }
-    
-    if(m.includes('pipeline')||m.includes('crm')||m.includes('prospect')||m.includes('prospecto')){
-        const stages={lead:0,contacted:0,negotiating:0,won:0};
-        prospects.forEach(p=>{if(stages[p.stage]!==undefined)stages[p.stage]++});
-        return '<b>🎯 '+(es?'Resumen del Pipeline':'Pipeline Summary')+':</b><br><br>📥 '+(es?'Prospectos':'Leads')+': '+stages.lead+'<br>📞 '+(es?'Contactados':'Contacted')+': '+stages.contacted+'<br>🤝 '+(es?'Negociando':'Negotiating')+': '+stages.negotiating+'<br>✅ '+(es?'Ganados':'Won')+': '+stages.won+'<br><br>💰 '+(es?'Valor Total':'Total Value')+': $'+prospects.reduce((sum,p)=>sum+(p.value||0),0).toLocaleString()+'/mes';
-    }
-    
-    for(const b of buyers){
-        if(m.includes(b.company.toLowerCase())||m.includes(b.contact.split(' ')[0].toLowerCase())){
-            const pr=b.prices?Object.entries(b.prices).filter(([k,v])=>v).map(([k,v])=>k+': $'+v).join(', '):'N/A';
-            return '<b>👤 '+b.company+'</b><br><br><b>'+(es?'Contacto':'Contact')+':</b> '+b.contact+'<br><b>'+(es?'Teléfono':'Phone')+':</b> <a href="tel:'+b.phone+'">'+b.phone+'</a><br><b>Email:</b> <a href="mailto:'+b.email+'">'+b.email+'</a><br><b>'+(es?'Tipo':'Type')+':</b> '+b.type+'<br><br><b>'+(es?'Precios':'Prices')+':</b> '+pr+'<br><br><b>'+(es?'Notas':'Notes')+':</b> '+b.notes;
-        }
-    }
-    
-    return es?
-        'Puedo ayudarte con:<br><br>📦 "¿Quién paga más por OCC?"<br>🎯 "Agregar prospecto"<br>📊 "Reporte PPI"<br>✉️ "Redactar email"<br>📈 "Perspectiva 2026"<br>👤 "Info de [empresa]"':
-        'I can help with:<br><br>📦 "Who pays most for OCC?"<br>🎯 "Add prospect"<br>📊 "PPI report"<br>✉️ "Draft email"<br>📈 "2026 outlook"<br>👤 "Tell me about [company]"';
-}
+function _uss(){$('sc').textContent=_c.length;$('sp').textContent=_p.length;$('se').textContent=_e.length;$('stk').textContent=_t.length}
 
-// ============ DASHBOARD ============
-function renderDash(){
-    const mills=buyers.filter(b=>b.type==='Mill').length;
-    const pri=buyers.filter(b=>b.priority).length;
-    const bO=buyers.filter(b=>b.prices?.OCC).sort((a,b)=>b.prices.OCC-a.prices.OCC)[0];
-    const pipeValue=prospects.filter(p=>p.stage!=='lost').reduce((sum,p)=>sum+(p.value||0),0);
-    const today=new Date().toISOString().split('T')[0];
-    const dueCount=prospects.filter(p=>p.followup&&p.followup<=today&&p.stage!=='won'&&p.stage!=='lost').length;
-    
-    return '<div class="grid grid-4" style="margin-bottom:20px">'+
-        '<div class="card stat-card"><div class="stat-icon">🏭</div><div class="stat-value">'+mills+'</div><div class="stat-label">'+(lang==='es'?'Molinos':'Mills')+'</div></div>'+
-        '<div class="card stat-card"><div class="stat-icon">👥</div><div class="stat-value">'+buyers.length+'</div><div class="stat-label">'+(lang==='es'?'Compradores':'Buyers')+'</div></div>'+
-        '<div class="card stat-card"><div class="stat-icon">🎯</div><div class="stat-value">'+prospects.length+'</div><div class="stat-label">'+(lang==='es'?'Prospectos':'Prospects')+'</div></div>'+
-        '<div class="card stat-card"><div class="stat-icon">💰</div><div class="stat-value">$'+(bO?.prices.OCC||'--')+'</div><div class="stat-label">'+(lang==='es'?'Mejor OCC':'Best OCC')+'</div></div>'+
-    '</div>'+
-    '<div class="grid grid-2" style="margin-bottom:20px">'+
-        '<div class="card"><div class="sidebar-title">💰 '+(lang==='es'?'Valor del Pipeline':'Pipeline Value')+'</div><div class="stat-value" style="color:var(--primary)">$'+pipeValue.toLocaleString()+'<span style="font-size:14px;color:var(--muted)">/mes</span></div></div>'+
-        '<div class="card"><div class="sidebar-title">📞 '+(lang==='es'?'Seguimientos Pendientes':'Follow-ups Due')+'</div><div class="stat-value" style="color:'+(dueCount>0?'var(--danger)':'var(--primary)')+'">'+dueCount+'</div></div>'+
-    '</div>'+
-    '<div class="market-grid">'+marketPrices.slice(0,6).map(p=>'<div class="market-card"><div class="market-code">'+p.code+'</div><div class="market-price">'+p.range+'</div><div class="market-change '+(p.change>0?'up':'down')+'">'+(p.change>0?'▲':'▼')+'$'+Math.abs(p.change)+'</div></div>').join('')+'</div>'+
-    '<div class="section-header"><h3 class="section-title">⭐ '+(lang==='es'?'Compradores Prioritarios':'Priority Buyers')+'</h3></div>'+
-    '<div class="grid grid-3">'+buyers.filter(b=>b.priority).slice(0,6).map(b=>renderBuyerCard(b)).join('')+'</div>';
-}
+// Stream Breakdown
+function _gsb(){const f=_cp?_e.filter(e=>e.pid===_cp.id):_e;const sb={};f.forEach(e=>{const cat=e.cat||'Mixed';if(!sb[cat])sb[cat]={tot:0,div:0,lf:0};sb[cat].tot+=e.t;if(e.dst==='d')sb[cat].div+=e.t;else sb[cat].lf+=e.t});return sb}
 
-// ============ CRM ============
-function renderCRM(){
-    const stages=['lead','contacted','negotiating','won'];
-    const stageNames={lead:lang==='es'?'Prospectos':'Leads',contacted:lang==='es'?'Contactados':'Contacted',negotiating:lang==='es'?'Negociando':'Negotiating',won:lang==='es'?'Ganados':'Won'};
-    const today=new Date().toISOString().split('T')[0];
-    const overdue=prospects.filter(p=>p.followup&&p.followup<today&&p.stage!=='won'&&p.stage!=='lost');
-    const dueToday=prospects.filter(p=>p.followup===today&&p.stage!=='won'&&p.stage!=='lost');
-    
-    let html='<div class="section-header"><h3 class="section-title">🎯 '+t('pipeline')+'</h3><button class="btn btn-blue" onclick="openProspectModal()">➕ '+t('addProspect')+'</button></div>';
-    
-    // Follow-up alerts
-    if(overdue.length>0||dueToday.length>0){
-        html+='<div class="card" style="margin-bottom:16px;border-left:4px solid var(--warning)"><div class="sidebar-title">📞 '+(lang==='es'?'Seguimientos Pendientes':'Pending Follow-ups')+'</div>';
-        overdue.forEach(p=>{
-            html+='<div class="followup-item" style="background:#fef2f2"><div class="followup-info"><h4>'+p.company+'</h4><p>'+p.contact+'</p></div><div><span class="followup-date" style="color:var(--danger)">'+(lang==='es'?'VENCIDO':'OVERDUE')+'</span><br><button class="btn btn-sm btn-gray" onclick="openActivityModal('+p.id+')" style="margin-top:4px">'+(lang==='es'?'Registrar':'Log')+'</button></div></div>';
-        });
-        dueToday.forEach(p=>{
-            html+='<div class="followup-item"><div class="followup-info"><h4>'+p.company+'</h4><p>'+p.contact+'</p></div><div><span class="followup-date">'+(lang==='es'?'HOY':'TODAY')+'</span><br><button class="btn btn-sm btn-gray" onclick="openActivityModal('+p.id+')" style="margin-top:4px">'+(lang==='es'?'Registrar':'Log')+'</button></div></div>';
-        });
-        html+='</div>';
-    }
-    
-    // Pipeline columns
-    html+='<div class="pipeline">';
-    stages.forEach(stage=>{
-        const items=prospects.filter(p=>p.stage===stage);
-        const value=items.reduce((sum,p)=>sum+(p.value||0),0);
-        html+='<div class="pipeline-col"><div class="pipeline-title '+stage+'">'+stageNames[stage]+' ('+items.length+') - $'+value.toLocaleString()+'</div>';
-        if(items.length===0){
-            html+='<div class="empty-state" style="padding:20px"><p style="font-size:11px;color:var(--muted)">'+(lang==='es'?'Sin prospectos':'No prospects')+'</p></div>';
-        }
-        items.forEach(p=>{
-            html+='<div class="pipeline-card" onclick="viewProspect('+p.id+')"><h4>'+p.company+'</h4><p>'+p.contact+'</p>'+(p.value?'<div class="value">$'+p.value.toLocaleString()+'/mes</div>':'')+(p.followup?'<p style="margin-top:4px;font-size:9px;color:'+(p.followup<=today?'var(--danger)':'var(--muted)')+'">📅 '+p.followup+'</p>':'')+'</div>';
-        });
-        html+='</div>';
-    });
-    html+='</div>';
-    
-    // Recent activities
-    const allActivities=[];
-    prospects.forEach(p=>{
-        (p.activities||[]).forEach(a=>{
-            allActivities.push({...a,company:p.company,prospectId:p.id});
-        });
-    });
-    allActivities.sort((a,b)=>new Date(b.date)-new Date(a.date));
-    
-    if(allActivities.length>0){
-        html+='<div class="card"><div class="sidebar-title">📋 '+(lang==='es'?'Actividad Reciente':'Recent Activity')+'</div>';
-        allActivities.slice(0,5).forEach(a=>{
-            const icons={call:'📞',email:'📧',meeting:'🤝',note:'📝'};
-            html+='<div class="activity-item"><div class="activity-icon '+a.type+'">'+icons[a.type]+'</div><div class="activity-content"><div class="activity-title">'+a.company+'</div><div class="activity-desc">'+a.desc+'</div></div><div class="activity-time">'+a.date+'</div></div>';
-        });
-        html+='</div>';
-    }
-    
-    return html;
-}
+function _usb(){const sb=_gsb();const keys=Object.keys(sb);if(!keys.length){$('strm-empty').style.display='block';$('strm-data').style.display='none';return}$('strm-empty').style.display='none';$('strm-data').style.display='block';let gt=0,gd=0,gl=0;let html='';keys.sort((a,b)=>sb[b].tot-sb[a].tot).forEach(k=>{const s=sb[k];const rt=s.tot>0?(s.div/s.tot*100):0;const rtc=rt>=75?'':rt>=50?'med':'low';gt+=s.tot;gd+=s.div;gl+=s.lf;html+=`<tr><td>${k}</td><td class="num">${s.tot.toFixed(2)}</td><td class="num">${s.div.toFixed(2)}</td><td class="num">${s.lf.toFixed(2)}</td><td class="num rate ${rtc}">${rt.toFixed(0)}%</td></tr>`});const grt=gt>0?(gd/gt*100):0;html+=`<tr><td><strong>TOTAL</strong></td><td class="num">${gt.toFixed(2)}</td><td class="num">${gd.toFixed(2)}</td><td class="num">${gl.toFixed(2)}</td><td class="num rate">${grt.toFixed(0)}%</td></tr>`;$('strm-body').innerHTML=html;_usc(sb)}
 
-function viewProspect(id){
-    const p=prospects.find(x=>x.id===id);
-    if(!p)return;
-    editProspectId=id;
-    document.getElementById('pCompany').value=p.company;
-    document.getElementById('pContact').value=p.contact;
-    document.getElementById('pEmail').value=p.email||'';
-    document.getElementById('pPhone').value=p.phone||'';
-    document.getElementById('pType').value=p.type||'Mill';
-    document.getElementById('pStage').value=p.stage;
-    document.getElementById('pValue').value=p.value||'';
-    document.getElementById('pFollowup').value=p.followup||'';
-    document.getElementById('pNotes').value=p.notes||'';
-    document.getElementById('prospectModalTitle').textContent=lang==='es'?'Editar Prospecto':'Edit Prospect';
-    document.getElementById('prospectModal').classList.add('active');
-}
+function _usc(sb){const ctx=$('strm-chart');if(!ctx)return;if(_sch)_sch.destroy();const keys=Object.keys(sb).sort((a,b)=>sb[b].tot-sb[a].tot);const colors=keys.map(k=>_catColors[_cats.indexOf(k)]||'#6b7280');_sch=new Chart(ctx,{type:'doughnut',data:{labels:keys,datasets:[{data:keys.map(k=>sb[k].tot),backgroundColor:colors,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#94a3b8',font:{size:10},boxWidth:12}}}}})}
 
-function openActivityModal(prospectId){
-    document.getElementById('aProspectId').value=prospectId;
-    document.getElementById('activityForm').reset();
-    document.getElementById('activityModal').classList.add('active');
-}
+function _ur(){if(!_cp){$('rnp').style.display='block';$('rc').style.display='none';return}$('rnp').style.display='none';$('rc').style.display='block';const f=_e.filter(e=>e.pid===_cp.id),tot=f.reduce((s,e)=>s+e.t,0),dv=f.filter(e=>e.dst==='d').reduce((s,e)=>s+e.t,0),lf=tot-dv,rt=tot>0?(dv/tot)*100:0;$('rt').textContent=tot.toFixed(1);$('rd').textContent=dv.toFixed(1);$('rl').textContent=lf.toFixed(1);$('rr').textContent=rt.toFixed(0)+'%';_uc(dv,lf)}
 
-// ============ CONTACTS ============
-function renderContacts(){
-    let f=buyers;
-    if(searchTerm)f=f.filter(b=>b.company.toLowerCase().includes(searchTerm.toLowerCase())||b.contact.toLowerCase().includes(searchTerm.toLowerCase()));
-    if(filterType!=='all')f=f.filter(b=>b.type===filterType);
-    
-    return '<div class="section-header"><h3 class="section-title">👥 '+t('contacts')+' ('+buyers.length+')</h3><button class="btn btn-green" onclick="openContactModal()">➕ '+t('add')+'</button></div>'+
-    '<div class="search-bar"><input type="text" class="search-input" placeholder="🔍 '+t('search')+'" value="'+searchTerm+'" oninput="searchTerm=this.value;render()"><button class="filter-btn '+(filterType==='all'?'active':'')+'" onclick="filterType=\'all\';render()">'+t('all')+'</button><button class="filter-btn '+(filterType==='Mill'?'active':'')+'" onclick="filterType=\'Mill\';render()">'+t('mills')+'</button><button class="filter-btn '+(filterType==='Broker'?'active':'')+'" onclick="filterType=\'Broker\';render()">'+t('brokers')+'</button></div>'+
-    '<div class="grid grid-3">'+f.map(b=>renderBuyerCard(b)).join('')+'</div>';
-}
+function _uc(dv,lf){const ctx=$('ch');if(!ctx)return;if(_ch)_ch.destroy();_ch=new Chart(ctx,{type:'doughnut',data:{labels:['Diverted','Landfill'],datasets:[{data:[dv||.1,lf||.1],backgroundColor:['#10b981','#ef4444'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#94a3b8',font:{size:11}}}}}})}
 
-function renderBuyerCard(b){
-    const init=b.company.split(' ').map(w=>w[0]).join('').slice(0,2);
-    const badge=b.type==='Mill'?'badge-mill':b.type==='Export'?'badge-export':'badge-broker';
-    const pr=b.prices?Object.entries(b.prices).filter(([k,v])=>v):[];
-    return '<div class="card '+(b.priority?'priority':'')+'"><div class="card-header"><div class="avatar">'+init+'</div><div class="badges"><span class="badge '+badge+'">'+b.type+'</span>'+(b.priority?'<span class="badge badge-priority">⭐</span>':'')+'</div></div><div class="card-title">'+b.company+'</div><div class="card-subtitle">'+b.contact+'</div><div class="card-info">📧 '+b.email+'<br>📞 '+b.phone+'</div><div class="tags">'+(b.commodities||[]).slice(0,4).map(c=>'<span class="tag">'+c+'</span>').join('')+'</div>'+(pr.length?'<div class="prices">'+pr.slice(0,4).map(([k,v])=>'<span class="price">'+k+': $'+v+'</span>').join('')+'</div>':'')+'<div class="card-actions"><button class="btn btn-green" onclick="window.open(\'mailto:'+b.email+'\')">📧</button><button class="btn btn-gray" onclick="window.open(\'tel:'+b.phone+'\')">📞</button><button class="btn btn-purple" onclick="editBuyer('+b.id+')">✏️</button><button class="btn btn-danger" onclick="deleteBuyer('+b.id+')">🗑️</button></div></div>';
-}
+// PDF Generation with Stream Breakdown
+function _gp(){if(!_cp)return;const f=_e.filter(e=>e.pid===_cp.id),tot=f.reduce((s,e)=>s+e.t,0),dv=f.filter(e=>e.dst==='d').reduce((s,e)=>s+e.t,0),lf=tot-dv,rt=tot>0?(dv/tot)*100:0,pb=$('pby').value||'DiversionScan User';const sb=_gsb();const doc=new _J();
 
-// ============ PRICES ============
-function renderPrices(){
-    const gr=['OCC','PM','SWL','DLK','SOP','HWEC'],mx={};
-    gr.forEach(g=>{const ps=buyers.map(b=>b.prices?.[g]).filter(p=>p);mx[g]=ps.length?Math.max(...ps):0});
-    return '<div class="section-header"><h3 class="section-title">💰 '+(lang==='es'?'Comparación de Precios':'Price Comparison')+'</h3></div>'+
-    '<div class="market-grid">'+marketPrices.map(p=>'<div class="market-card"><div class="market-code">'+p.code+'</div><div class="market-price">'+p.range+'</div><div class="market-change '+(p.change>0?'up':'down')+'">'+(p.change>0?'▲':'▼')+'$'+Math.abs(p.change)+'</div></div>').join('')+'</div>'+
-    '<div class="table-wrap"><div class="table-header">📊 '+(lang==='es'?'Precios por Comprador (Verde = Mejor)':'Buyer Prices (Green = Best)')+'</div><div class="table-scroll"><table><thead><tr><th>'+(lang==='es'?'Comprador':'Buyer')+'</th>'+gr.map(g=>'<th>'+g+'</th>').join('')+'<th>'+(lang==='es'?'Tipo':'Type')+'</th></tr></thead><tbody>'+buyers.filter(b=>b.prices).sort((a,b)=>(b.prices.OCC||0)-(a.prices.OCC||0)).map(b=>'<tr><td><b>'+b.company+'</b><br><small style="color:#64748b">'+b.contact+'</small></td>'+gr.map(g=>{const p=b.prices[g];if(!p)return'<td style="color:#cbd5e1">—</td>';return'<td><span class="'+(p===mx[g]?'price-best':'')+'">'+(p===mx[g]?'⭐ ':'')+'$'+p+'</span></td>'}).join('')+'<td><span class="badge badge-'+b.type.toLowerCase()+'">'+b.type+'</span></td></tr>').join('')+'</tbody></table></div></div>';
-}
+// Header
+doc.setFillColor(16,185,129);doc.rect(0,0,210,40,'F');doc.setTextColor(255);doc.setFontSize(24);doc.setFont('helvetica','bold');doc.text('LEED MRc5 Compliance Report',15,18);doc.setFontSize(11);doc.text('Construction & Demolition Waste Management',15,26);doc.setFontSize(9);doc.text(`Generated: ${new Date().toLocaleDateString()} | Prepared by: ${pb}`,15,34);
 
-// ============ NEWS ============
-function renderNews(){
-    return '<div class="section-header"><h3 class="section-title">📰 '+(lang==='es'?'Noticias de la Industria':'Industry News')+'</h3></div>'+
-    news.map(n=>'<div class="news-item"><div class="news-date">'+n.date+'</div><div class="news-title">'+(lang==='es'?n.titleEs:n.title)+'</div><div class="news-excerpt">'+(lang==='es'?n.excerptEs:n.excerpt)+'</div></div>').join('');
-}
+// Project info bar
+doc.setFillColor(240,240,240);doc.rect(0,40,210,18,'F');doc.setTextColor(60);doc.setFontSize(10);doc.text(`Project: ${_cp.n}`,15,50);if(_cp.cn)doc.text(`Customer: ${_cp.cn}`,80,50);if(_cp.ad)doc.text(`Address: ${_cp.ad}`,15,56);
 
-// ============ MODALS ============
-function openContactModal(){
-    editId=null;
-    document.getElementById('contactForm').reset();
-    document.getElementById('contactModalTitle').textContent=lang==='es'?'Agregar Comprador':'Add Buyer';
-    document.getElementById('contactModal').classList.add('active');
-}
+// Big diversion rate
+let y=68;doc.setFillColor(26,34,52);doc.roundedRect(15,y,180,32,3,3,'F');doc.setTextColor(16,185,129);doc.setFontSize(36);doc.setFont('helvetica','bold');doc.text(`${rt.toFixed(1)}%`,105,y+22,{align:'center'});doc.setFontSize(10);doc.setTextColor(200);doc.text('OVERALL DIVERSION RATE',105,y+30,{align:'center'});
 
-function openProspectModal(){
-    editProspectId=null;
-    document.getElementById('prospectForm').reset();
-    document.getElementById('prospectModalTitle').textContent=lang==='es'?'Agregar Prospecto':'Add Prospect';
-    document.getElementById('prospectModal').classList.add('active');
-}
+// Summary boxes
+y+=42;doc.setFillColor(245,245,245);doc.roundedRect(15,y,55,22,2,2,'F');doc.roundedRect(77,y,55,22,2,2,'F');doc.roundedRect(139,y,55,22,2,2,'F');doc.setFontSize(14);doc.setFont('helvetica','bold');doc.setTextColor(16,185,129);doc.text(`${tot.toFixed(2)}`,42,y+10,{align:'center'});doc.text(`${dv.toFixed(2)}`,105,y+10,{align:'center'});doc.setTextColor(239,68,68);doc.text(`${lf.toFixed(2)}`,167,y+10,{align:'center'});doc.setFontSize(8);doc.setTextColor(100);doc.text('TOTAL TONS',42,y+18,{align:'center'});doc.text('DIVERTED',105,y+18,{align:'center'});doc.text('LANDFILL',167,y+18,{align:'center'});
 
-function closeModal(id){document.getElementById(id).classList.remove('active')}
+// LEED status
+y+=30;if(_cp.lt!=='n'){const ach=rt>=parseInt(_cp.lt);doc.setFillColor(ach?16:239,ach?185:68,ach?129:68);doc.roundedRect(15,y,180,14,2,2,'F');doc.setTextColor(255);doc.setFontSize(10);doc.text(`LEED MRc5 TARGET: ${_cp.lt}% — ${ach?'✓ ACHIEVED':'IN PROGRESS'}`,105,y+10,{align:'center'});y+=20}
 
-function editBuyer(id){
-    const b=buyers.find(x=>x.id===id);
-    if(!b)return;
-    editId=id;
-    document.getElementById('fCompany').value=b.company;
-    document.getElementById('fContact').value=b.contact;
-    document.getElementById('fEmail').value=b.email;
-    document.getElementById('fPhone').value=b.phone||'';
-    document.getElementById('fType').value=b.type;
-    document.getElementById('fPriority').checked=b.priority;
-    document.getElementById('fNotes').value=b.notes||'';
-    document.querySelectorAll('input[name="comm"]').forEach(cb=>cb.checked=(b.commodities||[]).includes(cb.value));
-    document.getElementById('contactModalTitle').textContent=lang==='es'?'Editar Comprador':'Edit Buyer';
-    document.getElementById('contactModal').classList.add('active');
-}
+// Stream breakdown table
+y+=5;doc.setTextColor(30);doc.setFontSize(12);doc.setFont('helvetica','bold');doc.text('Material Stream Breakdown',15,y);y+=6;doc.setFontSize(8);doc.setFont('helvetica','normal');doc.setTextColor(100);doc.text('Stream',20,y);doc.text('Total',80,y);doc.text('Diverted',105,y);doc.text('Landfill',135,y);doc.text('Rate',165,y);y+=2;doc.setDrawColor(200);doc.line(15,y,195,y);y+=5;doc.setTextColor(60);
+const sbKeys=Object.keys(sb).sort((a,b)=>sb[b].tot-sb[a].tot);
+sbKeys.forEach(k=>{const s=sb[k];const srt=s.tot>0?(s.div/s.tot*100):0;doc.text(k,20,y);doc.text(s.tot.toFixed(2),80,y);doc.text(s.div.toFixed(2),105,y);doc.text(s.lf.toFixed(2),135,y);doc.setTextColor(srt>=75?16:srt>=50?245:239,srt>=75?185:srt>=50?158:68,srt>=75?129:srt>=50?11:68);doc.text(`${srt.toFixed(0)}%`,165,y);doc.setTextColor(60);y+=5;if(y>250){doc.addPage();y=20}});
+doc.setFont('helvetica','bold');doc.text('TOTAL',20,y);doc.text(tot.toFixed(2),80,y);doc.text(dv.toFixed(2),105,y);doc.text(lf.toFixed(2),135,y);doc.setTextColor(16,185,129);doc.text(`${rt.toFixed(0)}%`,165,y);
 
-function deleteBuyer(id){
-    if(confirm(lang==='es'?'¿Eliminar este comprador?':'Delete this buyer?')){
-        buyers=buyers.filter(b=>b.id!==id);
-        saveData();renderNav();render();
-        toast(lang==='es'?'Comprador eliminado':'Buyer deleted');
-    }
-}
+// Footer
+doc.setFillColor(240,240,240);doc.rect(0,282,210,15,'F');doc.setFontSize(8);doc.setTextColor(100);doc.setFont('helvetica','normal');doc.text('Report by DiversionScan™ | Powered by Dalmex Recycling, LLC | © 2025 All Rights Reserved',105,289,{align:'center'});doc.text('LEED v4.1 MRc5 Compliant Waste Diversion Tracking',105,294,{align:'center'});
 
-// ============ FORM HANDLERS ============
-document.getElementById('contactForm').addEventListener('submit',function(e){
-    e.preventDefault();
-    const comms=[];document.querySelectorAll('input[name="comm"]:checked').forEach(cb=>comms.push(cb.value));
-    const data={
-        company:document.getElementById('fCompany').value,
-        contact:document.getElementById('fContact').value,
-        email:document.getElementById('fEmail').value,
-        phone:document.getElementById('fPhone').value,
-        type:document.getElementById('fType').value,
-        priority:document.getElementById('fPriority').checked,
-        commodities:comms,
-        notes:document.getElementById('fNotes').value,
-        prices:{},
-        status:'active'
-    };
-    if(editId){
-        const idx=buyers.findIndex(b=>b.id===editId);
-        if(idx!==-1)buyers[idx]={...buyers[idx],...data};
-        toast(lang==='es'?'Comprador actualizado':'Buyer updated');
-    }else{
-        data.id=buyers.length?Math.max(...buyers.map(b=>b.id))+1:1;
-        buyers.push(data);
-        toast(lang==='es'?'Comprador agregado':'Buyer added');
-    }
-    saveData();closeModal('contactModal');renderNav();render();
-});
+doc.save(`${_cp.n.replace(/[^a-z0-9]/gi,'_')}_LEED_MRc5_Report.pdf`);_to('📄 Report Generated!','Pu')}
 
-document.getElementById('prospectForm').addEventListener('submit',function(e){
-    e.preventDefault();
-    const data={
-        company:document.getElementById('pCompany').value,
-        contact:document.getElementById('pContact').value,
-        email:document.getElementById('pEmail').value,
-        phone:document.getElementById('pPhone').value,
-        type:document.getElementById('pType').value,
-        stage:document.getElementById('pStage').value,
-        value:parseInt(document.getElementById('pValue').value)||0,
-        followup:document.getElementById('pFollowup').value,
-        notes:document.getElementById('pNotes').value,
-        activities:[]
-    };
-    if(editProspectId){
-        const idx=prospects.findIndex(p=>p.id===editProspectId);
-        if(idx!==-1){
-            data.activities=prospects[idx].activities||[];
-            prospects[idx]={...prospects[idx],...data};
-        }
-        toast(lang==='es'?'Prospecto actualizado':'Prospect updated');
-    }else{
-        data.id=prospects.length?Math.max(...prospects.map(p=>p.id))+1:1;
-        prospects.push(data);
-        toast(lang==='es'?'Prospecto agregado':'Prospect added');
-    }
-    saveData();closeModal('prospectModal');renderNav();render();checkReminders();
-});
+// Export/Import
+function _ex(){const d={v:'2.1',dt:new Date().toISOString(),c:_c,p:_p,e:_e,t:_t};const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=`DiversionScan_${new Date().toISOString().split('T')[0]}.json`;a.click();URL.revokeObjectURL(u);_to('📤 Exported!','Pu')}
+$('ii').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.c)_c=d.c;if(d.p)_p=d.p;if(d.e)_e=d.e;if(d.t)_t=d.t;_sv();_ua();_to('📥 Imported!','Pu')}catch{_to('❌ Invalid','Er')}};r.readAsText(f);e.target.value=''};
+$('clb').onclick=()=>{if(!_e.length)return;if(confirm('Clear all entries?')){_e=[];_sv();_ua();_to('🗑️ Cleared')}};
 
-document.getElementById('activityForm').addEventListener('submit',function(e){
-    e.preventDefault();
-    const prospectId=parseInt(document.getElementById('aProspectId').value);
-    const prospect=prospects.find(p=>p.id===prospectId);
-    if(!prospect)return;
-    
-    const activity={
-        type:document.getElementById('aType').value,
-        desc:document.getElementById('aDesc').value,
-        date:new Date().toISOString().split('T')[0]
-    };
-    
-    if(!prospect.activities)prospect.activities=[];
-    prospect.activities.unshift(activity);
-    
-    const newFollowup=document.getElementById('aFollowup').value;
-    if(newFollowup)prospect.followup=newFollowup;
-    
-    saveData();closeModal('activityModal');render();checkReminders();
-    toast(lang==='es'?'Actividad registrada':'Activity logged');
-});
+// Storage
+function _sv(){localStorage.setItem('_c',JSON.stringify(_c));localStorage.setItem('_p',JSON.stringify(_p));localStorage.setItem('_e',JSON.stringify(_e));localStorage.setItem('_t',JSON.stringify(_t));$('ls').textContent='Just now'}
+function _ld(){const c=localStorage.getItem('_c'),p=localStorage.getItem('_p'),e=localStorage.getItem('_e'),t=localStorage.getItem('_t');if(c)_c=JSON.parse(c);if(p)_p=JSON.parse(p);if(e)_e=JSON.parse(e);if(t)_t=JSON.parse(t)}
+function _to(m,t=''){const el=$('to');el.textContent=m;el.className='To'+(t?' '+t:'');el.classList.add('S');setTimeout(()=>el.classList.remove('S'),2500)}
 
-// ============ UTILITIES ============
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
-
-document.addEventListener('keypress',e=>{if(e.key==='Enter'&&!currentUser)handleLogin()});
+_ld();_ua();
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&(e.key==='s'||e.key==='u'||e.key==='c'))e.preventDefault()});
 </script>
 </body>
 </html>
