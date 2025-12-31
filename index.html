@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dalmex Fiber Hub AI</title>
+    <title>Dalmex Fiber Hub AI - Enterprise CRM</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        :root{--primary:#10b981;--primary-dark:#059669;--purple:#8b5cf6;--purple-dark:#7c3aed;--danger:#ef4444;--warning:#f59e0b;--light:#dcfce7;--card:rgba(255,255,255,0.95);--text:#1e293b;--muted:#64748b}
+        :root{--primary:#10b981;--primary-dark:#059669;--purple:#8b5cf6;--purple-dark:#7c3aed;--danger:#ef4444;--warning:#f59e0b;--blue:#3b82f6;--light:#dcfce7;--card:rgba(255,255,255,0.95);--text:#1e293b;--muted:#64748b}
         body{font-family:'Plus Jakarta Sans',sans-serif;background:linear-gradient(135deg,#f0fdf4,#ecfdf5,#d1fae5);min-height:100vh;color:var(--text)}
         .hidden{display:none!important}
         .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
@@ -17,14 +17,17 @@
         .login-subtitle{text-align:center;color:var(--muted);margin-bottom:24px}
         .form-group{margin-bottom:16px}
         .form-label{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase}
-        .form-input,.form-select{width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:10px;font-size:15px;font-family:inherit}
-        .form-input:focus,.form-select:focus{outline:none;border-color:var(--purple)}
+        .form-input,.form-select,.form-textarea{width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:10px;font-size:15px;font-family:inherit}
+        .form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--purple)}
         .btn{padding:12px 20px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
         .btn-purple{background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:white}
         .btn-green{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white}
+        .btn-blue{background:linear-gradient(135deg,var(--blue),#2563eb);color:white}
         .btn-gray{background:#f1f5f9;color:var(--text)}
         .btn-danger{background:var(--danger);color:white}
+        .btn-warning{background:var(--warning);color:white}
         .btn-full{width:100%;margin-bottom:10px}
+        .btn-sm{padding:8px 12px;font-size:12px}
         .login-error{background:#fef2f2;color:#dc2626;padding:12px;border-radius:8px;margin-bottom:16px;display:none}
         .login-error.show{display:block}
         .login-footer{text-align:center;margin-top:20px;font-size:11px;color:var(--muted)}
@@ -47,28 +50,38 @@
         .logo{width:42px;height:42px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
         .brand h1{font-size:18px;font-weight:800}
         .brand span{font-size:11px;color:var(--muted)}
-        .header-right{display:flex;align-items:center;gap:8px}
+        .header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
         .user-badge{background:var(--light);padding:6px 12px;border-radius:8px;font-size:11px;font-weight:600;color:var(--primary-dark)}
         .nav{display:flex;gap:6px;padding:12px 20px;max-width:1400px;margin:0 auto;overflow-x:auto}
         .nav-btn{padding:8px 14px;background:white;border:1px solid #e2e8f0;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
         .nav-btn:hover{background:#f8fafc}
         .nav-btn.active{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;border:none}
         .nav-btn.ai{background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:white;border:none}
+        .nav-btn.crm{background:linear-gradient(135deg,var(--blue),#2563eb);color:white;border:none}
         .main{max-width:1400px;margin:0 auto;padding:0 20px 30px}
         .grid{display:grid;gap:16px}
         .grid-2{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
         .grid-3{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+        .grid-4{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
         .card{background:var(--card);border-radius:16px;padding:18px;border:1px solid #e2e8f0}
         .card:hover{box-shadow:0 8px 25px rgba(0,0,0,0.08)}
         .card.priority{border-left:4px solid var(--warning)}
+        .card.prospect{border-left:4px solid var(--blue)}
         .card-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px}
         .avatar{width:42px;height:42px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+        .avatar.prospect{background:linear-gradient(135deg,var(--blue),#2563eb)}
         .badges{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
         .badge{padding:3px 8px;border-radius:5px;font-size:9px;font-weight:700;text-transform:uppercase}
         .badge-mill{background:#dbeafe;color:#1d4ed8}
         .badge-broker{background:#fef3c7;color:#92400e}
         .badge-export{background:#ede9fe;color:#6d28d9}
         .badge-priority{background:#fef3c7;color:#b45309}
+        .badge-lead{background:#dbeafe;color:#1d4ed8}
+        .badge-contacted{background:#fef3c7;color:#92400e}
+        .badge-negotiating{background:#ede9fe;color:#6d28d9}
+        .badge-won{background:#dcfce7;color:#15803d}
+        .badge-lost{background:#fef2f2;color:#dc2626}
+        .badge-active{background:#dcfce7;color:#15803d}
         .card-title{font-size:15px;font-weight:700;margin-bottom:2px}
         .card-subtitle{font-size:12px;color:var(--primary-dark);font-weight:600;margin-bottom:8px}
         .card-info{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:8px}
@@ -76,8 +89,8 @@
         .tag{background:var(--light);color:var(--primary-dark);padding:3px 7px;border-radius:4px;font-size:9px;font-weight:600}
         .prices{display:flex;flex-wrap:wrap;gap:6px;padding-top:8px;border-top:1px solid #f1f5f9;margin-bottom:10px}
         .price{background:#f0fdf4;padding:4px 8px;border-radius:6px;font-size:10px;font-weight:600;color:var(--primary-dark)}
-        .card-actions{display:flex;gap:6px}
-        .card-actions .btn{flex:1;padding:8px;font-size:11px}
+        .card-actions{display:flex;gap:6px;flex-wrap:wrap}
+        .card-actions .btn{flex:1;padding:8px;font-size:11px;min-width:40px}
         .stat-card{text-align:center}
         .stat-icon{font-size:28px;margin-bottom:6px}
         .stat-value{font-size:28px;font-weight:800}
@@ -138,19 +151,54 @@
         td:first-child{text-align:left}
         tr:hover{background:#f8fafc}
         .price-best{background:#dcfce7;color:#15803d;padding:4px 8px;border-radius:5px;font-weight:700}
+        .pipeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+        .pipeline-col{background:#f8fafc;border-radius:12px;padding:12px;min-height:200px}
+        .pipeline-title{font-size:12px;font-weight:700;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid}
+        .pipeline-title.lead{border-color:var(--blue);color:var(--blue)}
+        .pipeline-title.contacted{border-color:var(--warning);color:var(--warning)}
+        .pipeline-title.negotiating{border-color:var(--purple);color:var(--purple)}
+        .pipeline-title.won{border-color:var(--primary);color:var(--primary)}
+        .pipeline-card{background:white;border-radius:8px;padding:10px;margin-bottom:8px;border:1px solid #e2e8f0;cursor:pointer}
+        .pipeline-card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+        .pipeline-card h4{font-size:12px;font-weight:700;margin-bottom:4px}
+        .pipeline-card p{font-size:10px;color:var(--muted)}
+        .pipeline-card .value{font-size:11px;font-weight:700;color:var(--primary-dark);margin-top:4px}
+        .activity-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9}
+        .activity-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+        .activity-icon.call{background:#dcfce7}
+        .activity-icon.email{background:#dbeafe}
+        .activity-icon.note{background:#fef3c7}
+        .activity-icon.meeting{background:#ede9fe}
+        .activity-content{flex:1}
+        .activity-title{font-size:12px;font-weight:600}
+        .activity-desc{font-size:11px;color:var(--muted)}
+        .activity-time{font-size:10px;color:var(--muted)}
+        .followup-item{background:#fef3c7;border-radius:8px;padding:10px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+        .followup-info h4{font-size:12px;font-weight:700}
+        .followup-info p{font-size:10px;color:var(--muted)}
+        .followup-date{font-size:11px;font-weight:700;color:var(--warning)}
         .modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;padding:20px}
         .modal-overlay.active{display:flex}
-        .modal{background:white;border-radius:20px;padding:24px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
+        .modal{background:white;border-radius:20px;padding:24px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}
         .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
         .modal-title{font-size:18px;font-weight:700}
         .modal-close{width:32px;height:32px;background:#f1f5f9;border:none;border-radius:8px;font-size:16px;cursor:pointer}
         .checkbox-group{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
         .checkbox-item{display:flex;align-items:center;gap:6px;font-size:12px}
         .checkbox-item input{width:16px;height:16px}
+        .tabs{display:flex;gap:4px;margin-bottom:16px;border-bottom:2px solid #e2e8f0;padding-bottom:8px}
+        .tab{padding:8px 16px;background:transparent;border:none;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);border-radius:8px 8px 0 0}
+        .tab.active{background:var(--light);color:var(--primary-dark)}
         .footer{background:var(--card);border-top:1px solid #e2e8f0;padding:14px 20px;margin-top:30px;text-align:center;font-size:11px;color:var(--muted)}
         .toast{position:fixed;bottom:20px;right:20px;background:#1e293b;color:white;padding:12px 18px;border-radius:10px;font-size:13px;z-index:2000;display:none}
         .toast.show{display:block;animation:slideIn 0.3s ease}
         @keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+        .reminder-banner{background:linear-gradient(135deg,#fef3c7,#fde68a);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+        .reminder-text{font-size:13px;font-weight:600;color:#92400e}
+        .empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
+        .empty-state .icon{font-size:48px;margin-bottom:12px}
+        .empty-state h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--text)}
+        .empty-state p{font-size:13px}
     </style>
 </head>
 <body>
@@ -158,54 +206,56 @@
     <div class="login-card">
         <div class="login-logo">🤖</div>
         <h1 class="login-title">Dalmex Fiber Hub</h1>
-        <p class="login-subtitle" data-en="AI-Powered Paper Trading" data-es="Comercio de Papel con IA">AI-Powered Paper Trading</p>
+        <p class="login-subtitle" id="loginSub">Enterprise CRM & AI Trading</p>
         <div class="lang-toggle">
             <button class="lang-btn active" onclick="setLang('en')">🇺🇸 English</button>
             <button class="lang-btn" onclick="setLang('es')">🇲🇽 Español</button>
         </div>
         <div class="login-error" id="loginError">Invalid username or password</div>
         <div class="form-group">
-            <label class="form-label" data-en="Username" data-es="Usuario">Username</label>
-            <input type="text" id="username" class="form-input" placeholder="Enter username">
+            <label class="form-label" id="lblUser">Username</label>
+            <input type="text" id="username" class="form-input">
         </div>
         <div class="form-group">
-            <label class="form-label" data-en="Password" data-es="Contraseña">Password</label>
-            <input type="password" id="password" class="form-input" placeholder="Enter password">
+            <label class="form-label" id="lblPass">Password</label>
+            <input type="password" id="password" class="form-input">
         </div>
-        <button class="btn btn-purple btn-full" onclick="handleLogin()" data-en="Sign In" data-es="Iniciar Sesión">Sign In</button>
+        <button class="btn btn-purple btn-full" onclick="handleLogin()" id="btnLogin">Sign In</button>
         <button class="btn btn-green btn-full" onclick="quickLogin()">⚡ Quick Access</button>
-        <div class="login-footer">
-            <strong>Dalmex Recycling LLC</strong><br>
-            2828 Nagle St. Dallas, TX 75220 • 214-352-2000
-        </div>
+        <div class="login-footer"><strong>Dalmex Recycling LLC</strong><br>2828 Nagle St. Dallas, TX 75220 • 214-352-2000</div>
     </div>
 </div>
+
 <div class="app" id="app">
-    <div class="ticker">
-        <div class="ticker-track" id="ticker"></div>
+    <div class="ticker"><div class="ticker-track" id="ticker"></div></div>
+    <div class="reminder-banner" id="reminderBanner" style="display:none">
+        <span class="reminder-text" id="reminderText">📞 You have follow-ups due today!</span>
+        <button class="btn btn-warning btn-sm" onclick="setTab('crm')">View CRM</button>
     </div>
     <header class="header">
         <div class="header-inner">
             <div class="header-left">
                 <div class="logo">🤖</div>
-                <div class="brand"><h1>Dalmex Fiber Hub</h1><span>Enterprise AI • Dallas, TX</span></div>
+                <div class="brand"><h1>Dalmex Fiber Hub</h1><span>Enterprise CRM • Dallas, TX</span></div>
             </div>
             <div class="header-right">
-                <button class="lang-btn" onclick="setLang(lang==='en'?'es':'en')" id="langToggle">🇲🇽 Español</button>
+                <button class="lang-btn" onclick="toggleLang()" id="langToggle">🇲🇽 Español</button>
                 <div class="user-badge" id="userBadge">User</div>
-                <button class="btn btn-danger" onclick="logout()" style="padding:6px 12px;font-size:11px">Logout</button>
+                <button class="btn btn-danger btn-sm" onclick="logout()">Logout</button>
             </div>
         </div>
     </header>
     <nav class="nav" id="nav"></nav>
     <main class="main" id="main"></main>
-    <footer class="footer">© 2025 Dalmex Recycling LLC • Created by Robert Vandling • AI-Powered by Claude</footer>
+    <footer class="footer">© 2025 Dalmex Recycling LLC • Robert Vandling • AI-Powered by Claude</footer>
 </div>
-<div class="modal-overlay" id="addModal">
+
+<!-- Contact Modal -->
+<div class="modal-overlay" id="contactModal">
     <div class="modal">
         <div class="modal-header">
-            <h3 class="modal-title" data-en="Add Contact" data-es="Agregar Contacto">Add Contact</h3>
-            <button class="modal-close" onclick="closeModal()">✕</button>
+            <h3 class="modal-title" id="contactModalTitle">Add Contact</h3>
+            <button class="modal-close" onclick="closeModal('contactModal')">✕</button>
         </div>
         <form id="contactForm">
             <div class="form-group">
@@ -249,61 +299,633 @@
             </div>
             <div class="form-group">
                 <label class="form-label">Notes</label>
-                <input type="text" id="fNotes" class="form-input">
+                <textarea id="fNotes" class="form-textarea" rows="2"></textarea>
             </div>
             <div style="display:flex;gap:10px;margin-top:16px">
-                <button type="button" class="btn btn-gray" style="flex:1" onclick="closeModal()">Cancel</button>
+                <button type="button" class="btn btn-gray" style="flex:1" onclick="closeModal('contactModal')">Cancel</button>
                 <button type="submit" class="btn btn-green" style="flex:1">Save</button>
             </div>
         </form>
     </div>
 </div>
+
+<!-- Prospect Modal -->
+<div class="modal-overlay" id="prospectModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 class="modal-title" id="prospectModalTitle">Add Prospect</h3>
+            <button class="modal-close" onclick="closeModal('prospectModal')">✕</button>
+        </div>
+        <form id="prospectForm">
+            <div class="form-group">
+                <label class="form-label">Company *</label>
+                <input type="text" id="pCompany" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Contact Person *</label>
+                <input type="text" id="pContact" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" id="pEmail" class="form-input">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Phone</label>
+                <input type="tel" id="pPhone" class="form-input">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Type</label>
+                <select id="pType" class="form-select">
+                    <option value="Mill">Mill</option>
+                    <option value="Broker">Broker</option>
+                    <option value="Export">Export</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Pipeline Stage *</label>
+                <select id="pStage" class="form-select" required>
+                    <option value="lead">Lead</option>
+                    <option value="contacted">Contacted</option>
+                    <option value="negotiating">Negotiating</option>
+                    <option value="won">Won</option>
+                    <option value="lost">Lost</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Estimated Value ($)</label>
+                <input type="number" id="pValue" class="form-input" placeholder="Monthly potential">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Follow-up Date</label>
+                <input type="date" id="pFollowup" class="form-input">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Notes</label>
+                <textarea id="pNotes" class="form-textarea" rows="2"></textarea>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:16px">
+                <button type="button" class="btn btn-gray" style="flex:1" onclick="closeModal('prospectModal')">Cancel</button>
+                <button type="submit" class="btn btn-blue" style="flex:1">Save Prospect</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Activity Modal -->
+<div class="modal-overlay" id="activityModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 class="modal-title">Log Activity</h3>
+            <button class="modal-close" onclick="closeModal('activityModal')">✕</button>
+        </div>
+        <form id="activityForm">
+            <input type="hidden" id="aProspectId">
+            <div class="form-group">
+                <label class="form-label">Activity Type *</label>
+                <select id="aType" class="form-select" required>
+                    <option value="call">📞 Phone Call</option>
+                    <option value="email">📧 Email</option>
+                    <option value="meeting">🤝 Meeting</option>
+                    <option value="note">📝 Note</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Description *</label>
+                <textarea id="aDesc" class="form-textarea" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Next Follow-up</label>
+                <input type="date" id="aFollowup" class="form-input">
+            </div>
+            <div style="display:flex;gap:10px;margin-top:16px">
+                <button type="button" class="btn btn-gray" style="flex:1" onclick="closeModal('activityModal')">Cancel</button>
+                <button type="submit" class="btn btn-green" style="flex:1">Save Activity</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div class="toast" id="toast"></div>
+
 <script>
+// ============ DATA ============
 const defaultBuyers=[
-{id:1,company:"Georgia Pacific",contact:"Jake Walker",email:"jacob.walker1@gapac.com",phone:"(404) 652-4000",type:"Mill",priority:true,commodities:["OCC","DLK","PM","SOP","SWL","HWEC"],prices:{OCC:65,PM:155,SWL:215,DLK:90,SOP:150,HWEC:370},notes:"World's largest de-ink fiber user"},
-{id:2,company:"Smurfit Westrock",contact:"Cynthia Torres",email:"cynthia.torres@smurfitwestrock.com",phone:"(972) 686-7649",type:"Mill",priority:true,commodities:["OCC","PM"],prices:{OCC:60,PM:180},notes:"LOCAL - Best PM at $180!"},
-{id:3,company:"Greenside (Goldbergs)",contact:"Casandra Espinoza",email:"grupocartonero.mty@gmail.com",phone:"+52 81 8123-4567",type:"Export",priority:true,commodities:["OCC","PM","SWL"],prices:{OCC:58,PM:165,SWL:215},notes:"Mexico export"},
-{id:4,company:"American Fiber",contact:"Steve Minor",email:"SMinor@amfiberservices.com",phone:"(678) 555-1234",type:"Broker",priority:true,commodities:["OCC","PM","SWL","HWEC"],prices:{OCC:62,PM:160,SWL:220,HWEC:365},notes:"Best SWL at $220!"},
-{id:5,company:"Graphic Packaging - Waco",contact:"Fiber Procurement",email:"fiberprocurement@graphicpkg.com",phone:"(770) 240-7200",type:"Mill",priority:true,commodities:["OCC","Mixed Paper"],prices:{OCC:70,PM:55},notes:"NEW MILL 2026! Best OCC $70!"},
-{id:6,company:"Green Bay Packaging",contact:"Fiber Procurement",email:"info@gbp.com",phone:"(501) 354-2131",type:"Mill",priority:true,commodities:["OCC"],prices:{OCC:68},notes:"$1B expansion!"},
-{id:7,company:"Pratt Industries",contact:"Fiber Procurement",email:"recyclingcs@prattindustries.com",phone:"(888) 347-7288",type:"Mill",priority:false,commodities:["OCC","Mixed Paper"],prices:{OCC:65,PM:50},notes:"100% recycled"},
-{id:8,company:"International Paper",contact:"Recycling Division",email:"recycling@ipaper.com",phone:"(972) 245-3000",type:"Mill",priority:false,commodities:["OCC","DLK","SOP","PM"],prices:{OCC:65,PM:52,DLK:95,SOP:145},notes:"LOCAL Carrollton"},
-{id:9,company:"Texas Recycling",contact:"Joel/Craig Litman",email:"info@texasrecycling.com",phone:"(214) 357-0262",type:"Broker",priority:false,commodities:["OCC","PM","SOP","SWL"],prices:{OCC:62,PM:48,SWL:205,SOP:140},notes:"25+ years DFW"}
+{id:1,company:"Georgia Pacific",contact:"Jake Walker",email:"jacob.walker1@gapac.com",phone:"(404) 652-4000",type:"Mill",priority:true,commodities:["OCC","DLK","PM","SOP","SWL","HWEC"],prices:{OCC:65,PM:155,SWL:215,DLK:90,SOP:150,HWEC:370},notes:"World's largest de-ink fiber user",status:"active"},
+{id:2,company:"Smurfit Westrock",contact:"Cynthia Torres",email:"cynthia.torres@smurfitwestrock.com",phone:"(972) 686-7649",type:"Mill",priority:true,commodities:["OCC","PM"],prices:{OCC:60,PM:180},notes:"LOCAL - Best PM at $180!",status:"active"},
+{id:3,company:"Greenside (Goldbergs)",contact:"Casandra Espinoza",email:"grupocartonero.mty@gmail.com",phone:"+52 81 8123-4567",type:"Export",priority:true,commodities:["OCC","PM","SWL"],prices:{OCC:58,PM:165,SWL:215},notes:"Mexico export",status:"active"},
+{id:4,company:"American Fiber",contact:"Steve Minor",email:"SMinor@amfiberservices.com",phone:"(678) 555-1234",type:"Broker",priority:true,commodities:["OCC","PM","SWL","HWEC"],prices:{OCC:62,PM:160,SWL:220,HWEC:365},notes:"Best SWL at $220!",status:"active"},
+{id:5,company:"Graphic Packaging - Waco",contact:"Fiber Procurement",email:"fiberprocurement@graphicpkg.com",phone:"(770) 240-7200",type:"Mill",priority:true,commodities:["OCC","Mixed Paper"],prices:{OCC:70,PM:55},notes:"NEW MILL 2026! Best OCC $70!",status:"active"},
+{id:6,company:"Green Bay Packaging",contact:"Fiber Procurement",email:"info@gbp.com",phone:"(501) 354-2131",type:"Mill",priority:true,commodities:["OCC"],prices:{OCC:68},notes:"$1B expansion!",status:"active"},
+{id:7,company:"Pratt Industries",contact:"Fiber Procurement",email:"recyclingcs@prattindustries.com",phone:"(888) 347-7288",type:"Mill",priority:false,commodities:["OCC","Mixed Paper"],prices:{OCC:65,PM:50},notes:"100% recycled",status:"active"},
+{id:8,company:"International Paper",contact:"Recycling Division",email:"recycling@ipaper.com",phone:"(972) 245-3000",type:"Mill",priority:false,commodities:["OCC","DLK","SOP","PM"],prices:{OCC:65,PM:52,DLK:95,SOP:145},notes:"LOCAL Carrollton",status:"active"},
+{id:9,company:"Texas Recycling",contact:"Joel/Craig Litman",email:"info@texasrecycling.com",phone:"(214) 357-0262",type:"Broker",priority:false,commodities:["OCC","PM","SOP","SWL"],prices:{OCC:62,PM:48,SWL:205,SOP:140},notes:"25+ years DFW",status:"active"}
 ];
+
+const defaultProspects=[
+{id:1,company:"DS Smith",contact:"Regional Buyer",email:"procurement@dssmith.com",phone:"(555) 123-4567",type:"Mill",stage:"contacted",value:5000,followup:"2025-01-05",notes:"Interested in OCC volumes",activities:[{type:"call",desc:"Intro call - interested in OCC",date:"2024-12-28"},{type:"email",desc:"Sent pricing sheet",date:"2024-12-29"}]},
+{id:2,company:"Sonoco Products",contact:"Fiber Buyer",email:"fiber@sonoco.com",phone:"(555) 234-5678",type:"Mill",stage:"lead",value:8000,followup:"2025-01-03",notes:"Large mill, high potential",activities:[{type:"note",desc:"Found contact at trade show",date:"2024-12-27"}]},
+{id:3,company:"Cascades",contact:"US Procurement",email:"us.fiber@cascades.com",phone:"(555) 345-6789",type:"Mill",stage:"negotiating",value:12000,followup:"2025-01-02",notes:"Discussing long-term contract",activities:[{type:"meeting",desc:"Met at their facility",date:"2024-12-20"},{type:"call",desc:"Price negotiation",date:"2024-12-28"}]}
+];
+
 const marketPrices=[{code:"OCC",price:77,range:"$70-85",change:-5},{code:"PM",price:50,range:"$45-55",change:3},{code:"SWL",price:210,range:"$195-225",change:-10},{code:"DLK",price:92,range:"$85-100",change:0},{code:"SOP",price:145,range:"$135-155",change:5},{code:"HWEC",price:375,range:"$350-400",change:15}];
-const news=[{date:"Dec 30, 2025",title:"OCC Prices to Rise Q1 2026",titleEs:"Precios OCC Subirán Q1 2026",excerpt:"Mill closures point to tighter supply",excerptEs:"Cierres de molinos apuntan a menor oferta"},{date:"Dec 28, 2025",title:"Graphic Packaging Waco Update",titleEs:"Actualización Graphic Packaging Waco",excerpt:"New 550K TPY facility on track for 2026",excerptEs:"Nueva planta 550K TPY en camino para 2026"},{date:"Dec 26, 2025",title:"10% NA Capacity Eliminated",titleEs:"10% Capacidad NA Eliminada",excerpt:"2025 closures reshape market",excerptEs:"Cierres 2025 reforman el mercado"}];
-const tickerItems=[{type:"price",text:"💰 OCC: $70-85/ton"},{type:"price",text:"📄 PM: $45-55/ton"},{type:"news",text:"📰 Graphic Packaging Waco 2026"},{type:"alert",text:"🚨 10% NA capacity eliminated"},{type:"price",text:"💎 HWEC: $350-400/ton"}];
+
+const news=[
+{date:"Dec 30, 2025",title:"OCC Prices to Rise Q1 2026",titleEs:"Precios OCC Subirán Q1 2026",excerpt:"Mill closures point to tighter supply. Analysts predict $85-95/ton by March.",excerptEs:"Cierres de molinos apuntan a menor oferta. Analistas predicen $85-95/ton para marzo."},
+{date:"Dec 28, 2025",title:"Graphic Packaging Waco Update",titleEs:"Actualización Graphic Packaging Waco",excerpt:"New 550K TPY facility on track for mid-2026 opening.",excerptEs:"Nueva planta 550K TPY en camino para mediados de 2026."},
+{date:"Dec 26, 2025",title:"10% NA Capacity Eliminated",titleEs:"10% Capacidad NA Eliminada",excerpt:"2025 mill closures reshape recovered paper market dynamics.",excerptEs:"Cierres de molinos 2025 reforman la dinámica del mercado."},
+{date:"Dec 22, 2025",title:"Mexico Export Demand Strong",titleEs:"Demanda de Exportación a México Fuerte",excerpt:"Mexican mills continue strong buying despite tariff concerns.",excerptEs:"Molinos mexicanos continúan comprando fuerte a pesar de preocupaciones de tarifas."}
+];
+
+const tickerItems=[
+{type:"price",text:"💰 OCC: $70-85/ton (▼$5)"},
+{type:"price",text:"📄 PM: $45-55/ton (▲$3)"},
+{type:"news",text:"📰 Graphic Packaging Waco on track for 2026"},
+{type:"alert",text:"🚨 10% NA containerboard capacity eliminated"},
+{type:"price",text:"💎 HWEC: $350-400/ton (▲$15)"},
+{type:"news",text:"📈 Q1 2026 outlook: Bullish for sellers"}
+];
+
 const users=[{id:1,username:"Dalmex",password:"2828",role:"user",name:"Dalmex User"},{id:2,username:"RJVandling",password:"Sailer66",role:"admin",name:"Robert Vandling"}];
-const T={en:{ai:"AI Assistant",dash:"Dashboard",contacts:"Contacts",prices:"Prices",news:"News",add:"Add Contact",search:"Search...",all:"All",mills:"Mills",brokers:"Brokers",bestOCC:"Best OCC",bestSWL:"Best SWL",bestPM:"Best PM",quick:"Quick Actions",best:"Best Prices",who:"Who pays most for OCC?",swl:"Best for SWL?",addNew:"Add new contact",email:"Draft email",ppi:"PPI Report",outlook:"Market outlook",compare:"Price Comparison",industry:"Industry News"},es:{ai:"Asistente IA",dash:"Panel",contacts:"Contactos",prices:"Precios",news:"Noticias",add:"Agregar",search:"Buscar...",all:"Todos",mills:"Molinos",brokers:"Brokers",bestOCC:"Mejor OCC",bestSWL:"Mejor SWL",bestPM:"Mejor PM",quick:"Acciones",best:"Mejores Precios",who:"¿Quién paga más por OCC?",swl:"¿Mejor para SWL?",addNew:"Agregar contacto",email:"Escribir email",ppi:"Reporte PPI",outlook:"Perspectiva",compare:"Comparación",industry:"Noticias"}};
-let lang="en",currentUser=null,currentTab="ai",buyers=[],chat=[],searchTerm="",filterType="all",editId=null;
+
+// ============ STATE ============
+let lang="en";
+let currentUser=null;
+let currentTab="ai";
+let buyers=[];
+let prospects=[];
+let chat=[];
+let searchTerm="";
+let filterType="all";
+let editId=null;
+let editProspectId=null;
+
+// ============ TRANSLATIONS ============
+const T={
+en:{ai:"AI Assistant",dash:"Dashboard",contacts:"Buyers",crm:"CRM Pipeline",prices:"Prices",news:"News",add:"Add Buyer",addProspect:"Add Prospect",search:"Search...",all:"All",mills:"Mills",brokers:"Brokers",priority:"Priority",prospects:"Prospects",pipeline:"Sales Pipeline",activities:"Activities",followups:"Follow-ups",convert:"Convert to Buyer",logActivity:"Log Activity",lead:"Lead",contacted:"Contacted",negotiating:"Negotiating",won:"Won",lost:"Lost",total:"Total",value:"Value",dueToday:"Due Today",overdue:"Overdue",username:"Username",password:"Password",signin:"Sign In",subtitle:"Enterprise CRM & AI Trading"},
+es:{ai:"Asistente IA",dash:"Panel",contacts:"Compradores",crm:"Pipeline CRM",prices:"Precios",news:"Noticias",add:"Agregar",addProspect:"Agregar Prospecto",search:"Buscar...",all:"Todos",mills:"Molinos",brokers:"Brokers",priority:"Prioritarios",prospects:"Prospectos",pipeline:"Pipeline de Ventas",activities:"Actividades",followups:"Seguimientos",convert:"Convertir a Comprador",logActivity:"Registrar Actividad",lead:"Prospecto",contacted:"Contactado",negotiating:"Negociando",won:"Ganado",lost:"Perdido",total:"Total",value:"Valor",dueToday:"Hoy",overdue:"Vencido",username:"Usuario",password:"Contraseña",signin:"Iniciar Sesión",subtitle:"CRM Empresarial & Trading IA"}
+};
+
 function t(k){return T[lang][k]||k}
-function setLang(l){lang=l;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.lang-btn').forEach(b=>{if((l==='en'&&b.textContent.includes('English'))||(l==='es'&&b.textContent.includes('Español')))b.classList.add('active')});document.querySelectorAll('[data-'+l+']').forEach(el=>el.textContent=el.getAttribute('data-'+l));const tog=document.getElementById('langToggle');if(tog)tog.innerHTML=l==='en'?'🇲🇽 Español':'🇺🇸 English';if(currentUser){renderNav();render()}}
-function loadData(){const s=localStorage.getItem('fh_buyers');buyers=s?JSON.parse(s):[...defaultBuyers]}
-function saveData(){localStorage.setItem('fh_buyers',JSON.stringify(buyers))}
-function handleLogin(){const u=document.getElementById('username').value,p=document.getElementById('password').value,user=users.find(x=>x.username===u&&x.password===p);if(user){currentUser=user;document.getElementById('loginScreen').classList.add('hidden');document.getElementById('app').classList.add('active');document.getElementById('userBadge').textContent=(user.role==='admin'?'👑 ':'👤 ')+user.name;loadData();initApp()}else{document.getElementById('loginError').classList.add('show')}}
-function quickLogin(){currentUser=users[1];document.getElementById('loginScreen').classList.add('hidden');document.getElementById('app').classList.add('active');document.getElementById('userBadge').textContent='👑 Robert Vandling';loadData();initApp()}
-function logout(){currentUser=null;chat=[];document.getElementById('app').classList.remove('active');document.getElementById('loginScreen').classList.remove('hidden');document.getElementById('username').value='';document.getElementById('password').value='';document.getElementById('loginError').classList.remove('show')}
-function initApp(){renderTicker();if(chat.length===0){chat.push({role:'ai',content:lang==='es'?'👋 ¡Hola! Soy tu asistente IA.<br><br>Pregúntame sobre:<br>• Precios - "¿Quién paga más por OCC?"<br>• Contactos - "Info de Georgia Pacific"<br>• Agregar - "Agregar comprador"<br>• Emails - "Escribir email"':'👋 Hi! I\'m your AI assistant.<br><br>Ask me about:<br>• Prices - "Who pays most for OCC?"<br>• Buyers - "Tell me about Georgia Pacific"<br>• Add - "Add new buyer"<br>• Emails - "Draft email"'})}renderNav();render()}
-function renderTicker(){const items=[...tickerItems,...tickerItems,...tickerItems];document.getElementById('ticker').innerHTML=items.map(i=>'<div class="ticker-item"><span class="ticker-tag '+i.type+'">'+i.type.toUpperCase()+'</span>'+i.text+'</div>').join('')}
-function renderNav(){const tabs=[{id:'ai',icon:'🤖',label:t('ai'),ai:true},{id:'dashboard',icon:'📊',label:t('dash')},{id:'contacts',icon:'👥',label:t('contacts'),count:buyers.length},{id:'prices',icon:'💰',label:t('prices')},{id:'news',icon:'📰',label:t('news')}];document.getElementById('nav').innerHTML=tabs.map(x=>'<button class="nav-btn '+(currentTab===x.id?'active':'')+(x.ai&&currentTab!==x.id?' ai':'')+'" onclick="setTab(\''+x.id+'\')">'+x.icon+' '+x.label+(x.count!==undefined?' <span style="background:rgba(255,255,255,0.3);padding:2px 6px;border-radius:4px;font-size:10px">'+x.count+'</span>':'')+'</button>').join('')}
+
+// ============ LANGUAGE ============
+function setLang(l){
+    lang=l;
+    document.querySelectorAll('.lang-btn').forEach(b=>{
+        b.classList.remove('active');
+        if((l==='en'&&b.textContent.includes('English'))||(l==='es'&&b.textContent.includes('Español')))b.classList.add('active');
+    });
+    document.getElementById('langToggle').innerHTML=l==='en'?'🇲🇽 Español':'🇺🇸 English';
+    document.getElementById('loginSub').textContent=t('subtitle');
+    document.getElementById('lblUser').textContent=t('username');
+    document.getElementById('lblPass').textContent=t('password');
+    document.getElementById('btnLogin').textContent=t('signin');
+    if(currentUser){renderNav();render()}
+}
+function toggleLang(){setLang(lang==='en'?'es':'en')}
+
+// ============ STORAGE ============
+function loadData(){
+    const b=localStorage.getItem('fh_buyers');
+    const p=localStorage.getItem('fh_prospects');
+    buyers=b?JSON.parse(b):[...defaultBuyers];
+    prospects=p?JSON.parse(p):[...defaultProspects];
+}
+function saveData(){
+    localStorage.setItem('fh_buyers',JSON.stringify(buyers));
+    localStorage.setItem('fh_prospects',JSON.stringify(prospects));
+}
+
+// ============ AUTH ============
+function handleLogin(){
+    const u=document.getElementById('username').value;
+    const p=document.getElementById('password').value;
+    const user=users.find(x=>x.username===u&&x.password===p);
+    if(user){
+        currentUser=user;
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('app').classList.add('active');
+        document.getElementById('userBadge').textContent=(user.role==='admin'?'👑 ':'👤 ')+user.name;
+        loadData();
+        initApp();
+    }else{
+        document.getElementById('loginError').classList.add('show');
+    }
+}
+function quickLogin(){
+    currentUser=users[1];
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('app').classList.add('active');
+    document.getElementById('userBadge').textContent='👑 Robert Vandling';
+    loadData();
+    initApp();
+}
+function logout(){
+    currentUser=null;chat=[];
+    document.getElementById('app').classList.remove('active');
+    document.getElementById('loginScreen').classList.remove('hidden');
+    document.getElementById('username').value='';
+    document.getElementById('password').value='';
+    document.getElementById('loginError').classList.remove('show');
+}
+
+// ============ INIT ============
+function initApp(){
+    renderTicker();
+    checkReminders();
+    if(chat.length===0){
+        chat.push({role:'ai',content:lang==='es'?
+            '👋 ¡Hola! Soy tu asistente IA de Fiber Hub.<br><br>Puedo ayudarte con:<br>• <b>"¿Quién paga más por OCC?"</b><br>• <b>"Agregar prospecto"</b><br>• <b>"Reporte PPI"</b><br>• <b>"Perspectiva 2026"</b><br>• <b>"Info de Georgia Pacific"</b>':
+            '👋 Hi! I\'m your Fiber Hub AI assistant.<br><br>I can help with:<br>• <b>"Who pays most for OCC?"</b><br>• <b>"Add prospect"</b><br>• <b>"PPI report"</b><br>• <b>"2026 outlook"</b><br>• <b>"Tell me about Georgia Pacific"</b>'
+        });
+    }
+    renderNav();
+    render();
+}
+
+function renderTicker(){
+    const items=[...tickerItems,...tickerItems,...tickerItems];
+    document.getElementById('ticker').innerHTML=items.map(i=>'<div class="ticker-item"><span class="ticker-tag '+i.type+'">'+i.type.toUpperCase()+'</span>'+i.text+'</div>').join('');
+}
+
+function checkReminders(){
+    const today=new Date().toISOString().split('T')[0];
+    const due=prospects.filter(p=>p.followup&&p.followup<=today&&p.stage!=='won'&&p.stage!=='lost');
+    if(due.length>0){
+        document.getElementById('reminderBanner').style.display='flex';
+        document.getElementById('reminderText').textContent=lang==='es'?
+            `📞 Tienes ${due.length} seguimiento(s) pendiente(s)!`:
+            `📞 You have ${due.length} follow-up(s) due!`;
+    }else{
+        document.getElementById('reminderBanner').style.display='none';
+    }
+}
+
+// ============ NAV ============
+function renderNav(){
+    const tabs=[
+        {id:'ai',icon:'🤖',label:t('ai'),cls:'ai'},
+        {id:'dashboard',icon:'📊',label:t('dash')},
+        {id:'crm',icon:'🎯',label:t('crm'),cls:'crm',count:prospects.length},
+        {id:'contacts',icon:'👥',label:t('contacts'),count:buyers.length},
+        {id:'prices',icon:'💰',label:t('prices')},
+        {id:'news',icon:'📰',label:t('news')}
+    ];
+    document.getElementById('nav').innerHTML=tabs.map(x=>
+        '<button class="nav-btn '+(currentTab===x.id?'active':'')+(x.cls&&currentTab!==x.id?' '+x.cls:'')+'" onclick="setTab(\''+x.id+'\')">'+
+        x.icon+' '+x.label+(x.count!==undefined?' <span style="background:rgba(255,255,255,0.3);padding:2px 6px;border-radius:4px;font-size:10px">'+x.count+'</span>':'')+
+        '</button>'
+    ).join('');
+}
+
 function setTab(tab){currentTab=tab;renderNav();render()}
-function render(){const m=document.getElementById('main');if(currentTab==='ai')m.innerHTML=renderAI();else if(currentTab==='dashboard')m.innerHTML=renderDash();else if(currentTab==='contacts')m.innerHTML=renderContacts();else if(currentTab==='prices')m.innerHTML=renderPrices();else if(currentTab==='news')m.innerHTML=renderNews()}
-function renderAI(){const bO=buyers.filter(b=>b.prices?.OCC).sort((a,b)=>b.prices.OCC-a.prices.OCC)[0],bS=buyers.filter(b=>b.prices?.SWL).sort((a,b)=>b.prices.SWL-a.prices.SWL)[0],bP=buyers.filter(b=>b.prices?.PM).sort((a,b)=>b.prices.PM-a.prices.PM)[0];return '<div class="ai-container"><div class="chat-panel"><div class="chat-header"><div class="chat-avatar">🤖</div><div><div class="chat-title">Fiber Hub AI</div><div class="chat-status">Powered by Claude</div></div></div><div class="chat-messages" id="chatBox">'+chat.map(m=>'<div class="msg '+m.role+'"><div class="msg-avatar">'+(m.role==='ai'?'🤖':'👤')+'</div><div class="msg-content">'+m.content+'</div></div>').join('')+'</div><div class="chat-input-area"><input type="text" class="chat-input" id="chatInput" placeholder="'+(lang==='es'?'Pregunta algo...':'Ask anything...')+'" onkeypress="if(event.key===\'Enter\')sendChat()"><button class="btn btn-purple" onclick="sendChat()">'+(lang==='es'?'Enviar':'Send')+'</button></div></div><div class="sidebar"><div class="sidebar-card"><div class="sidebar-title">⚡ '+t('quick')+'</div><button class="quick-btn" onclick="ask(\''+t('who')+'\')">📦 '+t('who')+'</button><button class="quick-btn" onclick="ask(\''+t('swl')+'\')">📄 '+t('swl')+'</button><button class="quick-btn" onclick="openModal()">➕ '+t('addNew')+'</button><button class="quick-btn" onclick="ask(\''+t('email')+'\')">✉️ '+t('email')+'</button><button class="quick-btn" onclick="ask(\''+t('ppi')+'\')">📊 '+t('ppi')+'</button><button class="quick-btn" onclick="ask(\''+t('outlook')+'\')">📈 '+t('outlook')+'</button></div><div class="sidebar-card"><div class="sidebar-title">🎯 '+t('best')+'</div>'+(bO?'<div class="rec-card"><div class="rec-label">'+t('bestOCC')+'</div><div class="rec-value">$'+bO.prices.OCC+'/ton</div><div class="rec-detail">'+bO.company+'</div></div>':'')+(bS?'<div class="rec-card"><div class="rec-label">'+t('bestSWL')+'</div><div class="rec-value">$'+bS.prices.SWL+'/ton</div><div class="rec-detail">'+bS.company+'</div></div>':'')+(bP?'<div class="rec-card"><div class="rec-label">'+t('bestPM')+'</div><div class="rec-value">$'+bP.prices.PM+'/ton</div><div class="rec-detail">'+bP.company+'</div></div>':'')+'</div></div></div>'}
+
+function render(){
+    const m=document.getElementById('main');
+    switch(currentTab){
+        case 'ai':m.innerHTML=renderAI();break;
+        case 'dashboard':m.innerHTML=renderDash();break;
+        case 'crm':m.innerHTML=renderCRM();break;
+        case 'contacts':m.innerHTML=renderContacts();break;
+        case 'prices':m.innerHTML=renderPrices();break;
+        case 'news':m.innerHTML=renderNews();break;
+    }
+}
+
+// ============ AI ============
+function renderAI(){
+    const bO=buyers.filter(b=>b.prices?.OCC).sort((a,b)=>b.prices.OCC-a.prices.OCC)[0];
+    const bS=buyers.filter(b=>b.prices?.SWL).sort((a,b)=>b.prices.SWL-a.prices.SWL)[0];
+    return '<div class="ai-container"><div class="chat-panel"><div class="chat-header"><div class="chat-avatar">🤖</div><div><div class="chat-title">Fiber Hub AI</div><div class="chat-status">Powered by Claude</div></div></div><div class="chat-messages" id="chatBox">'+chat.map(m=>'<div class="msg '+m.role+'"><div class="msg-avatar">'+(m.role==='ai'?'🤖':'👤')+'</div><div class="msg-content">'+m.content+'</div></div>').join('')+'</div><div class="chat-input-area"><input type="text" class="chat-input" id="chatInput" placeholder="'+(lang==='es'?'Pregunta algo...':'Ask anything...')+'" onkeypress="if(event.key===\'Enter\')sendChat()"><button class="btn btn-purple" onclick="sendChat()">'+(lang==='es'?'Enviar':'Send')+'</button></div></div><div class="sidebar"><div class="sidebar-card"><div class="sidebar-title">⚡ '+(lang==='es'?'Acciones Rápidas':'Quick Actions')+'</div><button class="quick-btn" onclick="ask(\''+(lang==='es'?'¿Quién paga más por OCC?':'Who pays most for OCC?')+'\')">📦 '+(lang==='es'?'Mejor OCC':'Best OCC')+'</button><button class="quick-btn" onclick="ask(\''+(lang==='es'?'Agregar prospecto':'Add prospect')+'\')">🎯 '+(lang==='es'?'Agregar Prospecto':'Add Prospect')+'</button><button class="quick-btn" onclick="ask(\''+(lang==='es'?'Reporte PPI':'PPI report')+'\')">📊 '+(lang==='es'?'Reporte PPI':'PPI Report')+'</button><button class="quick-btn" onclick="ask(\''+(lang==='es'?'Redactar email':'Draft email')+'\')">✉️ '+(lang==='es'?'Redactar Email':'Draft Email')+'</button><button class="quick-btn" onclick="ask(\''+(lang==='es'?'Perspectiva 2026':'2026 outlook')+'\')">📈 '+(lang==='es'?'Perspectiva':'Outlook')+'</button></div><div class="sidebar-card"><div class="sidebar-title">🎯 '+(lang==='es'?'Mejores Precios':'Best Prices')+'</div>'+(bO?'<div class="rec-card"><div class="rec-label">'+(lang==='es'?'Mejor OCC':'Best OCC')+'</div><div class="rec-value">$'+bO.prices.OCC+'/ton</div><div class="rec-detail">'+bO.company+'</div></div>':'')+(bS?'<div class="rec-card"><div class="rec-label">'+(lang==='es'?'Mejor SWL':'Best SWL')+'</div><div class="rec-value">$'+bS.prices.SWL+'/ton</div><div class="rec-detail">'+bS.company+'</div></div>':'')+'</div></div></div>';
+}
+
 function ask(q){document.getElementById('chatInput').value=q;sendChat()}
-function sendChat(){const inp=document.getElementById('chatInput'),msg=inp.value.trim();if(!msg)return;chat.push({role:'user',content:msg});inp.value='';chat.push({role:'ai',content:aiResp(msg)});render();setTimeout(()=>{const b=document.getElementById('chatBox');if(b)b.scrollTop=b.scrollHeight},100)}
-function aiResp(msg){const m=msg.toLowerCase(),es=lang==='es';if(m.includes('add')||m.includes('agregar')||m.includes('new')||m.includes('nuevo')){setTimeout(()=>openModal(),500);return es?'Abriendo formulario...':'Opening form...';}if(m.includes('ppi')||m.includes('report')||m.includes('reporte')){return '<b>📊 '+(es?'Reporte PPI':'PPI Report')+'</b><br><br>'+marketPrices.map(p=>'<b>'+p.code+':</b> $'+p.price+' ('+(p.change>0?'▲':'▼')+'$'+Math.abs(p.change)+')').join('<br>');}if(m.includes('occ')&&(m.includes('best')||m.includes('most')||m.includes('mejor')||m.includes('who')||m.includes('quién'))){const s=buyers.filter(b=>b.prices?.OCC).sort((a,b)=>b.prices.OCC-a.prices.OCC);return '<b>📦 '+(es?'Mejores OCC':'Best OCC')+':</b><br><br>1. <b>'+s[0].company+'</b> - $'+s[0].prices.OCC+'/ton ⭐<br>'+s[0].contact+' | '+s[0].phone+'<br><br>2. '+s[1]?.company+' - $'+s[1]?.prices.OCC+'/ton';}if(m.includes('swl')||m.includes('white')){const s=buyers.filter(b=>b.prices?.SWL).sort((a,b)=>b.prices.SWL-a.prices.SWL);return '<b>📄 '+(es?'Mejores SWL':'Best SWL')+':</b><br><br>1. <b>'+s[0].company+'</b> - $'+s[0].prices.SWL+'/ton ⭐';}if(m.includes('email')||m.includes('draft')||m.includes('escribir')){return es?'<b>✉️ Email:</b><br><br>Asunto: Dalmex - Solicitud de Precios<br><br>Hola,<br><br>Solicito precios actuales para OCC, PM, SWL.<br><br>Gracias,<br>Robert Vandling<br>214-352-2000':'<b>✉️ Email:</b><br><br>Subject: Dalmex - Price Request<br><br>Hello,<br><br>Requesting current prices for OCC, PM, SWL.<br><br>Thanks,<br>Robert Vandling<br>214-352-2000';}if(m.includes('outlook')||m.includes('2026')||m.includes('market')||m.includes('perspectiva')){return es?'<b>📈 Q1 2026:</b><br><br><b style="color:#15803d">ALCISTA</b><br><br>✅ 10% capacidad eliminada<br>✅ Graphic Packaging Waco abre 2026<br>✅ OCC esperado $85-95/ton':'<b>📈 Q1 2026:</b><br><br><b style="color:#15803d">BULLISH</b><br><br>✅ 10% capacity eliminated<br>✅ Graphic Packaging Waco opening 2026<br>✅ OCC expected $85-95/ton';}for(const b of buyers){if(m.includes(b.company.toLowerCase())||m.includes(b.contact.split(' ')[0].toLowerCase())){const pr=b.prices?Object.entries(b.prices).filter(([k,v])=>v).map(([k,v])=>k+': $'+v).join(', '):'N/A';return '<b>👤 '+b.company+'</b><br><br>Contact: '+b.contact+'<br>Phone: '+b.phone+'<br>Email: '+b.email+'<br>Type: '+b.type+'<br><br>Prices: '+pr+'<br><br>Notes: '+b.notes;}}return es?'Pregúntame sobre precios, compradores, emails...':'Ask about prices, buyers, emails...';}
-function renderDash(){const mills=buyers.filter(b=>b.type==='Mill').length,pri=buyers.filter(b=>b.priority).length,bO=buyers.filter(b=>b.prices?.OCC).sort((a,b)=>b.prices.OCC-a.prices.OCC)[0];return '<div class="grid grid-2" style="margin-bottom:20px"><div class="card stat-card"><div class="stat-icon">🏭</div><div class="stat-value">'+mills+'</div><div class="stat-label">'+(lang==='es'?'Molinos':'Mills')+'</div></div><div class="card stat-card"><div class="stat-icon">👥</div><div class="stat-value">'+buyers.length+'</div><div class="stat-label">'+(lang==='es'?'Contactos':'Contacts')+'</div></div><div class="card stat-card"><div class="stat-icon">⭐</div><div class="stat-value">'+pri+'</div><div class="stat-label">'+(lang==='es'?'Prioritarios':'Priority')+'</div></div><div class="card stat-card"><div class="stat-icon">💰</div><div class="stat-value">$'+(bO?.prices.OCC||'--')+'</div><div class="stat-label">'+(lang==='es'?'Mejor OCC':'Best OCC')+'</div></div></div><div class="market-grid">'+marketPrices.slice(0,4).map(p=>'<div class="market-card"><div class="market-code">'+p.code+'</div><div class="market-price">'+p.range+'</div><div class="market-change '+(p.change>0?'up':'down')+'">'+(p.change>0?'▲':'▼')+'$'+Math.abs(p.change)+'</div></div>').join('')+'</div><div class="section-header"><h3 class="section-title">⭐ '+(lang==='es'?'Prioritarios':'Priority')+'</h3></div><div class="grid grid-3">'+buyers.filter(b=>b.priority).slice(0,6).map(b=>renderCard(b)).join('')+'</div>';}
-function renderContacts(){let f=buyers;if(searchTerm)f=f.filter(b=>b.company.toLowerCase().includes(searchTerm.toLowerCase())||b.contact.toLowerCase().includes(searchTerm.toLowerCase()));if(filterType!=='all')f=f.filter(b=>b.type===filterType);return '<div class="section-header"><h3 class="section-title">👥 '+t('contacts')+' ('+buyers.length+')</h3><button class="btn btn-green" onclick="openModal()">➕ '+t('add')+'</button></div><div class="search-bar"><input type="text" class="search-input" placeholder="🔍 '+t('search')+'" value="'+searchTerm+'" oninput="searchTerm=this.value;render()"><button class="filter-btn '+(filterType==='all'?'active':'')+'" onclick="filterType=\'all\';render()">'+t('all')+'</button><button class="filter-btn '+(filterType==='Mill'?'active':'')+'" onclick="filterType=\'Mill\';render()">'+t('mills')+'</button><button class="filter-btn '+(filterType==='Broker'?'active':'')+'" onclick="filterType=\'Broker\';render()">'+t('brokers')+'</button></div><div class="grid grid-3">'+f.map(b=>renderCard(b)).join('')+'</div>';}
-function renderCard(b){const init=b.company.split(' ').map(w=>w[0]).join('').slice(0,2),badge=b.type==='Mill'?'badge-mill':b.type==='Export'?'badge-export':'badge-broker',pr=b.prices?Object.entries(b.prices).filter(([k,v])=>v):[];return '<div class="card '+(b.priority?'priority':'')+'"><div class="card-header"><div class="avatar">'+init+'</div><div class="badges"><span class="badge '+badge+'">'+b.type+'</span>'+(b.priority?'<span class="badge badge-priority">⭐</span>':'')+'</div></div><div class="card-title">'+b.company+'</div><div class="card-subtitle">'+b.contact+'</div><div class="card-info">📧 '+b.email+'<br>📞 '+b.phone+'</div><div class="tags">'+(b.commodities||[]).slice(0,4).map(c=>'<span class="tag">'+c+'</span>').join('')+'</div>'+(pr.length?'<div class="prices">'+pr.slice(0,4).map(([k,v])=>'<span class="price">'+k+': $'+v+'</span>').join('')+'</div>':'')+'<div class="card-actions"><button class="btn btn-green" onclick="window.open(\'mailto:'+b.email+'\')">📧</button><button class="btn btn-gray" onclick="window.open(\'tel:'+b.phone+'\')">📞</button><button class="btn btn-purple" onclick="editContact('+b.id+')">✏️</button><button class="btn btn-danger" onclick="deleteContact('+b.id+')">🗑️</button></div></div>';}
-function renderPrices(){const gr=['OCC','PM','SWL','DLK','SOP','HWEC'],mx={};gr.forEach(g=>{const ps=buyers.map(b=>b.prices?.[g]).filter(p=>p);mx[g]=ps.length?Math.max(...ps):0});return '<div class="section-header"><h3 class="section-title">💰 '+t('compare')+'</h3></div><div class="market-grid">'+marketPrices.map(p=>'<div class="market-card"><div class="market-code">'+p.code+'</div><div class="market-price">'+p.range+'</div><div class="market-change '+(p.change>0?'up':'down')+'">'+(p.change>0?'▲':'▼')+'$'+Math.abs(p.change)+'</div></div>').join('')+'</div><div class="table-wrap"><div class="table-header">📊 '+(lang==='es'?'Comparación de Precios':'Price Comparison')+'</div><div class="table-scroll"><table><thead><tr><th>'+(lang==='es'?'Comprador':'Buyer')+'</th>'+gr.map(g=>'<th>'+g+'</th>').join('')+'<th>'+(lang==='es'?'Tipo':'Type')+'</th></tr></thead><tbody>'+buyers.filter(b=>b.prices).sort((a,b)=>(b.prices.OCC||0)-(a.prices.OCC||0)).map(b=>'<tr><td><b>'+b.company+'</b><br><small style="color:#64748b">'+b.contact+'</small></td>'+gr.map(g=>{const p=b.prices[g];if(!p)return'<td style="color:#cbd5e1">—</td>';return'<td><span class="'+(p===mx[g]?'price-best':'')+'">'+(p===mx[g]?'⭐ ':'')+'$'+p+'</span></td>'}).join('')+'<td><span class="badge badge-'+b.type.toLowerCase()+'">'+b.type+'</span></td></tr>').join('')+'</tbody></table></div></div>';}
-function renderNews(){return '<div class="section-header"><h3 class="section-title">📰 '+t('industry')+'</h3></div>'+news.map(n=>'<div class="news-item"><div class="news-date">'+n.date+'</div><div class="news-title">'+(lang==='es'?n.titleEs:n.title)+'</div><div class="news-excerpt">'+(lang==='es'?n.excerptEs:n.excerpt)+'</div></div>').join('');}
-function openModal(){editId=null;document.getElementById('contactForm').reset();document.getElementById('addModal').classList.add('active')}
-function closeModal(){document.getElementById('addModal').classList.remove('active')}
-function editContact(id){const b=buyers.find(x=>x.id===id);if(!b)return;editId=id;document.getElementById('fCompany').value=b.company;document.getElementById('fContact').value=b.contact;document.getElementById('fEmail').value=b.email;document.getElementById('fPhone').value=b.phone||'';document.getElementById('fType').value=b.type;document.getElementById('fPriority').checked=b.priority;document.getElementById('fNotes').value=b.notes||'';document.querySelectorAll('input[name="comm"]').forEach(cb=>cb.checked=(b.commodities||[]).includes(cb.value));document.getElementById('addModal').classList.add('active')}
-function deleteContact(id){if(confirm(lang==='es'?'¿Eliminar?':'Delete?')){buyers=buyers.filter(b=>b.id!==id);saveData();renderNav();render();toast(lang==='es'?'Eliminado':'Deleted')}}
-document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();const comms=[];document.querySelectorAll('input[name="comm"]:checked').forEach(cb=>comms.push(cb.value));const data={company:document.getElementById('fCompany').value,contact:document.getElementById('fContact').value,email:document.getElementById('fEmail').value,phone:document.getElementById('fPhone').value,type:document.getElementById('fType').value,priority:document.getElementById('fPriority').checked,commodities:comms,notes:document.getElementById('fNotes').value,prices:{}};if(editId){const idx=buyers.findIndex(b=>b.id===editId);if(idx!==-1)buyers[idx]={...buyers[idx],...data};toast(lang==='es'?'Actualizado':'Updated')}else{data.id=buyers.length?Math.max(...buyers.map(b=>b.id))+1:1;buyers.push(data);toast(lang==='es'?'Agregado':'Added')}saveData();closeModal();renderNav();render()});
+
+function sendChat(){
+    const inp=document.getElementById('chatInput'),msg=inp.value.trim();
+    if(!msg)return;
+    chat.push({role:'user',content:msg});
+    inp.value='';
+    chat.push({role:'ai',content:aiResp(msg)});
+    render();
+    setTimeout(()=>{const b=document.getElementById('chatBox');if(b)b.scrollTop=b.scrollHeight},100);
+}
+
+function aiResp(msg){
+    const m=msg.toLowerCase(),es=lang==='es';
+    
+    if(m.includes('add')||m.includes('agregar')||m.includes('new')||m.includes('nuevo')){
+        if(m.includes('prospect')||m.includes('prospecto')||m.includes('lead')){
+            setTimeout(()=>openProspectModal(),500);
+            return es?'✅ Abriendo formulario de prospecto...':'✅ Opening prospect form...';
+        }
+        setTimeout(()=>openContactModal(),500);
+        return es?'✅ Abriendo formulario de contacto...':'✅ Opening contact form...';
+    }
+    
+    if(m.includes('ppi')||m.includes('report')||m.includes('reporte')||m.includes('price')||m.includes('precio')){
+        return '<b>📊 '+(es?'Reporte PPI Diciembre 2025':'PPI Report December 2025')+'</b><br><br>'+marketPrices.map(p=>'<b>'+p.code+':</b> $'+p.price+'/ton '+(p.change>0?'<span style="color:#15803d">▲$'+p.change+'</span>':'<span style="color:#dc2626">▼$'+Math.abs(p.change)+'</span>')).join('<br>')+'<br><br><i>'+(es?'Fuente: Pulp & Paper Week':'Source: Pulp & Paper Week')+'</i>';
+    }
+    
+    if(m.includes('occ')&&(m.includes('best')||m.includes('most')||m.includes('mejor')||m.includes('who')||m.includes('quién'))){
+        const s=buyers.filter(b=>b.prices?.OCC).sort((a,b)=>b.prices.OCC-a.prices.OCC);
+        return '<b>📦 '+(es?'Mejores Compradores OCC':'Best OCC Buyers')+':</b><br><br>1. ⭐ <b>'+s[0].company+'</b> - $'+s[0].prices.OCC+'/ton<br>&nbsp;&nbsp;&nbsp;'+s[0].contact+' | '+s[0].phone+'<br><br>2. '+s[1]?.company+' - $'+s[1]?.prices.OCC+'/ton<br>3. '+s[2]?.company+' - $'+s[2]?.prices.OCC+'/ton<br><br>💡 <i>'+(es?'¡Llama a '+s[0].company+' primero!':'Call '+s[0].company+' first!')+'</i>';
+    }
+    
+    if(m.includes('swl')||m.includes('white')||m.includes('blanco')){
+        const s=buyers.filter(b=>b.prices?.SWL).sort((a,b)=>b.prices.SWL-a.prices.SWL);
+        return '<b>📄 '+(es?'Mejores Compradores SWL':'Best SWL Buyers')+':</b><br><br>1. ⭐ <b>'+s[0].company+'</b> - $'+s[0].prices.SWL+'/ton<br>2. '+s[1]?.company+' - $'+s[1]?.prices.SWL+'/ton';
+    }
+    
+    if(m.includes('email')||m.includes('draft')||m.includes('escribir')||m.includes('redactar')){
+        return '<b>✉️ '+(es?'Email de Solicitud':'Price Request Email')+':</b><br><br><div style="background:#f8fafc;padding:12px;border-radius:8px;font-size:12px">'+(es?
+            '<b>Asunto:</b> Dalmex Recycling - Solicitud de Precios<br><br>Hola,<br><br>Me comunico de Dalmex Recycling en Dallas para solicitar sus precios actuales de papel recuperado.<br><br>Tenemos volumen consistente en OCC, PM, SWL y DLK.<br>Cargas típicas: 43,000-45,000 lbs<br><br>Por favor envíen sus precios de compra.<br><br>Gracias,<br>Robert Vandling<br>Dalmex Recycling LLC<br>214-352-2000':
+            '<b>Subject:</b> Dalmex Recycling - Price Request<br><br>Hello,<br><br>I\'m reaching out from Dalmex Recycling in Dallas to request your current pricing for recovered paper.<br><br>We have consistent volume in OCC, PM, SWL, and DLK.<br>Typical loads: 43,000-45,000 lbs<br><br>Please send your current buy prices.<br><br>Thank you,<br>Robert Vandling<br>Dalmex Recycling LLC<br>214-352-2000')+'</div>';
+    }
+    
+    if(m.includes('outlook')||m.includes('2026')||m.includes('market')||m.includes('mercado')||m.includes('perspectiva')||m.includes('forecast')){
+        return '<b>📈 '+(es?'Perspectiva Q1 2026':'Q1 2026 Market Outlook')+':</b><br><br><b style="color:#15803d">'+(es?'ALCISTA para vendedores':'BULLISH for sellers')+'</b><br><br>✅ '+(es?'~10% capacidad NA eliminada en 2025':'~10% NA capacity eliminated in 2025')+'<br>✅ '+(es?'Graphic Packaging Waco abre 2026':'Graphic Packaging Waco opening 2026')+'<br>✅ '+(es?'Green Bay $1B expansión':'Green Bay $1B expansion')+'<br>✅ '+(es?'OCC esperado $85-95/ton en marzo':'OCC expected $85-95/ton by March')+'<br><br>💡 <i>'+(es?'¡Asegure relaciones con molinos en expansión AHORA!':'Lock in relationships with expanding mills NOW!')+'</i>';
+    }
+    
+    if(m.includes('pipeline')||m.includes('crm')||m.includes('prospect')||m.includes('prospecto')){
+        const stages={lead:0,contacted:0,negotiating:0,won:0};
+        prospects.forEach(p=>{if(stages[p.stage]!==undefined)stages[p.stage]++});
+        return '<b>🎯 '+(es?'Resumen del Pipeline':'Pipeline Summary')+':</b><br><br>📥 '+(es?'Prospectos':'Leads')+': '+stages.lead+'<br>📞 '+(es?'Contactados':'Contacted')+': '+stages.contacted+'<br>🤝 '+(es?'Negociando':'Negotiating')+': '+stages.negotiating+'<br>✅ '+(es?'Ganados':'Won')+': '+stages.won+'<br><br>💰 '+(es?'Valor Total':'Total Value')+': $'+prospects.reduce((sum,p)=>sum+(p.value||0),0).toLocaleString()+'/mes';
+    }
+    
+    for(const b of buyers){
+        if(m.includes(b.company.toLowerCase())||m.includes(b.contact.split(' ')[0].toLowerCase())){
+            const pr=b.prices?Object.entries(b.prices).filter(([k,v])=>v).map(([k,v])=>k+': $'+v).join(', '):'N/A';
+            return '<b>👤 '+b.company+'</b><br><br><b>'+(es?'Contacto':'Contact')+':</b> '+b.contact+'<br><b>'+(es?'Teléfono':'Phone')+':</b> <a href="tel:'+b.phone+'">'+b.phone+'</a><br><b>Email:</b> <a href="mailto:'+b.email+'">'+b.email+'</a><br><b>'+(es?'Tipo':'Type')+':</b> '+b.type+'<br><br><b>'+(es?'Precios':'Prices')+':</b> '+pr+'<br><br><b>'+(es?'Notas':'Notes')+':</b> '+b.notes;
+        }
+    }
+    
+    return es?
+        'Puedo ayudarte con:<br><br>📦 "¿Quién paga más por OCC?"<br>🎯 "Agregar prospecto"<br>📊 "Reporte PPI"<br>✉️ "Redactar email"<br>📈 "Perspectiva 2026"<br>👤 "Info de [empresa]"':
+        'I can help with:<br><br>📦 "Who pays most for OCC?"<br>🎯 "Add prospect"<br>📊 "PPI report"<br>✉️ "Draft email"<br>📈 "2026 outlook"<br>👤 "Tell me about [company]"';
+}
+
+// ============ DASHBOARD ============
+function renderDash(){
+    const mills=buyers.filter(b=>b.type==='Mill').length;
+    const pri=buyers.filter(b=>b.priority).length;
+    const bO=buyers.filter(b=>b.prices?.OCC).sort((a,b)=>b.prices.OCC-a.prices.OCC)[0];
+    const pipeValue=prospects.filter(p=>p.stage!=='lost').reduce((sum,p)=>sum+(p.value||0),0);
+    const today=new Date().toISOString().split('T')[0];
+    const dueCount=prospects.filter(p=>p.followup&&p.followup<=today&&p.stage!=='won'&&p.stage!=='lost').length;
+    
+    return '<div class="grid grid-4" style="margin-bottom:20px">'+
+        '<div class="card stat-card"><div class="stat-icon">🏭</div><div class="stat-value">'+mills+'</div><div class="stat-label">'+(lang==='es'?'Molinos':'Mills')+'</div></div>'+
+        '<div class="card stat-card"><div class="stat-icon">👥</div><div class="stat-value">'+buyers.length+'</div><div class="stat-label">'+(lang==='es'?'Compradores':'Buyers')+'</div></div>'+
+        '<div class="card stat-card"><div class="stat-icon">🎯</div><div class="stat-value">'+prospects.length+'</div><div class="stat-label">'+(lang==='es'?'Prospectos':'Prospects')+'</div></div>'+
+        '<div class="card stat-card"><div class="stat-icon">💰</div><div class="stat-value">$'+(bO?.prices.OCC||'--')+'</div><div class="stat-label">'+(lang==='es'?'Mejor OCC':'Best OCC')+'</div></div>'+
+    '</div>'+
+    '<div class="grid grid-2" style="margin-bottom:20px">'+
+        '<div class="card"><div class="sidebar-title">💰 '+(lang==='es'?'Valor del Pipeline':'Pipeline Value')+'</div><div class="stat-value" style="color:var(--primary)">$'+pipeValue.toLocaleString()+'<span style="font-size:14px;color:var(--muted)">/mes</span></div></div>'+
+        '<div class="card"><div class="sidebar-title">📞 '+(lang==='es'?'Seguimientos Pendientes':'Follow-ups Due')+'</div><div class="stat-value" style="color:'+(dueCount>0?'var(--danger)':'var(--primary)')+'">'+dueCount+'</div></div>'+
+    '</div>'+
+    '<div class="market-grid">'+marketPrices.slice(0,6).map(p=>'<div class="market-card"><div class="market-code">'+p.code+'</div><div class="market-price">'+p.range+'</div><div class="market-change '+(p.change>0?'up':'down')+'">'+(p.change>0?'▲':'▼')+'$'+Math.abs(p.change)+'</div></div>').join('')+'</div>'+
+    '<div class="section-header"><h3 class="section-title">⭐ '+(lang==='es'?'Compradores Prioritarios':'Priority Buyers')+'</h3></div>'+
+    '<div class="grid grid-3">'+buyers.filter(b=>b.priority).slice(0,6).map(b=>renderBuyerCard(b)).join('')+'</div>';
+}
+
+// ============ CRM ============
+function renderCRM(){
+    const stages=['lead','contacted','negotiating','won'];
+    const stageNames={lead:lang==='es'?'Prospectos':'Leads',contacted:lang==='es'?'Contactados':'Contacted',negotiating:lang==='es'?'Negociando':'Negotiating',won:lang==='es'?'Ganados':'Won'};
+    const today=new Date().toISOString().split('T')[0];
+    const overdue=prospects.filter(p=>p.followup&&p.followup<today&&p.stage!=='won'&&p.stage!=='lost');
+    const dueToday=prospects.filter(p=>p.followup===today&&p.stage!=='won'&&p.stage!=='lost');
+    
+    let html='<div class="section-header"><h3 class="section-title">🎯 '+t('pipeline')+'</h3><button class="btn btn-blue" onclick="openProspectModal()">➕ '+t('addProspect')+'</button></div>';
+    
+    // Follow-up alerts
+    if(overdue.length>0||dueToday.length>0){
+        html+='<div class="card" style="margin-bottom:16px;border-left:4px solid var(--warning)"><div class="sidebar-title">📞 '+(lang==='es'?'Seguimientos Pendientes':'Pending Follow-ups')+'</div>';
+        overdue.forEach(p=>{
+            html+='<div class="followup-item" style="background:#fef2f2"><div class="followup-info"><h4>'+p.company+'</h4><p>'+p.contact+'</p></div><div><span class="followup-date" style="color:var(--danger)">'+(lang==='es'?'VENCIDO':'OVERDUE')+'</span><br><button class="btn btn-sm btn-gray" onclick="openActivityModal('+p.id+')" style="margin-top:4px">'+(lang==='es'?'Registrar':'Log')+'</button></div></div>';
+        });
+        dueToday.forEach(p=>{
+            html+='<div class="followup-item"><div class="followup-info"><h4>'+p.company+'</h4><p>'+p.contact+'</p></div><div><span class="followup-date">'+(lang==='es'?'HOY':'TODAY')+'</span><br><button class="btn btn-sm btn-gray" onclick="openActivityModal('+p.id+')" style="margin-top:4px">'+(lang==='es'?'Registrar':'Log')+'</button></div></div>';
+        });
+        html+='</div>';
+    }
+    
+    // Pipeline columns
+    html+='<div class="pipeline">';
+    stages.forEach(stage=>{
+        const items=prospects.filter(p=>p.stage===stage);
+        const value=items.reduce((sum,p)=>sum+(p.value||0),0);
+        html+='<div class="pipeline-col"><div class="pipeline-title '+stage+'">'+stageNames[stage]+' ('+items.length+') - $'+value.toLocaleString()+'</div>';
+        if(items.length===0){
+            html+='<div class="empty-state" style="padding:20px"><p style="font-size:11px;color:var(--muted)">'+(lang==='es'?'Sin prospectos':'No prospects')+'</p></div>';
+        }
+        items.forEach(p=>{
+            html+='<div class="pipeline-card" onclick="viewProspect('+p.id+')"><h4>'+p.company+'</h4><p>'+p.contact+'</p>'+(p.value?'<div class="value">$'+p.value.toLocaleString()+'/mes</div>':'')+(p.followup?'<p style="margin-top:4px;font-size:9px;color:'+(p.followup<=today?'var(--danger)':'var(--muted)')+'">📅 '+p.followup+'</p>':'')+'</div>';
+        });
+        html+='</div>';
+    });
+    html+='</div>';
+    
+    // Recent activities
+    const allActivities=[];
+    prospects.forEach(p=>{
+        (p.activities||[]).forEach(a=>{
+            allActivities.push({...a,company:p.company,prospectId:p.id});
+        });
+    });
+    allActivities.sort((a,b)=>new Date(b.date)-new Date(a.date));
+    
+    if(allActivities.length>0){
+        html+='<div class="card"><div class="sidebar-title">📋 '+(lang==='es'?'Actividad Reciente':'Recent Activity')+'</div>';
+        allActivities.slice(0,5).forEach(a=>{
+            const icons={call:'📞',email:'📧',meeting:'🤝',note:'📝'};
+            html+='<div class="activity-item"><div class="activity-icon '+a.type+'">'+icons[a.type]+'</div><div class="activity-content"><div class="activity-title">'+a.company+'</div><div class="activity-desc">'+a.desc+'</div></div><div class="activity-time">'+a.date+'</div></div>';
+        });
+        html+='</div>';
+    }
+    
+    return html;
+}
+
+function viewProspect(id){
+    const p=prospects.find(x=>x.id===id);
+    if(!p)return;
+    editProspectId=id;
+    document.getElementById('pCompany').value=p.company;
+    document.getElementById('pContact').value=p.contact;
+    document.getElementById('pEmail').value=p.email||'';
+    document.getElementById('pPhone').value=p.phone||'';
+    document.getElementById('pType').value=p.type||'Mill';
+    document.getElementById('pStage').value=p.stage;
+    document.getElementById('pValue').value=p.value||'';
+    document.getElementById('pFollowup').value=p.followup||'';
+    document.getElementById('pNotes').value=p.notes||'';
+    document.getElementById('prospectModalTitle').textContent=lang==='es'?'Editar Prospecto':'Edit Prospect';
+    document.getElementById('prospectModal').classList.add('active');
+}
+
+function openActivityModal(prospectId){
+    document.getElementById('aProspectId').value=prospectId;
+    document.getElementById('activityForm').reset();
+    document.getElementById('activityModal').classList.add('active');
+}
+
+// ============ CONTACTS ============
+function renderContacts(){
+    let f=buyers;
+    if(searchTerm)f=f.filter(b=>b.company.toLowerCase().includes(searchTerm.toLowerCase())||b.contact.toLowerCase().includes(searchTerm.toLowerCase()));
+    if(filterType!=='all')f=f.filter(b=>b.type===filterType);
+    
+    return '<div class="section-header"><h3 class="section-title">👥 '+t('contacts')+' ('+buyers.length+')</h3><button class="btn btn-green" onclick="openContactModal()">➕ '+t('add')+'</button></div>'+
+    '<div class="search-bar"><input type="text" class="search-input" placeholder="🔍 '+t('search')+'" value="'+searchTerm+'" oninput="searchTerm=this.value;render()"><button class="filter-btn '+(filterType==='all'?'active':'')+'" onclick="filterType=\'all\';render()">'+t('all')+'</button><button class="filter-btn '+(filterType==='Mill'?'active':'')+'" onclick="filterType=\'Mill\';render()">'+t('mills')+'</button><button class="filter-btn '+(filterType==='Broker'?'active':'')+'" onclick="filterType=\'Broker\';render()">'+t('brokers')+'</button></div>'+
+    '<div class="grid grid-3">'+f.map(b=>renderBuyerCard(b)).join('')+'</div>';
+}
+
+function renderBuyerCard(b){
+    const init=b.company.split(' ').map(w=>w[0]).join('').slice(0,2);
+    const badge=b.type==='Mill'?'badge-mill':b.type==='Export'?'badge-export':'badge-broker';
+    const pr=b.prices?Object.entries(b.prices).filter(([k,v])=>v):[];
+    return '<div class="card '+(b.priority?'priority':'')+'"><div class="card-header"><div class="avatar">'+init+'</div><div class="badges"><span class="badge '+badge+'">'+b.type+'</span>'+(b.priority?'<span class="badge badge-priority">⭐</span>':'')+'</div></div><div class="card-title">'+b.company+'</div><div class="card-subtitle">'+b.contact+'</div><div class="card-info">📧 '+b.email+'<br>📞 '+b.phone+'</div><div class="tags">'+(b.commodities||[]).slice(0,4).map(c=>'<span class="tag">'+c+'</span>').join('')+'</div>'+(pr.length?'<div class="prices">'+pr.slice(0,4).map(([k,v])=>'<span class="price">'+k+': $'+v+'</span>').join('')+'</div>':'')+'<div class="card-actions"><button class="btn btn-green" onclick="window.open(\'mailto:'+b.email+'\')">📧</button><button class="btn btn-gray" onclick="window.open(\'tel:'+b.phone+'\')">📞</button><button class="btn btn-purple" onclick="editBuyer('+b.id+')">✏️</button><button class="btn btn-danger" onclick="deleteBuyer('+b.id+')">🗑️</button></div></div>';
+}
+
+// ============ PRICES ============
+function renderPrices(){
+    const gr=['OCC','PM','SWL','DLK','SOP','HWEC'],mx={};
+    gr.forEach(g=>{const ps=buyers.map(b=>b.prices?.[g]).filter(p=>p);mx[g]=ps.length?Math.max(...ps):0});
+    return '<div class="section-header"><h3 class="section-title">💰 '+(lang==='es'?'Comparación de Precios':'Price Comparison')+'</h3></div>'+
+    '<div class="market-grid">'+marketPrices.map(p=>'<div class="market-card"><div class="market-code">'+p.code+'</div><div class="market-price">'+p.range+'</div><div class="market-change '+(p.change>0?'up':'down')+'">'+(p.change>0?'▲':'▼')+'$'+Math.abs(p.change)+'</div></div>').join('')+'</div>'+
+    '<div class="table-wrap"><div class="table-header">📊 '+(lang==='es'?'Precios por Comprador (Verde = Mejor)':'Buyer Prices (Green = Best)')+'</div><div class="table-scroll"><table><thead><tr><th>'+(lang==='es'?'Comprador':'Buyer')+'</th>'+gr.map(g=>'<th>'+g+'</th>').join('')+'<th>'+(lang==='es'?'Tipo':'Type')+'</th></tr></thead><tbody>'+buyers.filter(b=>b.prices).sort((a,b)=>(b.prices.OCC||0)-(a.prices.OCC||0)).map(b=>'<tr><td><b>'+b.company+'</b><br><small style="color:#64748b">'+b.contact+'</small></td>'+gr.map(g=>{const p=b.prices[g];if(!p)return'<td style="color:#cbd5e1">—</td>';return'<td><span class="'+(p===mx[g]?'price-best':'')+'">'+(p===mx[g]?'⭐ ':'')+'$'+p+'</span></td>'}).join('')+'<td><span class="badge badge-'+b.type.toLowerCase()+'">'+b.type+'</span></td></tr>').join('')+'</tbody></table></div></div>';
+}
+
+// ============ NEWS ============
+function renderNews(){
+    return '<div class="section-header"><h3 class="section-title">📰 '+(lang==='es'?'Noticias de la Industria':'Industry News')+'</h3></div>'+
+    news.map(n=>'<div class="news-item"><div class="news-date">'+n.date+'</div><div class="news-title">'+(lang==='es'?n.titleEs:n.title)+'</div><div class="news-excerpt">'+(lang==='es'?n.excerptEs:n.excerpt)+'</div></div>').join('');
+}
+
+// ============ MODALS ============
+function openContactModal(){
+    editId=null;
+    document.getElementById('contactForm').reset();
+    document.getElementById('contactModalTitle').textContent=lang==='es'?'Agregar Comprador':'Add Buyer';
+    document.getElementById('contactModal').classList.add('active');
+}
+
+function openProspectModal(){
+    editProspectId=null;
+    document.getElementById('prospectForm').reset();
+    document.getElementById('prospectModalTitle').textContent=lang==='es'?'Agregar Prospecto':'Add Prospect';
+    document.getElementById('prospectModal').classList.add('active');
+}
+
+function closeModal(id){document.getElementById(id).classList.remove('active')}
+
+function editBuyer(id){
+    const b=buyers.find(x=>x.id===id);
+    if(!b)return;
+    editId=id;
+    document.getElementById('fCompany').value=b.company;
+    document.getElementById('fContact').value=b.contact;
+    document.getElementById('fEmail').value=b.email;
+    document.getElementById('fPhone').value=b.phone||'';
+    document.getElementById('fType').value=b.type;
+    document.getElementById('fPriority').checked=b.priority;
+    document.getElementById('fNotes').value=b.notes||'';
+    document.querySelectorAll('input[name="comm"]').forEach(cb=>cb.checked=(b.commodities||[]).includes(cb.value));
+    document.getElementById('contactModalTitle').textContent=lang==='es'?'Editar Comprador':'Edit Buyer';
+    document.getElementById('contactModal').classList.add('active');
+}
+
+function deleteBuyer(id){
+    if(confirm(lang==='es'?'¿Eliminar este comprador?':'Delete this buyer?')){
+        buyers=buyers.filter(b=>b.id!==id);
+        saveData();renderNav();render();
+        toast(lang==='es'?'Comprador eliminado':'Buyer deleted');
+    }
+}
+
+// ============ FORM HANDLERS ============
+document.getElementById('contactForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    const comms=[];document.querySelectorAll('input[name="comm"]:checked').forEach(cb=>comms.push(cb.value));
+    const data={
+        company:document.getElementById('fCompany').value,
+        contact:document.getElementById('fContact').value,
+        email:document.getElementById('fEmail').value,
+        phone:document.getElementById('fPhone').value,
+        type:document.getElementById('fType').value,
+        priority:document.getElementById('fPriority').checked,
+        commodities:comms,
+        notes:document.getElementById('fNotes').value,
+        prices:{},
+        status:'active'
+    };
+    if(editId){
+        const idx=buyers.findIndex(b=>b.id===editId);
+        if(idx!==-1)buyers[idx]={...buyers[idx],...data};
+        toast(lang==='es'?'Comprador actualizado':'Buyer updated');
+    }else{
+        data.id=buyers.length?Math.max(...buyers.map(b=>b.id))+1:1;
+        buyers.push(data);
+        toast(lang==='es'?'Comprador agregado':'Buyer added');
+    }
+    saveData();closeModal('contactModal');renderNav();render();
+});
+
+document.getElementById('prospectForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    const data={
+        company:document.getElementById('pCompany').value,
+        contact:document.getElementById('pContact').value,
+        email:document.getElementById('pEmail').value,
+        phone:document.getElementById('pPhone').value,
+        type:document.getElementById('pType').value,
+        stage:document.getElementById('pStage').value,
+        value:parseInt(document.getElementById('pValue').value)||0,
+        followup:document.getElementById('pFollowup').value,
+        notes:document.getElementById('pNotes').value,
+        activities:[]
+    };
+    if(editProspectId){
+        const idx=prospects.findIndex(p=>p.id===editProspectId);
+        if(idx!==-1){
+            data.activities=prospects[idx].activities||[];
+            prospects[idx]={...prospects[idx],...data};
+        }
+        toast(lang==='es'?'Prospecto actualizado':'Prospect updated');
+    }else{
+        data.id=prospects.length?Math.max(...prospects.map(p=>p.id))+1:1;
+        prospects.push(data);
+        toast(lang==='es'?'Prospecto agregado':'Prospect added');
+    }
+    saveData();closeModal('prospectModal');renderNav();render();checkReminders();
+});
+
+document.getElementById('activityForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    const prospectId=parseInt(document.getElementById('aProspectId').value);
+    const prospect=prospects.find(p=>p.id===prospectId);
+    if(!prospect)return;
+    
+    const activity={
+        type:document.getElementById('aType').value,
+        desc:document.getElementById('aDesc').value,
+        date:new Date().toISOString().split('T')[0]
+    };
+    
+    if(!prospect.activities)prospect.activities=[];
+    prospect.activities.unshift(activity);
+    
+    const newFollowup=document.getElementById('aFollowup').value;
+    if(newFollowup)prospect.followup=newFollowup;
+    
+    saveData();closeModal('activityModal');render();checkReminders();
+    toast(lang==='es'?'Actividad registrada':'Activity logged');
+});
+
+// ============ UTILITIES ============
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
+
 document.addEventListener('keypress',e=>{if(e.key==='Enter'&&!currentUser)handleLogin()});
 </script>
 </body>
