@@ -1,859 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>Fiber Hub Pro - Dalmex Recycling</title>
-<link rel="manifest" href="data:application/json,{}">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#6366f1">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--primary:#6366f1;--primary-dark:#4f46e5;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--purple:#8b5cf6;--purple-dark:#7c3aed;--dark:#1e293b;--darker:#0f172a;--card-bg:#fff;--bg:#f1f5f9;--light:#e2e8f0;--text:#1e293b;--text-muted:#64748b;--header-bg:#fff;--table-header:#f1f5f9;--border:#e2e8f0;--profit:#10b981;--loss:#ef4444}
-.theme-terminal{--primary:#22d3ee;--primary-dark:#0891b2;--success:#22c55e;--warning:#eab308;--danger:#ef4444;--purple:#a855f7;--purple-dark:#7c3aed;--dark:#0a0a0a;--darker:#000;--card-bg:#111;--bg:#0a0a0a;--light:#222;--text:#e4e4e7;--text-muted:#a1a1aa;--header-bg:#111;--table-header:#1a1a1a;--border:#333;--profit:#22c55e;--loss:#ef4444}
-.theme-terminal body{background:#0a0a0a}.theme-terminal .ticker-wrap{background:linear-gradient(90deg,#000,#111)}.theme-terminal .header{background:#111;border-color:#333}.theme-terminal .nav-bar{background:#111;border-color:#333}.theme-terminal .panel-card,.theme-terminal .stat-card,.theme-terminal .contact-card,.theme-terminal .lead-card,.theme-terminal .resource-card,.theme-terminal .modal{background:#111;border:1px solid #333}.theme-terminal .data-table th{background:#1a1a1a}.theme-terminal .data-table td{border-color:#333}.theme-terminal .form-input,.theme-terminal .form-select,.theme-terminal .form-textarea{background:#1a1a1a;border-color:#333;color:#e4e4e7}.theme-terminal .search-box{background:#111;border-color:#333}.theme-terminal .filter-btn{background:#111;border-color:#333;color:#a1a1aa}.theme-terminal .filter-btn.active{background:#22d3ee;border-color:#22d3ee;color:#000}.theme-terminal .footer{border-color:#333}.theme-terminal .brand-title{background:linear-gradient(135deg,#22d3ee,#a855f7);-webkit-background-clip:text}.theme-terminal .report-section{background:linear-gradient(135deg,#052e16,#14532d);border-color:#22c55e}.theme-terminal .highest-pair{background:linear-gradient(135deg,#422006,#713f12);border-color:#eab308}.theme-terminal .forecast-box{background:linear-gradient(135deg,#0c1929,#1e3a5f);border-color:#3b82f6}.theme-terminal .contact-prices,.theme-terminal .quick-action{background:#1a1a1a}
-.theme-corporate{--primary:#1e3a5f;--primary-dark:#0f2744;--success:#059669;--warning:#d97706;--danger:#dc2626;--purple:#1e3a5f;--purple-dark:#0f2744;--dark:#1e3a5f;--darker:#0f2744;--card-bg:#fff;--bg:#f8fafc;--light:#e2e8f0;--text:#1e293b;--text-muted:#64748b;--header-bg:#1e3a5f;--table-header:#f1f5f9;--border:#cbd5e1;--profit:#059669;--loss:#dc2626}.theme-corporate .header{background:#1e3a5f}.theme-corporate .brand-title{color:#fff;-webkit-text-fill-color:#fff}.theme-corporate .brand-sub{color:rgba(255,255,255,.8)}.theme-corporate .user-badge{background:rgba(255,255,255,.2);color:#fff}.theme-corporate .admin-login-btn,.theme-corporate .lang-btn{background:#fff;color:#1e3a5f}.theme-corporate .ticker-wrap{background:#0f2744}.theme-corporate .nav-btn{background:#e2e8f0}.theme-corporate .nav-btn.active{background:#1e3a5f}.theme-corporate .logo{background:#fff;color:#1e3a5f}
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:all .3s}
-.ticker-wrap{background:linear-gradient(90deg,var(--darker),var(--dark));padding:8px 0;overflow:hidden}.ticker{display:flex;animation:tickerScroll 60s linear infinite;width:max-content}@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}.ticker-item{display:inline-flex;align-items:center;gap:6px;margin-right:40px;color:#f1f5f9;font-size:12px;white-space:nowrap}.ticker-badge{padding:2px 6px;border-radius:4px;font-size:9px;font-weight:700;text-transform:uppercase}.ticker-badge.price{background:var(--warning);color:#000}.ticker-badge.tip{background:#3b82f6}.ticker-badge.alert{background:var(--danger)}.ticker-badge.market{background:var(--success)}
-.header{background:var(--header-bg);padding:12px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}.header-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}.header-left{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;font-weight:800}.brand-title{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--purple),var(--primary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.brand-sub{font-size:10px;color:var(--text-muted);font-weight:600}.header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.user-badge{background:var(--light);padding:6px 12px;border-radius:8px;font-size:11px;font-weight:600;color:var(--text)}.user-badge.admin{background:linear-gradient(135deg,var(--warning),#d97706);color:#fff}.admin-login-btn{padding:6px 12px;border:none;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,var(--warning),#d97706);color:#fff}.lang-btn{padding:6px 12px;border:none;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#059669,#10b981);color:#fff}
-.theme-selector{display:flex;gap:4px}.theme-btn{width:26px;height:26px;border-radius:6px;border:2px solid var(--border);cursor:pointer;transition:all .2s}.theme-btn:hover{transform:scale(1.1)}.theme-btn.active{border-color:var(--primary);box-shadow:0 0 0 2px var(--primary)}.theme-btn.t-default{background:linear-gradient(135deg,#8b5cf6,#6366f1)}.theme-btn.t-terminal{background:linear-gradient(135deg,#000,#22c55e)}.theme-btn.t-corporate{background:linear-gradient(135deg,#1e3a5f,#fff)}
-.nav-bar{background:var(--card-bg);padding:10px 16px;border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}.nav-bar::-webkit-scrollbar{display:none}.nav-inner{max-width:1400px;margin:0 auto;display:flex;gap:6px}.nav-btn{padding:10px 16px;border:none;background:var(--light);border-radius:10px;font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:all .2s}.nav-btn:hover{background:#e0e7ff;color:var(--primary)}.nav-btn.active{background:linear-gradient(135deg,var(--primary),var(--purple));color:#fff;box-shadow:0 4px 12px rgba(99,102,241,.3)}.nav-btn.admin-only{background:linear-gradient(135deg,var(--warning),#d97706);color:#fff}.nav-count{background:rgba(255,255,255,.3);padding:2px 7px;border-radius:6px;font-size:10px;font-weight:700}
-.main{max-width:1400px;margin:0 auto;padding:16px}
-.panel-card{background:var(--card-bg);border-radius:16px;padding:18px;box-shadow:0 4px 20px rgba(0,0,0,.06);margin-bottom:16px}.panel-title{font-size:13px;font-weight:700;color:var(--text-muted);margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px;display:flex;justify-content:space-between;align-items:center}
-.btn{padding:10px 18px;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;transition:all .2s}.btn-primary{background:var(--primary);color:#fff}.btn-success{background:var(--success);color:#fff}.btn-warning{background:var(--warning);color:#fff}.btn-danger{background:var(--danger);color:#fff}.btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}.btn-sm{padding:7px 12px;font-size:11px}.btn:hover{opacity:0.9;transform:translateY(-1px)}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:18px}.stat-card{background:var(--card-bg);border-radius:16px;padding:18px;cursor:pointer;transition:all .2s;border:2px solid transparent}.stat-card:hover{border-color:var(--primary);transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,.1)}.stat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px}.stat-icon.purple{background:linear-gradient(135deg,var(--purple),var(--purple-dark))}.stat-icon.green{background:linear-gradient(135deg,var(--success),#059669)}.stat-icon.blue{background:linear-gradient(135deg,var(--primary),var(--primary-dark))}.stat-icon.yellow{background:linear-gradient(135deg,var(--warning),#d97706)}.stat-icon.red{background:linear-gradient(135deg,var(--danger),#dc2626)}.stat-icon.cyan{background:linear-gradient(135deg,#06b6d4,#0891b2)}.stat-value{font-size:28px;font-weight:800;margin-bottom:4px;color:var(--text)}.stat-label{font-size:11px;color:var(--text-muted);font-weight:500}.stat-sub{font-size:10px;color:var(--primary);margin-top:6px;font-weight:600}
-.lead-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.lead-stat{background:var(--card-bg);border-radius:12px;padding:14px;text-align:center}.lead-stat-value{font-size:26px;font-weight:800}.lead-stat-label{font-size:9px;color:var(--text-muted);text-transform:uppercase;font-weight:600}.lead-stat.new .lead-stat-value{color:var(--primary)}.lead-stat.contacted .lead-stat-value{color:var(--warning)}.lead-stat.responded .lead-stat-value{color:var(--success)}.lead-stat.converted .lead-stat-value{color:#06b6d4}
-.lead-card{background:var(--card-bg);border-radius:14px;padding:16px;margin-bottom:12px;border-left:5px solid var(--border);transition:all .2s}.lead-card:hover{box-shadow:0 4px 15px rgba(0,0,0,.08)}.lead-card.new{border-left-color:var(--primary)}.lead-card.contacted{border-left-color:var(--warning)}.lead-card.responded{border-left-color:var(--success)}.lead-card.converted{border-left-color:#22d3ee}.lead-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px}.lead-company{font-size:15px;font-weight:700;color:var(--text)}.lead-status{padding:4px 10px;border-radius:6px;font-size:9px;font-weight:700;text-transform:uppercase}.lead-status.new{background:#e0e7ff;color:#4338ca}.lead-status.contacted{background:#fef3c7;color:#b45309}.lead-status.responded{background:#d1fae5;color:#047857}.lead-status.converted{background:#cffafe;color:#0891b2}.lead-details{font-size:11px;color:var(--text-muted);margin-bottom:10px;line-height:1.6}.lead-materials{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}.lead-material{background:var(--bg);padding:3px 8px;border-radius:5px;font-size:10px;font-weight:600;color:var(--text)}.lead-actions{display:flex;gap:8px;flex-wrap:wrap}.lead-action{padding:8px 12px;border:none;border-radius:8px;font-size:10px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;text-decoration:none;transition:all .2s}.lead-action.email{background:#dbeafe;color:#1d4ed8}.lead-action.sms{background:#d1fae5;color:#047857}.lead-action.call{background:#fef3c7;color:#b45309}.lead-action.convert{background:linear-gradient(135deg,var(--success),#059669);color:#fff}.lead-action.delete{background:#fee2e2;color:#dc2626}.lead-action:hover{transform:translateY(-1px)}
-.resource-card{background:var(--card-bg);border-radius:14px;padding:18px;margin-bottom:14px;border:2px solid var(--border);transition:all .2s}.resource-card:hover{border-color:var(--primary);transform:translateY(-2px)}.resource-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}.resource-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px}.resource-title{font-size:15px;font-weight:700;color:var(--text)}.resource-type{font-size:10px;color:var(--text-muted);font-weight:500}.resource-desc{font-size:12px;color:var(--text-muted);line-height:1.6;margin-bottom:14px}.resource-tips{background:var(--bg);border-radius:10px;padding:12px;margin-bottom:14px}.resource-tips-title{font-size:11px;font-weight:700;color:var(--text);margin-bottom:8px}.resource-tips ul{font-size:11px;color:var(--text-muted);margin-left:18px;line-height:1.7}.resource-link{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;font-size:11px;font-weight:600;text-decoration:none}.resource-link:hover{opacity:0.9}
-.company-list{background:var(--bg);border-radius:12px;padding:14px;margin-bottom:14px}.company-list-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:10px}.company-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--card-bg);border-radius:8px;margin-bottom:8px}.company-item:last-child{margin-bottom:0}.company-name{font-size:13px;font-weight:600;color:var(--text)}.company-type{font-size:10px;color:var(--text-muted)}.company-actions{display:flex;gap:6px}.company-action{padding:5px 10px;border-radius:6px;font-size:10px;font-weight:600;text-decoration:none;background:var(--light);color:var(--text);transition:all .2s}.company-action:hover{background:var(--primary);color:#fff}
-.contact-card{background:var(--card-bg);border-radius:14px;padding:14px;border:2px solid transparent;margin-bottom:12px;transition:all .2s}.contact-card:hover{box-shadow:0 4px 15px rgba(0,0,0,.08)}.contact-card.priority{border-color:var(--warning)}.contact-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:8px}.contact-name{font-size:14px;font-weight:700;color:var(--text)}.contact-type{display:inline-block;padding:3px 8px;border-radius:5px;font-size:9px;font-weight:700;text-transform:uppercase}.contact-type.mill{background:#dbeafe;color:#1d4ed8}.contact-type.broker{background:#fef3c7;color:#b45309}.contact-type.export{background:#d1fae5;color:#047857}.contact-person{font-size:11px;color:var(--text-muted);margin-bottom:4px}.contact-email{font-size:10px;color:var(--primary);margin-bottom:8px}.contact-prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(50px,1fr));gap:6px;margin-bottom:10px;padding:10px;background:var(--bg);border-radius:10px}.price-item{text-align:center}.price-label{font-size:9px;color:var(--text-muted);text-transform:uppercase;font-weight:600}.price-value{font-size:13px;font-weight:700;color:var(--profit)}.contact-actions{display:flex;gap:6px;flex-wrap:wrap}.contact-action{padding:7px 10px;background:var(--bg);border:none;border-radius:6px;font-size:10px;font-weight:600;cursor:pointer;color:var(--text);text-decoration:none;transition:all .2s}.contact-action:hover{background:var(--light)}.contact-action.call{background:#d1fae5;color:#047857}.contact-action.email{background:#dbeafe;color:#1d4ed8}
-.contacts-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px}.search-box{display:flex;align-items:center;gap:8px;background:var(--card-bg);padding:10px 14px;border-radius:10px;flex:1;max-width:280px;border:2px solid var(--border)}.search-box:focus-within{border-color:var(--primary)}.search-box input{border:none;background:none;flex:1;font-size:13px;font-family:inherit;color:var(--text)}.search-box input:focus{outline:none}.filter-btns{display:flex;gap:6px;flex-wrap:wrap}.filter-btn{padding:8px 14px;border:2px solid var(--border);background:var(--card-bg);border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;color:var(--text-muted);transition:all .2s}.filter-btn:hover{border-color:var(--primary)}.filter-btn.active{border-color:var(--primary);background:#e0e7ff;color:var(--primary)}
-.outreach-template{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid var(--primary);border-radius:14px;padding:16px;margin-bottom:18px}.outreach-title{font-size:14px;font-weight:700;color:#1e40af;margin-bottom:10px}.outreach-text{font-size:11px;line-height:1.7;color:#1e3a5f;background:#fff;padding:14px;border-radius:10px;margin-bottom:12px;white-space:pre-wrap}
-.share-section{background:linear-gradient(135deg,#dbeafe,#bfdbfe);border:2px solid var(--primary);border-radius:14px;padding:16px;margin-bottom:16px}.share-title{font-size:14px;font-weight:700;color:#1e40af;margin-bottom:8px}.share-url{background:#fff;padding:12px;border-radius:8px;font-size:11px;word-break:break-all;margin:10px 0;border:1px solid var(--primary);color:var(--text)}.share-btns{display:flex;gap:8px;flex-wrap:wrap}
-.qr-section{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid var(--success);border-radius:14px;padding:18px;margin-bottom:16px;text-align:center}.qr-title{font-size:14px;font-weight:700;color:#166534;margin-bottom:12px}.qr-code{background:#fff;padding:12px;border-radius:10px;display:inline-block}
-.calc-section{background:linear-gradient(135deg,#faf5ff,#f3e8ff);border:2px solid var(--purple);border-radius:14px;padding:16px;margin-bottom:16px}.calc-title{font-size:14px;font-weight:700;color:#6b21a8;margin-bottom:12px}.calc-row{display:flex;gap:10px;align-items:center;margin-bottom:10px;flex-wrap:wrap}.calc-input{padding:10px 14px;border:2px solid var(--border);border-radius:8px;width:100px;font-size:13px;background:var(--card-bg);color:var(--text)}.calc-result{padding:12px;background:var(--card-bg);border-radius:10px;margin-top:12px}.margin-positive{color:var(--profit);font-weight:700}.margin-negative{color:var(--loss);font-weight:700}
-.history-chart{display:flex;align-items:flex-end;gap:4px;height:80px;padding:12px;background:var(--bg);border-radius:10px}.history-bar{flex:1;background:var(--primary);border-radius:4px 4px 0 0;min-width:20px;position:relative;cursor:pointer;transition:all .2s}.history-bar:hover{opacity:0.8}.history-bar:hover::after{content:attr(data-value);position:absolute;top:-22px;left:50%;transform:translateX(-50%);background:var(--dark);color:#fff;padding:3px 8px;border-radius:5px;font-size:9px;white-space:nowrap}
-.report-section{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid var(--success);border-radius:14px;padding:16px;margin-bottom:16px}.report-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.report-title{font-size:16px;font-weight:800;color:#166534}.report-date{font-size:11px;color:#166534}
-.scorecard{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-bottom:16px}.scorecard-item{background:var(--card-bg);border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border)}.scorecard-value{font-size:20px;font-weight:800;color:var(--profit)}.scorecard-label{font-size:9px;color:var(--text-muted);text-transform:uppercase}
-.bar-chart{margin:12px 0}.bar-row{display:flex;align-items:center;margin-bottom:8px}.bar-label{width:50px;font-size:11px;font-weight:600;color:var(--text)}.bar-container{flex:1;height:20px;background:var(--light);border-radius:5px;overflow:hidden;margin:0 8px}.bar-fill{height:100%;border-radius:5px}.bar-value{width:40px;font-size:11px;font-weight:700;text-align:right;color:var(--text)}
-.highest-pair{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--warning);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}.highest-pair-commodity{font-size:13px;font-weight:700;color:#92400e}.highest-pair-buyer{font-size:10px;color:#92400e}.highest-pair-price{font-size:17px;font-weight:800;color:var(--profit)}
-.ppi-compare{border-radius:12px;overflow:hidden;margin-bottom:14px;background:var(--card-bg)}.ppi-row{display:flex;padding:10px 12px;border-bottom:1px solid var(--border)}.ppi-row:last-child{border-bottom:none}.ppi-row.header{background:var(--table-header);font-weight:700;font-size:10px;text-transform:uppercase;color:var(--text-muted)}.ppi-commodity{flex:1;color:var(--text);font-size:12px}.ppi-value{width:60px;text-align:right;font-weight:600;color:var(--text);font-size:11px}.ppi-gap{width:65px;text-align:right;font-weight:700;font-size:11px}
-.forecast-box{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid #3b82f6;border-radius:12px;padding:14px;margin-top:14px}.forecast-title{font-size:12px;font-weight:700;color:#1e40af;margin-bottom:6px}.forecast-text{font-size:11px;line-height:1.6;color:#1e3a5f}
-.intel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:18px}.intel-btn{background:var(--card-bg);border:2px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;text-align:left;transition:all .2s}.intel-btn:hover{border-color:var(--primary);transform:translateY(-2px)}.intel-btn-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px}.intel-btn-title{font-size:13px;font-weight:700;margin-bottom:3px;color:var(--text)}.intel-btn-desc{font-size:10px;color:var(--text-muted)}
-.quick-action{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border-radius:10px;margin-bottom:6px;cursor:pointer;border:none;width:100%;text-align:left;font-family:inherit;transition:all .2s}.quick-action:hover{background:var(--light);transform:translateX(3px)}.quick-action-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}.quick-action-text{font-size:12px;font-weight:600;color:var(--text)}
-.prices-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}.price-card{background:var(--card-bg);border-radius:14px;padding:14px}.price-commodity{font-size:12px;font-weight:700;color:var(--text)}.price-current{font-size:20px;font-weight:800;color:var(--profit);margin-bottom:3px}.price-range{font-size:10px;color:var(--text-muted)}
-.table-container{overflow-x:auto;background:var(--card-bg);border-radius:12px}.data-table{width:100%;border-collapse:collapse;font-size:12px}.data-table th{background:var(--table-header);padding:12px 10px;text-align:left;font-weight:600;font-size:10px;text-transform:uppercase;color:var(--text-muted)}.data-table td{padding:12px 10px;border-bottom:1px solid var(--border);color:var(--text)}.data-table tr:hover{background:var(--bg)}
-.admin-section{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--warning);border-radius:14px;padding:16px;margin-bottom:16px}.admin-section-title{font-size:14px;font-weight:700;color:#92400e;margin-bottom:12px}.admin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}.admin-btn{padding:12px;background:#fff;border:2px solid var(--warning);border-radius:10px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;color:#92400e;transition:all .2s}.admin-btn:hover{background:var(--warning);color:#fff}
-.activity-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px}.activity-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}.activity-content{flex:1}.activity-title{font-size:12px;font-weight:600;color:var(--text)}.activity-time{font-size:10px;color:var(--text-muted)}
-.empty-state{text-align:center;padding:50px 20px;color:var(--text-muted)}.empty-icon{font-size:56px;margin-bottom:16px}.empty-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px}.empty-desc{font-size:13px;margin-bottom:20px;line-height:1.5}
-.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:1000;padding:16px;backdrop-filter:blur(4px)}.modal-overlay.active{display:flex}.modal{background:var(--card-bg);border-radius:20px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}.modal-header{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}.modal-title{font-size:17px;font-weight:700;color:var(--text)}.modal-close{width:32px;height:32px;border-radius:8px;border:none;background:var(--light);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--text)}.modal-body{padding:20px}.modal-footer{padding:16px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}.form-group{margin-bottom:16px}.form-label{display:block;margin-bottom:6px;font-weight:600;font-size:12px;color:var(--text-muted)}.form-input,.form-textarea{width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:var(--card-bg);color:var(--text);transition:border-color .2s}.form-input:focus,.form-textarea:focus{outline:none;border-color:var(--primary)}.form-textarea{min-height:100px;resize:vertical}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:500px){.form-row{grid-template-columns:1fr}}.form-select{width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:10px;font-size:13px;font-family:inherit;background:var(--card-bg);color:var(--text)}.price-input-group{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.price-input-item label{display:block;font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px}.price-input-item input{width:100%;padding:10px;border:2px solid var(--border);border-radius:8px;font-size:12px;background:var(--card-bg);color:var(--text)}
-.login-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:1000;padding:16px;backdrop-filter:blur(4px)}.login-overlay.active{display:flex}.login-card{background:var(--card-bg);border-radius:24px;padding:36px;width:100%;max-width:380px}.login-logo{width:70px;height:70px;background:linear-gradient(135deg,var(--warning),#d97706);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 20px}.login-title{text-align:center;font-size:22px;font-weight:800;margin-bottom:8px;color:var(--text)}.login-subtitle{text-align:center;color:var(--text-muted);margin-bottom:24px;font-size:13px}.login-error{background:#fef2f2;color:var(--danger);padding:12px;border-radius:10px;margin-bottom:14px;font-size:12px;text-align:center;display:none}.login-error.show{display:block}.login-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--warning),#d97706);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;margin-top:10px}.login-cancel{width:100%;padding:12px;background:var(--light);color:var(--text);border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;margin-top:10px}
-.gap-positive{color:var(--profit);font-weight:700}.gap-negative{color:var(--loss);font-weight:700}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--dark);color:#fff;padding:14px 24px;border-radius:12px;font-size:13px;font-weight:600;z-index:2000;opacity:0;transition:all .3s;box-shadow:0 8px 30px rgba(0,0,0,.2)}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.footer{text-align:center;padding:20px 16px;color:var(--text-muted);font-size:10px;border-top:1px solid var(--border);margin-top:24px;line-height:1.6}.footer a{color:var(--primary);text-decoration:none}.footer strong{color:var(--text)}
-.goal-tracker{background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:12px;padding:14px;margin-bottom:16px}.goal-title{font-size:12px;font-weight:700;color:#92400e;margin-bottom:10px}.goal-progress{height:12px;background:#fff;border-radius:6px;overflow:hidden;margin-bottom:8px}.goal-fill{height:100%;background:linear-gradient(90deg,var(--success),#22c55e);border-radius:6px;transition:width .5s}.goal-text{font-size:11px;color:#78350f;display:flex;justify-content:space-between}
-.pipeline-value{background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-radius:12px;padding:14px;margin-bottom:16px;text-align:center}.pipeline-amount{font-size:28px;font-weight:800;color:#166534}.pipeline-label{font-size:11px;color:#166534}
-@media print{.header,.nav-bar,.ticker-wrap,.footer,.btn,.contact-actions,.no-print,.theme-selector,.lang-btn,.admin-section,.share-section,.qr-section,.modal-overlay,.login-overlay,.toast{display:none!important}.main{padding:0}.panel-card{box-shadow:none;border:1px solid #ddd}}
-@media(max-width:768px){.header-inner{flex-direction:column;gap:10px}.stats-grid{grid-template-columns:repeat(2,1fr)}.lead-stats{grid-template-columns:repeat(2,1fr)}.intel-grid{grid-template-columns:repeat(2,1fr)}.form-row{grid-template-columns:1fr}.price-input-group{grid-template-columns:repeat(2,1fr)}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dalmex Fiber Hub AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--primary:#10b981;--primary-dark:#059669;--purple:#8b5cf6;--purple-dark:#7c3aed;--danger:#ef4444;--warning:#f59e0b;--light:#dcfce7;--card:rgba(255,255,255,0.95);--text:#1e293b;--muted:#64748b}
+        body{font-family:'Plus Jakarta Sans',sans-serif;background:linear-gradient(135deg,#f0fdf4,#ecfdf5,#d1fae5);min-height:100vh;color:var(--text)}
+        .hidden{display:none!important}
+        .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+        .login-card{background:var(--card);border-radius:24px;padding:40px;width:100%;max-width:400px;box-shadow:0 25px 50px rgba(0,0,0,0.15)}
+        .login-logo{width:80px;height:80px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 20px}
+        .login-title{text-align:center;font-size:26px;font-weight:800;margin-bottom:8px}
+        .login-subtitle{text-align:center;color:var(--muted);margin-bottom:24px}
+        .form-group{margin-bottom:16px}
+        .form-label{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase}
+        .form-input,.form-select{width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:10px;font-size:15px;font-family:inherit}
+        .form-input:focus,.form-select:focus{outline:none;border-color:var(--purple)}
+        .btn{padding:12px 20px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+        .btn-purple{background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:white}
+        .btn-green{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white}
+        .btn-gray{background:#f1f5f9;color:var(--text)}
+        .btn-danger{background:var(--danger);color:white}
+        .btn-full{width:100%;margin-bottom:10px}
+        .login-error{background:#fef2f2;color:#dc2626;padding:12px;border-radius:8px;margin-bottom:16px;display:none}
+        .login-error.show{display:block}
+        .login-footer{text-align:center;margin-top:20px;font-size:11px;color:var(--muted)}
+        .lang-toggle{display:flex;justify-content:center;gap:8px;margin-bottom:20px}
+        .lang-btn{padding:8px 16px;border:2px solid #e2e8f0;border-radius:8px;background:white;font-size:13px;font-weight:600;cursor:pointer}
+        .lang-btn.active{border-color:var(--purple);background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:white}
+        .app{display:none}
+        .app.active{display:block}
+        .ticker{background:linear-gradient(90deg,#0f172a,#1e293b);padding:10px 0;overflow:hidden}
+        .ticker-track{display:flex;animation:scroll 50s linear infinite;white-space:nowrap}
+        @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        .ticker-item{display:inline-flex;align-items:center;gap:8px;margin-right:40px;color:#f1f5f9;font-size:12px}
+        .ticker-tag{padding:2px 6px;border-radius:4px;font-size:9px;font-weight:700}
+        .ticker-tag.price{background:var(--warning)}
+        .ticker-tag.news{background:#3b82f6}
+        .ticker-tag.alert{background:var(--danger)}
+        .header{background:var(--card);padding:12px 20px;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:100}
+        .header-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+        .header-left{display:flex;align-items:center;gap:10px}
+        .logo{width:42px;height:42px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
+        .brand h1{font-size:18px;font-weight:800}
+        .brand span{font-size:11px;color:var(--muted)}
+        .header-right{display:flex;align-items:center;gap:8px}
+        .user-badge{background:var(--light);padding:6px 12px;border-radius:8px;font-size:11px;font-weight:600;color:var(--primary-dark)}
+        .nav{display:flex;gap:6px;padding:12px 20px;max-width:1400px;margin:0 auto;overflow-x:auto}
+        .nav-btn{padding:8px 14px;background:white;border:1px solid #e2e8f0;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+        .nav-btn:hover{background:#f8fafc}
+        .nav-btn.active{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;border:none}
+        .nav-btn.ai{background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:white;border:none}
+        .main{max-width:1400px;margin:0 auto;padding:0 20px 30px}
+        .grid{display:grid;gap:16px}
+        .grid-2{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+        .grid-3{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+        .card{background:var(--card);border-radius:16px;padding:18px;border:1px solid #e2e8f0}
+        .card:hover{box-shadow:0 8px 25px rgba(0,0,0,0.08)}
+        .card.priority{border-left:4px solid var(--warning)}
+        .card-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px}
+        .avatar{width:42px;height:42px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+        .badges{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+        .badge{padding:3px 8px;border-radius:5px;font-size:9px;font-weight:700;text-transform:uppercase}
+        .badge-mill{background:#dbeafe;color:#1d4ed8}
+        .badge-broker{background:#fef3c7;color:#92400e}
+        .badge-export{background:#ede9fe;color:#6d28d9}
+        .badge-priority{background:#fef3c7;color:#b45309}
+        .card-title{font-size:15px;font-weight:700;margin-bottom:2px}
+        .card-subtitle{font-size:12px;color:var(--primary-dark);font-weight:600;margin-bottom:8px}
+        .card-info{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+        .tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+        .tag{background:var(--light);color:var(--primary-dark);padding:3px 7px;border-radius:4px;font-size:9px;font-weight:600}
+        .prices{display:flex;flex-wrap:wrap;gap:6px;padding-top:8px;border-top:1px solid #f1f5f9;margin-bottom:10px}
+        .price{background:#f0fdf4;padding:4px 8px;border-radius:6px;font-size:10px;font-weight:600;color:var(--primary-dark)}
+        .card-actions{display:flex;gap:6px}
+        .card-actions .btn{flex:1;padding:8px;font-size:11px}
+        .stat-card{text-align:center}
+        .stat-icon{font-size:28px;margin-bottom:6px}
+        .stat-value{font-size:28px;font-weight:800}
+        .stat-label{font-size:11px;color:var(--muted)}
+        .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+        .section-title{font-size:16px;font-weight:700}
+        .ai-container{display:grid;grid-template-columns:1fr 320px;gap:16px}
+        @media(max-width:900px){.ai-container{grid-template-columns:1fr}}
+        .chat-panel{background:var(--card);border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;display:flex;flex-direction:column}
+        .chat-header{background:linear-gradient(135deg,var(--purple),var(--purple-dark));padding:14px 18px;color:white;display:flex;align-items:center;gap:10px}
+        .chat-avatar{width:38px;height:38px;background:rgba(255,255,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+        .chat-title{font-size:15px;font-weight:700}
+        .chat-status{font-size:11px;opacity:0.9}
+        .chat-messages{flex:1;padding:14px;overflow-y:auto;max-height:400px;min-height:300px}
+        .msg{display:flex;gap:10px;margin-bottom:12px;max-width:90%}
+        .msg.user{margin-left:auto;flex-direction:row-reverse}
+        .msg-avatar{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+        .msg.ai .msg-avatar{background:var(--purple)}
+        .msg.user .msg-avatar{background:var(--primary)}
+        .msg-content{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5}
+        .msg.ai .msg-content{background:#f1f5f9}
+        .msg.user .msg-content{background:var(--primary);color:white}
+        .chat-input-area{padding:12px;border-top:1px solid #e2e8f0;display:flex;gap:8px}
+        .chat-input{flex:1;padding:10px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:13px;font-family:inherit}
+        .chat-input:focus{outline:none;border-color:var(--purple)}
+        .sidebar{display:flex;flex-direction:column;gap:14px}
+        .sidebar-card{background:var(--card);border-radius:14px;padding:16px;border:1px solid #e2e8f0}
+        .sidebar-title{font-size:13px;font-weight:700;margin-bottom:12px}
+        .quick-btn{width:100%;padding:10px 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;font-size:11px;cursor:pointer;text-align:left;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+        .quick-btn:hover{background:var(--light);border-color:var(--primary)}
+        .rec-card{background:linear-gradient(135deg,rgba(139,92,246,0.1),rgba(124,58,237,0.05));border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:10px;margin-bottom:8px}
+        .rec-label{font-size:9px;color:var(--purple);font-weight:700;text-transform:uppercase}
+        .rec-value{font-size:18px;font-weight:800}
+        .rec-detail{font-size:10px;color:var(--muted)}
+        .market-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:16px}
+        .market-card{background:var(--card);border-radius:10px;padding:14px;text-align:center;border:1px solid #e2e8f0}
+        .market-code{font-size:11px;font-weight:700;color:var(--muted)}
+        .market-price{font-size:18px;font-weight:800;color:var(--primary-dark)}
+        .market-change{font-size:10px;font-weight:600}
+        .market-change.up{color:#15803d}
+        .market-change.down{color:#dc2626}
+        .search-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+        .search-input{flex:1;min-width:200px;padding:10px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:13px;font-family:inherit}
+        .search-input:focus{outline:none;border-color:var(--primary)}
+        .filter-btn{padding:10px 14px;background:white;border:2px solid #e2e8f0;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer}
+        .filter-btn.active{border-color:var(--primary);background:var(--light)}
+        .news-item{background:var(--card);border-radius:12px;padding:14px;border:1px solid #e2e8f0;margin-bottom:12px}
+        .news-date{font-size:10px;color:var(--muted);margin-bottom:4px}
+        .news-title{font-size:13px;font-weight:700;margin-bottom:6px}
+        .news-excerpt{font-size:11px;color:var(--muted);line-height:1.5}
+        .table-wrap{background:var(--card);border-radius:14px;overflow:hidden;border:1px solid #e2e8f0}
+        .table-header{background:linear-gradient(135deg,#1e293b,#334155);padding:12px 16px;color:white;font-weight:700;font-size:14px}
+        .table-scroll{overflow-x:auto}
+        table{width:100%;border-collapse:collapse;min-width:600px}
+        th{background:#f8fafc;padding:10px 8px;text-align:center;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase}
+        th:first-child{text-align:left}
+        td{padding:10px 8px;text-align:center;border-bottom:1px solid #f1f5f9;font-size:12px}
+        td:first-child{text-align:left}
+        tr:hover{background:#f8fafc}
+        .price-best{background:#dcfce7;color:#15803d;padding:4px 8px;border-radius:5px;font-weight:700}
+        .modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;padding:20px}
+        .modal-overlay.active{display:flex}
+        .modal{background:white;border-radius:20px;padding:24px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
+        .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+        .modal-title{font-size:18px;font-weight:700}
+        .modal-close{width:32px;height:32px;background:#f1f5f9;border:none;border-radius:8px;font-size:16px;cursor:pointer}
+        .checkbox-group{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+        .checkbox-item{display:flex;align-items:center;gap:6px;font-size:12px}
+        .checkbox-item input{width:16px;height:16px}
+        .footer{background:var(--card);border-top:1px solid #e2e8f0;padding:14px 20px;margin-top:30px;text-align:center;font-size:11px;color:var(--muted)}
+        .toast{position:fixed;bottom:20px;right:20px;background:#1e293b;color:white;padding:12px 18px;border-radius:10px;font-size:13px;z-index:2000;display:none}
+        .toast.show{display:block;animation:slideIn 0.3s ease}
+        @keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+    </style>
 </head>
 <body>
-<div id="app"></div>
+<div class="login-screen" id="loginScreen">
+    <div class="login-card">
+        <div class="login-logo">🤖</div>
+        <h1 class="login-title">Dalmex Fiber Hub</h1>
+        <p class="login-subtitle" data-en="AI-Powered Paper Trading" data-es="Comercio de Papel con IA">AI-Powered Paper Trading</p>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('en')">🇺🇸 English</button>
+            <button class="lang-btn" onclick="setLang('es')">🇲🇽 Español</button>
+        </div>
+        <div class="login-error" id="loginError">Invalid username or password</div>
+        <div class="form-group">
+            <label class="form-label" data-en="Username" data-es="Usuario">Username</label>
+            <input type="text" id="username" class="form-input" placeholder="Enter username">
+        </div>
+        <div class="form-group">
+            <label class="form-label" data-en="Password" data-es="Contraseña">Password</label>
+            <input type="password" id="password" class="form-input" placeholder="Enter password">
+        </div>
+        <button class="btn btn-purple btn-full" onclick="handleLogin()" data-en="Sign In" data-es="Iniciar Sesión">Sign In</button>
+        <button class="btn btn-green btn-full" onclick="quickLogin()">⚡ Quick Access</button>
+        <div class="login-footer">
+            <strong>Dalmex Recycling LLC</strong><br>
+            2828 Nagle St. Dallas, TX 75220 • 214-352-2000
+        </div>
+    </div>
+</div>
+<div class="app" id="app">
+    <div class="ticker">
+        <div class="ticker-track" id="ticker"></div>
+    </div>
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-left">
+                <div class="logo">🤖</div>
+                <div class="brand"><h1>Dalmex Fiber Hub</h1><span>Enterprise AI • Dallas, TX</span></div>
+            </div>
+            <div class="header-right">
+                <button class="lang-btn" onclick="setLang(lang==='en'?'es':'en')" id="langToggle">🇲🇽 Español</button>
+                <div class="user-badge" id="userBadge">User</div>
+                <button class="btn btn-danger" onclick="logout()" style="padding:6px 12px;font-size:11px">Logout</button>
+            </div>
+        </div>
+    </header>
+    <nav class="nav" id="nav"></nav>
+    <main class="main" id="main"></main>
+    <footer class="footer">© 2025 Dalmex Recycling LLC • Created by Robert Vandling • AI-Powered by Claude</footer>
+</div>
+<div class="modal-overlay" id="addModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 class="modal-title" data-en="Add Contact" data-es="Agregar Contacto">Add Contact</h3>
+            <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <form id="contactForm">
+            <div class="form-group">
+                <label class="form-label">Company *</label>
+                <input type="text" id="fCompany" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Contact Person *</label>
+                <input type="text" id="fContact" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email *</label>
+                <input type="email" id="fEmail" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Phone</label>
+                <input type="tel" id="fPhone" class="form-input">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Type *</label>
+                <select id="fType" class="form-select" required>
+                    <option value="">Select...</option>
+                    <option value="Mill">Mill</option>
+                    <option value="Broker">Broker</option>
+                    <option value="Export">Export</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Commodities</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-item"><input type="checkbox" name="comm" value="OCC"> OCC</label>
+                    <label class="checkbox-item"><input type="checkbox" name="comm" value="PM"> PM</label>
+                    <label class="checkbox-item"><input type="checkbox" name="comm" value="SWL"> SWL</label>
+                    <label class="checkbox-item"><input type="checkbox" name="comm" value="DLK"> DLK</label>
+                    <label class="checkbox-item"><input type="checkbox" name="comm" value="SOP"> SOP</label>
+                    <label class="checkbox-item"><input type="checkbox" name="comm" value="HWEC"> HWEC</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="checkbox-item"><input type="checkbox" id="fPriority"> Priority Contact</label>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Notes</label>
+                <input type="text" id="fNotes" class="form-input">
+            </div>
+            <div style="display:flex;gap:10px;margin-top:16px">
+                <button type="button" class="btn btn-gray" style="flex:1" onclick="closeModal()">Cancel</button>
+                <button type="submit" class="btn btn-green" style="flex:1">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="toast" id="toast"></div>
 <script>
-// ============================================
-// FIBER HUB PRO - DALMEX RECYCLING
-// Created by R.J. Vandling
-// ============================================
-
-var CONFIG = {
-  admin: { username: 'RJVandling', password: 'Sailer66' },
-  version: '2.0',
-  storageKeys: { buyers: 'fhp_buyers', leads: 'fhp_leads', pending: 'fhp_pending', theme: 'fhp_theme', lang: 'fhp_lang', history: 'fhp_history', activity: 'fhp_activity' }
-};
-
-var T = {
-  en: { dashboard:'Dashboard', intel:'Intel', tools:'Tools', findBuyers:'Find Buyers', myLeads:'My Leads', outreach:'Outreach', buyers:'Buyers', prices:'Prices', admin:'Admin', search:'Search...', all:'All', mills:'Mills', brokers:'Brokers', exporters:'Exporters', save:'Save', cancel:'Cancel', add:'Add', edit:'Edit', delete:'Delete', company:'Company', contact:'Contact', email:'Email', phone:'Phone', type:'Type', notes:'Notes', new:'New', contacted:'Contacted', responded:'Responded', converted:'Converted', perTon:'per ton', margin:'Margin', profit:'Profit', yourCost:'Your Cost', ppiCompare:'PPI Compare', bestBuyers:'Best Buyers', report:'Industry Report', calculator:'Calculator', priceHistory:'Price History', qrCode:'QR Code', shareLink:'Share Link', welcome:'Welcome!', copied:'Copied!', saved:'Saved!', approved:'Approved!', marketPrices:'Market Prices', totalBuyers:'Total Buyers', topPrice:'Top Price', avgPrice:'Avg Price', openAccess:'Open Access', grade:'Grade', market:'Market', yours:'Yours', gap:'Gap', volume:'Volume', forecast:'Forecast', forecastText:'OCC stable $55-65 range expected Q1 2026. SWL strong demand with Marck at $230. HWEC premium grades in high demand.' },
-  es: { dashboard:'Panel', intel:'Intel', tools:'Herram.', findBuyers:'Buscar', myLeads:'Prospectos', outreach:'Contacto', buyers:'Compradores', prices:'Precios', admin:'Admin', search:'Buscar...', all:'Todos', mills:'Molinos', brokers:'Corredores', exporters:'Export.', save:'Guardar', cancel:'Cancelar', add:'Agregar', edit:'Editar', delete:'Eliminar', company:'Empresa', contact:'Contacto', email:'Correo', phone:'Teléfono', type:'Tipo', notes:'Notas', new:'Nuevo', contacted:'Contactado', responded:'Respondió', converted:'Convertido', perTon:'por ton', margin:'Margen', profit:'Ganancia', yourCost:'Tu Costo', ppiCompare:'Comparar PPI', bestBuyers:'Mejores', report:'Reporte', calculator:'Calculadora', priceHistory:'Historial', qrCode:'Código QR', shareLink:'Compartir', welcome:'¡Bienvenido!', copied:'¡Copiado!', saved:'¡Guardado!', approved:'¡Aprobado!', marketPrices:'Precios', totalBuyers:'Total', topPrice:'Mejor Precio', avgPrice:'Promedio', openAccess:'Acceso Libre', grade:'Grado', market:'Mercado', yours:'Tuyo', gap:'Dif', volume:'Volumen', forecast:'Pronóstico', forecastText:'OCC estable $55-65 Q1 2026. SWL fuerte demanda.' }
-};
-
-var defaultBuyers = [
-  {id:1,company:'Georgia Pacific',contact:'Jake Walker',email:'jacob.walker1@gapac.com',phone:'',type:'mill',priority:true,prices:{OCC:65,PM:155,SWL:215,HWEC:370},lastContact:'2024-12-28'},
-  {id:2,company:'SKG Westrock',contact:'Cynthia Torres',email:'cynthia.torres@smurfitwestrock.com',phone:'',type:'mill',priority:true,prices:{OCC:60},lastContact:'2024-12-27'},
-  {id:3,company:'Greenside',contact:'Casandra Espinoza',email:'grupocartonero.mty@gmail.com',phone:'',type:'export',priority:true,prices:{OCC:58,PM:165,SWL:215},lastContact:'2024-12-26'},
-  {id:4,company:'American Fiber',contact:'Steve Minor',email:'sminor@amfiberservices.com',phone:'',type:'broker',priority:true,prices:{SWL:215,CBS:160,HWEC:250},lastContact:'2024-12-25'},
-  {id:5,company:'Marck',contact:'Don Langley',email:'dlongley@marck.net',phone:'',type:'broker',priority:false,prices:{OCC:55,SWL:230},lastContact:'2024-12-20'}
+const defaultBuyers=[
+{id:1,company:"Georgia Pacific",contact:"Jake Walker",email:"jacob.walker1@gapac.com",phone:"(404) 652-4000",type:"Mill",priority:true,commodities:["OCC","DLK","PM","SOP","SWL","HWEC"],prices:{OCC:65,PM:155,SWL:215,DLK:90,SOP:150,HWEC:370},notes:"World's largest de-ink fiber user"},
+{id:2,company:"Smurfit Westrock",contact:"Cynthia Torres",email:"cynthia.torres@smurfitwestrock.com",phone:"(972) 686-7649",type:"Mill",priority:true,commodities:["OCC","PM"],prices:{OCC:60,PM:180},notes:"LOCAL - Best PM at $180!"},
+{id:3,company:"Greenside (Goldbergs)",contact:"Casandra Espinoza",email:"grupocartonero.mty@gmail.com",phone:"+52 81 8123-4567",type:"Export",priority:true,commodities:["OCC","PM","SWL"],prices:{OCC:58,PM:165,SWL:215},notes:"Mexico export"},
+{id:4,company:"American Fiber",contact:"Steve Minor",email:"SMinor@amfiberservices.com",phone:"(678) 555-1234",type:"Broker",priority:true,commodities:["OCC","PM","SWL","HWEC"],prices:{OCC:62,PM:160,SWL:220,HWEC:365},notes:"Best SWL at $220!"},
+{id:5,company:"Graphic Packaging - Waco",contact:"Fiber Procurement",email:"fiberprocurement@graphicpkg.com",phone:"(770) 240-7200",type:"Mill",priority:true,commodities:["OCC","Mixed Paper"],prices:{OCC:70,PM:55},notes:"NEW MILL 2026! Best OCC $70!"},
+{id:6,company:"Green Bay Packaging",contact:"Fiber Procurement",email:"info@gbp.com",phone:"(501) 354-2131",type:"Mill",priority:true,commodities:["OCC"],prices:{OCC:68},notes:"$1B expansion!"},
+{id:7,company:"Pratt Industries",contact:"Fiber Procurement",email:"recyclingcs@prattindustries.com",phone:"(888) 347-7288",type:"Mill",priority:false,commodities:["OCC","Mixed Paper"],prices:{OCC:65,PM:50},notes:"100% recycled"},
+{id:8,company:"International Paper",contact:"Recycling Division",email:"recycling@ipaper.com",phone:"(972) 245-3000",type:"Mill",priority:false,commodities:["OCC","DLK","SOP","PM"],prices:{OCC:65,PM:52,DLK:95,SOP:145},notes:"LOCAL Carrollton"},
+{id:9,company:"Texas Recycling",contact:"Joel/Craig Litman",email:"info@texasrecycling.com",phone:"(214) 357-0262",type:"Broker",priority:false,commodities:["OCC","PM","SOP","SWL"],prices:{OCC:62,PM:48,SWL:205,SOP:140},notes:"25+ years DFW"}
 ];
-
-var companiesToResearch = [
-  {name:'International Paper',type:'Mill',website:'internationalpaper.com',notes:'Largest US paper company'},
-  {name:'Packaging Corp of America',type:'Mill',website:'packagingcorp.com',notes:'Major containerboard producer'},
-  {name:'Pratt Industries',type:'Mill',website:'prattindustries.com',notes:'100% recycled containerboard'},
-  {name:'Clearwater Paper',type:'Mill',website:'clearwaterpaper.com',notes:'Tissue and paperboard'},
-  {name:'Graphic Packaging',type:'Mill',website:'graphicpkg.com',notes:'Paperboard packaging'},
-  {name:'Sonoco',type:'Mill/Broker',website:'sonoco.com',notes:'Diversified packaging'},
-  {name:'DS Smith',type:'Mill',website:'dssmith.com',notes:'UK company, US operations'},
-  {name:'Cascades',type:'Mill',website:'cascades.com',notes:'Canadian, US facilities'},
-  {name:'Republic Services',type:'Recycler',website:'republicservices.com',notes:'May partner on fiber'},
-  {name:'Waste Management',type:'Recycler',website:'wm.com',notes:'Recycling division'}
-];
-
-var resources = [
-  {id:1,title:'ISRI Member Directory',type:'Industry Association',icon:'🏭',color:'#3b82f6',url:'https://www.isri.org/recycling-commodities/find-a-recycler',desc:'Search verified paper recyclers and brokers by region.',tips:['Search by "Paper" category','Filter by state','Look for "Paper Stock Dealers"']},
-  {id:2,title:'LinkedIn Sales Navigator',type:'Professional Network',icon:'💼',color:'#0077b5',url:'https://www.linkedin.com/sales/search/people',desc:'Find fiber buyers and procurement managers at target companies.',tips:['Search: "fiber buyer" OR "paper procurement"','Filter by Texas/Southeast','Send personalized connection requests']},
-  {id:3,title:'AF&PA Member Mills',type:'Industry Association',icon:'🌲',color:'#166534',url:'https://www.afandpa.org/about-us/member-companies',desc:'All major US paper manufacturers.',tips:['Visit company websites','Look for "Suppliers" pages','Find procurement contacts']},
-  {id:4,title:'RecyclingMarkets.net',type:'Trading Platform',icon:'♻️',color:'#10b981',url:'https://www.recyclingmarkets.net/',desc:'Post listings and connect with buyers.',tips:['Create seller profile','Post available materials','Check price benchmarks']},
-  {id:5,title:'Google Search Strategies',type:'Research Method',icon:'🔍',color:'#ea4335',url:'https://www.google.com',desc:'Targeted searches to find purchasing contacts.',tips:['"fiber procurement manager" + Texas','[Company] + "vendor registration"','[Company] + "raw materials buyer"']}
-];
-
-var ppiData = {OCC:{index:78.2,marketLow:55,marketHigh:70},SWL:{index:92.4,marketLow:200,marketHigh:240},PM:{index:85.1,marketLow:145,marketHigh:175},CBS:{index:88.5,marketLow:150,marketHigh:180},HWEC:{index:95.2,marketLow:240,marketHigh:380},DLK:{index:82.3,marketLow:60,marketHigh:85}};
-var marketPrices = {OCC:{low:55,high:65},SWL:{low:215,high:230},PM:{low:155,high:165},CBS:{low:155,high:165},HWEC:{low:250,high:370},DLK:{low:60,high:80}};
-var tickerItems = [{type:'market',text:'OCC: $55-65/ton'},{type:'market',text:'SWL: $215-230/ton'},{type:'tip',text:'Use LinkedIn to find fiber buyers'},{type:'price',text:'GP leads at $65 OCC'},{type:'tip',text:'Check ISRI directory for recyclers'}];
-
-// App State
-var state = {
-  isAdmin: false,
-  isBuyerForm: false,
-  currentTab: 'dashboard',
-  currentTheme: 'default',
-  lang: 'en',
-  buyers: [],
-  leads: [],
-  priceHistory: [],
-  activity: [],
-  searchTerm: '',
-  filterType: 'all',
-  leadFilter: 'all',
-  editBuyerId: null,
-  editLeadId: null,
-  calcCost: 45,
-  weeklyGoal: 10,
-  contactsMade: 0
-};
-
-function t(key) { return T[state.lang][key] || key; }
-
-function init() {
-  var params = new URLSearchParams(window.location.search);
-  if (params.get('submit')) {
-    state.isBuyerForm = true;
-    renderBuyerForm(params.get('company') || '');
-  } else {
-    loadData();
-    renderApp();
-  }
-}
-
-function loadData() {
-  var b = localStorage.getItem(CONFIG.storageKeys.buyers);
-  state.buyers = b ? JSON.parse(b) : JSON.parse(JSON.stringify(defaultBuyers));
-  var l = localStorage.getItem(CONFIG.storageKeys.leads);
-  state.leads = l ? JSON.parse(l) : [];
-  var th = localStorage.getItem(CONFIG.storageKeys.theme);
-  if (th) state.currentTheme = th;
-  var ln = localStorage.getItem(CONFIG.storageKeys.lang);
-  if (ln) state.lang = ln;
-  var ph = localStorage.getItem(CONFIG.storageKeys.history);
-  state.priceHistory = ph ? JSON.parse(ph) : generateHistory();
-  var act = localStorage.getItem(CONFIG.storageKeys.activity);
-  state.activity = act ? JSON.parse(act) : [];
-  // Count today's contacts
-  var today = new Date().toDateString();
-  state.contactsMade = state.activity.filter(function(a) { return new Date(a.time).toDateString() === today; }).length;
-}
-
-function saveData() {
-  localStorage.setItem(CONFIG.storageKeys.buyers, JSON.stringify(state.buyers));
-  localStorage.setItem(CONFIG.storageKeys.leads, JSON.stringify(state.leads));
-  localStorage.setItem(CONFIG.storageKeys.theme, state.currentTheme);
-  localStorage.setItem(CONFIG.storageKeys.lang, state.lang);
-  localStorage.setItem(CONFIG.storageKeys.history, JSON.stringify(state.priceHistory));
-  localStorage.setItem(CONFIG.storageKeys.activity, JSON.stringify(state.activity));
-}
-
-function generateHistory() {
-  var h = [], base = {OCC:60,SWL:220,PM:160};
-  for (var i=30; i>=0; i--) {
-    var d = new Date(); d.setDate(d.getDate()-i);
-    h.push({date:d.toISOString().split('T')[0],OCC:base.OCC+Math.floor(Math.random()*10-5),SWL:base.SWL+Math.floor(Math.random()*20-10),PM:base.PM+Math.floor(Math.random()*10-5)});
-  }
-  return h;
-}
-
-function logActivity(type, desc) {
-  state.activity.unshift({type:type,desc:desc,time:new Date().toISOString()});
-  if (state.activity.length > 50) state.activity.pop();
-  state.contactsMade++;
-  saveData();
-}
-
-function toast(msg) {
-  var el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(function() { el.classList.remove('show'); }, 2500);
-}
-
-function setTheme(theme) {
-  state.currentTheme = theme;
-  document.body.className = '';
-  if (theme !== 'default') document.body.classList.add('theme-' + theme);
-  saveData();
-}
-
-function toggleLang() {
-  state.lang = state.lang === 'en' ? 'es' : 'en';
-  saveData();
-  renderApp();
-  toast(state.lang === 'en' ? 'English' : 'Español');
-}
-
-function getShareLink() { return window.location.origin + window.location.pathname + '?submit=1'; }
-function getQRUrl() { return 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(getShareLink()); }
-// ============================================
-// BUYER FORM (Public Submission)
-// ============================================
-function renderBuyerForm(company) {
-  document.getElementById('app').innerHTML = '<div style="max-width:420px;margin:40px auto;padding:16px"><div class="panel-card" style="padding:28px"><div style="text-align:center;margin-bottom:20px"><div style="width:56px;height:56px;background:linear-gradient(135deg,var(--success),#059669);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 14px">💰</div><h1 style="font-size:20px;font-weight:800;margin-bottom:6px">Submit Your Prices</h1><p style="color:var(--text-muted);font-size:12px">Dalmex Recycling LLC - Dallas-Fort Worth, TX</p></div><div id="formContent"><div class="form-group"><label class="form-label">Company Name *</label><input type="text" class="form-input" id="bfCompany" value="'+company+'" placeholder="Your company name"></div><div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" id="bfContact" placeholder="Contact name"></div><div class="form-row"><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="bfEmail" placeholder="email@company.com"></div><div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" id="bfPhone" placeholder="555-123-4567"></div></div><div class="form-group"><label class="form-label">Your Buying Prices ($/ton)</label><div class="price-input-group"><div class="price-input-item"><label>OCC</label><input type="number" id="bfOCC" placeholder="55-70"></div><div class="price-input-item"><label>SWL</label><input type="number" id="bfSWL" placeholder="200-240"></div><div class="price-input-item"><label>PM</label><input type="number" id="bfPM" placeholder="145-175"></div><div class="price-input-item"><label>CBS</label><input type="number" id="bfCBS" placeholder="150-180"></div><div class="price-input-item"><label>HWEC</label><input type="number" id="bfHWEC" placeholder="240-380"></div><div class="price-input-item"><label>DLK</label><input type="number" id="bfDLK" placeholder="60-85"></div></div></div><button class="btn btn-success" style="width:100%;padding:16px;font-size:15px" onclick="submitPrices()">✓ Submit Prices</button></div></div><p style="text-align:center;margin-top:16px;font-size:10px;color:var(--text-muted)">Powered by Fiber Hub Pro</p></div>';
-}
-
-function submitPrices() {
-  var company = document.getElementById('bfCompany').value.trim();
-  if (!company) { toast('Company name required'); return; }
-  var prices = {};
-  ['OCC','SWL','PM','CBS','HWEC','DLK'].forEach(function(c) {
-    var v = document.getElementById('bf'+c).value;
-    if (v) prices[c] = parseInt(v);
-  });
-  var data = {company:company,contact:document.getElementById('bfContact').value.trim(),email:document.getElementById('bfEmail').value.trim(),phone:document.getElementById('bfPhone').value.trim(),prices:prices,submitted:new Date().toISOString()};
-  var pending = JSON.parse(localStorage.getItem(CONFIG.storageKeys.pending) || '[]');
-  pending.push(data);
-  localStorage.setItem(CONFIG.storageKeys.pending, JSON.stringify(pending));
-  document.getElementById('formContent').innerHTML = '<div style="text-align:center;padding:40px 20px;background:#d1fae5;border-radius:14px;color:#047857"><div style="font-size:48px;margin-bottom:16px">✅</div><h3 style="font-size:18px;margin-bottom:8px">Thank You!</h3><p style="font-size:13px">We\'ll review your pricing and be in touch soon.</p></div>';
-}
-
-// ============================================
-// MAIN APP RENDER
-// ============================================
-function renderApp() {
-  var leadCount = state.leads.filter(function(l){return l.status==='new';}).length;
-  document.getElementById('app').innerHTML = 
-    '<div class="ticker-wrap"><div class="ticker" id="ticker"></div></div>' +
-    '<header class="header"><div class="header-inner">' +
-      '<div class="header-left"><div class="logo">FH</div><div><div class="brand-title">Fiber Hub Pro</div><div class="brand-sub">Dalmex Recycling LLC</div></div></div>' +
-      '<div class="header-right">' +
-        '<button class="lang-btn" onclick="toggleLang()">' + (state.lang==='en'?'🇲🇽 ES':'🇺🇸 EN') + '</button>' +
-        '<div class="theme-selector"><button class="theme-btn t-default '+(state.currentTheme==='default'?'active':'')+'" onclick="setTheme(\'default\')" title="Default"></button><button class="theme-btn t-terminal '+(state.currentTheme==='terminal'?'active':'')+'" onclick="setTheme(\'terminal\')" title="Dark"></button><button class="theme-btn t-corporate '+(state.currentTheme==='corporate'?'active':'')+'" onclick="setTheme(\'corporate\')" title="Corporate"></button></div>' +
-        '<span class="user-badge" id="userBadge">' + (state.isAdmin ? '👑 Admin' : t('openAccess')) + '</span>' +
-        (state.isAdmin ? '' : '<button class="admin-login-btn" onclick="showLogin()">👑</button>') +
-      '</div>' +
-    '</div></header>' +
-    '<nav class="nav-bar"><div class="nav-inner" id="nav"></div></nav>' +
-    '<main class="main" id="main"></main>' +
-    '<footer class="footer"><strong>Fiber Hub Pro v' + CONFIG.version + '</strong><br>Created by <strong>R.J. Vandling</strong> for <strong>Dalmex Recycling, LLC</strong><br>Dallas-Fort Worth, Texas</footer>' +
-    renderModals();
-  
-  if (state.currentTheme !== 'default') document.body.classList.add('theme-' + state.currentTheme);
-  initTicker();
-  renderNav();
-  render();
-}
-
-function renderModals() {
-  return '<div class="login-overlay" id="loginModal"><div class="login-card"><div class="login-logo">👑</div><h2 class="login-title">Admin Login</h2><p class="login-subtitle">Authorized users only</p><div class="login-error" id="loginError"></div><div class="form-group"><label class="form-label">Username</label><input type="text" class="form-input" id="loginUser"></div><div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="loginPass"></div><button class="login-btn" onclick="doLogin()">🔐 Login</button><button class="login-cancel" onclick="hideLogin()">Cancel</button></div></div>' +
-  '<div class="modal-overlay" id="leadModal"><div class="modal"><div class="modal-header"><h3 class="modal-title" id="leadModalTitle">Add Lead</h3><button class="modal-close" onclick="closeLeadModal()">×</button></div><div class="modal-body"><div class="form-group"><label class="form-label">Company *</label><input type="text" class="form-input" id="lCompany"></div><div class="form-row"><div class="form-group"><label class="form-label">Contact Name</label><input type="text" class="form-input" id="lContact"></div><div class="form-group"><label class="form-label">Title</label><input type="text" class="form-input" id="lTitle"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="lEmail"></div><div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" id="lPhone"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Type</label><select class="form-select" id="lType"><option value="mill">Mill</option><option value="broker">Broker</option><option value="recycler">Recycler</option><option value="export">Exporter</option></select></div><div class="form-group"><label class="form-label">Region</label><input type="text" class="form-input" id="lRegion" placeholder="TX, Southeast..."></div></div><div class="form-group"><label class="form-label">Materials (comma separated)</label><input type="text" class="form-input" id="lMaterials" placeholder="OCC, SWL, PM"></div><div class="form-group"><label class="form-label">Notes</label><textarea class="form-textarea" id="lNotes"></textarea></div></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeLeadModal()">Cancel</button><button class="btn btn-primary" onclick="saveLead()">💾 Save</button></div></div></div>' +
-  '<div class="modal-overlay" id="buyerModal"><div class="modal"><div class="modal-header"><h3 class="modal-title" id="buyerModalTitle">Add Buyer</h3><button class="modal-close" onclick="closeBuyerModal()">×</button></div><div class="modal-body"><div class="form-row"><div class="form-group"><label class="form-label">Company *</label><input type="text" class="form-input" id="bCompany"></div><div class="form-group"><label class="form-label">Contact</label><input type="text" class="form-input" id="bContact"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="bEmail"></div><div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" id="bPhone"></div></div><div class="form-group"><label class="form-label">Type</label><select class="form-select" id="bType"><option value="mill">Mill</option><option value="broker">Broker</option><option value="export">Export</option></select></div><div class="form-group"><label class="form-label">Prices ($/ton)</label><div class="price-input-group"><div class="price-input-item"><label>OCC</label><input type="number" id="pOCC"></div><div class="price-input-item"><label>SWL</label><input type="number" id="pSWL"></div><div class="price-input-item"><label>PM</label><input type="number" id="pPM"></div><div class="price-input-item"><label>CBS</label><input type="number" id="pCBS"></div><div class="price-input-item"><label>HWEC</label><input type="number" id="pHWEC"></div><div class="price-input-item"><label>DLK</label><input type="number" id="pDLK"></div></div></div></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeBuyerModal()">Cancel</button><button class="btn btn-primary" onclick="saveBuyer()">💾 Save</button></div></div></div>';
-}
-
-function showLogin() { document.getElementById('loginModal').classList.add('active'); }
-function hideLogin() { document.getElementById('loginModal').classList.remove('active'); }
-function doLogin() {
-  var u = document.getElementById('loginUser').value.trim();
-  var p = document.getElementById('loginPass').value;
-  if (u.toLowerCase() === CONFIG.admin.username.toLowerCase() && p === CONFIG.admin.password) {
-    state.isAdmin = true;
-    hideLogin();
-    renderApp();
-    toast(t('welcome'));
-  } else {
-    document.getElementById('loginError').textContent = 'Invalid credentials';
-    document.getElementById('loginError').classList.add('show');
-  }
-}
-
-function initTicker() {
-  var html = tickerItems.map(function(i) {
-    return '<div class="ticker-item"><span class="ticker-badge ' + i.type + '">' + i.type.toUpperCase() + '</span> ' + i.text + '</div>';
-  }).join('');
-  document.getElementById('ticker').innerHTML = html + html;
-}
-
-function renderNav() {
-  var leadCount = state.leads.filter(function(l){return l.status==='new';}).length;
-  var tabs = [
-    {id:'dashboard',icon:'📊',label:t('dashboard')},
-    {id:'intel',icon:'📈',label:t('intel')},
-    {id:'tools',icon:'🧮',label:t('tools')},
-    {id:'findBuyers',icon:'📚',label:t('findBuyers')},
-    {id:'leads',icon:'🎯',label:t('myLeads'),count:leadCount},
-    {id:'outreach',icon:'📧',label:t('outreach')},
-    {id:'buyers',icon:'👥',label:t('buyers'),count:state.buyers.length},
-    {id:'prices',icon:'💰',label:t('prices')}
-  ];
-  if (state.isAdmin) tabs.push({id:'admin',icon:'⚙️',label:t('admin'),admin:true});
-  document.getElementById('nav').innerHTML = tabs.map(function(tab) {
-    return '<button class="nav-btn ' + (state.currentTab===tab.id?'active':'') + (tab.admin?' admin-only':'') + '" onclick="setTab(\'' + tab.id + '\')">' + tab.icon + ' ' + tab.label + (tab.count ? ' <span class="nav-count">' + tab.count + '</span>' : '') + '</button>';
-  }).join('');
-}
-
-function setTab(tab) { state.currentTab = tab; renderNav(); render(); }
-function render() {
-  var main = document.getElementById('main');
-  switch(state.currentTab) {
-    case 'dashboard': main.innerHTML = renderDashboard(); break;
-    case 'intel': main.innerHTML = renderIntel(); break;
-    case 'tools': main.innerHTML = renderTools(); break;
-    case 'findBuyers': main.innerHTML = renderFindBuyers(); break;
-    case 'leads': main.innerHTML = renderLeads(); break;
-    case 'outreach': main.innerHTML = renderOutreach(); break;
-    case 'buyers': main.innerHTML = renderBuyers(); break;
-    case 'prices': main.innerHTML = renderPrices(); break;
-    case 'admin': main.innerHTML = renderAdmin(); break;
-  }
-}
-// ============================================
-// DASHBOARD
-// ============================================
-function getStats() {
-  var mills = state.buyers.filter(function(b){return b.type==='mill';}).length;
-  var brokers = state.buyers.filter(function(b){return b.type==='broker';}).length;
-  var exporters = state.buyers.filter(function(b){return b.type==='export';}).length;
-  var occPrices = state.buyers.filter(function(b){return b.prices&&b.prices.OCC;}).map(function(b){return b.prices.OCC;});
-  var topOCC = occPrices.length ? Math.max.apply(null, occPrices) : 0;
-  var avgOCC = occPrices.length ? Math.round(occPrices.reduce(function(a,b){return a+b;},0)/occPrices.length) : 0;
-  var newLeads = state.leads.filter(function(l){return l.status==='new';}).length;
-  var pipelineValue = state.leads.filter(function(l){return l.status!=='converted';}).length * 500; // Est $500/lead
-  return {total:state.buyers.length,mills:mills,brokers:brokers,exporters:exporters,topOCC:topOCC,avgOCC:avgOCC,newLeads:newLeads,pipelineValue:pipelineValue};
-}
-
-function renderDashboard() {
-  var s = getStats();
-  var topBuyers = state.buyers.filter(function(b){return b.prices&&b.prices.OCC;}).sort(function(a,b){return b.prices.OCC-a.prices.OCC;}).slice(0,3);
-  var goalPct = Math.min(100, Math.round((state.contactsMade / state.weeklyGoal) * 100));
-  
-  return '<div style="margin-bottom:16px"><h2 style="font-size:22px;font-weight:800;color:var(--text)">📊 ' + t('dashboard') + '</h2><p style="font-size:12px;color:var(--text-muted)">Your business development command center</p></div>' +
-    
-    // Goal Tracker
-    '<div class="goal-tracker"><div class="goal-title">📞 Daily Outreach Goal</div><div class="goal-progress"><div class="goal-fill" style="width:'+goalPct+'%"></div></div><div class="goal-text"><span>'+state.contactsMade+' of '+state.weeklyGoal+' contacts today</span><span>'+goalPct+'%</span></div></div>' +
-    
-    // Pipeline Value
-    (state.leads.length ? '<div class="pipeline-value"><div class="pipeline-amount">$'+s.pipelineValue.toLocaleString()+'</div><div class="pipeline-label">Estimated Pipeline Value ('+state.leads.filter(function(l){return l.status!=='converted';}).length+' active leads × $500)</div></div>' : '') +
-    
-    // Stats Grid
-    '<div class="stats-grid">' +
-      '<div class="stat-card" onclick="setTab(\'buyers\')"><div class="stat-icon purple">👥</div><div class="stat-value">'+s.total+'</div><div class="stat-label">'+t('totalBuyers')+'</div><div class="stat-sub">Click to view all</div></div>' +
-      '<div class="stat-card" onclick="setTab(\'prices\')"><div class="stat-icon green">💰</div><div class="stat-value">$'+s.topOCC+'</div><div class="stat-label">'+t('topPrice')+' (OCC)</div><div class="stat-sub">Georgia Pacific leads</div></div>' +
-      '<div class="stat-card" onclick="setTab(\'intel\')"><div class="stat-icon blue">📈</div><div class="stat-value">$'+s.avgOCC+'</div><div class="stat-label">'+t('avgPrice')+' OCC</div><div class="stat-sub">Market average</div></div>' +
-      '<div class="stat-card" onclick="setTab(\'leads\')"><div class="stat-icon yellow">🎯</div><div class="stat-value">'+s.newLeads+'</div><div class="stat-label">New Leads</div><div class="stat-sub">Awaiting contact</div></div>' +
-      '<div class="stat-card" onclick="state.filterType=\'mill\';setTab(\'buyers\')"><div class="stat-icon cyan">🏭</div><div class="stat-value">'+s.mills+'</div><div class="stat-label">'+t('mills')+'</div><div class="stat-sub">Direct buyers</div></div>' +
-      '<div class="stat-card" onclick="state.filterType=\'broker\';setTab(\'buyers\')"><div class="stat-icon red">🤝</div><div class="stat-value">'+s.brokers+'</div><div class="stat-label">'+t('brokers')+'</div><div class="stat-sub">Trading partners</div></div>' +
-    '</div>' +
-    
-    // Top Buyers & Quick Actions
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">'+
-      '<div class="panel-card"><div class="panel-title">🏆 Top OCC Buyers</div>' + topBuyers.map(function(b,i){
-        var margin = b.prices.OCC - state.calcCost;
-        return '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px"><div style="display:flex;align-items:center;gap:12px"><div style="width:30px;height:30px;background:linear-gradient(135deg,var(--warning),#fbbf24);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff">'+(i+1)+'</div><div><div style="font-size:13px;font-weight:700">'+b.company+'</div><div style="font-size:10px;color:var(--text-muted)">'+b.type+'</div></div></div><div style="text-align:right"><div style="font-size:18px;font-weight:800;color:var(--profit)">$'+b.prices.OCC+'</div><div style="font-size:10px;color:'+(margin>=0?'var(--profit)':'var(--loss)')+'">+$'+margin+' margin</div></div></div>';
-      }).join('') + '</div>' +
-      
-      '<div class="panel-card"><div class="panel-title">⚡ Quick Actions</div>' +
-        '<button class="quick-action" onclick="setTab(\'leads\');setTimeout(openLeadModal,100)"><div class="quick-action-icon" style="background:#fee2e2">🎯</div><div class="quick-action-text">Add New Lead</div></button>' +
-        '<button class="quick-action" onclick="setTab(\'outreach\')"><div class="quick-action-icon" style="background:#dbeafe">📧</div><div class="quick-action-text">View Outreach Templates</div></button>' +
-        '<button class="quick-action" onclick="setTab(\'intel\');setTimeout(showPPICompare,100)"><div class="quick-action-icon" style="background:#d1fae5">📊</div><div class="quick-action-text">PPI Price Compare</div></button>' +
-        '<button class="quick-action" onclick="setTab(\'tools\')"><div class="quick-action-icon" style="background:#f3e8ff">🧮</div><div class="quick-action-text">Profit Calculator</div></button>' +
-      '</div>' +
-    '</div>' +
-    
-    // Recent Activity
-    (state.activity.length ? '<div class="panel-card"><div class="panel-title">📋 Recent Activity</div>' + state.activity.slice(0,5).map(function(a){
-      var icon = a.type==='email'?'📧':a.type==='call'?'📞':a.type==='sms'?'💬':'📝';
-      var time = new Date(a.time);
-      var timeStr = time.toLocaleDateString() + ' ' + time.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-      return '<div class="activity-item"><div class="activity-icon" style="background:var(--bg)">'+icon+'</div><div class="activity-content"><div class="activity-title">'+a.desc+'</div><div class="activity-time">'+timeStr+'</div></div></div>';
-    }).join('') + '</div>' : '');
-}
-
-// ============================================
-// INTEL TAB
-// ============================================
-function renderIntel() {
-  return '<div style="margin-bottom:16px"><h2 style="font-size:22px;font-weight:800;color:var(--text)">📈 Market Intelligence</h2><p style="font-size:12px;color:var(--text-muted)">Commodity pricing data and analysis</p></div>' +
-    '<div class="intel-grid">' +
-      '<div class="intel-btn" onclick="showPPICompare()"><div class="intel-btn-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">📊</div><div class="intel-btn-title">'+t('ppiCompare')+'</div><div class="intel-btn-desc">PPI Index vs Market</div></div>' +
-      '<div class="intel-btn" onclick="showBestBuyers()"><div class="intel-btn-icon" style="background:linear-gradient(135deg,var(--warning),#d97706)">🏆</div><div class="intel-btn-title">'+t('bestBuyers')+'</div><div class="intel-btn-desc">Top price per grade</div></div>' +
-      '<div class="intel-btn" onclick="showReport()"><div class="intel-btn-icon" style="background:linear-gradient(135deg,var(--success),#059669)">📋</div><div class="intel-btn-title">'+t('report')+'</div><div class="intel-btn-desc">Volume & trends</div></div>' +
-      '<div class="intel-btn" onclick="setTab(\'tools\')"><div class="intel-btn-icon" style="background:linear-gradient(135deg,var(--purple),#7c3aed)">🧮</div><div class="intel-btn-title">'+t('calculator')+'</div><div class="intel-btn-desc">Margins & profit</div></div>' +
-    '</div>' +
-    '<div id="intelResults"></div>';
-}
-
-function showPPICompare() {
-  var data = [];
-  Object.keys(ppiData).forEach(function(c) {
-    var ppi = ppiData[c];
-    var best = getHighestPair(c);
-    var ourPrice = best ? best.price : 0;
-    var midMarket = (ppi.marketLow + ppi.marketHigh) / 2;
-    data.push({commodity:c, ppiIndex:ppi.index, marketRange:ppi.marketLow+'-'+ppi.marketHigh, ourPrice:ourPrice, gap:ourPrice-midMarket});
-  });
-  var html = '<div class="panel-card"><div class="panel-title">📊 '+t('ppiCompare')+'</div><div class="ppi-compare"><div class="ppi-row header"><div class="ppi-commodity">'+t('grade')+'</div><div class="ppi-value">PPI</div><div class="ppi-value">'+t('market')+'</div><div class="ppi-value">'+t('yours')+'</div><div class="ppi-gap">'+t('gap')+'</div></div>';
-  data.forEach(function(d) {
-    var gc = d.gap >= 0 ? 'gap-positive' : 'gap-negative';
-    html += '<div class="ppi-row"><div class="ppi-commodity"><strong>'+d.commodity+'</strong></div><div class="ppi-value">'+d.ppiIndex+'</div><div class="ppi-value">$'+d.marketRange+'</div><div class="ppi-value" style="color:var(--profit)">'+(d.ourPrice?'$'+d.ourPrice:'-')+'</div><div class="ppi-gap '+gc+'">'+(d.ourPrice?(d.gap>=0?'+':'')+d.gap.toFixed(0):'-')+'</div></div>';
-  });
-  html += '</div></div>';
-  document.getElementById('intelResults').innerHTML = html;
-}
-
-function getHighestPair(commodity) {
-  var best = null, hp = 0;
-  state.buyers.forEach(function(b) {
-    if (b.prices && b.prices[commodity] && b.prices[commodity] > hp) {
-      hp = b.prices[commodity]; best = b;
-    }
-  });
-  return best ? {buyer:best, price:hp} : null;
-}
-
-function showBestBuyers() {
-  var commodities = ['OCC','SWL','PM','CBS','HWEC','DLK'];
-  var html = '<div class="panel-card"><div class="panel-title">🏆 '+t('bestBuyers')+'</div>';
-  commodities.forEach(function(c) {
-    var pair = getHighestPair(c);
-    if (pair) {
-      html += '<div class="highest-pair"><div><div class="highest-pair-commodity">'+c+'</div><div class="highest-pair-buyer">'+pair.buyer.company+' ('+pair.buyer.type+')</div></div><div class="highest-pair-price">$'+pair.price+'</div></div>';
-    }
-  });
-  html += '</div>';
-  document.getElementById('intelResults').innerHTML = html;
-}
-
-function showReport() {
-  var vols = {OCC:85,SWL:45,PM:62,CBS:28,HWEC:15,DLK:32};
-  var totalVol = Object.values(vols).reduce(function(a,b){return a+b;},0);
-  var html = '<div class="report-section"><div class="report-header"><div class="report-title">📋 '+t('report')+'</div><div class="report-date">'+new Date().toLocaleDateString()+'</div></div>' +
-    '<div class="scorecard"><div class="scorecard-item"><div class="scorecard-value">'+totalVol+'%</div><div class="scorecard-label">Market Coverage</div></div><div class="scorecard-item"><div class="scorecard-value">$'+getStats().avgOCC+'</div><div class="scorecard-label">Avg OCC</div></div><div class="scorecard-item"><div class="scorecard-value">'+state.buyers.length+'</div><div class="scorecard-label">Active Buyers</div></div><div class="scorecard-item"><div class="scorecard-value">'+state.leads.length+'</div><div class="scorecard-label">Leads</div></div></div></div>' +
-    '<div class="panel-card"><div class="panel-title">📊 '+t('volume')+' Index</div><div class="bar-chart">';
-  Object.keys(vols).forEach(function(c) {
-    var p = vols[c];
-    var col = p > 70 ? 'var(--profit)' : p > 40 ? 'var(--warning)' : 'var(--loss)';
-    html += '<div class="bar-row"><div class="bar-label">'+c+'</div><div class="bar-container"><div class="bar-fill" style="width:'+p+'%;background:'+col+'"></div></div><div class="bar-value">'+p+'%</div></div>';
-  });
-  html += '</div></div><div class="forecast-box"><div class="forecast-title">🔮 '+t('forecast')+'</div><div class="forecast-text">'+t('forecastText')+'</div></div>';
-  document.getElementById('intelResults').innerHTML = html;
-}
-// ============================================
-// TOOLS TAB
-// ============================================
-function renderTools() {
-  var topBuyers = state.buyers.filter(function(b){return b.prices&&b.prices.OCC;}).sort(function(a,b){return b.prices.OCC-a.prices.OCC;}).slice(0,6);
-  return '<div style="margin-bottom:16px"><h2 style="font-size:22px;font-weight:800;color:var(--text)">🧮 '+t('tools')+'</h2></div>' +
-    
-    // Profit Calculator
-    '<div class="calc-section"><div class="calc-title">💰 '+t('calculator')+'</div><div class="calc-row"><label style="font-size:12px;color:var(--text)">'+t('yourCost')+' ($/ton):</label><input type="number" class="calc-input" id="calcCost" value="'+state.calcCost+'" onchange="state.calcCost=parseInt(this.value)||45;render()"></div><div class="calc-result"><table class="data-table"><thead><tr><th>'+t('company')+'</th><th>Price</th><th>'+t('margin')+'</th><th>'+t('profit')+'</th></tr></thead><tbody>' +
-    topBuyers.map(function(b) {
-      var margin = b.prices.OCC - state.calcCost;
-      var pct = ((margin / state.calcCost) * 100).toFixed(0);
-      return '<tr><td><strong>'+b.company+'</strong></td><td style="color:var(--profit)">$'+b.prices.OCC+'</td><td class="'+(margin>=0?'margin-positive':'margin-negative')+'">'+pct+'%</td><td class="'+(margin>=0?'margin-positive':'margin-negative')+'">$'+margin+'</td></tr>';
-    }).join('') +
-    '</tbody></table></div></div>' +
-    
-    // QR Code
-    '<div class="qr-section"><div class="qr-title">📱 '+t('qrCode')+'</div><p style="font-size:11px;color:var(--text-muted);margin-bottom:12px">Buyers scan to submit prices</p><div class="qr-code"><img src="'+getQRUrl()+'" alt="QR Code" style="width:150px;height:150px"></div><p style="font-size:10px;color:var(--text-muted);margin-top:10px;word-break:break-all">'+getShareLink()+'</p></div>' +
-    
-    // Price History
-    '<div class="panel-card"><div class="panel-title">📈 '+t('priceHistory')+' - OCC (15 days)</div>' + renderHistoryChart('OCC') + '</div>' +
-    '<div class="panel-card"><div class="panel-title">📈 '+t('priceHistory')+' - SWL (15 days)</div>' + renderHistoryChart('SWL') + '</div>';
-}
-
-function renderHistoryChart(commodity) {
-  if (!state.priceHistory.length) return '<p style="font-size:11px;color:var(--text-muted)">No history data</p>';
-  var prices = state.priceHistory.map(function(h){return h[commodity]||0;});
-  var max = Math.max.apply(null, prices);
-  var min = Math.min.apply(null, prices);
-  var range = max - min || 1;
-  var current = prices[prices.length-1];
-  var html = '<div class="history-chart">';
-  prices.slice(-15).forEach(function(p) {
-    var h = Math.max(12, ((p-min)/range)*60 + 20);
-    html += '<div class="history-bar" style="height:'+h+'px;background:'+(p>=current?'var(--profit)':'var(--primary)')+'" data-value="$'+p+'"></div>';
-  });
-  html += '</div><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-top:6px"><span>Low: $'+min+'</span><span>Current: $'+current+'</span><span>High: $'+max+'</span></div>';
-  return html;
-}
-
-// ============================================
-// FIND BUYERS (Resources)
-// ============================================
-function renderFindBuyers() {
-  return '<div style="margin-bottom:16px"><h2 style="font-size:22px;font-weight:800;color:var(--text)">📚 '+t('findBuyers')+'</h2><p style="font-size:12px;color:var(--text-muted)">Research resources to find verified buyer contacts</p></div>' +
-    
-    '<div class="panel-card" style="background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--warning)"><div style="display:flex;align-items:start;gap:14px"><div style="font-size:32px">💡</div><div><div style="font-size:14px;font-weight:700;color:#92400e;margin-bottom:6px">How This Works</div><div style="font-size:12px;color:#78350f;line-height:1.7">1. Use resources below to find REAL contacts<br>2. Add verified leads to "My Leads" tab<br>3. Use "Outreach" templates to contact them<br>4. When they submit prices, convert to "Buyers"</div></div></div></div>' +
-    
-    '<div class="company-list"><div class="company-list-title">🏭 Target Companies to Research</div>' +
-    companiesToResearch.map(function(c) {
-      return '<div class="company-item"><div><div class="company-name">'+c.name+'</div><div class="company-type">'+c.type+' • '+c.notes+'</div></div><div class="company-actions"><a href="https://www.google.com/search?q='+encodeURIComponent(c.name+' fiber buyer procurement contact')+'" target="_blank" class="company-action">🔍</a><a href="https://www.linkedin.com/search/results/people/?keywords='+encodeURIComponent(c.name+' fiber buyer')+'" target="_blank" class="company-action">💼</a>'+(c.website?'<a href="https://'+c.website+'" target="_blank" class="company-action">🌐</a>':'')+'</div></div>';
-    }).join('') + '</div>' +
-    
-    '<div style="display:grid;gap:14px">' +
-    resources.map(function(r) {
-      return '<div class="resource-card"><div class="resource-header"><div class="resource-icon" style="background:'+r.color+'">'+r.icon+'</div><div><div class="resource-title">'+r.title+'</div><div class="resource-type">'+r.type+'</div></div></div><div class="resource-desc">'+r.desc+'</div><div class="resource-tips"><div class="resource-tips-title">💡 Tips:</div><ul>'+r.tips.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul></div>'+(r.url?'<a href="'+r.url+'" target="_blank" class="resource-link">🔗 Open Resource</a>':'')+'</div>';
-    }).join('') + '</div>';
-}
-
-// ============================================
-// LEADS TAB
-// ============================================
-function getLeadStats() {
-  var s = {new:0,contacted:0,responded:0,converted:0};
-  state.leads.forEach(function(l){s[l.status]=(s[l.status]||0)+1;});
-  return s;
-}
-
-function renderLeads() {
-  var s = getLeadStats();
-  var filtered = state.leads.slice();
-  if (state.leadFilter !== 'all') filtered = filtered.filter(function(l){return l.status===state.leadFilter;});
-  if (state.searchTerm) filtered = filtered.filter(function(l){return l.company.toLowerCase().indexOf(state.searchTerm.toLowerCase())>-1;});
-  
-  var empty = '<div class="empty-state"><div class="empty-icon">🎯</div><div class="empty-title">No Leads Yet</div><div class="empty-desc">Use "Find Buyers" to research contacts, then add them here to track your outreach.</div><button class="btn btn-primary" onclick="openLeadModal()">➕ Add First Lead</button> <button class="btn btn-outline" onclick="setTab(\'findBuyers\')">📚 Find Buyers</button></div>';
-  
-  return '<div style="margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px"><div><h2 style="font-size:22px;font-weight:800;color:var(--text)">🎯 '+t('myLeads')+'</h2><p style="font-size:12px;color:var(--text-muted)">Track your prospect pipeline</p></div><button class="btn btn-primary" onclick="openLeadModal()">➕ Add Lead</button></div>' +
-    
-    '<div class="lead-stats"><div class="lead-stat new"><div class="lead-stat-value">'+s.new+'</div><div class="lead-stat-label">'+t('new')+'</div></div><div class="lead-stat contacted"><div class="lead-stat-value">'+s.contacted+'</div><div class="lead-stat-label">'+t('contacted')+'</div></div><div class="lead-stat responded"><div class="lead-stat-value">'+s.responded+'</div><div class="lead-stat-label">'+t('responded')+'</div></div><div class="lead-stat converted"><div class="lead-stat-value">'+s.converted+'</div><div class="lead-stat-label">'+t('converted')+'</div></div></div>' +
-    
-    (state.leads.length ? '<div class="contacts-header"><div class="search-box"><span>🔍</span><input type="text" placeholder="'+t('search')+'" value="'+state.searchTerm+'" oninput="state.searchTerm=this.value;render()"></div><div class="filter-btns"><button class="filter-btn '+(state.leadFilter==='all'?'active':'')+'" onclick="state.leadFilter=\'all\';render()">'+t('all')+'</button><button class="filter-btn '+(state.leadFilter==='new'?'active':'')+'" onclick="state.leadFilter=\'new\';render()">'+t('new')+'</button><button class="filter-btn '+(state.leadFilter==='contacted'?'active':'')+'" onclick="state.leadFilter=\'contacted\';render()">'+t('contacted')+'</button><button class="filter-btn '+(state.leadFilter==='responded'?'active':'')+'" onclick="state.leadFilter=\'responded\';render()">'+t('responded')+'</button></div></div>' : '') +
-    
-    (filtered.length ? '<div>' + filtered.map(function(l) {
-      return '<div class="lead-card '+l.status+'"><div class="lead-header"><div class="lead-company">'+l.company+'</div><span class="lead-status '+l.status+'">'+l.status+'</span></div><div class="lead-details">👤 '+(l.contact||'No contact')+(l.title?' - '+l.title:'')+(l.email?'<br>✉️ '+l.email:'')+(l.phone?'<br>📞 '+l.phone:'')+'<br>🏭 '+l.type+(l.region?' • 📍 '+l.region:'')+'</div>'+(l.materials&&l.materials.length?'<div class="lead-materials">'+l.materials.map(function(m){return '<span class="lead-material">'+m+'</span>';}).join('')+'</div>':'')+(l.notes?'<div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;font-style:italic">"'+l.notes+'"</div>':'')+'<div class="lead-actions">'+(l.email?'<button class="lead-action email" onclick="emailLead('+l.id+')">✉️ Email</button>':'')+(l.phone?'<button class="lead-action sms" onclick="smsLead('+l.id+')">💬 SMS</button><button class="lead-action call" onclick="callLead('+l.id+')">📞 Call</button>':'')+'<button class="lead-action" style="background:var(--bg)" onclick="cycleLeadStatus('+l.id+')">📊 Status</button>'+(l.status==='responded'?'<button class="lead-action convert" onclick="convertLead('+l.id+')">✓ Convert</button>':'')+'<button class="lead-action delete" onclick="deleteLead('+l.id+')">🗑️</button></div></div>';
-    }).join('') + '</div>' : empty);
-}
-
-function openLeadModal() {
-  state.editLeadId = null;
-  document.getElementById('leadModalTitle').textContent = 'Add New Lead';
-  ['lCompany','lContact','lTitle','lEmail','lPhone','lRegion','lMaterials','lNotes'].forEach(function(id){document.getElementById(id).value='';});
-  document.getElementById('lType').value = 'mill';
-  document.getElementById('leadModal').classList.add('active');
-}
-function closeLeadModal() { document.getElementById('leadModal').classList.remove('active'); }
-
-function saveLead() {
-  var company = document.getElementById('lCompany').value.trim();
-  if (!company) { toast('Company required'); return; }
-  var materials = document.getElementById('lMaterials').value.split(',').map(function(m){return m.trim().toUpperCase();}).filter(function(m){return m;});
-  var lead = {
-    id: Date.now(),
-    company: company,
-    contact: document.getElementById('lContact').value.trim(),
-    title: document.getElementById('lTitle').value.trim(),
-    email: document.getElementById('lEmail').value.trim(),
-    phone: document.getElementById('lPhone').value.trim(),
-    type: document.getElementById('lType').value,
-    region: document.getElementById('lRegion').value.trim(),
-    materials: materials,
-    notes: document.getElementById('lNotes').value.trim(),
-    status: 'new',
-    created: new Date().toISOString()
-  };
-  state.leads.unshift(lead);
-  saveData();
-  closeLeadModal();
-  renderNav();
-  render();
-  toast(t('saved'));
-}
-
-function emailLead(id) {
-  var l = state.leads.find(function(x){return x.id===id;});
-  if (!l || !l.email) return;
-  var name = l.contact ? l.contact.split(' ')[0] : 'there';
-  var body = 'Hi '+name+',\n\nI\'m Robert with Dalmex Recycling in Dallas-Fort Worth. We generate consistent volumes of recovered fiber (OCC, SWL, mixed paper).\n\nWould you share your current buying prices? You can submit here:\n'+getShareLink()+'\n\nThanks!\nRobert Vandling\nDalmex Recycling LLC';
-  window.location.href = 'mailto:'+l.email+'?subject='+encodeURIComponent('Price Request - Dalmex Recycling')+'&body='+encodeURIComponent(body);
-  updateLeadStatus(id, 'contacted');
-  logActivity('email', 'Emailed '+l.company);
-}
-
-function smsLead(id) {
-  var l = state.leads.find(function(x){return x.id===id;});
-  if (!l || !l.phone) return;
-  var name = l.contact ? l.contact.split(' ')[0] : '';
-  var msg = 'Hi'+(name?' '+name:'')+', this is Robert from Dalmex Recycling in Dallas. We have consistent fiber volumes (OCC, SWL, mixed paper). What are your current buying rates? Submit here: '+getShareLink();
-  window.location.href = 'sms:'+l.phone.replace(/[^0-9+]/g,'')+'?body='+encodeURIComponent(msg);
-  updateLeadStatus(id, 'contacted');
-  logActivity('sms', 'Texted '+l.company);
-}
-
-function callLead(id) {
-  var l = state.leads.find(function(x){return x.id===id;});
-  if (!l || !l.phone) return;
-  window.location.href = 'tel:'+l.phone.replace(/[^0-9+]/g,'');
-  updateLeadStatus(id, 'contacted');
-  logActivity('call', 'Called '+l.company);
-}
-
-function updateLeadStatus(id, status) {
-  var l = state.leads.find(function(x){return x.id===id;});
-  if (l && l.status === 'new') { l.status = status; saveData(); }
-}
-
-function cycleLeadStatus(id) {
-  var l = state.leads.find(function(x){return x.id===id;});
-  if (!l) return;
-  var statuses = ['new','contacted','responded','converted'];
-  var idx = statuses.indexOf(l.status);
-  l.status = statuses[(idx+1) % statuses.length];
-  saveData();
-  renderNav();
-  render();
-  toast('Status: ' + l.status);
-}
-
-function convertLead(id) {
-  var l = state.leads.find(function(x){return x.id===id;});
-  if (!l) return;
-  if (confirm('Convert '+l.company+' to active buyer?')) {
-    state.buyers.push({id:Date.now(),company:l.company,contact:l.contact||'',email:l.email||'',phone:l.phone||'',type:l.type==='recycler'?'broker':l.type,priority:false,prices:{}});
-    l.status = 'converted';
-    saveData();
-    renderNav();
-    render();
-    toast(l.company + ' converted!');
-  }
-}
-
-function deleteLead(id) {
-  if (!confirm('Delete this lead?')) return;
-  state.leads = state.leads.filter(function(x){return x.id!==id;});
-  saveData();
-  renderNav();
-  render();
-}
-// ============================================
-// OUTREACH TAB
-// ============================================
-function renderOutreach() {
-  var emailTpl = 'Subject: Price Request - Dalmex Recycling (OCC, SWL, Mixed Paper)\n\nHi [NAME],\n\nI\'m Robert with Dalmex Recycling in Dallas-Fort Worth. We\'re a waste management company generating consistent volumes of recovered fiber including OCC, SWL, mixed paper, and other grades.\n\nWe\'re looking for buyers who offer competitive pricing. I\'d love to get your current rates on:\n\n• OCC (Old Corrugated Containers)\n• SWL (Sorted White Ledger)\n• Mixed Paper\n• CBS (Coated Book Stock)\n• HWEC (High White Envelope Cuttings)\n\nYou can submit your pricing directly here:\n'+getShareLink()+'\n\nOr reply with your current rates.\n\nLooking forward to connecting!\n\nRobert Vandling\nDalmex Recycling LLC\nDallas-Fort Worth, TX\nrvandling@dalmex.com';
-  
-  var smsTpl = 'Hi [NAME], this is Robert from Dalmex Recycling in Dallas. We have consistent fiber volumes (OCC, SWL, mixed paper) and looking for buyers. What are your current rates? Submit here: '+getShareLink();
-  
-  var callScript = 'Hi, this is Robert Vandling calling from Dalmex Recycling in Dallas-Fort Worth.\n\nWe\'re a waste management company and we generate consistent volumes of recovered paper - OCC, sorted white ledger, mixed paper, and other grades.\n\nI\'m reaching out to see if you\'d be interested in receiving our material, or if you\'re buying, what your current rates are.\n\nQuestions to ask:\n• What grades are you currently buying?\n• What are your current prices per ton?\n• What\'s your minimum load requirement?\n• Do you pick up or do we deliver?\n\nClose: Great - I\'ll send you our pricing form. What\'s the best email?';
-  
-  return '<div style="margin-bottom:16px"><h2 style="font-size:22px;font-weight:800;color:var(--text)">📧 '+t('outreach')+'</h2><p style="font-size:12px;color:var(--text-muted)">Ready-to-use templates for contacting prospects</p></div>' +
-    
-    '<div class="outreach-template"><div class="outreach-title">📧 Email Template</div><div class="outreach-text" id="emailTpl">'+emailTpl+'</div><button class="btn btn-primary btn-sm" onclick="copyText(\'emailTpl\')">📋 Copy Email</button></div>' +
-    
-    '<div class="outreach-template" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:var(--success)"><div class="outreach-title" style="color:#166534">💬 SMS Template</div><div class="outreach-text" id="smsTpl">'+smsTpl+'</div><button class="btn btn-success btn-sm" onclick="copyText(\'smsTpl\')">📋 Copy SMS</button></div>' +
-    
-    '<div class="outreach-template" style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-color:var(--warning)"><div class="outreach-title" style="color:#92400e">📞 Call Script</div><div class="outreach-text">'+callScript+'</div></div>' +
-    
-    '<div class="share-section"><div class="share-title">🔗 '+t('shareLink')+'</div><p style="font-size:11px;color:var(--text-muted)">Send this link to buyers to submit their prices</p><div class="share-url" id="shareUrl">'+getShareLink()+'</div><div class="share-btns"><button class="btn btn-primary btn-sm" onclick="copyText(\'shareUrl\')">📋 Copy</button><button class="btn btn-success btn-sm" onclick="window.location.href=\'sms:?body=\'+encodeURIComponent(\'Submit fiber prices to Dalmex: \'+getShareLink())">📱 SMS</button><button class="btn btn-warning btn-sm" onclick="window.location.href=\'mailto:?subject=Price Request&body=\'+encodeURIComponent(\'Submit your pricing here: \'+getShareLink())">✉️ Email</button></div></div>' +
-    
-    '<div class="qr-section"><div class="qr-title">📱 '+t('qrCode')+'</div><p style="font-size:11px;color:var(--text-muted)">Print or show to buyers</p><div class="qr-code"><img src="'+getQRUrl()+'" alt="QR" style="width:150px;height:150px"></div></div>';
-}
-
-function copyText(id) {
-  var text = document.getElementById(id).innerText;
-  navigator.clipboard.writeText(text);
-  toast(t('copied'));
-}
-
-// ============================================
-// BUYERS TAB
-// ============================================
-function renderBuyers() {
-  var filtered = state.buyers.slice().sort(function(a,b){return a.company.localeCompare(b.company);});
-  if (state.searchTerm) filtered = filtered.filter(function(b){return b.company.toLowerCase().indexOf(state.searchTerm.toLowerCase())>-1;});
-  if (state.filterType !== 'all') filtered = filtered.filter(function(b){return b.type===state.filterType;});
-  
-  return '<div style="margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px"><div><h2 style="font-size:22px;font-weight:800;color:var(--text)">👥 '+t('buyers')+'</h2><p style="font-size:12px;color:var(--text-muted)">Your active buyer contacts</p></div>'+(state.isAdmin?'<button class="btn btn-primary" onclick="openBuyerModal()">➕ Add Buyer</button>':'')+'</div>' +
-    
-    '<div class="contacts-header"><div class="search-box"><span>🔍</span><input type="text" placeholder="'+t('search')+'" value="'+state.searchTerm+'" oninput="state.searchTerm=this.value;render()"></div><div class="filter-btns"><button class="filter-btn '+(state.filterType==='all'?'active':'')+'" onclick="state.filterType=\'all\';render()">'+t('all')+'</button><button class="filter-btn '+(state.filterType==='mill'?'active':'')+'" onclick="state.filterType=\'mill\';render()">'+t('mills')+'</button><button class="filter-btn '+(state.filterType==='broker'?'active':'')+'" onclick="state.filterType=\'broker\';render()">'+t('brokers')+'</button><button class="filter-btn '+(state.filterType==='export'?'active':'')+'" onclick="state.filterType=\'export\';render()">'+t('exporters')+'</button></div></div>' +
-    
-    '<div>' + filtered.map(function(b) {
-      return '<div class="contact-card '+(b.priority?'priority':'')+'"><div class="contact-header"><div class="contact-name">'+b.company+'</div><span class="contact-type '+b.type+'">'+b.type+'</span></div><div class="contact-person">👤 '+(b.contact||'No contact')+'</div>'+(b.email?'<div class="contact-email">✉️ '+b.email+'</div>':'')+(b.prices&&Object.keys(b.prices).length?'<div class="contact-prices">'+Object.keys(b.prices).filter(function(k){return b.prices[k];}).map(function(k){return '<div class="price-item"><div class="price-label">'+k+'</div><div class="price-value">$'+b.prices[k]+'</div></div>';}).join('')+'</div>':'<div style="padding:12px;background:var(--bg);border-radius:10px;font-size:11px;color:var(--text-muted);margin-bottom:10px">No prices yet - send price request</div>')+'<div class="contact-actions">'+(b.phone?'<a href="tel:'+b.phone+'" class="contact-action call">📞</a>':'')+(b.email?'<a href="mailto:'+b.email+'?subject=Price%20Request&body='+encodeURIComponent('Please submit your pricing: '+getShareLink())+'" class="contact-action email">✉️ Request</a>':'')+(state.isAdmin?'<button class="contact-action" onclick="openBuyerModal('+b.id+')">✏️</button><button class="contact-action" style="color:var(--danger)" onclick="deleteBuyer('+b.id+')">🗑️</button>':'')+'</div></div>';
-    }).join('') + '</div>';
-}
-
-function openBuyerModal(id) {
-  state.editBuyerId = id || null;
-  document.getElementById('buyerModalTitle').textContent = id ? 'Edit Buyer' : 'Add Buyer';
-  if (id) {
-    var b = state.buyers.find(function(x){return x.id===id;});
-    if (b) {
-      document.getElementById('bCompany').value = b.company || '';
-      document.getElementById('bContact').value = b.contact || '';
-      document.getElementById('bEmail').value = b.email || '';
-      document.getElementById('bPhone').value = b.phone || '';
-      document.getElementById('bType').value = b.type || 'mill';
-      ['OCC','SWL','PM','CBS','HWEC','DLK'].forEach(function(c){
-        var inp = document.getElementById('p'+c);
-        if (inp) inp.value = b.prices && b.prices[c] || '';
-      });
-    }
-  } else {
-    ['bCompany','bContact','bEmail','bPhone'].forEach(function(id){document.getElementById(id).value='';});
-    ['pOCC','pSWL','pPM','pCBS','pHWEC','pDLK'].forEach(function(id){document.getElementById(id).value='';});
-    document.getElementById('bType').value = 'mill';
-  }
-  document.getElementById('buyerModal').classList.add('active');
-}
-function closeBuyerModal() { document.getElementById('buyerModal').classList.remove('active'); }
-
-function saveBuyer() {
-  var company = document.getElementById('bCompany').value.trim();
-  if (!company) { toast('Company required'); return; }
-  var prices = {};
-  ['OCC','SWL','PM','CBS','HWEC','DLK'].forEach(function(c){
-    var v = document.getElementById('p'+c).value;
-    if (v) prices[c] = parseInt(v);
-  });
-  var data = {
-    company: company,
-    contact: document.getElementById('bContact').value.trim(),
-    email: document.getElementById('bEmail').value.trim(),
-    phone: document.getElementById('bPhone').value.trim(),
-    type: document.getElementById('bType').value,
-    priority: false,
-    prices: prices
-  };
-  if (state.editBuyerId) {
-    var idx = state.buyers.findIndex(function(b){return b.id===state.editBuyerId;});
-    if (idx > -1) state.buyers[idx] = Object.assign({}, state.buyers[idx], data);
-  } else {
-    data.id = Date.now();
-    state.buyers.push(data);
-  }
-  saveData();
-  closeBuyerModal();
-  renderNav();
-  render();
-  toast(t('saved'));
-}
-
-function deleteBuyer(id) {
-  if (!confirm('Delete this buyer?')) return;
-  state.buyers = state.buyers.filter(function(x){return x.id!==id;});
-  saveData();
-  renderNav();
-  render();
-}
-
-// ============================================
-// PRICES TAB
-// ============================================
-function renderPrices() {
-  var sorted = state.buyers.filter(function(b){return b.prices&&Object.keys(b.prices).length;}).sort(function(a,b){return(b.prices.OCC||0)-(a.prices.OCC||0);});
-  
-  return '<div style="margin-bottom:16px"><h2 style="font-size:22px;font-weight:800;color:var(--text)">💰 '+t('marketPrices')+'</h2><p style="font-size:12px;color:var(--text-muted)">Current market ranges and buyer comparison</p></div>' +
-    
-    '<div class="prices-grid">' + Object.keys(marketPrices).map(function(c){
-      var p = marketPrices[c];
-      return '<div class="price-card"><div class="price-commodity">'+c+'</div><div class="price-current">$'+p.low+'-'+p.high+'</div><div class="price-range">'+t('perTon')+'</div></div>';
-    }).join('') + '</div>' +
-    
-    '<div class="panel-card" style="margin-top:18px"><div class="panel-title">📊 Buyer Price Comparison</div>' +
-    (sorted.length ? '<div class="table-container"><table class="data-table"><thead><tr><th>'+t('company')+'</th><th>Type</th><th>OCC</th><th>SWL</th><th>PM</th><th>HWEC</th></tr></thead><tbody>' +
-    sorted.map(function(b){
-      return '<tr><td><strong>'+b.company+'</strong></td><td>'+b.type+'</td><td style="color:var(--profit);font-weight:700">'+(b.prices.OCC?'$'+b.prices.OCC:'-')+'</td><td style="color:var(--profit);font-weight:700">'+(b.prices.SWL?'$'+b.prices.SWL:'-')+'</td><td style="color:var(--profit);font-weight:700">'+(b.prices.PM?'$'+b.prices.PM:'-')+'</td><td style="color:var(--profit);font-weight:700">'+(b.prices.HWEC?'$'+b.prices.HWEC:'-')+'</td></tr>';
-    }).join('') + '</tbody></table></div>' : '<p style="text-align:center;padding:30px;color:var(--text-muted)">No buyer prices yet</p>') + '</div>';
-}
-
-// ============================================
-// ADMIN TAB
-// ============================================
-function renderAdmin() {
-  if (!state.isAdmin) return '<p>Admin access required</p>';
-  var pending = JSON.parse(localStorage.getItem(CONFIG.storageKeys.pending) || '[]');
-  
-  return '<div style="margin-bottom:16px"><h2 style="font-size:22px;font-weight:800;color:var(--text)">⚙️ '+t('admin')+'</h2></div>' +
-    
-    '<div class="share-section"><div class="share-title">🔗 '+t('shareLink')+'</div><div class="share-url">'+getShareLink()+'</div><div class="share-btns"><button class="btn btn-primary btn-sm" onclick="navigator.clipboard.writeText(getShareLink());toast(t(\'copied\'))">📋 Copy</button></div></div>' +
-    
-    (pending.length ? '<div class="panel-card"><div class="panel-title">📥 Pending Submissions ('+pending.length+')</div>' +
-    pending.map(function(p, i){
-      return '<div style="padding:14px;background:var(--bg);border-radius:10px;margin-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:10px"><div><strong style="font-size:14px">'+p.company+'</strong><div style="font-size:11px;color:var(--text-muted)">'+(p.contact||'')+(p.email?' • '+p.email:'')+'</div><div style="font-size:12px;margin-top:6px;color:var(--profit);font-weight:600">'+Object.keys(p.prices).map(function(k){return k+': $'+p.prices[k];}).join(' • ')+'</div></div><div style="display:flex;gap:8px"><button class="btn btn-success btn-sm" onclick="approvePending('+i+')">✓ Approve</button><button class="btn btn-danger btn-sm" onclick="rejectPending('+i+')">✕ Reject</button></div></div></div>';
-    }).join('') + '</div>' : '<div class="panel-card"><div style="text-align:center;padding:30px;color:var(--text-muted)"><div style="font-size:40px;margin-bottom:12px">📭</div><div style="font-size:13px">No pending submissions</div></div></div>') +
-    
-    '<div class="admin-section"><div class="admin-section-title">👑 Admin Tools</div><div class="admin-grid"><button class="admin-btn" onclick="openBuyerModal()">➕ Add Buyer</button><button class="admin-btn" onclick="exportCSV()">📥 Export CSV</button><button class="admin-btn" onclick="printReport()">🖨️ Print Report</button><button class="admin-btn" onclick="clearData()">🗑️ Clear Data</button><button class="admin-btn" onclick="logout()">🚪 Logout</button></div></div>';
-}
-
-function approvePending(i) {
-  var pending = JSON.parse(localStorage.getItem(CONFIG.storageKeys.pending) || '[]');
-  var p = pending[i];
-  if (!p) return;
-  var existing = state.buyers.find(function(b){return b.company.toLowerCase()===p.company.toLowerCase();});
-  if (existing) {
-    Object.keys(p.prices).forEach(function(k){existing.prices[k]=p.prices[k];});
-    if (p.contact) existing.contact = p.contact;
-    if (p.email) existing.email = p.email;
-    if (p.phone) existing.phone = p.phone;
-  } else {
-    state.buyers.push({id:Date.now(),company:p.company,contact:p.contact||'',email:p.email||'',phone:p.phone||'',type:'mill',priority:false,prices:p.prices});
-  }
-  // Update lead if exists
-  var lead = state.leads.find(function(l){return l.company.toLowerCase()===p.company.toLowerCase();});
-  if (lead) lead.status = 'responded';
-  pending.splice(i,1);
-  localStorage.setItem(CONFIG.storageKeys.pending, JSON.stringify(pending));
-  saveData();
-  renderNav();
-  render();
-  toast(t('approved'));
-}
-
-function rejectPending(i) {
-  var pending = JSON.parse(localStorage.getItem(CONFIG.storageKeys.pending) || '[]');
-  pending.splice(i,1);
-  localStorage.setItem(CONFIG.storageKeys.pending, JSON.stringify(pending));
-  render();
-}
-
-function exportCSV() {
-  var csv = 'Company,Contact,Email,Phone,Type,OCC,SWL,PM,CBS,HWEC,DLK\n' +
-    state.buyers.map(function(b){
-      return [b.company,b.contact||'',b.email||'',b.phone||'',b.type,b.prices.OCC||'',b.prices.SWL||'',b.prices.PM||'',b.prices.CBS||'',b.prices.HWEC||'',b.prices.DLK||''].join(',');
-    }).join('\n');
-  var a = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-  a.download = 'dalmex_buyers_' + new Date().toISOString().split('T')[0] + '.csv';
-  a.click();
-  toast('CSV downloaded');
-}
-
-function printReport() { window.print(); }
-
-function clearData() {
-  if (confirm('Clear all leads and reset buyers to defaults? This cannot be undone.')) {
-    state.leads = [];
-    state.buyers = JSON.parse(JSON.stringify(defaultBuyers));
-    state.activity = [];
-    localStorage.removeItem(CONFIG.storageKeys.pending);
-    saveData();
-    renderNav();
-    render();
-    toast('Data cleared');
-  }
-}
-
-function logout() {
-  state.isAdmin = false;
-  state.currentTab = 'dashboard';
-  renderApp();
-}
-
-// Initialize
-init();
+const marketPrices=[{code:"OCC",price:77,range:"$70-85",change:-5},{code:"PM",price:50,range:"$45-55",change:3},{code:"SWL",price:210,range:"$195-225",change:-10},{code:"DLK",price:92,range:"$85-100",change:0},{code:"SOP",price:145,range:"$135-155",change:5},{code:"HWEC",price:375,range:"$350-400",change:15}];
+const news=[{date:"Dec 30, 2025",title:"OCC Prices to Rise Q1 2026",titleEs:"Precios OCC Subirán Q1 2026",excerpt:"Mill closures point to tighter supply",excerptEs:"Cierres de molinos apuntan a menor oferta"},{date:"Dec 28, 2025",title:"Graphic Packaging Waco Update",titleEs:"Actualización Graphic Packaging Waco",excerpt:"New 550K TPY facility on track for 2026",excerptEs:"Nueva planta 550K TPY en camino para 2026"},{date:"Dec 26, 2025",title:"10% NA Capacity Eliminated",titleEs:"10% Capacidad NA Eliminada",excerpt:"2025 closures reshape market",excerptEs:"Cierres 2025 reforman el mercado"}];
+const tickerItems=[{type:"price",text:"💰 OCC: $70-85/ton"},{type:"price",text:"📄 PM: $45-55/ton"},{type:"news",text:"📰 Graphic Packaging Waco 2026"},{type:"alert",text:"🚨 10% NA capacity eliminated"},{type:"price",text:"💎 HWEC: $350-400/ton"}];
+const users=[{id:1,username:"Dalmex",password:"2828",role:"user",name:"Dalmex User"},{id:2,username:"RJVandling",password:"Sailer66",role:"admin",name:"Robert Vandling"}];
+const T={en:{ai:"AI Assistant",dash:"Dashboard",contacts:"Contacts",prices:"Prices",news:"News",add:"Add Contact",search:"Search...",all:"All",mills:"Mills",brokers:"Brokers",bestOCC:"Best OCC",bestSWL:"Best SWL",bestPM:"Best PM",quick:"Quick Actions",best:"Best Prices",who:"Who pays most for OCC?",swl:"Best for SWL?",addNew:"Add new contact",email:"Draft email",ppi:"PPI Report",outlook:"Market outlook",compare:"Price Comparison",industry:"Industry News"},es:{ai:"Asistente IA",dash:"Panel",contacts:"Contactos",prices:"Precios",news:"Noticias",add:"Agregar",search:"Buscar...",all:"Todos",mills:"Molinos",brokers:"Brokers",bestOCC:"Mejor OCC",bestSWL:"Mejor SWL",bestPM:"Mejor PM",quick:"Acciones",best:"Mejores Precios",who:"¿Quién paga más por OCC?",swl:"¿Mejor para SWL?",addNew:"Agregar contacto",email:"Escribir email",ppi:"Reporte PPI",outlook:"Perspectiva",compare:"Comparación",industry:"Noticias"}};
+let lang="en",currentUser=null,currentTab="ai",buyers=[],chat=[],searchTerm="",filterType="all",editId=null;
+function t(k){return T[lang][k]||k}
+function setLang(l){lang=l;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.lang-btn').forEach(b=>{if((l==='en'&&b.textContent.includes('English'))||(l==='es'&&b.textContent.includes('Español')))b.classList.add('active')});document.querySelectorAll('[data-'+l+']').forEach(el=>el.textContent=el.getAttribute('data-'+l));const tog=document.getElementById('langToggle');if(tog)tog.innerHTML=l==='en'?'🇲🇽 Español':'🇺🇸 English';if(currentUser){renderNav();render()}}
+function loadData(){const s=localStorage.getItem('fh_buyers');buyers=s?JSON.parse(s):[...defaultBuyers]}
+function saveData(){localStorage.setItem('fh_buyers',JSON.stringify(buyers))}
+function handleLogin(){const u=document.getElementById('username').value,p=document.getElementById('password').value,user=users.find(x=>x.username===u&&x.password===p);if(user){currentUser=user;document.getElementById('loginScreen').classList.add('hidden');document.getElementById('app').classList.add('active');document.getElementById('userBadge').textContent=(user.role==='admin'?'👑 ':'👤 ')+user.name;loadData();initApp()}else{document.getElementById('loginError').classList.add('show')}}
+function quickLogin(){currentUser=users[1];document.getElementById('loginScreen').classList.add('hidden');document.getElementById('app').classList.add('active');document.getElementById('userBadge').textContent='👑 Robert Vandling';loadData();initApp()}
+function logout(){currentUser=null;chat=[];document.getElementById('app').classList.remove('active');document.getElementById('loginScreen').classList.remove('hidden');document.getElementById('username').value='';document.getElementById('password').value='';document.getElementById('loginError').classList.remove('show')}
+function initApp(){renderTicker();if(chat.length===0){chat.push({role:'ai',content:lang==='es'?'👋 ¡Hola! Soy tu asistente IA.<br><br>Pregúntame sobre:<br>• Precios - "¿Quién paga más por OCC?"<br>• Contactos - "Info de Georgia Pacific"<br>• Agregar - "Agregar comprador"<br>• Emails - "Escribir email"':'👋 Hi! I\'m your AI assistant.<br><br>Ask me about:<br>• Prices - "Who pays most for OCC?"<br>• Buyers - "Tell me about Georgia Pacific"<br>• Add - "Add new buyer"<br>• Emails - "Draft email"'})}renderNav();render()}
+function renderTicker(){const items=[...tickerItems,...tickerItems,...tickerItems];document.getElementById('ticker').innerHTML=items.map(i=>'<div class="ticker-item"><span class="ticker-tag '+i.type+'">'+i.type.toUpperCase()+'</span>'+i.text+'</div>').join('')}
+function renderNav(){const tabs=[{id:'ai',icon:'🤖',label:t('ai'),ai:true},{id:'dashboard',icon:'📊',label:t('dash')},{id:'contacts',icon:'👥',label:t('contacts'),count:buyers.length},{id:'prices',icon:'💰',label:t('prices')},{id:'news',icon:'📰',label:t('news')}];document.getElementById('nav').innerHTML=tabs.map(x=>'<button class="nav-btn '+(currentTab===x.id?'active':'')+(x.ai&&currentTab!==x.id?' ai':'')+'" onclick="setTab(\''+x.id+'\')">'+x.icon+' '+x.label+(x.count!==undefined?' <span style="background:rgba(255,255,255,0.3);padding:2px 6px;border-radius:4px;font-size:10px">'+x.count+'</span>':'')+'</button>').join('')}
+function setTab(tab){currentTab=tab;renderNav();render()}
+function render(){const m=document.getElementById('main');if(currentTab==='ai')m.innerHTML=renderAI();else if(currentTab==='dashboard')m.innerHTML=renderDash();else if(currentTab==='contacts')m.innerHTML=renderContacts();else if(currentTab==='prices')m.innerHTML=renderPrices();else if(currentTab==='news')m.innerHTML=renderNews()}
+function renderAI(){const bO=buyers.filter(b=>b.prices?.OCC).sort((a,b)=>b.prices.OCC-a.prices.OCC)[0],bS=buyers.filter(b=>b.prices?.SWL).sort((a,b)=>b.prices.SWL-a.prices.SWL)[0],bP=buyers.filter(b=>b.prices?.PM).sort((a,b)=>b.prices.PM-a.prices.PM)[0];return '<div class="ai-container"><div class="chat-panel"><div class="chat-header"><div class="chat-avatar">🤖</div><div><div class="chat-title">Fiber Hub AI</div><div class="chat-status">Powered by Claude</div></div></div><div class="chat-messages" id="chatBox">'+chat.map(m=>'<div class="msg '+m.role+'"><div class="msg-avatar">'+(m.role==='ai'?'🤖':'👤')+'</div><div class="msg-content">'+m.content+'</div></div>').join('')+'</div><div class="chat-input-area"><input type="text" class="chat-input" id="chatInput" placeholder="'+(lang==='es'?'Pregunta algo...':'Ask anything...')+'" onkeypress="if(event.key===\'Enter\')sendChat()"><button class="btn btn-purple" onclick="sendChat()">'+(lang==='es'?'Enviar':'Send')+'</button></div></div><div class="sidebar"><div class="sidebar-card"><div class="sidebar-title">⚡ '+t('quick')+'</div><button class="quick-btn" onclick="ask(\''+t('who')+'\')">📦 '+t('who')+'</button><button class="quick-btn" onclick="ask(\''+t('swl')+'\')">📄 '+t('swl')+'</button><button class="quick-btn" onclick="openModal()">➕ '+t('addNew')+'</button><button class="quick-btn" onclick="ask(\''+t('email')+'\')">✉️ '+t('email')+'</button><button class="quick-btn" onclick="ask(\''+t('ppi')+'\')">📊 '+t('ppi')+'</button><button class="quick-btn" onclick="ask(\''+t('outlook')+'\')">📈 '+t('outlook')+'</button></div><div class="sidebar-card"><div class="sidebar-title">🎯 '+t('best')+'</div>'+(bO?'<div class="rec-card"><div class="rec-label">'+t('bestOCC')+'</div><div class="rec-value">$'+bO.prices.OCC+'/ton</div><div class="rec-detail">'+bO.company+'</div></div>':'')+(bS?'<div class="rec-card"><div class="rec-label">'+t('bestSWL')+'</div><div class="rec-value">$'+bS.prices.SWL+'/ton</div><div class="rec-detail">'+bS.company+'</div></div>':'')+(bP?'<div class="rec-card"><div class="rec-label">'+t('bestPM')+'</div><div class="rec-value">$'+bP.prices.PM+'/ton</div><div class="rec-detail">'+bP.company+'</div></div>':'')+'</div></div></div>'}
+function ask(q){document.getElementById('chatInput').value=q;sendChat()}
+function sendChat(){const inp=document.getElementById('chatInput'),msg=inp.value.trim();if(!msg)return;chat.push({role:'user',content:msg});inp.value='';chat.push({role:'ai',content:aiResp(msg)});render();setTimeout(()=>{const b=document.getElementById('chatBox');if(b)b.scrollTop=b.scrollHeight},100)}
+function aiResp(msg){const m=msg.toLowerCase(),es=lang==='es';if(m.includes('add')||m.includes('agregar')||m.includes('new')||m.includes('nuevo')){setTimeout(()=>openModal(),500);return es?'Abriendo formulario...':'Opening form...';}if(m.includes('ppi')||m.includes('report')||m.includes('reporte')){return '<b>📊 '+(es?'Reporte PPI':'PPI Report')+'</b><br><br>'+marketPrices.map(p=>'<b>'+p.code+':</b> $'+p.price+' ('+(p.change>0?'▲':'▼')+'$'+Math.abs(p.change)+')').join('<br>');}if(m.includes('occ')&&(m.includes('best')||m.includes('most')||m.includes('mejor')||m.includes('who')||m.includes('quién'))){const s=buyers.filter(b=>b.prices?.OCC).sort((a,b)=>b.prices.OCC-a.prices.OCC);return '<b>📦 '+(es?'Mejores OCC':'Best OCC')+':</b><br><br>1. <b>'+s[0].company+'</b> - $'+s[0].prices.OCC+'/ton ⭐<br>'+s[0].contact+' | '+s[0].phone+'<br><br>2. '+s[1]?.company+' - $'+s[1]?.prices.OCC+'/ton';}if(m.includes('swl')||m.includes('white')){const s=buyers.filter(b=>b.prices?.SWL).sort((a,b)=>b.prices.SWL-a.prices.SWL);return '<b>📄 '+(es?'Mejores SWL':'Best SWL')+':</b><br><br>1. <b>'+s[0].company+'</b> - $'+s[0].prices.SWL+'/ton ⭐';}if(m.includes('email')||m.includes('draft')||m.includes('escribir')){return es?'<b>✉️ Email:</b><br><br>Asunto: Dalmex - Solicitud de Precios<br><br>Hola,<br><br>Solicito precios actuales para OCC, PM, SWL.<br><br>Gracias,<br>Robert Vandling<br>214-352-2000':'<b>✉️ Email:</b><br><br>Subject: Dalmex - Price Request<br><br>Hello,<br><br>Requesting current prices for OCC, PM, SWL.<br><br>Thanks,<br>Robert Vandling<br>214-352-2000';}if(m.includes('outlook')||m.includes('2026')||m.includes('market')||m.includes('perspectiva')){return es?'<b>📈 Q1 2026:</b><br><br><b style="color:#15803d">ALCISTA</b><br><br>✅ 10% capacidad eliminada<br>✅ Graphic Packaging Waco abre 2026<br>✅ OCC esperado $85-95/ton':'<b>📈 Q1 2026:</b><br><br><b style="color:#15803d">BULLISH</b><br><br>✅ 10% capacity eliminated<br>✅ Graphic Packaging Waco opening 2026<br>✅ OCC expected $85-95/ton';}for(const b of buyers){if(m.includes(b.company.toLowerCase())||m.includes(b.contact.split(' ')[0].toLowerCase())){const pr=b.prices?Object.entries(b.prices).filter(([k,v])=>v).map(([k,v])=>k+': $'+v).join(', '):'N/A';return '<b>👤 '+b.company+'</b><br><br>Contact: '+b.contact+'<br>Phone: '+b.phone+'<br>Email: '+b.email+'<br>Type: '+b.type+'<br><br>Prices: '+pr+'<br><br>Notes: '+b.notes;}}return es?'Pregúntame sobre precios, compradores, emails...':'Ask about prices, buyers, emails...';}
+function renderDash(){const mills=buyers.filter(b=>b.type==='Mill').length,pri=buyers.filter(b=>b.priority).length,bO=buyers.filter(b=>b.prices?.OCC).sort((a,b)=>b.prices.OCC-a.prices.OCC)[0];return '<div class="grid grid-2" style="margin-bottom:20px"><div class="card stat-card"><div class="stat-icon">🏭</div><div class="stat-value">'+mills+'</div><div class="stat-label">'+(lang==='es'?'Molinos':'Mills')+'</div></div><div class="card stat-card"><div class="stat-icon">👥</div><div class="stat-value">'+buyers.length+'</div><div class="stat-label">'+(lang==='es'?'Contactos':'Contacts')+'</div></div><div class="card stat-card"><div class="stat-icon">⭐</div><div class="stat-value">'+pri+'</div><div class="stat-label">'+(lang==='es'?'Prioritarios':'Priority')+'</div></div><div class="card stat-card"><div class="stat-icon">💰</div><div class="stat-value">$'+(bO?.prices.OCC||'--')+'</div><div class="stat-label">'+(lang==='es'?'Mejor OCC':'Best OCC')+'</div></div></div><div class="market-grid">'+marketPrices.slice(0,4).map(p=>'<div class="market-card"><div class="market-code">'+p.code+'</div><div class="market-price">'+p.range+'</div><div class="market-change '+(p.change>0?'up':'down')+'">'+(p.change>0?'▲':'▼')+'$'+Math.abs(p.change)+'</div></div>').join('')+'</div><div class="section-header"><h3 class="section-title">⭐ '+(lang==='es'?'Prioritarios':'Priority')+'</h3></div><div class="grid grid-3">'+buyers.filter(b=>b.priority).slice(0,6).map(b=>renderCard(b)).join('')+'</div>';}
+function renderContacts(){let f=buyers;if(searchTerm)f=f.filter(b=>b.company.toLowerCase().includes(searchTerm.toLowerCase())||b.contact.toLowerCase().includes(searchTerm.toLowerCase()));if(filterType!=='all')f=f.filter(b=>b.type===filterType);return '<div class="section-header"><h3 class="section-title">👥 '+t('contacts')+' ('+buyers.length+')</h3><button class="btn btn-green" onclick="openModal()">➕ '+t('add')+'</button></div><div class="search-bar"><input type="text" class="search-input" placeholder="🔍 '+t('search')+'" value="'+searchTerm+'" oninput="searchTerm=this.value;render()"><button class="filter-btn '+(filterType==='all'?'active':'')+'" onclick="filterType=\'all\';render()">'+t('all')+'</button><button class="filter-btn '+(filterType==='Mill'?'active':'')+'" onclick="filterType=\'Mill\';render()">'+t('mills')+'</button><button class="filter-btn '+(filterType==='Broker'?'active':'')+'" onclick="filterType=\'Broker\';render()">'+t('brokers')+'</button></div><div class="grid grid-3">'+f.map(b=>renderCard(b)).join('')+'</div>';}
+function renderCard(b){const init=b.company.split(' ').map(w=>w[0]).join('').slice(0,2),badge=b.type==='Mill'?'badge-mill':b.type==='Export'?'badge-export':'badge-broker',pr=b.prices?Object.entries(b.prices).filter(([k,v])=>v):[];return '<div class="card '+(b.priority?'priority':'')+'"><div class="card-header"><div class="avatar">'+init+'</div><div class="badges"><span class="badge '+badge+'">'+b.type+'</span>'+(b.priority?'<span class="badge badge-priority">⭐</span>':'')+'</div></div><div class="card-title">'+b.company+'</div><div class="card-subtitle">'+b.contact+'</div><div class="card-info">📧 '+b.email+'<br>📞 '+b.phone+'</div><div class="tags">'+(b.commodities||[]).slice(0,4).map(c=>'<span class="tag">'+c+'</span>').join('')+'</div>'+(pr.length?'<div class="prices">'+pr.slice(0,4).map(([k,v])=>'<span class="price">'+k+': $'+v+'</span>').join('')+'</div>':'')+'<div class="card-actions"><button class="btn btn-green" onclick="window.open(\'mailto:'+b.email+'\')">📧</button><button class="btn btn-gray" onclick="window.open(\'tel:'+b.phone+'\')">📞</button><button class="btn btn-purple" onclick="editContact('+b.id+')">✏️</button><button class="btn btn-danger" onclick="deleteContact('+b.id+')">🗑️</button></div></div>';}
+function renderPrices(){const gr=['OCC','PM','SWL','DLK','SOP','HWEC'],mx={};gr.forEach(g=>{const ps=buyers.map(b=>b.prices?.[g]).filter(p=>p);mx[g]=ps.length?Math.max(...ps):0});return '<div class="section-header"><h3 class="section-title">💰 '+t('compare')+'</h3></div><div class="market-grid">'+marketPrices.map(p=>'<div class="market-card"><div class="market-code">'+p.code+'</div><div class="market-price">'+p.range+'</div><div class="market-change '+(p.change>0?'up':'down')+'">'+(p.change>0?'▲':'▼')+'$'+Math.abs(p.change)+'</div></div>').join('')+'</div><div class="table-wrap"><div class="table-header">📊 '+(lang==='es'?'Comparación de Precios':'Price Comparison')+'</div><div class="table-scroll"><table><thead><tr><th>'+(lang==='es'?'Comprador':'Buyer')+'</th>'+gr.map(g=>'<th>'+g+'</th>').join('')+'<th>'+(lang==='es'?'Tipo':'Type')+'</th></tr></thead><tbody>'+buyers.filter(b=>b.prices).sort((a,b)=>(b.prices.OCC||0)-(a.prices.OCC||0)).map(b=>'<tr><td><b>'+b.company+'</b><br><small style="color:#64748b">'+b.contact+'</small></td>'+gr.map(g=>{const p=b.prices[g];if(!p)return'<td style="color:#cbd5e1">—</td>';return'<td><span class="'+(p===mx[g]?'price-best':'')+'">'+(p===mx[g]?'⭐ ':'')+'$'+p+'</span></td>'}).join('')+'<td><span class="badge badge-'+b.type.toLowerCase()+'">'+b.type+'</span></td></tr>').join('')+'</tbody></table></div></div>';}
+function renderNews(){return '<div class="section-header"><h3 class="section-title">📰 '+t('industry')+'</h3></div>'+news.map(n=>'<div class="news-item"><div class="news-date">'+n.date+'</div><div class="news-title">'+(lang==='es'?n.titleEs:n.title)+'</div><div class="news-excerpt">'+(lang==='es'?n.excerptEs:n.excerpt)+'</div></div>').join('');}
+function openModal(){editId=null;document.getElementById('contactForm').reset();document.getElementById('addModal').classList.add('active')}
+function closeModal(){document.getElementById('addModal').classList.remove('active')}
+function editContact(id){const b=buyers.find(x=>x.id===id);if(!b)return;editId=id;document.getElementById('fCompany').value=b.company;document.getElementById('fContact').value=b.contact;document.getElementById('fEmail').value=b.email;document.getElementById('fPhone').value=b.phone||'';document.getElementById('fType').value=b.type;document.getElementById('fPriority').checked=b.priority;document.getElementById('fNotes').value=b.notes||'';document.querySelectorAll('input[name="comm"]').forEach(cb=>cb.checked=(b.commodities||[]).includes(cb.value));document.getElementById('addModal').classList.add('active')}
+function deleteContact(id){if(confirm(lang==='es'?'¿Eliminar?':'Delete?')){buyers=buyers.filter(b=>b.id!==id);saveData();renderNav();render();toast(lang==='es'?'Eliminado':'Deleted')}}
+document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();const comms=[];document.querySelectorAll('input[name="comm"]:checked').forEach(cb=>comms.push(cb.value));const data={company:document.getElementById('fCompany').value,contact:document.getElementById('fContact').value,email:document.getElementById('fEmail').value,phone:document.getElementById('fPhone').value,type:document.getElementById('fType').value,priority:document.getElementById('fPriority').checked,commodities:comms,notes:document.getElementById('fNotes').value,prices:{}};if(editId){const idx=buyers.findIndex(b=>b.id===editId);if(idx!==-1)buyers[idx]={...buyers[idx],...data};toast(lang==='es'?'Actualizado':'Updated')}else{data.id=buyers.length?Math.max(...buyers.map(b=>b.id))+1:1;buyers.push(data);toast(lang==='es'?'Agregado':'Added')}saveData();closeModal();renderNav();render()});
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
+document.addEventListener('keypress',e=>{if(e.key==='Enter'&&!currentUser)handleLogin()});
 </script>
 </body>
 </html>
