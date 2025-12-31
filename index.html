@@ -3,560 +3,856 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>Dalmex Fiber Hub - Lead Generation</title>
+<title>Fiber Hub Pro - Dalmex Recycling</title>
+<link rel="manifest" href="data:application/json,{}">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#6366f1">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--primary:#6366f1;--primary-dark:#4f46e5;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--ai-purple:#8b5cf6;--ai-purple-dark:#7c3aed;--dark:#1e293b;--darker:#0f172a;--card-bg:#fff;--bg:#f1f5f9;--light:#e2e8f0;--text:#1e293b;--text-muted:#64748b;--header-bg:#fff;--table-header:#f1f5f9;--border:#e2e8f0;--profit:#10b981;--loss:#ef4444}
-.theme-terminal{--primary:#22d3ee;--primary-dark:#0891b2;--success:#22c55e;--warning:#eab308;--danger:#ef4444;--ai-purple:#a855f7;--ai-purple-dark:#7c3aed;--dark:#0a0a0a;--darker:#000;--card-bg:#111;--bg:#0a0a0a;--light:#222;--text:#e4e4e7;--text-muted:#a1a1aa;--header-bg:#111;--table-header:#1a1a1a;--border:#333;--profit:#22c55e;--loss:#ef4444}
-.theme-terminal body{background:#0a0a0a}.theme-terminal .ticker-wrap{background:linear-gradient(90deg,#000,#111)}.theme-terminal .header{background:#111;border-color:#333}.theme-terminal .nav-bar{background:#111;border-color:#333}.theme-terminal .panel-card,.theme-terminal .stat-card,.theme-terminal .contact-card,.theme-terminal .lead-card,.theme-terminal .resource-card{background:#111;border:1px solid #333}.theme-terminal .data-table th{background:#1a1a1a}.theme-terminal .data-table td{border-color:#333}.theme-terminal .form-input,.theme-terminal .form-select,.theme-terminal .form-textarea{background:#1a1a1a;border-color:#333;color:#e4e4e7}.theme-terminal .search-box{background:#111}.theme-terminal .filter-btn{background:#111;border-color:#333;color:#a1a1aa}.theme-terminal .filter-btn.active{background:#22d3ee;border-color:#22d3ee;color:#000}.theme-terminal .footer{border-color:#333}.theme-terminal .brand-title{background:linear-gradient(135deg,#22d3ee,#a855f7);-webkit-background-clip:text}
-.theme-corporate{--primary:#1e3a5f;--primary-dark:#0f2744;--success:#059669;--warning:#d97706;--danger:#dc2626;--ai-purple:#1e3a5f;--ai-purple-dark:#0f2744;--dark:#1e3a5f;--darker:#0f2744;--card-bg:#fff;--bg:#f8fafc;--light:#e2e8f0;--text:#1e293b;--text-muted:#64748b;--header-bg:#1e3a5f;--table-header:#f1f5f9;--border:#cbd5e1;--profit:#059669;--loss:#dc2626}.theme-corporate .header{background:#1e3a5f}.theme-corporate .brand-title{color:#fff;-webkit-text-fill-color:#fff}.theme-corporate .brand-sub{color:rgba(255,255,255,.7)}.theme-corporate .user-badge{background:rgba(255,255,255,.2);color:#fff}.theme-corporate .admin-login-btn{background:#fff;color:#1e3a5f}.theme-corporate .ticker-wrap{background:#0f2744}.theme-corporate .nav-btn{background:#e2e8f0}.theme-corporate .nav-btn.active{background:#1e3a5f}.theme-corporate .logo{background:#fff}
+:root{--primary:#6366f1;--primary-dark:#4f46e5;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--purple:#8b5cf6;--purple-dark:#7c3aed;--dark:#1e293b;--darker:#0f172a;--card-bg:#fff;--bg:#f1f5f9;--light:#e2e8f0;--text:#1e293b;--text-muted:#64748b;--header-bg:#fff;--table-header:#f1f5f9;--border:#e2e8f0;--profit:#10b981;--loss:#ef4444}
+.theme-terminal{--primary:#22d3ee;--primary-dark:#0891b2;--success:#22c55e;--warning:#eab308;--danger:#ef4444;--purple:#a855f7;--purple-dark:#7c3aed;--dark:#0a0a0a;--darker:#000;--card-bg:#111;--bg:#0a0a0a;--light:#222;--text:#e4e4e7;--text-muted:#a1a1aa;--header-bg:#111;--table-header:#1a1a1a;--border:#333;--profit:#22c55e;--loss:#ef4444}
+.theme-terminal body{background:#0a0a0a}.theme-terminal .ticker-wrap{background:linear-gradient(90deg,#000,#111)}.theme-terminal .header{background:#111;border-color:#333}.theme-terminal .nav-bar{background:#111;border-color:#333}.theme-terminal .panel-card,.theme-terminal .stat-card,.theme-terminal .contact-card,.theme-terminal .lead-card,.theme-terminal .resource-card,.theme-terminal .modal{background:#111;border:1px solid #333}.theme-terminal .data-table th{background:#1a1a1a}.theme-terminal .data-table td{border-color:#333}.theme-terminal .form-input,.theme-terminal .form-select,.theme-terminal .form-textarea{background:#1a1a1a;border-color:#333;color:#e4e4e7}.theme-terminal .search-box{background:#111;border-color:#333}.theme-terminal .filter-btn{background:#111;border-color:#333;color:#a1a1aa}.theme-terminal .filter-btn.active{background:#22d3ee;border-color:#22d3ee;color:#000}.theme-terminal .footer{border-color:#333}.theme-terminal .brand-title{background:linear-gradient(135deg,#22d3ee,#a855f7);-webkit-background-clip:text}.theme-terminal .report-section{background:linear-gradient(135deg,#052e16,#14532d);border-color:#22c55e}.theme-terminal .highest-pair{background:linear-gradient(135deg,#422006,#713f12);border-color:#eab308}.theme-terminal .forecast-box{background:linear-gradient(135deg,#0c1929,#1e3a5f);border-color:#3b82f6}.theme-terminal .contact-prices,.theme-terminal .quick-action{background:#1a1a1a}
+.theme-corporate{--primary:#1e3a5f;--primary-dark:#0f2744;--success:#059669;--warning:#d97706;--danger:#dc2626;--purple:#1e3a5f;--purple-dark:#0f2744;--dark:#1e3a5f;--darker:#0f2744;--card-bg:#fff;--bg:#f8fafc;--light:#e2e8f0;--text:#1e293b;--text-muted:#64748b;--header-bg:#1e3a5f;--table-header:#f1f5f9;--border:#cbd5e1;--profit:#059669;--loss:#dc2626}.theme-corporate .header{background:#1e3a5f}.theme-corporate .brand-title{color:#fff;-webkit-text-fill-color:#fff}.theme-corporate .brand-sub{color:rgba(255,255,255,.8)}.theme-corporate .user-badge{background:rgba(255,255,255,.2);color:#fff}.theme-corporate .admin-login-btn,.theme-corporate .lang-btn{background:#fff;color:#1e3a5f}.theme-corporate .ticker-wrap{background:#0f2744}.theme-corporate .nav-btn{background:#e2e8f0}.theme-corporate .nav-btn.active{background:#1e3a5f}.theme-corporate .logo{background:#fff;color:#1e3a5f}
 *{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:all .3s}
-.ticker-wrap{background:linear-gradient(90deg,var(--darker),var(--dark));padding:8px 0;overflow:hidden}.ticker{display:flex;animation:tickerScroll 45s linear infinite;width:max-content}@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}.ticker-item{display:inline-flex;align-items:center;gap:6px;margin-right:40px;color:#f1f5f9;font-size:12px;white-space:nowrap}.ticker-badge{padding:2px 6px;border-radius:4px;font-size:9px;font-weight:700;text-transform:uppercase}.ticker-badge.price{background:var(--warning);color:#000}.ticker-badge.tip{background:#3b82f6}.ticker-badge.alert{background:var(--danger)}
-.header{background:var(--header-bg);padding:10px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}.header-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}.header-left{display:flex;align-items:center;gap:10px}.logo{width:40px;height:40px;background:linear-gradient(135deg,var(--ai-purple),var(--ai-purple-dark));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}.brand-title{font-size:18px;font-weight:800;background:linear-gradient(135deg,var(--ai-purple),var(--primary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.brand-sub{font-size:10px;color:var(--text-muted)}.header-right{display:flex;align-items:center;gap:8px}.user-badge{background:var(--light);padding:5px 10px;border-radius:6px;font-size:11px;font-weight:600;color:var(--text)}.user-badge.admin{background:linear-gradient(135deg,var(--warning),#d97706);color:#fff}.admin-login-btn{padding:6px 10px;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,var(--warning),#d97706);color:#fff}
-.theme-selector{display:flex;gap:4px}.theme-btn{width:24px;height:24px;border-radius:5px;border:2px solid var(--border);cursor:pointer;transition:all .2s}.theme-btn:hover{transform:scale(1.1)}.theme-btn.active{border-color:var(--primary);box-shadow:0 0 0 2px var(--primary)}.theme-btn.t-default{background:linear-gradient(135deg,#8b5cf6,#6366f1)}.theme-btn.t-terminal{background:linear-gradient(135deg,#000,#22c55e)}.theme-btn.t-corporate{background:linear-gradient(135deg,#1e3a5f,#fff)}
-.nav-bar{background:var(--card-bg);padding:8px 16px;border-bottom:1px solid var(--border);overflow-x:auto}.nav-inner{max-width:1400px;margin:0 auto;display:flex;gap:6px}.nav-btn{padding:8px 14px;border:none;background:var(--light);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;gap:5px;white-space:nowrap}.nav-btn:hover{background:#e0e7ff;color:var(--primary)}.nav-btn.active{background:linear-gradient(135deg,var(--primary),var(--ai-purple));color:#fff}.nav-btn.admin-only{background:linear-gradient(135deg,var(--warning),#d97706);color:#fff}.nav-btn.leads{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff}.nav-btn.resources{background:linear-gradient(135deg,#059669,#10b981);color:#fff}.nav-count{background:rgba(255,255,255,.3);padding:2px 6px;border-radius:5px;font-size:10px}
+.ticker-wrap{background:linear-gradient(90deg,var(--darker),var(--dark));padding:8px 0;overflow:hidden}.ticker{display:flex;animation:tickerScroll 60s linear infinite;width:max-content}@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}.ticker-item{display:inline-flex;align-items:center;gap:6px;margin-right:40px;color:#f1f5f9;font-size:12px;white-space:nowrap}.ticker-badge{padding:2px 6px;border-radius:4px;font-size:9px;font-weight:700;text-transform:uppercase}.ticker-badge.price{background:var(--warning);color:#000}.ticker-badge.tip{background:#3b82f6}.ticker-badge.alert{background:var(--danger)}.ticker-badge.market{background:var(--success)}
+.header{background:var(--header-bg);padding:12px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}.header-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}.header-left{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;font-weight:800}.brand-title{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--purple),var(--primary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}.brand-sub{font-size:10px;color:var(--text-muted);font-weight:600}.header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.user-badge{background:var(--light);padding:6px 12px;border-radius:8px;font-size:11px;font-weight:600;color:var(--text)}.user-badge.admin{background:linear-gradient(135deg,var(--warning),#d97706);color:#fff}.admin-login-btn{padding:6px 12px;border:none;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,var(--warning),#d97706);color:#fff}.lang-btn{padding:6px 12px;border:none;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#059669,#10b981);color:#fff}
+.theme-selector{display:flex;gap:4px}.theme-btn{width:26px;height:26px;border-radius:6px;border:2px solid var(--border);cursor:pointer;transition:all .2s}.theme-btn:hover{transform:scale(1.1)}.theme-btn.active{border-color:var(--primary);box-shadow:0 0 0 2px var(--primary)}.theme-btn.t-default{background:linear-gradient(135deg,#8b5cf6,#6366f1)}.theme-btn.t-terminal{background:linear-gradient(135deg,#000,#22c55e)}.theme-btn.t-corporate{background:linear-gradient(135deg,#1e3a5f,#fff)}
+.nav-bar{background:var(--card-bg);padding:10px 16px;border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}.nav-bar::-webkit-scrollbar{display:none}.nav-inner{max-width:1400px;margin:0 auto;display:flex;gap:6px}.nav-btn{padding:10px 16px;border:none;background:var(--light);border-radius:10px;font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:all .2s}.nav-btn:hover{background:#e0e7ff;color:var(--primary)}.nav-btn.active{background:linear-gradient(135deg,var(--primary),var(--purple));color:#fff;box-shadow:0 4px 12px rgba(99,102,241,.3)}.nav-btn.admin-only{background:linear-gradient(135deg,var(--warning),#d97706);color:#fff}.nav-count{background:rgba(255,255,255,.3);padding:2px 7px;border-radius:6px;font-size:10px;font-weight:700}
 .main{max-width:1400px;margin:0 auto;padding:16px}
-.login-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:1000;padding:16px}.login-overlay.active{display:flex}.login-card{background:var(--card-bg);border-radius:20px;padding:32px;width:100%;max-width:360px}.login-logo{width:60px;height:60px;background:linear-gradient(135deg,var(--warning),#d97706);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 16px}.login-title{text-align:center;font-size:20px;font-weight:800;margin-bottom:6px;color:var(--text)}.login-subtitle{text-align:center;color:var(--text-muted);margin-bottom:20px;font-size:12px}.login-error{background:#fef2f2;color:var(--danger);padding:10px;border-radius:8px;margin-bottom:12px;font-size:12px;text-align:center;display:none}.login-error.show{display:block}.form-group{margin-bottom:14px}.form-label{display:block;margin-bottom:5px;font-weight:600;font-size:12px;color:var(--text-muted)}.form-input,.form-textarea{width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:var(--card-bg);color:var(--text)}.form-input:focus,.form-textarea:focus{outline:none;border-color:var(--primary)}.form-textarea{min-height:80px;resize:vertical}.login-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--warning),#d97706);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px}.login-cancel{width:100%;padding:10px;background:var(--light);color:var(--text);border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;margin-top:8px}
-.panel-card{background:var(--card-bg);border-radius:14px;padding:16px;box-shadow:0 4px 15px rgba(0,0,0,.06);margin-bottom:16px}.panel-title{font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:12px;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
-.btn{padding:10px 16px;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none}.btn-primary{background:var(--primary);color:#fff}.btn-success{background:var(--success);color:#fff}.btn-warning{background:var(--warning);color:#fff}.btn-danger{background:var(--danger);color:#fff}.btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}.btn-sm{padding:6px 12px;font-size:11px}.btn-purple{background:linear-gradient(135deg,var(--ai-purple),var(--ai-purple-dark));color:#fff}.btn:hover{opacity:0.9}
-.lead-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}.lead-stat{background:var(--card-bg);border-radius:10px;padding:12px;text-align:center}.lead-stat-value{font-size:22px;font-weight:800}.lead-stat-label{font-size:9px;color:var(--text-muted);text-transform:uppercase}.lead-stat.new .lead-stat-value{color:var(--primary)}.lead-stat.contacted .lead-stat-value{color:var(--warning)}.lead-stat.responded .lead-stat-value{color:var(--success)}.lead-stat.converted .lead-stat-value{color:#06b6d4}
-.lead-card{background:var(--card-bg);border-radius:12px;padding:14px;margin-bottom:10px;border-left:4px solid var(--border)}.lead-card.new{border-left-color:var(--primary)}.lead-card.contacted{border-left-color:var(--warning)}.lead-card.responded{border-left-color:var(--success)}.lead-card.converted{border-left-color:#22d3ee}.lead-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:8px}.lead-company{font-size:14px;font-weight:700;color:var(--text)}.lead-status{padding:3px 8px;border-radius:5px;font-size:9px;font-weight:600;text-transform:uppercase}.lead-status.new{background:#e0e7ff;color:#4338ca}.lead-status.contacted{background:#fef3c7;color:#b45309}.lead-status.responded{background:#d1fae5;color:#047857}.lead-status.converted{background:#cffafe;color:#0891b2}.lead-details{font-size:11px;color:var(--text-muted);margin-bottom:8px}.lead-details div{margin-bottom:3px}.lead-materials{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}.lead-material{background:var(--bg);padding:2px 6px;border-radius:4px;font-size:9px;font-weight:600;color:var(--text)}.lead-actions{display:flex;gap:6px;flex-wrap:wrap}.lead-action{padding:6px 10px;border:none;border-radius:6px;font-size:10px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px;text-decoration:none}.lead-action.email{background:#dbeafe;color:#1d4ed8}.lead-action.sms{background:#d1fae5;color:#047857}.lead-action.call{background:#fef3c7;color:#b45309}.lead-action.convert{background:linear-gradient(135deg,var(--success),#059669);color:#fff}.lead-action.delete{background:#fee2e2;color:#dc2626}.lead-action:hover{opacity:0.8}
-.resource-card{background:var(--card-bg);border-radius:12px;padding:16px;margin-bottom:12px;border:2px solid var(--border)}.resource-card:hover{border-color:var(--primary)}.resource-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}.resource-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px}.resource-title{font-size:14px;font-weight:700;color:var(--text)}.resource-type{font-size:10px;color:var(--text-muted)}.resource-desc{font-size:11px;color:var(--text-muted);line-height:1.5;margin-bottom:12px}.resource-tips{background:var(--bg);border-radius:8px;padding:10px;margin-bottom:12px}.resource-tips-title{font-size:10px;font-weight:700;color:var(--text);margin-bottom:6px}.resource-tips ul{font-size:10px;color:var(--text-muted);margin-left:16px;line-height:1.6}.resource-link{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--primary);color:#fff;border-radius:6px;font-size:11px;font-weight:600;text-decoration:none}.resource-link:hover{opacity:0.9}
-.company-list{background:var(--bg);border-radius:10px;padding:12px;margin-bottom:12px}.company-list-title{font-size:11px;font-weight:700;color:var(--text);margin-bottom:8px}.company-item{display:flex;justify-content:space-between;align-items:center;padding:8px;background:var(--card-bg);border-radius:6px;margin-bottom:6px}.company-item:last-child{margin-bottom:0}.company-name{font-size:12px;font-weight:600;color:var(--text)}.company-type{font-size:9px;color:var(--text-muted)}.company-actions{display:flex;gap:4px}.company-action{padding:4px 8px;border-radius:4px;font-size:9px;font-weight:600;text-decoration:none;background:var(--light);color:var(--text)}.company-action:hover{background:var(--primary);color:#fff}
-.contacts-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px}.search-box{display:flex;align-items:center;gap:6px;background:var(--card-bg);padding:7px 10px;border-radius:8px;flex:1;max-width:260px;border:1px solid var(--border)}.search-box input{border:none;background:none;flex:1;font-size:12px;font-family:inherit;color:var(--text)}.search-box input:focus{outline:none}.filter-btns{display:flex;gap:4px;flex-wrap:wrap}.filter-btn{padding:5px 10px;border:2px solid var(--border);background:var(--card-bg);border-radius:6px;font-size:10px;font-weight:600;cursor:pointer;color:var(--text-muted)}.filter-btn.active{border-color:var(--primary);background:#e0e7ff;color:var(--primary)}
-.contact-card{background:var(--card-bg);border-radius:12px;padding:12px;border:2px solid transparent;margin-bottom:10px}.contact-card.priority{border-color:var(--warning)}.contact-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:6px}.contact-name{font-size:13px;font-weight:700;color:var(--text)}.contact-type{display:inline-block;padding:2px 6px;border-radius:4px;font-size:9px;font-weight:600;text-transform:uppercase}.contact-type.mill{background:#dbeafe;color:#1d4ed8}.contact-type.broker{background:#fef3c7;color:#b45309}.contact-type.export{background:#d1fae5;color:#047857}.contact-person{font-size:10px;color:var(--text-muted);margin-bottom:4px}.contact-email{font-size:9px;color:var(--primary);margin-bottom:6px}.contact-prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(40px,1fr));gap:4px;margin-bottom:8px;padding:8px;background:var(--bg);border-radius:8px}.price-item{text-align:center}.price-label{font-size:8px;color:var(--text-muted);text-transform:uppercase}.price-value{font-size:11px;font-weight:700;color:var(--profit)}.contact-actions{display:flex;gap:4px}.contact-action{padding:6px 8px;background:var(--bg);border:none;border-radius:5px;font-size:10px;font-weight:600;cursor:pointer;color:var(--text);text-decoration:none}.contact-action:hover{background:var(--light)}.contact-action.call{background:#d1fae5;color:#047857}.contact-action.email{background:#dbeafe;color:#1d4ed8}
-.outreach-template{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid var(--primary);border-radius:12px;padding:14px;margin-bottom:16px}.outreach-title{font-size:13px;font-weight:700;color:#1e40af;margin-bottom:8px}.outreach-text{font-size:11px;line-height:1.6;color:#1e3a5f;background:#fff;padding:12px;border-radius:8px;margin-bottom:10px;white-space:pre-wrap}
-.share-section{background:linear-gradient(135deg,#dbeafe,#bfdbfe);border:2px solid var(--primary);border-radius:12px;padding:14px;margin-bottom:14px}.share-title{font-size:13px;font-weight:700;color:#1e40af;margin-bottom:6px}.share-url{background:#fff;padding:8px;border-radius:6px;font-size:10px;word-break:break-all;margin:8px 0;border:1px solid var(--primary);color:var(--text)}.share-btns{display:flex;gap:6px;flex-wrap:wrap}
-.qr-section{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid var(--success);border-radius:12px;padding:14px;margin-bottom:14px;text-align:center}.qr-title{font-size:13px;font-weight:700;color:#166534;margin-bottom:10px}.qr-code{background:#fff;padding:10px;border-radius:8px;display:inline-block}
-.empty-state{text-align:center;padding:40px 20px;color:var(--text-muted)}.empty-icon{font-size:48px;margin-bottom:12px}.empty-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px}.empty-desc{font-size:12px;margin-bottom:16px}
-.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:1000;padding:16px}.modal-overlay.active{display:flex}.modal{background:var(--card-bg);border-radius:16px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}.modal-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}.modal-title{font-size:15px;font-weight:700;color:var(--text)}.modal-close{width:28px;height:28px;border-radius:7px;border:none;background:var(--light);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--text)}.modal-body{padding:16px}.modal-footer{padding:12px 16px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:500px){.form-row{grid-template-columns:1fr}}.form-select{width:100%;padding:10px;border:2px solid var(--border);border-radius:8px;font-size:12px;font-family:inherit;background:var(--card-bg);color:var(--text)}.price-input-group{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.price-input-item label{display:block;font-size:9px;font-weight:600;color:var(--text-muted);margin-bottom:2px}.price-input-item input{width:100%;padding:8px;border:2px solid var(--border);border-radius:6px;font-size:11px;background:var(--card-bg);color:var(--text)}
-.admin-section{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--warning);border-radius:12px;padding:14px;margin-bottom:14px}.admin-section-title{font-size:13px;font-weight:700;color:#92400e;margin-bottom:10px}.admin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:6px}.admin-btn{padding:10px;background:#fff;border:2px solid var(--warning);border-radius:8px;font-size:10px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px;color:#92400e}.admin-btn:hover{background:var(--warning);color:#fff}
-.prices-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}.price-card{background:var(--card-bg);border-radius:12px;padding:12px}.price-commodity{font-size:11px;font-weight:700;color:var(--text)}.price-current{font-size:18px;font-weight:800;color:var(--profit);margin-bottom:2px}.price-range{font-size:9px;color:var(--text-muted)}
-.table-container{overflow-x:auto;background:var(--card-bg);border-radius:12px}.data-table{width:100%;border-collapse:collapse;font-size:11px}.data-table th{background:var(--table-header);padding:8px 6px;text-align:left;font-weight:600;font-size:9px;text-transform:uppercase;color:var(--text-muted)}.data-table td{padding:8px 6px;border-bottom:1px solid var(--border);color:var(--text)}.data-table tr:hover{background:var(--bg)}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--dark);color:#fff;padding:10px 18px;border-radius:8px;font-size:12px;font-weight:500;z-index:2000;opacity:0;transition:all .3s}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.footer{text-align:center;padding:16px;color:var(--text-muted);font-size:9px;border-top:1px solid var(--border);margin-top:20px}
-@media(max-width:768px){.header-inner{flex-direction:column;gap:8px}.lead-stats{grid-template-columns:repeat(2,1fr)}.form-row{grid-template-columns:1fr}}
+.panel-card{background:var(--card-bg);border-radius:16px;padding:18px;box-shadow:0 4px 20px rgba(0,0,0,.06);margin-bottom:16px}.panel-title{font-size:13px;font-weight:700;color:var(--text-muted);margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px;display:flex;justify-content:space-between;align-items:center}
+.btn{padding:10px 18px;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;transition:all .2s}.btn-primary{background:var(--primary);color:#fff}.btn-success{background:var(--success);color:#fff}.btn-warning{background:var(--warning);color:#fff}.btn-danger{background:var(--danger);color:#fff}.btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}.btn-sm{padding:7px 12px;font-size:11px}.btn:hover{opacity:0.9;transform:translateY(-1px)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:18px}.stat-card{background:var(--card-bg);border-radius:16px;padding:18px;cursor:pointer;transition:all .2s;border:2px solid transparent}.stat-card:hover{border-color:var(--primary);transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,.1)}.stat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px}.stat-icon.purple{background:linear-gradient(135deg,var(--purple),var(--purple-dark))}.stat-icon.green{background:linear-gradient(135deg,var(--success),#059669)}.stat-icon.blue{background:linear-gradient(135deg,var(--primary),var(--primary-dark))}.stat-icon.yellow{background:linear-gradient(135deg,var(--warning),#d97706)}.stat-icon.red{background:linear-gradient(135deg,var(--danger),#dc2626)}.stat-icon.cyan{background:linear-gradient(135deg,#06b6d4,#0891b2)}.stat-value{font-size:28px;font-weight:800;margin-bottom:4px;color:var(--text)}.stat-label{font-size:11px;color:var(--text-muted);font-weight:500}.stat-sub{font-size:10px;color:var(--primary);margin-top:6px;font-weight:600}
+.lead-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.lead-stat{background:var(--card-bg);border-radius:12px;padding:14px;text-align:center}.lead-stat-value{font-size:26px;font-weight:800}.lead-stat-label{font-size:9px;color:var(--text-muted);text-transform:uppercase;font-weight:600}.lead-stat.new .lead-stat-value{color:var(--primary)}.lead-stat.contacted .lead-stat-value{color:var(--warning)}.lead-stat.responded .lead-stat-value{color:var(--success)}.lead-stat.converted .lead-stat-value{color:#06b6d4}
+.lead-card{background:var(--card-bg);border-radius:14px;padding:16px;margin-bottom:12px;border-left:5px solid var(--border);transition:all .2s}.lead-card:hover{box-shadow:0 4px 15px rgba(0,0,0,.08)}.lead-card.new{border-left-color:var(--primary)}.lead-card.contacted{border-left-color:var(--warning)}.lead-card.responded{border-left-color:var(--success)}.lead-card.converted{border-left-color:#22d3ee}.lead-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:10px}.lead-company{font-size:15px;font-weight:700;color:var(--text)}.lead-status{padding:4px 10px;border-radius:6px;font-size:9px;font-weight:700;text-transform:uppercase}.lead-status.new{background:#e0e7ff;color:#4338ca}.lead-status.contacted{background:#fef3c7;color:#b45309}.lead-status.responded{background:#d1fae5;color:#047857}.lead-status.converted{background:#cffafe;color:#0891b2}.lead-details{font-size:11px;color:var(--text-muted);margin-bottom:10px;line-height:1.6}.lead-materials{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}.lead-material{background:var(--bg);padding:3px 8px;border-radius:5px;font-size:10px;font-weight:600;color:var(--text)}.lead-actions{display:flex;gap:8px;flex-wrap:wrap}.lead-action{padding:8px 12px;border:none;border-radius:8px;font-size:10px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;text-decoration:none;transition:all .2s}.lead-action.email{background:#dbeafe;color:#1d4ed8}.lead-action.sms{background:#d1fae5;color:#047857}.lead-action.call{background:#fef3c7;color:#b45309}.lead-action.convert{background:linear-gradient(135deg,var(--success),#059669);color:#fff}.lead-action.delete{background:#fee2e2;color:#dc2626}.lead-action:hover{transform:translateY(-1px)}
+.resource-card{background:var(--card-bg);border-radius:14px;padding:18px;margin-bottom:14px;border:2px solid var(--border);transition:all .2s}.resource-card:hover{border-color:var(--primary);transform:translateY(-2px)}.resource-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}.resource-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px}.resource-title{font-size:15px;font-weight:700;color:var(--text)}.resource-type{font-size:10px;color:var(--text-muted);font-weight:500}.resource-desc{font-size:12px;color:var(--text-muted);line-height:1.6;margin-bottom:14px}.resource-tips{background:var(--bg);border-radius:10px;padding:12px;margin-bottom:14px}.resource-tips-title{font-size:11px;font-weight:700;color:var(--text);margin-bottom:8px}.resource-tips ul{font-size:11px;color:var(--text-muted);margin-left:18px;line-height:1.7}.resource-link{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;font-size:11px;font-weight:600;text-decoration:none}.resource-link:hover{opacity:0.9}
+.company-list{background:var(--bg);border-radius:12px;padding:14px;margin-bottom:14px}.company-list-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:10px}.company-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--card-bg);border-radius:8px;margin-bottom:8px}.company-item:last-child{margin-bottom:0}.company-name{font-size:13px;font-weight:600;color:var(--text)}.company-type{font-size:10px;color:var(--text-muted)}.company-actions{display:flex;gap:6px}.company-action{padding:5px 10px;border-radius:6px;font-size:10px;font-weight:600;text-decoration:none;background:var(--light);color:var(--text);transition:all .2s}.company-action:hover{background:var(--primary);color:#fff}
+.contact-card{background:var(--card-bg);border-radius:14px;padding:14px;border:2px solid transparent;margin-bottom:12px;transition:all .2s}.contact-card:hover{box-shadow:0 4px 15px rgba(0,0,0,.08)}.contact-card.priority{border-color:var(--warning)}.contact-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:8px}.contact-name{font-size:14px;font-weight:700;color:var(--text)}.contact-type{display:inline-block;padding:3px 8px;border-radius:5px;font-size:9px;font-weight:700;text-transform:uppercase}.contact-type.mill{background:#dbeafe;color:#1d4ed8}.contact-type.broker{background:#fef3c7;color:#b45309}.contact-type.export{background:#d1fae5;color:#047857}.contact-person{font-size:11px;color:var(--text-muted);margin-bottom:4px}.contact-email{font-size:10px;color:var(--primary);margin-bottom:8px}.contact-prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(50px,1fr));gap:6px;margin-bottom:10px;padding:10px;background:var(--bg);border-radius:10px}.price-item{text-align:center}.price-label{font-size:9px;color:var(--text-muted);text-transform:uppercase;font-weight:600}.price-value{font-size:13px;font-weight:700;color:var(--profit)}.contact-actions{display:flex;gap:6px;flex-wrap:wrap}.contact-action{padding:7px 10px;background:var(--bg);border:none;border-radius:6px;font-size:10px;font-weight:600;cursor:pointer;color:var(--text);text-decoration:none;transition:all .2s}.contact-action:hover{background:var(--light)}.contact-action.call{background:#d1fae5;color:#047857}.contact-action.email{background:#dbeafe;color:#1d4ed8}
+.contacts-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px}.search-box{display:flex;align-items:center;gap:8px;background:var(--card-bg);padding:10px 14px;border-radius:10px;flex:1;max-width:280px;border:2px solid var(--border)}.search-box:focus-within{border-color:var(--primary)}.search-box input{border:none;background:none;flex:1;font-size:13px;font-family:inherit;color:var(--text)}.search-box input:focus{outline:none}.filter-btns{display:flex;gap:6px;flex-wrap:wrap}.filter-btn{padding:8px 14px;border:2px solid var(--border);background:var(--card-bg);border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;color:var(--text-muted);transition:all .2s}.filter-btn:hover{border-color:var(--primary)}.filter-btn.active{border-color:var(--primary);background:#e0e7ff;color:var(--primary)}
+.outreach-template{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid var(--primary);border-radius:14px;padding:16px;margin-bottom:18px}.outreach-title{font-size:14px;font-weight:700;color:#1e40af;margin-bottom:10px}.outreach-text{font-size:11px;line-height:1.7;color:#1e3a5f;background:#fff;padding:14px;border-radius:10px;margin-bottom:12px;white-space:pre-wrap}
+.share-section{background:linear-gradient(135deg,#dbeafe,#bfdbfe);border:2px solid var(--primary);border-radius:14px;padding:16px;margin-bottom:16px}.share-title{font-size:14px;font-weight:700;color:#1e40af;margin-bottom:8px}.share-url{background:#fff;padding:12px;border-radius:8px;font-size:11px;word-break:break-all;margin:10px 0;border:1px solid var(--primary);color:var(--text)}.share-btns{display:flex;gap:8px;flex-wrap:wrap}
+.qr-section{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid var(--success);border-radius:14px;padding:18px;margin-bottom:16px;text-align:center}.qr-title{font-size:14px;font-weight:700;color:#166534;margin-bottom:12px}.qr-code{background:#fff;padding:12px;border-radius:10px;display:inline-block}
+.calc-section{background:linear-gradient(135deg,#faf5ff,#f3e8ff);border:2px solid var(--purple);border-radius:14px;padding:16px;margin-bottom:16px}.calc-title{font-size:14px;font-weight:700;color:#6b21a8;margin-bottom:12px}.calc-row{display:flex;gap:10px;align-items:center;margin-bottom:10px;flex-wrap:wrap}.calc-input{padding:10px 14px;border:2px solid var(--border);border-radius:8px;width:100px;font-size:13px;background:var(--card-bg);color:var(--text)}.calc-result{padding:12px;background:var(--card-bg);border-radius:10px;margin-top:12px}.margin-positive{color:var(--profit);font-weight:700}.margin-negative{color:var(--loss);font-weight:700}
+.history-chart{display:flex;align-items:flex-end;gap:4px;height:80px;padding:12px;background:var(--bg);border-radius:10px}.history-bar{flex:1;background:var(--primary);border-radius:4px 4px 0 0;min-width:20px;position:relative;cursor:pointer;transition:all .2s}.history-bar:hover{opacity:0.8}.history-bar:hover::after{content:attr(data-value);position:absolute;top:-22px;left:50%;transform:translateX(-50%);background:var(--dark);color:#fff;padding:3px 8px;border-radius:5px;font-size:9px;white-space:nowrap}
+.report-section{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid var(--success);border-radius:14px;padding:16px;margin-bottom:16px}.report-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.report-title{font-size:16px;font-weight:800;color:#166534}.report-date{font-size:11px;color:#166534}
+.scorecard{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-bottom:16px}.scorecard-item{background:var(--card-bg);border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border)}.scorecard-value{font-size:20px;font-weight:800;color:var(--profit)}.scorecard-label{font-size:9px;color:var(--text-muted);text-transform:uppercase}
+.bar-chart{margin:12px 0}.bar-row{display:flex;align-items:center;margin-bottom:8px}.bar-label{width:50px;font-size:11px;font-weight:600;color:var(--text)}.bar-container{flex:1;height:20px;background:var(--light);border-radius:5px;overflow:hidden;margin:0 8px}.bar-fill{height:100%;border-radius:5px}.bar-value{width:40px;font-size:11px;font-weight:700;text-align:right;color:var(--text)}
+.highest-pair{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--warning);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}.highest-pair-commodity{font-size:13px;font-weight:700;color:#92400e}.highest-pair-buyer{font-size:10px;color:#92400e}.highest-pair-price{font-size:17px;font-weight:800;color:var(--profit)}
+.ppi-compare{border-radius:12px;overflow:hidden;margin-bottom:14px;background:var(--card-bg)}.ppi-row{display:flex;padding:10px 12px;border-bottom:1px solid var(--border)}.ppi-row:last-child{border-bottom:none}.ppi-row.header{background:var(--table-header);font-weight:700;font-size:10px;text-transform:uppercase;color:var(--text-muted)}.ppi-commodity{flex:1;color:var(--text);font-size:12px}.ppi-value{width:60px;text-align:right;font-weight:600;color:var(--text);font-size:11px}.ppi-gap{width:65px;text-align:right;font-weight:700;font-size:11px}
+.forecast-box{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid #3b82f6;border-radius:12px;padding:14px;margin-top:14px}.forecast-title{font-size:12px;font-weight:700;color:#1e40af;margin-bottom:6px}.forecast-text{font-size:11px;line-height:1.6;color:#1e3a5f}
+.intel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:18px}.intel-btn{background:var(--card-bg);border:2px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;text-align:left;transition:all .2s}.intel-btn:hover{border-color:var(--primary);transform:translateY(-2px)}.intel-btn-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px}.intel-btn-title{font-size:13px;font-weight:700;margin-bottom:3px;color:var(--text)}.intel-btn-desc{font-size:10px;color:var(--text-muted)}
+.quick-action{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border-radius:10px;margin-bottom:6px;cursor:pointer;border:none;width:100%;text-align:left;font-family:inherit;transition:all .2s}.quick-action:hover{background:var(--light);transform:translateX(3px)}.quick-action-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}.quick-action-text{font-size:12px;font-weight:600;color:var(--text)}
+.prices-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}.price-card{background:var(--card-bg);border-radius:14px;padding:14px}.price-commodity{font-size:12px;font-weight:700;color:var(--text)}.price-current{font-size:20px;font-weight:800;color:var(--profit);margin-bottom:3px}.price-range{font-size:10px;color:var(--text-muted)}
+.table-container{overflow-x:auto;background:var(--card-bg);border-radius:12px}.data-table{width:100%;border-collapse:collapse;font-size:12px}.data-table th{background:var(--table-header);padding:12px 10px;text-align:left;font-weight:600;font-size:10px;text-transform:uppercase;color:var(--text-muted)}.data-table td{padding:12px 10px;border-bottom:1px solid var(--border);color:var(--text)}.data-table tr:hover{background:var(--bg)}
+.admin-section{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--warning);border-radius:14px;padding:16px;margin-bottom:16px}.admin-section-title{font-size:14px;font-weight:700;color:#92400e;margin-bottom:12px}.admin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}.admin-btn{padding:12px;background:#fff;border:2px solid var(--warning);border-radius:10px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;color:#92400e;transition:all .2s}.admin-btn:hover{background:var(--warning);color:#fff}
+.activity-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px}.activity-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}.activity-content{flex:1}.activity-title{font-size:12px;font-weight:600;color:var(--text)}.activity-time{font-size:10px;color:var(--text-muted)}
+.empty-state{text-align:center;padding:50px 20px;color:var(--text-muted)}.empty-icon{font-size:56px;margin-bottom:16px}.empty-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px}.empty-desc{font-size:13px;margin-bottom:20px;line-height:1.5}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:1000;padding:16px;backdrop-filter:blur(4px)}.modal-overlay.active{display:flex}.modal{background:var(--card-bg);border-radius:20px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}.modal-header{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}.modal-title{font-size:17px;font-weight:700;color:var(--text)}.modal-close{width:32px;height:32px;border-radius:8px;border:none;background:var(--light);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--text)}.modal-body{padding:20px}.modal-footer{padding:16px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}.form-group{margin-bottom:16px}.form-label{display:block;margin-bottom:6px;font-weight:600;font-size:12px;color:var(--text-muted)}.form-input,.form-textarea{width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:var(--card-bg);color:var(--text);transition:border-color .2s}.form-input:focus,.form-textarea:focus{outline:none;border-color:var(--primary)}.form-textarea{min-height:100px;resize:vertical}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:500px){.form-row{grid-template-columns:1fr}}.form-select{width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:10px;font-size:13px;font-family:inherit;background:var(--card-bg);color:var(--text)}.price-input-group{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.price-input-item label{display:block;font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px}.price-input-item input{width:100%;padding:10px;border:2px solid var(--border);border-radius:8px;font-size:12px;background:var(--card-bg);color:var(--text)}
+.login-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:1000;padding:16px;backdrop-filter:blur(4px)}.login-overlay.active{display:flex}.login-card{background:var(--card-bg);border-radius:24px;padding:36px;width:100%;max-width:380px}.login-logo{width:70px;height:70px;background:linear-gradient(135deg,var(--warning),#d97706);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 20px}.login-title{text-align:center;font-size:22px;font-weight:800;margin-bottom:8px;color:var(--text)}.login-subtitle{text-align:center;color:var(--text-muted);margin-bottom:24px;font-size:13px}.login-error{background:#fef2f2;color:var(--danger);padding:12px;border-radius:10px;margin-bottom:14px;font-size:12px;text-align:center;display:none}.login-error.show{display:block}.login-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--warning),#d97706);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;margin-top:10px}.login-cancel{width:100%;padding:12px;background:var(--light);color:var(--text);border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;margin-top:10px}
+.gap-positive{color:var(--profit);font-weight:700}.gap-negative{color:var(--loss);font-weight:700}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--dark);color:#fff;padding:14px 24px;border-radius:12px;font-size:13px;font-weight:600;z-index:2000;opacity:0;transition:all .3s;box-shadow:0 8px 30px rgba(0,0,0,.2)}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.footer{text-align:center;padding:20px 16px;color:var(--text-muted);font-size:10px;border-top:1px solid var(--border);margin-top:24px;line-height:1.6}.footer a{color:var(--primary);text-decoration:none}.footer strong{color:var(--text)}
+.goal-tracker{background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:12px;padding:14px;margin-bottom:16px}.goal-title{font-size:12px;font-weight:700;color:#92400e;margin-bottom:10px}.goal-progress{height:12px;background:#fff;border-radius:6px;overflow:hidden;margin-bottom:8px}.goal-fill{height:100%;background:linear-gradient(90deg,var(--success),#22c55e);border-radius:6px;transition:width .5s}.goal-text{font-size:11px;color:#78350f;display:flex;justify-content:space-between}
+.pipeline-value{background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-radius:12px;padding:14px;margin-bottom:16px;text-align:center}.pipeline-amount{font-size:28px;font-weight:800;color:#166534}.pipeline-label{font-size:11px;color:#166534}
+@media print{.header,.nav-bar,.ticker-wrap,.footer,.btn,.contact-actions,.no-print,.theme-selector,.lang-btn,.admin-section,.share-section,.qr-section,.modal-overlay,.login-overlay,.toast{display:none!important}.main{padding:0}.panel-card{box-shadow:none;border:1px solid #ddd}}
+@media(max-width:768px){.header-inner{flex-direction:column;gap:10px}.stats-grid{grid-template-columns:repeat(2,1fr)}.lead-stats{grid-template-columns:repeat(2,1fr)}.intel-grid{grid-template-columns:repeat(2,1fr)}.form-row{grid-template-columns:1fr}.price-input-group{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
-<div id="appContainer"></div>
-<div class="login-overlay" id="adminLogin">
-<div class="login-card">
-<div class="login-logo">👑</div>
-<h2 class="login-title">Admin Login</h2>
-<p class="login-subtitle">RJVandling only</p>
-<div class="login-error" id="loginError"></div>
-<div class="form-group"><label class="form-label">Username</label><input type="text" class="form-input" id="username"></div>
-<div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="password"></div>
-<button class="login-btn" onclick="handleAdminLogin()">🔐 Login</button>
-<button class="login-cancel" onclick="hideAdminLogin()">Cancel</button>
-</div>
-</div>
-<div class="modal-overlay" id="leadModal">
-<div class="modal">
-<div class="modal-header"><h3 class="modal-title" id="leadModalTitle">Add Lead</h3><button class="modal-close" onclick="closeLeadModal()">×</button></div>
-<div class="modal-body">
-<div class="form-group"><label class="form-label">Company Name *</label><input type="text" class="form-input" id="lCompany" placeholder="e.g. International Paper"></div>
-<div class="form-row"><div class="form-group"><label class="form-label">Contact Name</label><input type="text" class="form-input" id="lContact" placeholder="e.g. John Smith"></div><div class="form-group"><label class="form-label">Title</label><input type="text" class="form-input" id="lTitle" placeholder="e.g. Fiber Buyer"></div></div>
-<div class="form-row"><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="lEmail" placeholder="jsmith@company.com"></div><div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" id="lPhone" placeholder="555-123-4567"></div></div>
-<div class="form-row"><div class="form-group"><label class="form-label">Type</label><select class="form-select" id="lType"><option value="mill">Mill</option><option value="broker">Broker</option><option value="recycler">Recycler</option><option value="export">Exporter</option></select></div><div class="form-group"><label class="form-label">Region</label><input type="text" class="form-input" id="lRegion" placeholder="TX, Southeast, etc"></div></div>
-<div class="form-group"><label class="form-label">Materials They Buy (comma separated)</label><input type="text" class="form-input" id="lMaterials" placeholder="OCC, SWL, PM, CBS, HWEC"></div>
-<div class="form-group"><label class="form-label">Notes</label><textarea class="form-textarea" id="lNotes" placeholder="Where you found them, any notes..."></textarea></div>
-</div>
-<div class="modal-footer"><button class="btn btn-outline" onclick="closeLeadModal()">Cancel</button><button class="btn btn-danger" onclick="saveLead()">💾 Save Lead</button></div>
-</div>
-</div>
-<div class="modal-overlay" id="buyerModal">
-<div class="modal">
-<div class="modal-header"><h3 class="modal-title" id="buyerModalTitle">Add Buyer</h3><button class="modal-close" onclick="closeBuyerModal()">×</button></div>
-<div class="modal-body">
-<div class="form-row"><div class="form-group"><label class="form-label">Company *</label><input type="text" class="form-input" id="bCompany"></div><div class="form-group"><label class="form-label">Contact</label><input type="text" class="form-input" id="bContact"></div></div>
-<div class="form-row"><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="bEmail"></div><div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" id="bPhone"></div></div>
-<div class="form-group"><label class="form-label">Type</label><select class="form-select" id="bType"><option value="mill">Mill</option><option value="broker">Broker</option><option value="export">Export</option></select></div>
-<div class="form-group"><label class="form-label">Prices ($/ton)</label><div class="price-input-group"><div class="price-input-item"><label>OCC</label><input type="number" id="pOCC"></div><div class="price-input-item"><label>DLK</label><input type="number" id="pDLK"></div><div class="price-input-item"><label>SWL</label><input type="number" id="pSWL"></div><div class="price-input-item"><label>PM</label><input type="number" id="pPM"></div><div class="price-input-item"><label>CBS</label><input type="number" id="pCBS"></div><div class="price-input-item"><label>HWEC</label><input type="number" id="pHWEC"></div></div></div>
-</div>
-<div class="modal-footer"><button class="btn btn-outline" onclick="closeBuyerModal()">Cancel</button><button class="btn btn-primary" onclick="saveBuyer()">Save</button></div>
-</div>
-</div>
+<div id="app"></div>
 <div class="toast" id="toast"></div>
 <script>
-var adminUser={username:'RJVandling',password:'Sailer66'};
-var defaultBuyers=[
-{id:1,company:'Georgia Pacific',contact:'Jake Walker',email:'jacob.walker1@gapac.com',phone:'',type:'mill',priority:true,prices:{OCC:65,PM:155,SWL:215,HWEC:370}},
-{id:2,company:'SKG Westrock',contact:'Cynthia Torres',email:'cynthia.torres@smurfitwestrock.com',phone:'',type:'mill',priority:true,prices:{OCC:60}},
-{id:3,company:'Greenside',contact:'Casandra Espinoza',email:'grupocartonero.mty@gmail.com',phone:'',type:'export',priority:true,prices:{OCC:58,PM:165,SWL:215}},
-{id:4,company:'American Fiber',contact:'Steve Minor',email:'sminor@amfiberservices.com',phone:'',type:'broker',priority:true,prices:{SWL:215,CBS:160,HWEC:250}},
-{id:5,company:'Marck',contact:'Don Langley',email:'dlongley@marck.net',phone:'',type:'broker',priority:false,prices:{OCC:55,SWL:230}}
-];
+// ============================================
+// FIBER HUB PRO - DALMEX RECYCLING
+// Created by R.J. Vandling
+// ============================================
 
-// REAL companies to research - NO fake contact info
-var companiesToResearch=[
-{name:'International Paper',type:'Mill',website:'internationalpaper.com',notes:'Largest paper company in US. Multiple TX locations.'},
-{name:'Packaging Corp of America',type:'Mill',website:'packagingcorp.com',notes:'Major containerboard producer.'},
-{name:'WestRock',type:'Mill',website:'westrock.com',notes:'Now Smurfit WestRock. Large corrugated producer.'},
-{name:'Pratt Industries',type:'Mill',website:'prattindustries.com',notes:'100% recycled containerboard. Growing fast.'},
-{name:'Clearwater Paper',type:'Mill',website:'clearwaterpaper.com',notes:'Tissue and paperboard.'},
-{name:'Graphic Packaging',type:'Mill',website:'graphicpkg.com',notes:'Paperboard packaging.'},
-{name:'Sonoco',type:'Mill/Broker',website:'sonoco.com',notes:'Diversified packaging, buys fiber.'},
-{name:'Republic Services',type:'Recycler',website:'republicservices.com',notes:'May buy or partner on fiber.'},
-{name:'Waste Management',type:'Recycler',website:'wm.com',notes:'Recycling division buys materials.'},
-{name:'DS Smith',type:'Mill',website:'dssmith.com',notes:'UK company with US operations.'},
-{name:'Cascades',type:'Mill',website:'cascades.com',notes:'Canadian company, US facilities.'},
-{name:'Caraustar',type:'Mill',website:'caraustar.com',notes:'Recycled paperboard.'},
-{name:'Green Bay Packaging',type:'Mill',website:'gbp.com',notes:'Midwest focus.'},
-{name:'Sustana',type:'Mill',website:'sustana.com',notes:'Recycled fiber specialist.'}
-];
-
-var resources=[
-{id:1,title:'ISRI Member Directory',type:'Industry Association',icon:'🏭',color:'#3b82f6',url:'https://www.isri.org/recycling-commodities/find-a-recycler',desc:'Institute of Scrap Recycling Industries. Search their member directory for paper recyclers and brokers in your area.',tips:['Search by "Paper" category','Filter by state/region','Look for "Paper Stock Dealers"','Members are verified industry participants']},
-{id:2,title:'LinkedIn Sales Navigator',type:'Professional Network',icon:'💼',color:'#0077b5',url:'https://www.linkedin.com/sales/search/people',desc:'Find procurement managers, fiber buyers, and raw materials purchasers at target companies. Best for finding actual decision-makers.',tips:['Search: "fiber buyer" OR "paper procurement"','Search: "raw materials" + "paper mill"','Filter by location (Texas, Southeast)','Look at who works at your target companies','Send connection requests with personalized notes']},
-{id:3,title:'Pulp & Paper Directory (RISI)',type:'Industry Database',icon:'📋',color:'#059669',url:'https://www.fastmarkets.com/pulp-and-paper',desc:'Comprehensive database of paper mills, converters, and suppliers. Some content requires subscription.',tips:['Search for mills by region','Look for "recovered paper" buyers','Check company profiles for contacts','Trade publications list key players']},
-{id:4,title:'AF&PA Member Mills',type:'Industry Association',icon:'🌲',color:'#166534',url:'https://www.afandpa.org/about-us/member-companies',desc:'American Forest & Paper Association member list. These are the major paper manufacturers in the US.',tips:['All major US paper companies are members','Visit each company website','Look for "Suppliers" or "Vendor" pages','Find procurement/purchasing contacts']},
-{id:5,title:'RecyclingMarkets.net',type:'Trading Platform',icon:'♻️',color:'#10b981',url:'https://www.recyclingmarkets.net/',desc:'Online marketplace for recyclables. Post listings and connect with buyers. See current market prices.',tips:['Create a seller profile','Post your available materials','Browse buyer listings','Check price benchmarks']},
-{id:6,title:'Google Search Strategies',type:'Research Method',icon:'🔍',color:'#ea4335',url:'https://www.google.com',desc:'Use targeted searches to find purchasing contacts and vendor registration pages.',tips:['"fiber procurement manager" + Texas','"paper mill" + "vendor registration"','[Company name] + "suppliers"','[Company name] + "raw materials buyer"','filetype:pdf "recovered paper" supplier']},
-{id:7,title:'State Recycling Associations',type:'Regional Networks',icon:'🗺️',color:'#f59e0b',url:'https://www.recyclingassociations.org/',desc:'State-level recycling associations often have member directories and networking events.',tips:['Texas Recycling Association','Regional trade shows','Networking events','Member directories']},
-{id:8,title:'Company Career Pages',type:'Research Method',icon:'👔',color:'#8b5cf6',url:'',desc:'Job postings reveal who buys materials. Search for "Fiber Buyer", "Paper Procurement" positions to find the right departments.',tips:['Indeed: "fiber buyer" jobs','LinkedIn Jobs at target companies','Job descriptions show who to contact','Purchasing department structures']}
-];
-
-var tickerItems=[
-{type:'tip',text:'Use LinkedIn to find fiber buyers'},
-{type:'tip',text:'ISRI directory has verified recyclers'},
-{type:'price',text:'OCC: $55-65/ton'},
-{type:'alert',text:'Add leads from Resources tab'}
-];
-
-var marketPrices={OCC:{low:55,high:65},SWL:{low:215,high:230},PM:{low:155,high:165},CBS:{low:155,high:165},HWEC:{low:250,high:370}};
-
-var isAdmin=false,isBuyerForm=false,currentTab='resources',currentTheme='default',buyers=[],leads=[],searchTerm='',filterType='all',leadFilter='all',editBuyerId=null;
-
-function init(){
-var p=new URLSearchParams(window.location.search);
-if(p.get('submit')){isBuyerForm=true;renderBuyerForm(p.get('company')||'');}
-else{loadData();renderApp();}
-}
-
-function loadData(){
-var b=localStorage.getItem('fh_buyers11');
-buyers=b?JSON.parse(b):JSON.parse(JSON.stringify(defaultBuyers));
-var l=localStorage.getItem('fh_leads2');
-leads=l?JSON.parse(l):[];
-var th=localStorage.getItem('fh_theme');
-if(th)currentTheme=th;
-}
-
-function saveData(){
-localStorage.setItem('fh_buyers11',JSON.stringify(buyers));
-localStorage.setItem('fh_leads2',JSON.stringify(leads));
-localStorage.setItem('fh_theme',currentTheme);
-}
-
-function toast(m){var el=document.getElementById('toast');el.textContent=m;el.classList.add('show');setTimeout(function(){el.classList.remove('show')},2000);}
-function setTheme(theme){currentTheme=theme;document.body.className='';if(theme!=='default')document.body.classList.add('theme-'+theme);saveData();}
-function getShareLink(){return window.location.origin+window.location.pathname+'?submit=1';}
-function getQRUrl(){return 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='+encodeURIComponent(getShareLink());}
-
-function renderBuyerForm(company){
-document.getElementById('appContainer').innerHTML='<div style="max-width:400px;margin:30px auto;padding:16px"><div class="panel-card" style="padding:24px"><div style="text-align:center;margin-bottom:16px"><div style="width:50px;height:50px;background:linear-gradient(135deg,var(--success),#059669);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 12px">💰</div><h1 style="font-size:18px;font-weight:800">Submit Your Prices</h1><p style="color:var(--text-muted);font-size:11px">Dalmex Recycling - Dallas, TX</p></div><div id="buyerFormContent"><div class="form-group"><label class="form-label">Company Name *</label><input type="text" class="form-input" id="bfCompany" value="'+company+'"></div><div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" id="bfContact"></div><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="bfEmail"></div><div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" id="bfPhone"></div><div class="form-group"><label class="form-label">Your Buying Prices ($/ton)</label><div class="price-input-group"><div class="price-input-item"><label>OCC</label><input type="number" id="bfOCC" placeholder="55-70"></div><div class="price-input-item"><label>SWL</label><input type="number" id="bfSWL" placeholder="200-240"></div><div class="price-input-item"><label>PM</label><input type="number" id="bfPM" placeholder="145-175"></div><div class="price-input-item"><label>CBS</label><input type="number" id="bfCBS" placeholder="150-180"></div><div class="price-input-item"><label>HWEC</label><input type="number" id="bfHWEC" placeholder="240-380"></div><div class="price-input-item"><label>DLK</label><input type="number" id="bfDLK" placeholder="60-85"></div></div></div><button class="btn btn-success" style="width:100%;padding:14px;font-size:14px" onclick="submitBuyerPrices()">✓ Submit Prices</button></div></div></div>';
-}
-
-function submitBuyerPrices(){
-var company=document.getElementById('bfCompany').value.trim();
-if(!company){toast('Company name required');return;}
-var prices={};
-['OCC','SWL','PM','CBS','HWEC','DLK'].forEach(function(c){
-var v=document.getElementById('bf'+c).value;
-if(v)prices[c]=parseInt(v);
-});
-var data={company:company,contact:document.getElementById('bfContact').value.trim(),email:document.getElementById('bfEmail').value.trim(),phone:document.getElementById('bfPhone').value.trim(),prices:prices,submitted:new Date().toISOString()};
-var pending=JSON.parse(localStorage.getItem('fh_pending')||'[]');
-pending.push(data);
-localStorage.setItem('fh_pending',JSON.stringify(pending));
-document.getElementById('buyerFormContent').innerHTML='<div style="text-align:center;padding:30px;background:#d1fae5;border-radius:12px;color:#047857"><div style="font-size:40px;margin-bottom:12px">✅</div><h3 style="font-size:16px;margin-bottom:6px">Thank You!</h3><p style="font-size:12px">We\'ll review your pricing and be in touch soon.</p></div>';
-}
-
-function renderApp(){
-document.getElementById('appContainer').innerHTML='<div class="app"><div class="ticker-wrap"><div class="ticker" id="ticker"></div></div><header class="header"><div class="header-inner"><div class="header-left"><div class="logo">🎯</div><div><div class="brand-title">Fiber Hub</div><div class="brand-sub">Lead Generation CRM</div></div></div><div class="header-right"><div class="theme-selector"><button class="theme-btn t-default '+(currentTheme==='default'?'active':'')+'" onclick="setTheme(\'default\')"></button><button class="theme-btn t-terminal '+(currentTheme==='terminal'?'active':'')+'" onclick="setTheme(\'terminal\')"></button><button class="theme-btn t-corporate '+(currentTheme==='corporate'?'active':'')+'" onclick="setTheme(\'corporate\')"></button></div><span class="user-badge" id="userBadge">Sales Rep</span><button class="admin-login-btn" id="adminBtn" onclick="showAdminLogin()">👑</button></div></div></header><nav class="nav-bar"><div class="nav-inner" id="navBar"></div></nav><main class="main" id="main"></main><footer class="footer">© 2025 Dalmex Recycling LLC • Lead Generation System</footer></div>';
-if(currentTheme!=='default')document.body.classList.add('theme-'+currentTheme);
-initTicker();renderNav();render();
-}
-
-function showAdminLogin(){document.getElementById('adminLogin').classList.add('active');}
-function hideAdminLogin(){document.getElementById('adminLogin').classList.remove('active');}
-function handleAdminLogin(){
-var u=document.getElementById('username').value.trim(),p=document.getElementById('password').value;
-if(u.toLowerCase()===adminUser.username.toLowerCase()&&p===adminUser.password){
-isAdmin=true;hideAdminLogin();
-document.getElementById('userBadge').textContent='👑 Admin';
-document.getElementById('userBadge').classList.add('admin');
-document.getElementById('adminBtn').style.display='none';
-renderNav();render();toast('Welcome!');
-}else{document.getElementById('loginError').textContent='Invalid credentials';document.getElementById('loginError').classList.add('show');}
-}
-
-function initTicker(){var tk=document.getElementById('ticker'),it=tickerItems.map(function(i){return '<div class="ticker-item"><span class="ticker-badge '+i.type+'">'+i.type.toUpperCase()+'</span> '+i.text+'</div>';}).join('');tk.innerHTML=it+it;}
-
-function renderNav(){
-var leadCount=leads.length;
-var tabs=[
-{id:'resources',icon:'📚',label:'Find Buyers',resources:true},
-{id:'leads',icon:'🎯',label:'My Leads',count:leadCount,leads:true},
-{id:'outreach',icon:'📧',label:'Outreach'},
-{id:'buyers',icon:'👥',label:'Buyers',count:buyers.length},
-{id:'prices',icon:'💰',label:'Prices'}
-];
-if(isAdmin)tabs.push({id:'admin',icon:'⚙️',label:'Admin',adminOnly:true});
-document.getElementById('navBar').innerHTML=tabs.map(function(tab){
-return '<button class="nav-btn '+(currentTab===tab.id?'active':'')+' '+(tab.adminOnly?'admin-only':'')+(tab.leads?' leads':'')+(tab.resources?' resources':'')+'" onclick="setTab(\''+tab.id+'\')">'+tab.icon+' '+tab.label+(tab.count?' <span class="nav-count">'+tab.count+'</span>':'')+'</button>';
-}).join('');
-}
-
-function setTab(tab){currentTab=tab;renderNav();render();}
-function render(){
-var m=document.getElementById('main');
-if(currentTab==='resources')m.innerHTML=renderResources();
-else if(currentTab==='leads')m.innerHTML=renderLeads();
-else if(currentTab==='outreach')m.innerHTML=renderOutreach();
-else if(currentTab==='buyers')m.innerHTML=renderBuyers();
-else if(currentTab==='prices')m.innerHTML=renderPrices();
-else if(currentTab==='admin')m.innerHTML=renderAdmin();
-}
-
-function getLeadStats(){var s={new:0,contacted:0,responded:0,converted:0};leads.forEach(function(l){s[l.status]=(s[l.status]||0)+1;});return s;}
-function renderResources(){
-return '<div style="margin-bottom:14px"><h2 style="font-size:18px;font-weight:800;color:var(--text)">📚 Find Buyers - Research Resources</h2><p style="font-size:11px;color:var(--text-muted)">Use these resources to find REAL contacts at companies that buy recovered fiber</p></div>'+
-
-'<div class="panel-card" style="background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--warning)"><div style="display:flex;align-items:start;gap:12px"><div style="font-size:28px">⚠️</div><div><div style="font-size:13px;font-weight:700;color:#92400e;margin-bottom:4px">How This Works</div><div style="font-size:11px;color:#78350f;line-height:1.6">1. Use the resources below to research real companies and find actual contact info<br>2. Add verified leads to "My Leads" tab with real names, emails, phone numbers<br>3. Use "Outreach" templates to contact them<br>4. When they submit prices, convert them to "Buyers"</div></div></div></div>'+
-
-'<div class="company-list"><div class="company-list-title">🏭 Target Companies to Research (Real Companies)</div>'+
-companiesToResearch.map(function(c){
-return '<div class="company-item"><div><div class="company-name">'+c.name+'</div><div class="company-type">'+c.type+' • '+c.notes+'</div></div><div class="company-actions"><a href="https://www.google.com/search?q='+encodeURIComponent(c.name+' fiber buyer procurement contact')+'" target="_blank" class="company-action">🔍 Search</a><a href="https://www.linkedin.com/search/results/people/?keywords='+encodeURIComponent(c.name+' fiber buyer')+'" target="_blank" class="company-action">💼 LinkedIn</a>'+(c.website?'<a href="https://'+c.website+'" target="_blank" class="company-action">🌐 Site</a>':'')+'</div></div>';
-}).join('')+'</div>'+
-
-'<div style="display:grid;gap:12px">'+
-resources.map(function(r){
-return '<div class="resource-card"><div class="resource-header"><div class="resource-icon" style="background:'+r.color+'">'+r.icon+'</div><div><div class="resource-title">'+r.title+'</div><div class="resource-type">'+r.type+'</div></div></div><div class="resource-desc">'+r.desc+'</div><div class="resource-tips"><div class="resource-tips-title">💡 Tips:</div><ul>'+r.tips.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul></div>'+(r.url?'<a href="'+r.url+'" target="_blank" class="resource-link">🔗 Open Resource</a>':'')+'</div>';
-}).join('')+'</div>'+
-
-'<div class="panel-card" style="margin-top:16px"><div class="panel-title">✅ When You Find a Contact</div><div style="font-size:11px;color:var(--text-muted);line-height:1.7">Once you find a real person at a company:<br><br>1. Click <strong>🎯 My Leads</strong> tab<br>2. Click <strong>➕ Add Lead</strong><br>3. Enter their real info (name, email, phone, company)<br>4. Track your outreach and responses</div><button class="btn btn-danger" style="margin-top:12px" onclick="setTab(\'leads\')">🎯 Go to My Leads</button></div>';
-}
-
-function renderLeads(){
-var s=getLeadStats();
-var filtered=leads.slice();
-if(leadFilter!=='all')filtered=filtered.filter(function(l){return l.status===leadFilter;});
-if(searchTerm)filtered=filtered.filter(function(l){return l.company.toLowerCase().indexOf(searchTerm.toLowerCase())>-1||(l.contact&&l.contact.toLowerCase().indexOf(searchTerm.toLowerCase())>-1);});
-
-var emptyState='<div class="empty-state"><div class="empty-icon">🎯</div><div class="empty-title">No Leads Yet</div><div class="empty-desc">Use the "Find Buyers" tab to research contacts, then add them here</div><button class="btn btn-danger" onclick="openLeadModal()">➕ Add Your First Lead</button><button class="btn btn-outline" style="margin-left:8px" onclick="setTab(\'resources\')">📚 Find Buyers</button></div>';
-
-return '<div style="margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px"><div><h2 style="font-size:18px;font-weight:800;color:var(--text)">🎯 My Leads</h2><p style="font-size:10px;color:var(--text-muted)">Your researched contacts - add real info only</p></div><button class="btn btn-danger btn-sm" onclick="openLeadModal()">➕ Add Lead</button></div>'+
-
-'<div class="lead-stats"><div class="lead-stat new"><div class="lead-stat-value">'+s.new+'</div><div class="lead-stat-label">New</div></div><div class="lead-stat contacted"><div class="lead-stat-value">'+s.contacted+'</div><div class="lead-stat-label">Contacted</div></div><div class="lead-stat responded"><div class="lead-stat-value">'+s.responded+'</div><div class="lead-stat-label">Responded</div></div><div class="lead-stat converted"><div class="lead-stat-value">'+s.converted+'</div><div class="lead-stat-label">Converted</div></div></div>'+
-
-(leads.length?'<div class="contacts-header"><div class="search-box"><span>🔍</span><input type="text" placeholder="Search leads..." value="'+searchTerm+'" oninput="searchTerm=this.value;render()"></div><div class="filter-btns"><button class="filter-btn '+(leadFilter==='all'?'active':'')+'" onclick="leadFilter=\'all\';render()">All</button><button class="filter-btn '+(leadFilter==='new'?'active':'')+'" onclick="leadFilter=\'new\';render()">New</button><button class="filter-btn '+(leadFilter==='contacted'?'active':'')+'" onclick="leadFilter=\'contacted\';render()">Contacted</button><button class="filter-btn '+(leadFilter==='responded'?'active':'')+'" onclick="leadFilter=\'responded\';render()">Responded</button></div></div>':'')+
-
-(filtered.length?'<div>'+filtered.map(function(l){
-return '<div class="lead-card '+l.status+'"><div class="lead-header"><div class="lead-company">'+l.company+'</div><span class="lead-status '+l.status+'">'+l.status+'</span></div><div class="lead-details"><div>👤 '+(l.contact||'No contact')+''+(l.title?' - '+l.title:'')+'</div>'+(l.email?'<div>✉️ '+l.email+'</div>':'')+(l.phone?'<div>📞 '+l.phone+'</div>':'')+'<div>🏭 '+l.type+(l.region?' • 📍 '+l.region:'')+'</div></div>'+(l.materials&&l.materials.length?'<div class="lead-materials">'+l.materials.map(function(m){return '<span class="lead-material">'+m+'</span>';}).join('')+'</div>':'')+(l.notes?'<div style="font-size:10px;color:var(--text-muted);margin-bottom:8px;font-style:italic">"'+l.notes+'"</div>':'')+'<div class="lead-actions">'+(l.email?'<button class="lead-action email" onclick="emailLead('+l.id+')">✉️ Email</button>':'')+(l.phone?'<button class="lead-action sms" onclick="smsLead('+l.id+')">💬 SMS</button><button class="lead-action call" onclick="callLead('+l.id+')">📞 Call</button>':'')+'<button class="lead-action" style="background:var(--bg)" onclick="updateLeadStatus('+l.id+')">📊 Status</button>'+(l.status==='responded'?'<button class="lead-action convert" onclick="convertToBuyer('+l.id+')">✓ Convert</button>':'')+'<button class="lead-action delete" onclick="deleteLead('+l.id+')">🗑️</button></div></div>';
-}).join('')+'</div>':emptyState);
-}
-
-function renderOutreach(){
-var emailTemplate='Subject: Price Request - Dalmex Recycling (OCC, SWL, Mixed Paper)\n\nHi [NAME],\n\nI\'m Robert with Dalmex Recycling in Dallas. We\'re a waste management company generating consistent volumes of recovered fiber including OCC, SWL, mixed paper, and other grades.\n\nWe\'re looking for buyers who offer competitive pricing. I\'d love to get your current rates on:\n\n• OCC (Old Corrugated Containers)\n• SWL (Sorted White Ledger)\n• Mixed Paper\n• CBS (Coated Book Stock)\n• HWEC (High White Envelope Cuttings)\n\nYou can submit your pricing directly here:\n'+getShareLink()+'\n\nOr reply to this email with your current rates.\n\nLooking forward to connecting!\n\nRobert Vandling\nDalmex Recycling LLC\nDallas-Fort Worth, TX\nrvandling@dalmex.com';
-
-var smsTemplate='Hi [NAME], this is Robert from Dalmex Recycling in Dallas. We generate consistent fiber volumes (OCC, SWL, mixed paper) and looking for buyers. What are your current rates? You can submit here: '+getShareLink();
-
-var callScript='Hi, this is Robert Vandling calling from Dalmex Recycling in Dallas-Fort Worth.\n\nWe\'re a waste management company and we generate consistent volumes of recovered paper - OCC, sorted white ledger, mixed paper, and other grades.\n\nI\'m reaching out to see if you\'d be interested in receiving pricing on our material, or if you\'re buying, what your current rates are.\n\nQuestions to ask:\n• What grades are you currently buying?\n• What are your current prices per ton?\n• What\'s your minimum load requirement?\n• Do you pick up or do we deliver?\n\nClose: Great - I\'ll send you our pricing form. What\'s the best email to send that to?';
-
-return '<div style="margin-bottom:14px"><h2 style="font-size:18px;font-weight:800;color:var(--text)">📧 Outreach Templates</h2><p style="font-size:10px;color:var(--text-muted)">Copy these templates when contacting leads</p></div>'+
-
-'<div class="outreach-template"><div class="outreach-title">📧 Email Template</div><div class="outreach-text" id="emailTemplate">'+emailTemplate+'</div><button class="btn btn-primary btn-sm" onclick="copyText(\'emailTemplate\')">📋 Copy Email</button></div>'+
-
-'<div class="outreach-template" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:var(--success)"><div class="outreach-title" style="color:#166534">💬 SMS Template</div><div class="outreach-text" id="smsTemplate">'+smsTemplate+'</div><button class="btn btn-success btn-sm" onclick="copyText(\'smsTemplate\')">📋 Copy SMS</button></div>'+
-
-'<div class="outreach-template" style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-color:var(--warning)"><div class="outreach-title" style="color:#92400e">📞 Call Script</div><div class="outreach-text">'+callScript+'</div></div>'+
-
-'<div class="share-section"><div class="share-title">🔗 Price Submission Link</div><p style="font-size:10px;color:var(--text-muted)">Send this link to buyers - they can submit their prices directly</p><div class="share-url" id="shareUrl">'+getShareLink()+'</div><div class="share-btns"><button class="btn btn-primary btn-sm" onclick="copyText(\'shareUrl\')">📋 Copy Link</button><button class="btn btn-success btn-sm" onclick="window.location.href=\'sms:?body=\'+encodeURIComponent(\'Submit your fiber prices to Dalmex Recycling: \'+getShareLink())">📱 Share via SMS</button><button class="btn btn-warning btn-sm" onclick="window.location.href=\'mailto:?subject=Price Request&body=\'+encodeURIComponent(\'Please submit your pricing here: \'+getShareLink())">✉️ Share via Email</button></div></div>'+
-
-'<div class="qr-section"><div class="qr-title">📱 QR Code - Price Submission</div><p style="font-size:10px;color:var(--text-muted)">Print this or show on your phone for buyers to scan</p><div class="qr-code"><img src="'+getQRUrl()+'" alt="QR Code" style="width:150px;height:150px"></div></div>';
-}
-
-function copyText(id){
-var text=document.getElementById(id).innerText;
-navigator.clipboard.writeText(text);
-toast('Copied to clipboard!');
-}
-
-function emailLead(id){
-var l=leads.find(function(x){return x.id===id;});
-if(!l||!l.email)return;
-var name=l.contact?l.contact.split(' ')[0]:'there';
-var body='Hi '+name+',\n\nI\'m Robert with Dalmex Recycling in Dallas. We generate consistent volumes of recovered fiber (OCC, SWL, mixed paper) and are looking for buyers.\n\nCould you share your current pricing? You can submit here: '+getShareLink()+'\n\nThanks!\nRobert Vandling\nDalmex Recycling';
-window.location.href='mailto:'+l.email+'?subject='+encodeURIComponent('Price Request - Dalmex Recycling')+'&body='+encodeURIComponent(body);
-updateStatus(id,'contacted');
-}
-
-function smsLead(id){
-var l=leads.find(function(x){return x.id===id;});
-if(!l||!l.phone)return;
-var name=l.contact?l.contact.split(' ')[0]:'';
-var msg='Hi'+(name?' '+name:'')+', this is Robert from Dalmex Recycling in Dallas. We have consistent fiber volumes (OCC, SWL, mixed paper). What are your current buying rates? Submit here: '+getShareLink();
-window.location.href='sms:'+l.phone.replace(/[^0-9+]/g,'')+'?body='+encodeURIComponent(msg);
-updateStatus(id,'contacted');
-}
-
-function callLead(id){
-var l=leads.find(function(x){return x.id===id;});
-if(!l||!l.phone)return;
-window.location.href='tel:'+l.phone.replace(/[^0-9+]/g,'');
-updateStatus(id,'contacted');
-}
-
-function updateStatus(id,status){
-var l=leads.find(function(x){return x.id===id;});
-if(l&&l.status==='new'){l.status=status;l.lastContact=new Date().toISOString();saveData();}
-}
-
-function updateLeadStatus(id){
-var l=leads.find(function(x){return x.id===id;});
-if(!l)return;
-var statuses=['new','contacted','responded','converted'];
-var current=statuses.indexOf(l.status);
-var next=statuses[(current+1)%statuses.length];
-l.status=next;
-l.lastContact=new Date().toISOString();
-saveData();renderNav();render();
-toast('Status: '+next);
-}
-
-function deleteLead(id){
-if(!confirm('Delete this lead?'))return;
-leads=leads.filter(function(x){return x.id!==id;});
-saveData();renderNav();render();
-toast('Lead deleted');
-}
-
-function convertToBuyer(id){
-var l=leads.find(function(x){return x.id===id;});
-if(!l)return;
-if(confirm('Convert '+l.company+' to active buyer?')){
-buyers.push({
-id:Date.now(),
-company:l.company,
-contact:l.contact||'',
-email:l.email||'',
-phone:l.phone||'',
-type:l.type==='recycler'?'broker':l.type,
-priority:false,
-prices:{}
-});
-l.status='converted';
-saveData();renderNav();render();
-toast(l.company+' is now a buyer!');
-}
-}
-
-function openLeadModal(){
-document.getElementById('leadModalTitle').textContent='Add New Lead';
-document.getElementById('lCompany').value='';
-document.getElementById('lContact').value='';
-document.getElementById('lTitle').value='';
-document.getElementById('lEmail').value='';
-document.getElementById('lPhone').value='';
-document.getElementById('lType').value='mill';
-document.getElementById('lRegion').value='';
-document.getElementById('lMaterials').value='';
-document.getElementById('lNotes').value='';
-document.getElementById('leadModal').classList.add('active');
-}
-
-function closeLeadModal(){document.getElementById('leadModal').classList.remove('active');}
-
-function saveLead(){
-var company=document.getElementById('lCompany').value.trim();
-if(!company){toast('Company name required');return;}
-var materials=document.getElementById('lMaterials').value.split(',').map(function(m){return m.trim().toUpperCase();}).filter(function(m){return m;});
-var newLead={
-id:Date.now(),
-company:company,
-contact:document.getElementById('lContact').value.trim(),
-title:document.getElementById('lTitle').value.trim(),
-email:document.getElementById('lEmail').value.trim(),
-phone:document.getElementById('lPhone').value.trim(),
-type:document.getElementById('lType').value,
-region:document.getElementById('lRegion').value.trim()||'',
-materials:materials,
-status:'new',
-notes:document.getElementById('lNotes').value.trim(),
-created:new Date().toISOString()
+var CONFIG = {
+  admin: { username: 'RJVandling', password: 'Sailer66' },
+  version: '2.0',
+  storageKeys: { buyers: 'fhp_buyers', leads: 'fhp_leads', pending: 'fhp_pending', theme: 'fhp_theme', lang: 'fhp_lang', history: 'fhp_history', activity: 'fhp_activity' }
 };
-leads.unshift(newLead);
-saveData();closeLeadModal();renderNav();render();
-toast('Lead added!');
-}
-function renderBuyers(){
-var f=buyers.slice().sort(function(a,b){return a.company.localeCompare(b.company);});
-if(searchTerm)f=f.filter(function(b){return b.company.toLowerCase().indexOf(searchTerm.toLowerCase())>-1;});
-if(filterType!=='all')f=f.filter(function(b){return b.type===filterType;});
 
-return '<div style="margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px"><div><h2 style="font-size:18px;font-weight:800;color:var(--text)">👥 Active Buyers</h2><p style="font-size:10px;color:var(--text-muted)">Buyers who have submitted pricing or been verified</p></div>'+(isAdmin?'<button class="btn btn-primary btn-sm" onclick="openBuyerModal()">➕ Add Buyer</button>':'')+'</div>'+
-
-'<div class="contacts-header"><div class="search-box"><span>🔍</span><input type="text" placeholder="Search buyers..." value="'+searchTerm+'" oninput="searchTerm=this.value;render()"></div><div class="filter-btns"><button class="filter-btn '+(filterType==='all'?'active':'')+'" onclick="filterType=\'all\';render()">All</button><button class="filter-btn '+(filterType==='mill'?'active':'')+'" onclick="filterType=\'mill\';render()">Mills</button><button class="filter-btn '+(filterType==='broker'?'active':'')+'" onclick="filterType=\'broker\';render()">Brokers</button><button class="filter-btn '+(filterType==='export'?'active':'')+'" onclick="filterType=\'export\';render()">Export</button></div></div>'+
-
-'<div>'+f.map(function(b){
-return '<div class="contact-card '+(b.priority?'priority':'')+'"><div class="contact-header"><div class="contact-name">'+b.company+'</div><span class="contact-type '+b.type+'">'+b.type+'</span></div><div class="contact-person">👤 '+(b.contact||'No contact')+'</div>'+(b.email?'<div class="contact-email">✉️ '+b.email+'</div>':'')+(b.prices&&Object.keys(b.prices).length?'<div class="contact-prices">'+Object.keys(b.prices).filter(function(k){return b.prices[k];}).map(function(k){return '<div class="price-item"><div class="price-label">'+k+'</div><div class="price-value">$'+b.prices[k]+'</div></div>';}).join('')+'</div>':'<div style="padding:10px;background:var(--bg);border-radius:8px;font-size:10px;color:var(--text-muted);margin-bottom:8px">No prices yet - send price request link</div>')+'<div class="contact-actions">'+(b.phone?'<a href="tel:'+b.phone+'" class="contact-action call">📞 Call</a>':'')+(b.email?'<a href="mailto:'+b.email+'?subject=Price%20Request&body='+encodeURIComponent('Hi, please submit your current pricing here: '+getShareLink())+'" class="contact-action email">✉️ Request Prices</a>':'')+(isAdmin?'<button class="contact-action" onclick="openBuyerModal('+b.id+')">✏️</button><button class="contact-action" style="color:var(--danger)" onclick="deleteBuyer('+b.id+')">🗑️</button>':'')+'</div></div>';
-}).join('')+'</div>';
-}
-
-function renderPrices(){
-var cs=[{n:'OCC',d:marketPrices.OCC},{n:'SWL',d:marketPrices.SWL},{n:'PM',d:marketPrices.PM},{n:'CBS',d:marketPrices.CBS},{n:'HWEC',d:marketPrices.HWEC}];
-var sorted=buyers.filter(function(b){return b.prices&&Object.keys(b.prices).length;}).sort(function(a,b){return(b.prices.OCC||0)-(a.prices.OCC||0);});
-
-return '<div style="margin-bottom:12px"><h2 style="font-size:16px;font-weight:700;color:var(--text)">💰 Market Prices</h2><p style="font-size:10px;color:var(--text-muted)">Current market ranges for recovered fiber</p></div>'+
-
-'<div class="prices-grid">'+cs.map(function(c){return '<div class="price-card"><div class="price-commodity">'+c.n+'</div><div class="price-current">$'+c.d.low+'-'+c.d.high+'</div><div class="price-range">per ton</div></div>';}).join('')+'</div>'+
-
-'<div class="panel-card" style="margin-top:14px"><div class="panel-title">📊 Buyer Price Comparison</div>'+(sorted.length?'<div class="table-container"><table class="data-table"><thead><tr><th>Buyer</th><th>Type</th><th>OCC</th><th>SWL</th><th>PM</th><th>HWEC</th></tr></thead><tbody>'+sorted.map(function(b){return '<tr><td><strong>'+b.company+'</strong></td><td>'+b.type+'</td><td style="color:var(--profit);font-weight:700">'+(b.prices.OCC?'$'+b.prices.OCC:'-')+'</td><td style="color:var(--profit);font-weight:700">'+(b.prices.SWL?'$'+b.prices.SWL:'-')+'</td><td style="color:var(--profit);font-weight:700">'+(b.prices.PM?'$'+b.prices.PM:'-')+'</td><td style="color:var(--profit);font-weight:700">'+(b.prices.HWEC?'$'+b.prices.HWEC:'-')+'</td></tr>';}).join('')+'</tbody></table></div>':'<p style="font-size:11px;color:var(--text-muted);text-align:center;padding:20px">No buyer prices yet. Send the price request link to buyers.</p>')+'</div>';
-}
-
-function renderAdmin(){
-if(!isAdmin)return '<p>Admin only</p>';
-var pending=JSON.parse(localStorage.getItem('fh_pending')||'[]');
-
-return '<div style="margin-bottom:14px"><h2 style="font-size:18px;font-weight:800;color:var(--text)">⚙️ Admin Panel</h2></div>'+
-
-'<div class="share-section"><div class="share-title">🔗 Price Submission Link</div><div class="share-url">'+getShareLink()+'</div><div class="share-btns"><button class="btn btn-primary btn-sm" onclick="navigator.clipboard.writeText(getShareLink());toast(\'Copied!\')">📋 Copy</button></div></div>'+
-
-(pending.length?'<div class="panel-card"><div class="panel-title">📥 Pending Submissions ('+pending.length+')</div>'+pending.map(function(p,i){return '<div style="padding:12px;background:var(--bg);border-radius:8px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:8px"><div><strong style="font-size:13px">'+p.company+'</strong><div style="font-size:10px;color:var(--text-muted)">'+(p.contact||'')+(p.email?' • '+p.email:'')+(p.phone?' • '+p.phone:'')+'</div><div style="font-size:11px;margin-top:6px;color:var(--profit);font-weight:600">'+Object.keys(p.prices).map(function(k){return k+': $'+p.prices[k];}).join(' • ')+'</div></div><div style="display:flex;gap:6px"><button class="btn btn-sm btn-success" onclick="approvePending('+i+')">✓ Approve</button><button class="btn btn-sm btn-danger" onclick="rejectPending('+i+')">✕ Reject</button></div></div></div>';}).join('')+'</div>':'<div class="panel-card"><div style="text-align:center;padding:20px;color:var(--text-muted)"><div style="font-size:32px;margin-bottom:8px">📭</div><div style="font-size:12px">No pending submissions</div><div style="font-size:10px;margin-top:4px">Share your price submission link with buyers</div></div></div>')+
-
-'<div class="admin-section"><div class="admin-section-title">👑 Admin Tools</div><div class="admin-grid"><button class="admin-btn" onclick="openBuyerModal()">➕ Add Buyer</button><button class="admin-btn" onclick="exportCSV()">📥 Export CSV</button><button class="admin-btn" onclick="clearAllData()">🗑️ Clear Data</button><button class="admin-btn" onclick="logoutAdmin()">🚪 Logout</button></div></div>';
-}
-
-function approvePending(i){
-var pending=JSON.parse(localStorage.getItem('fh_pending')||'[]');
-var p=pending[i];
-if(!p)return;
-var ex=buyers.find(function(b){return b.company.toLowerCase()===p.company.toLowerCase();});
-if(ex){
-Object.keys(p.prices).forEach(function(k){ex.prices[k]=p.prices[k];});
-if(p.contact)ex.contact=p.contact;
-if(p.email)ex.email=p.email;
-if(p.phone)ex.phone=p.phone;
-}else{
-buyers.push({id:Date.now(),company:p.company,contact:p.contact||'',email:p.email||'',phone:p.phone||'',type:'mill',priority:false,prices:p.prices});
-}
-// Update lead status if exists
-var lead=leads.find(function(l){return l.company.toLowerCase()===p.company.toLowerCase();});
-if(lead)lead.status='responded';
-pending.splice(i,1);
-localStorage.setItem('fh_pending',JSON.stringify(pending));
-saveData();renderNav();render();
-toast('Approved - '+p.company);
-}
-
-function rejectPending(i){
-var pending=JSON.parse(localStorage.getItem('fh_pending')||'[]');
-pending.splice(i,1);
-localStorage.setItem('fh_pending',JSON.stringify(pending));
-render();
-toast('Rejected');
-}
-
-function exportCSV(){
-var csv='Company,Contact,Email,Phone,Type,OCC,SWL,PM,CBS,HWEC\n'+buyers.map(function(b){return[b.company,b.contact||'',b.email||'',b.phone||'',b.type,b.prices.OCC||'',b.prices.SWL||'',b.prices.PM||'',b.prices.CBS||'',b.prices.HWEC||''].join(',');}).join('\n');
-var a=document.createElement('a');
-a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
-a.download='dalmex_buyers_'+new Date().toISOString().split('T')[0]+'.csv';
-a.click();
-toast('CSV downloaded');
-}
-
-function clearAllData(){
-if(confirm('Clear ALL leads and reset buyers to defaults? This cannot be undone.')){
-leads=[];
-buyers=JSON.parse(JSON.stringify(defaultBuyers));
-localStorage.removeItem('fh_pending');
-saveData();renderNav();render();
-toast('Data cleared');
-}
-}
-
-function logoutAdmin(){
-isAdmin=false;
-document.getElementById('userBadge').textContent='Sales Rep';
-document.getElementById('userBadge').classList.remove('admin');
-document.getElementById('adminBtn').style.display='inline-block';
-currentTab='resources';
-renderNav();render();
-}
-
-function openBuyerModal(id){
-if(!isAdmin){toast('Admin only');return;}
-editBuyerId=id||null;
-document.getElementById('buyerModalTitle').textContent=id?'Edit Buyer':'Add Buyer';
-if(id){
-var b=buyers.find(function(x){return x.id===id;});
-if(b){
-document.getElementById('bCompany').value=b.company||'';
-document.getElementById('bContact').value=b.contact||'';
-document.getElementById('bEmail').value=b.email||'';
-document.getElementById('bPhone').value=b.phone||'';
-document.getElementById('bType').value=b.type||'mill';
-['OCC','DLK','SWL','PM','CBS','HWEC'].forEach(function(c){
-var inp=document.getElementById('p'+c);
-if(inp)inp.value=b.prices&&b.prices[c]||'';
-});
-}
-}else{
-document.getElementById('bCompany').value='';
-document.getElementById('bContact').value='';
-document.getElementById('bEmail').value='';
-document.getElementById('bPhone').value='';
-document.getElementById('bType').value='mill';
-['OCC','DLK','SWL','PM','CBS','HWEC'].forEach(function(c){
-var inp=document.getElementById('p'+c);
-if(inp)inp.value='';
-});
-}
-document.getElementById('buyerModal').classList.add('active');
-}
-
-function closeBuyerModal(){document.getElementById('buyerModal').classList.remove('active');editBuyerId=null;}
-
-function saveBuyer(){
-var pr={};
-['OCC','DLK','SWL','PM','CBS','HWEC'].forEach(function(c){
-var v=document.getElementById('p'+c).value;
-if(v)pr[c]=parseInt(v);
-});
-var d={
-company:document.getElementById('bCompany').value.trim(),
-contact:document.getElementById('bContact').value.trim(),
-email:document.getElementById('bEmail').value.trim(),
-phone:document.getElementById('bPhone').value.trim(),
-type:document.getElementById('bType').value,
-priority:false,
-prices:pr
+var T = {
+  en: { dashboard:'Dashboard', intel:'Intel', tools:'Tools', findBuyers:'Find Buyers', myLeads:'My Leads', outreach:'Outreach', buyers:'Buyers', prices:'Prices', admin:'Admin', search:'Search...', all:'All', mills:'Mills', brokers:'Brokers', exporters:'Exporters', save:'Save', cancel:'Cancel', add:'Add', edit:'Edit', delete:'Delete', company:'Company', contact:'Contact', email:'Email', phone:'Phone', type:'Type', notes:'Notes', new:'New', contacted:'Contacted', responded:'Responded', converted:'Converted', perTon:'per ton', margin:'Margin', profit:'Profit', yourCost:'Your Cost', ppiCompare:'PPI Compare', bestBuyers:'Best Buyers', report:'Industry Report', calculator:'Calculator', priceHistory:'Price History', qrCode:'QR Code', shareLink:'Share Link', welcome:'Welcome!', copied:'Copied!', saved:'Saved!', approved:'Approved!', marketPrices:'Market Prices', totalBuyers:'Total Buyers', topPrice:'Top Price', avgPrice:'Avg Price', openAccess:'Open Access', grade:'Grade', market:'Market', yours:'Yours', gap:'Gap', volume:'Volume', forecast:'Forecast', forecastText:'OCC stable $55-65 range expected Q1 2026. SWL strong demand with Marck at $230. HWEC premium grades in high demand.' },
+  es: { dashboard:'Panel', intel:'Intel', tools:'Herram.', findBuyers:'Buscar', myLeads:'Prospectos', outreach:'Contacto', buyers:'Compradores', prices:'Precios', admin:'Admin', search:'Buscar...', all:'Todos', mills:'Molinos', brokers:'Corredores', exporters:'Export.', save:'Guardar', cancel:'Cancelar', add:'Agregar', edit:'Editar', delete:'Eliminar', company:'Empresa', contact:'Contacto', email:'Correo', phone:'Teléfono', type:'Tipo', notes:'Notas', new:'Nuevo', contacted:'Contactado', responded:'Respondió', converted:'Convertido', perTon:'por ton', margin:'Margen', profit:'Ganancia', yourCost:'Tu Costo', ppiCompare:'Comparar PPI', bestBuyers:'Mejores', report:'Reporte', calculator:'Calculadora', priceHistory:'Historial', qrCode:'Código QR', shareLink:'Compartir', welcome:'¡Bienvenido!', copied:'¡Copiado!', saved:'¡Guardado!', approved:'¡Aprobado!', marketPrices:'Precios', totalBuyers:'Total', topPrice:'Mejor Precio', avgPrice:'Promedio', openAccess:'Acceso Libre', grade:'Grado', market:'Mercado', yours:'Tuyo', gap:'Dif', volume:'Volumen', forecast:'Pronóstico', forecastText:'OCC estable $55-65 Q1 2026. SWL fuerte demanda.' }
 };
-if(!d.company){toast('Company required');return;}
-if(editBuyerId){
-var ix=buyers.findIndex(function(b){return b.id===editBuyerId;});
-if(ix>-1)buyers[ix]=Object.assign({},buyers[ix],d);
-}else{
-d.id=Date.now();
-buyers.push(d);
-}
-saveData();closeBuyerModal();renderNav();render();
-toast('Saved!');
+
+var defaultBuyers = [
+  {id:1,company:'Georgia Pacific',contact:'Jake Walker',email:'jacob.walker1@gapac.com',phone:'',type:'mill',priority:true,prices:{OCC:65,PM:155,SWL:215,HWEC:370},lastContact:'2024-12-28'},
+  {id:2,company:'SKG Westrock',contact:'Cynthia Torres',email:'cynthia.torres@smurfitwestrock.com',phone:'',type:'mill',priority:true,prices:{OCC:60},lastContact:'2024-12-27'},
+  {id:3,company:'Greenside',contact:'Casandra Espinoza',email:'grupocartonero.mty@gmail.com',phone:'',type:'export',priority:true,prices:{OCC:58,PM:165,SWL:215},lastContact:'2024-12-26'},
+  {id:4,company:'American Fiber',contact:'Steve Minor',email:'sminor@amfiberservices.com',phone:'',type:'broker',priority:true,prices:{SWL:215,CBS:160,HWEC:250},lastContact:'2024-12-25'},
+  {id:5,company:'Marck',contact:'Don Langley',email:'dlongley@marck.net',phone:'',type:'broker',priority:false,prices:{OCC:55,SWL:230},lastContact:'2024-12-20'}
+];
+
+var companiesToResearch = [
+  {name:'International Paper',type:'Mill',website:'internationalpaper.com',notes:'Largest US paper company'},
+  {name:'Packaging Corp of America',type:'Mill',website:'packagingcorp.com',notes:'Major containerboard producer'},
+  {name:'Pratt Industries',type:'Mill',website:'prattindustries.com',notes:'100% recycled containerboard'},
+  {name:'Clearwater Paper',type:'Mill',website:'clearwaterpaper.com',notes:'Tissue and paperboard'},
+  {name:'Graphic Packaging',type:'Mill',website:'graphicpkg.com',notes:'Paperboard packaging'},
+  {name:'Sonoco',type:'Mill/Broker',website:'sonoco.com',notes:'Diversified packaging'},
+  {name:'DS Smith',type:'Mill',website:'dssmith.com',notes:'UK company, US operations'},
+  {name:'Cascades',type:'Mill',website:'cascades.com',notes:'Canadian, US facilities'},
+  {name:'Republic Services',type:'Recycler',website:'republicservices.com',notes:'May partner on fiber'},
+  {name:'Waste Management',type:'Recycler',website:'wm.com',notes:'Recycling division'}
+];
+
+var resources = [
+  {id:1,title:'ISRI Member Directory',type:'Industry Association',icon:'🏭',color:'#3b82f6',url:'https://www.isri.org/recycling-commodities/find-a-recycler',desc:'Search verified paper recyclers and brokers by region.',tips:['Search by "Paper" category','Filter by state','Look for "Paper Stock Dealers"']},
+  {id:2,title:'LinkedIn Sales Navigator',type:'Professional Network',icon:'💼',color:'#0077b5',url:'https://www.linkedin.com/sales/search/people',desc:'Find fiber buyers and procurement managers at target companies.',tips:['Search: "fiber buyer" OR "paper procurement"','Filter by Texas/Southeast','Send personalized connection requests']},
+  {id:3,title:'AF&PA Member Mills',type:'Industry Association',icon:'🌲',color:'#166534',url:'https://www.afandpa.org/about-us/member-companies',desc:'All major US paper manufacturers.',tips:['Visit company websites','Look for "Suppliers" pages','Find procurement contacts']},
+  {id:4,title:'RecyclingMarkets.net',type:'Trading Platform',icon:'♻️',color:'#10b981',url:'https://www.recyclingmarkets.net/',desc:'Post listings and connect with buyers.',tips:['Create seller profile','Post available materials','Check price benchmarks']},
+  {id:5,title:'Google Search Strategies',type:'Research Method',icon:'🔍',color:'#ea4335',url:'https://www.google.com',desc:'Targeted searches to find purchasing contacts.',tips:['"fiber procurement manager" + Texas','[Company] + "vendor registration"','[Company] + "raw materials buyer"']}
+];
+
+var ppiData = {OCC:{index:78.2,marketLow:55,marketHigh:70},SWL:{index:92.4,marketLow:200,marketHigh:240},PM:{index:85.1,marketLow:145,marketHigh:175},CBS:{index:88.5,marketLow:150,marketHigh:180},HWEC:{index:95.2,marketLow:240,marketHigh:380},DLK:{index:82.3,marketLow:60,marketHigh:85}};
+var marketPrices = {OCC:{low:55,high:65},SWL:{low:215,high:230},PM:{low:155,high:165},CBS:{low:155,high:165},HWEC:{low:250,high:370},DLK:{low:60,high:80}};
+var tickerItems = [{type:'market',text:'OCC: $55-65/ton'},{type:'market',text:'SWL: $215-230/ton'},{type:'tip',text:'Use LinkedIn to find fiber buyers'},{type:'price',text:'GP leads at $65 OCC'},{type:'tip',text:'Check ISRI directory for recyclers'}];
+
+// App State
+var state = {
+  isAdmin: false,
+  isBuyerForm: false,
+  currentTab: 'dashboard',
+  currentTheme: 'default',
+  lang: 'en',
+  buyers: [],
+  leads: [],
+  priceHistory: [],
+  activity: [],
+  searchTerm: '',
+  filterType: 'all',
+  leadFilter: 'all',
+  editBuyerId: null,
+  editLeadId: null,
+  calcCost: 45,
+  weeklyGoal: 10,
+  contactsMade: 0
+};
+
+function t(key) { return T[state.lang][key] || key; }
+
+function init() {
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('submit')) {
+    state.isBuyerForm = true;
+    renderBuyerForm(params.get('company') || '');
+  } else {
+    loadData();
+    renderApp();
+  }
 }
 
-function deleteBuyer(id){
-if(!isAdmin)return;
-if(confirm('Delete this buyer?')){
-buyers=buyers.filter(function(x){return x.id!==id;});
-saveData();renderNav();render();
-toast('Deleted');
-}
+function loadData() {
+  var b = localStorage.getItem(CONFIG.storageKeys.buyers);
+  state.buyers = b ? JSON.parse(b) : JSON.parse(JSON.stringify(defaultBuyers));
+  var l = localStorage.getItem(CONFIG.storageKeys.leads);
+  state.leads = l ? JSON.parse(l) : [];
+  var th = localStorage.getItem(CONFIG.storageKeys.theme);
+  if (th) state.currentTheme = th;
+  var ln = localStorage.getItem(CONFIG.storageKeys.lang);
+  if (ln) state.lang = ln;
+  var ph = localStorage.getItem(CONFIG.storageKeys.history);
+  state.priceHistory = ph ? JSON.parse(ph) : generateHistory();
+  var act = localStorage.getItem(CONFIG.storageKeys.activity);
+  state.activity = act ? JSON.parse(act) : [];
+  // Count today's contacts
+  var today = new Date().toDateString();
+  state.contactsMade = state.activity.filter(function(a) { return new Date(a.time).toDateString() === today; }).length;
 }
 
+function saveData() {
+  localStorage.setItem(CONFIG.storageKeys.buyers, JSON.stringify(state.buyers));
+  localStorage.setItem(CONFIG.storageKeys.leads, JSON.stringify(state.leads));
+  localStorage.setItem(CONFIG.storageKeys.theme, state.currentTheme);
+  localStorage.setItem(CONFIG.storageKeys.lang, state.lang);
+  localStorage.setItem(CONFIG.storageKeys.history, JSON.stringify(state.priceHistory));
+  localStorage.setItem(CONFIG.storageKeys.activity, JSON.stringify(state.activity));
+}
+
+function generateHistory() {
+  var h = [], base = {OCC:60,SWL:220,PM:160};
+  for (var i=30; i>=0; i--) {
+    var d = new Date(); d.setDate(d.getDate()-i);
+    h.push({date:d.toISOString().split('T')[0],OCC:base.OCC+Math.floor(Math.random()*10-5),SWL:base.SWL+Math.floor(Math.random()*20-10),PM:base.PM+Math.floor(Math.random()*10-5)});
+  }
+  return h;
+}
+
+function logActivity(type, desc) {
+  state.activity.unshift({type:type,desc:desc,time:new Date().toISOString()});
+  if (state.activity.length > 50) state.activity.pop();
+  state.contactsMade++;
+  saveData();
+}
+
+function toast(msg) {
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(function() { el.classList.remove('show'); }, 2500);
+}
+
+function setTheme(theme) {
+  state.currentTheme = theme;
+  document.body.className = '';
+  if (theme !== 'default') document.body.classList.add('theme-' + theme);
+  saveData();
+}
+
+function toggleLang() {
+  state.lang = state.lang === 'en' ? 'es' : 'en';
+  saveData();
+  renderApp();
+  toast(state.lang === 'en' ? 'English' : 'Español');
+}
+
+function getShareLink() { return window.location.origin + window.location.pathname + '?submit=1'; }
+function getQRUrl() { return 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(getShareLink()); }
+// ============================================
+// BUYER FORM (Public Submission)
+// ============================================
+function renderBuyerForm(company) {
+  document.getElementById('app').innerHTML = '<div style="max-width:420px;margin:40px auto;padding:16px"><div class="panel-card" style="padding:28px"><div style="text-align:center;margin-bottom:20px"><div style="width:56px;height:56px;background:linear-gradient(135deg,var(--success),#059669);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 14px">💰</div><h1 style="font-size:20px;font-weight:800;margin-bottom:6px">Submit Your Prices</h1><p style="color:var(--text-muted);font-size:12px">Dalmex Recycling LLC - Dallas-Fort Worth, TX</p></div><div id="formContent"><div class="form-group"><label class="form-label">Company Name *</label><input type="text" class="form-input" id="bfCompany" value="'+company+'" placeholder="Your company name"></div><div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" id="bfContact" placeholder="Contact name"></div><div class="form-row"><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="bfEmail" placeholder="email@company.com"></div><div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" id="bfPhone" placeholder="555-123-4567"></div></div><div class="form-group"><label class="form-label">Your Buying Prices ($/ton)</label><div class="price-input-group"><div class="price-input-item"><label>OCC</label><input type="number" id="bfOCC" placeholder="55-70"></div><div class="price-input-item"><label>SWL</label><input type="number" id="bfSWL" placeholder="200-240"></div><div class="price-input-item"><label>PM</label><input type="number" id="bfPM" placeholder="145-175"></div><div class="price-input-item"><label>CBS</label><input type="number" id="bfCBS" placeholder="150-180"></div><div class="price-input-item"><label>HWEC</label><input type="number" id="bfHWEC" placeholder="240-380"></div><div class="price-input-item"><label>DLK</label><input type="number" id="bfDLK" placeholder="60-85"></div></div></div><button class="btn btn-success" style="width:100%;padding:16px;font-size:15px" onclick="submitPrices()">✓ Submit Prices</button></div></div><p style="text-align:center;margin-top:16px;font-size:10px;color:var(--text-muted)">Powered by Fiber Hub Pro</p></div>';
+}
+
+function submitPrices() {
+  var company = document.getElementById('bfCompany').value.trim();
+  if (!company) { toast('Company name required'); return; }
+  var prices = {};
+  ['OCC','SWL','PM','CBS','HWEC','DLK'].forEach(function(c) {
+    var v = document.getElementById('bf'+c).value;
+    if (v) prices[c] = parseInt(v);
+  });
+  var data = {company:company,contact:document.getElementById('bfContact').value.trim(),email:document.getElementById('bfEmail').value.trim(),phone:document.getElementById('bfPhone').value.trim(),prices:prices,submitted:new Date().toISOString()};
+  var pending = JSON.parse(localStorage.getItem(CONFIG.storageKeys.pending) || '[]');
+  pending.push(data);
+  localStorage.setItem(CONFIG.storageKeys.pending, JSON.stringify(pending));
+  document.getElementById('formContent').innerHTML = '<div style="text-align:center;padding:40px 20px;background:#d1fae5;border-radius:14px;color:#047857"><div style="font-size:48px;margin-bottom:16px">✅</div><h3 style="font-size:18px;margin-bottom:8px">Thank You!</h3><p style="font-size:13px">We\'ll review your pricing and be in touch soon.</p></div>';
+}
+
+// ============================================
+// MAIN APP RENDER
+// ============================================
+function renderApp() {
+  var leadCount = state.leads.filter(function(l){return l.status==='new';}).length;
+  document.getElementById('app').innerHTML = 
+    '<div class="ticker-wrap"><div class="ticker" id="ticker"></div></div>' +
+    '<header class="header"><div class="header-inner">' +
+      '<div class="header-left"><div class="logo">FH</div><div><div class="brand-title">Fiber Hub Pro</div><div class="brand-sub">Dalmex Recycling LLC</div></div></div>' +
+      '<div class="header-right">' +
+        '<button class="lang-btn" onclick="toggleLang()">' + (state.lang==='en'?'🇲🇽 ES':'🇺🇸 EN') + '</button>' +
+        '<div class="theme-selector"><button class="theme-btn t-default '+(state.currentTheme==='default'?'active':'')+'" onclick="setTheme(\'default\')" title="Default"></button><button class="theme-btn t-terminal '+(state.currentTheme==='terminal'?'active':'')+'" onclick="setTheme(\'terminal\')" title="Dark"></button><button class="theme-btn t-corporate '+(state.currentTheme==='corporate'?'active':'')+'" onclick="setTheme(\'corporate\')" title="Corporate"></button></div>' +
+        '<span class="user-badge" id="userBadge">' + (state.isAdmin ? '👑 Admin' : t('openAccess')) + '</span>' +
+        (state.isAdmin ? '' : '<button class="admin-login-btn" onclick="showLogin()">👑</button>') +
+      '</div>' +
+    '</div></header>' +
+    '<nav class="nav-bar"><div class="nav-inner" id="nav"></div></nav>' +
+    '<main class="main" id="main"></main>' +
+    '<footer class="footer"><strong>Fiber Hub Pro v' + CONFIG.version + '</strong><br>Created by <strong>R.J. Vandling</strong> for <strong>Dalmex Recycling, LLC</strong><br>Dallas-Fort Worth, Texas</footer>' +
+    renderModals();
+  
+  if (state.currentTheme !== 'default') document.body.classList.add('theme-' + state.currentTheme);
+  initTicker();
+  renderNav();
+  render();
+}
+
+function renderModals() {
+  return '<div class="login-overlay" id="loginModal"><div class="login-card"><div class="login-logo">👑</div><h2 class="login-title">Admin Login</h2><p class="login-subtitle">Authorized users only</p><div class="login-error" id="loginError"></div><div class="form-group"><label class="form-label">Username</label><input type="text" class="form-input" id="loginUser"></div><div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="loginPass"></div><button class="login-btn" onclick="doLogin()">🔐 Login</button><button class="login-cancel" onclick="hideLogin()">Cancel</button></div></div>' +
+  '<div class="modal-overlay" id="leadModal"><div class="modal"><div class="modal-header"><h3 class="modal-title" id="leadModalTitle">Add Lead</h3><button class="modal-close" onclick="closeLeadModal()">×</button></div><div class="modal-body"><div class="form-group"><label class="form-label">Company *</label><input type="text" class="form-input" id="lCompany"></div><div class="form-row"><div class="form-group"><label class="form-label">Contact Name</label><input type="text" class="form-input" id="lContact"></div><div class="form-group"><label class="form-label">Title</label><input type="text" class="form-input" id="lTitle"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="lEmail"></div><div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" id="lPhone"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Type</label><select class="form-select" id="lType"><option value="mill">Mill</option><option value="broker">Broker</option><option value="recycler">Recycler</option><option value="export">Exporter</option></select></div><div class="form-group"><label class="form-label">Region</label><input type="text" class="form-input" id="lRegion" placeholder="TX, Southeast..."></div></div><div class="form-group"><label class="form-label">Materials (comma separated)</label><input type="text" class="form-input" id="lMaterials" placeholder="OCC, SWL, PM"></div><div class="form-group"><label class="form-label">Notes</label><textarea class="form-textarea" id="lNotes"></textarea></div></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeLeadModal()">Cancel</button><button class="btn btn-primary" onclick="saveLead()">💾 Save</button></div></div></div>' +
+  '<div class="modal-overlay" id="buyerModal"><div class="modal"><div class="modal-header"><h3 class="modal-title" id="buyerModalTitle">Add Buyer</h3><button class="modal-close" onclick="closeBuyerModal()">×</button></div><div class="modal-body"><div class="form-row"><div class="form-group"><label class="form-label">Company *</label><input type="text" class="form-input" id="bCompany"></div><div class="form-group"><label class="form-label">Contact</label><input type="text" class="form-input" id="bContact"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="bEmail"></div><div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" id="bPhone"></div></div><div class="form-group"><label class="form-label">Type</label><select class="form-select" id="bType"><option value="mill">Mill</option><option value="broker">Broker</option><option value="export">Export</option></select></div><div class="form-group"><label class="form-label">Prices ($/ton)</label><div class="price-input-group"><div class="price-input-item"><label>OCC</label><input type="number" id="pOCC"></div><div class="price-input-item"><label>SWL</label><input type="number" id="pSWL"></div><div class="price-input-item"><label>PM</label><input type="number" id="pPM"></div><div class="price-input-item"><label>CBS</label><input type="number" id="pCBS"></div><div class="price-input-item"><label>HWEC</label><input type="number" id="pHWEC"></div><div class="price-input-item"><label>DLK</label><input type="number" id="pDLK"></div></div></div></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeBuyerModal()">Cancel</button><button class="btn btn-primary" onclick="saveBuyer()">💾 Save</button></div></div></div>';
+}
+
+function showLogin() { document.getElementById('loginModal').classList.add('active'); }
+function hideLogin() { document.getElementById('loginModal').classList.remove('active'); }
+function doLogin() {
+  var u = document.getElementById('loginUser').value.trim();
+  var p = document.getElementById('loginPass').value;
+  if (u.toLowerCase() === CONFIG.admin.username.toLowerCase() && p === CONFIG.admin.password) {
+    state.isAdmin = true;
+    hideLogin();
+    renderApp();
+    toast(t('welcome'));
+  } else {
+    document.getElementById('loginError').textContent = 'Invalid credentials';
+    document.getElementById('loginError').classList.add('show');
+  }
+}
+
+function initTicker() {
+  var html = tickerItems.map(function(i) {
+    return '<div class="ticker-item"><span class="ticker-badge ' + i.type + '">' + i.type.toUpperCase() + '</span> ' + i.text + '</div>';
+  }).join('');
+  document.getElementById('ticker').innerHTML = html + html;
+}
+
+function renderNav() {
+  var leadCount = state.leads.filter(function(l){return l.status==='new';}).length;
+  var tabs = [
+    {id:'dashboard',icon:'📊',label:t('dashboard')},
+    {id:'intel',icon:'📈',label:t('intel')},
+    {id:'tools',icon:'🧮',label:t('tools')},
+    {id:'findBuyers',icon:'📚',label:t('findBuyers')},
+    {id:'leads',icon:'🎯',label:t('myLeads'),count:leadCount},
+    {id:'outreach',icon:'📧',label:t('outreach')},
+    {id:'buyers',icon:'👥',label:t('buyers'),count:state.buyers.length},
+    {id:'prices',icon:'💰',label:t('prices')}
+  ];
+  if (state.isAdmin) tabs.push({id:'admin',icon:'⚙️',label:t('admin'),admin:true});
+  document.getElementById('nav').innerHTML = tabs.map(function(tab) {
+    return '<button class="nav-btn ' + (state.currentTab===tab.id?'active':'') + (tab.admin?' admin-only':'') + '" onclick="setTab(\'' + tab.id + '\')">' + tab.icon + ' ' + tab.label + (tab.count ? ' <span class="nav-count">' + tab.count + '</span>' : '') + '</button>';
+  }).join('');
+}
+
+function setTab(tab) { state.currentTab = tab; renderNav(); render(); }
+function render() {
+  var main = document.getElementById('main');
+  switch(state.currentTab) {
+    case 'dashboard': main.innerHTML = renderDashboard(); break;
+    case 'intel': main.innerHTML = renderIntel(); break;
+    case 'tools': main.innerHTML = renderTools(); break;
+    case 'findBuyers': main.innerHTML = renderFindBuyers(); break;
+    case 'leads': main.innerHTML = renderLeads(); break;
+    case 'outreach': main.innerHTML = renderOutreach(); break;
+    case 'buyers': main.innerHTML = renderBuyers(); break;
+    case 'prices': main.innerHTML = renderPrices(); break;
+    case 'admin': main.innerHTML = renderAdmin(); break;
+  }
+}
+// ============================================
+// DASHBOARD
+// ============================================
+function getStats() {
+  var mills = state.buyers.filter(function(b){return b.type==='mill';}).length;
+  var brokers = state.buyers.filter(function(b){return b.type==='broker';}).length;
+  var exporters = state.buyers.filter(function(b){return b.type==='export';}).length;
+  var occPrices = state.buyers.filter(function(b){return b.prices&&b.prices.OCC;}).map(function(b){return b.prices.OCC;});
+  var topOCC = occPrices.length ? Math.max.apply(null, occPrices) : 0;
+  var avgOCC = occPrices.length ? Math.round(occPrices.reduce(function(a,b){return a+b;},0)/occPrices.length) : 0;
+  var newLeads = state.leads.filter(function(l){return l.status==='new';}).length;
+  var pipelineValue = state.leads.filter(function(l){return l.status!=='converted';}).length * 500; // Est $500/lead
+  return {total:state.buyers.length,mills:mills,brokers:brokers,exporters:exporters,topOCC:topOCC,avgOCC:avgOCC,newLeads:newLeads,pipelineValue:pipelineValue};
+}
+
+function renderDashboard() {
+  var s = getStats();
+  var topBuyers = state.buyers.filter(function(b){return b.prices&&b.prices.OCC;}).sort(function(a,b){return b.prices.OCC-a.prices.OCC;}).slice(0,3);
+  var goalPct = Math.min(100, Math.round((state.contactsMade / state.weeklyGoal) * 100));
+  
+  return '<div style="margin-bottom:16px"><h2 style="font-size:22px;font-weight:800;color:var(--text)">📊 ' + t('dashboard') + '</h2><p style="font-size:12px;color:var(--text-muted)">Your business development command center</p></div>' +
+    
+    // Goal Tracker
+    '<div class="goal-tracker"><div class="goal-title">📞 Daily Outreach Goal</div><div class="goal-progress"><div class="goal-fill" style="width:'+goalPct+'%"></div></div><div class="goal-text"><span>'+state.contactsMade+' of '+state.weeklyGoal+' contacts today</span><span>'+goalPct+'%</span></div></div>' +
+    
+    // Pipeline Value
+    (state.leads.length ? '<div class="pipeline-value"><div class="pipeline-amount">$'+s.pipelineValue.toLocaleString()+'</div><div class="pipeline-label">Estimated Pipeline Value ('+state.leads.filter(function(l){return l.status!=='converted';}).length+' active leads × $500)</div></div>' : '') +
+    
+    // Stats Grid
+    '<div class="stats-grid">' +
+      '<div class="stat-card" onclick="setTab(\'buyers\')"><div class="stat-icon purple">👥</div><div class="stat-value">'+s.total+'</div><div class="stat-label">'+t('totalBuyers')+'</div><div class="stat-sub">Click to view all</div></div>' +
+      '<div class="stat-card" onclick="setTab(\'prices\')"><div class="stat-icon green">💰</div><div class="stat-value">$'+s.topOCC+'</div><div class="stat-label">'+t('topPrice')+' (OCC)</div><div class="stat-sub">Georgia Pacific leads</div></div>' +
+      '<div class="stat-card" onclick="setTab(\'intel\')"><div class="stat-icon blue">📈</div><div class="stat-value">$'+s.avgOCC+'</div><div class="stat-label">'+t('avgPrice')+' OCC</div><div class="stat-sub">Market average</div></div>' +
+      '<div class="stat-card" onclick="setTab(\'leads\')"><div class="stat-icon yellow">🎯</div><div class="stat-value">'+s.newLeads+'</div><div class="stat-label">New Leads</div><div class="stat-sub">Awaiting contact</div></div>' +
+      '<div class="stat-card" onclick="state.filterType=\'mill\';setTab(\'buyers\')"><div class="stat-icon cyan">🏭</div><div class="stat-value">'+s.mills+'</div><div class="stat-label">'+t('mills')+'</div><div class="stat-sub">Direct buyers</div></div>' +
+      '<div class="stat-card" onclick="state.filterType=\'broker\';setTab(\'buyers\')"><div class="stat-icon red">🤝</div><div class="stat-value">'+s.brokers+'</div><div class="stat-label">'+t('brokers')+'</div><div class="stat-sub">Trading partners</div></div>' +
+    '</div>' +
+    
+    // Top Buyers & Quick Actions
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">'+
+      '<div class="panel-card"><div class="panel-title">🏆 Top OCC Buyers</div>' + topBuyers.map(function(b,i){
+        var margin = b.prices.OCC - state.calcCost;
+        return '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px"><div style="display:flex;align-items:center;gap:12px"><div style="width:30px;height:30px;background:linear-gradient(135deg,var(--warning),#fbbf24);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff">'+(i+1)+'</div><div><div style="font-size:13px;font-weight:700">'+b.company+'</div><div style="font-size:10px;color:var(--text-muted)">'+b.type+'</div></div></div><div style="text-align:right"><div style="font-size:18px;font-weight:800;color:var(--profit)">$'+b.prices.OCC+'</div><div style="font-size:10px;color:'+(margin>=0?'var(--profit)':'var(--loss)')+'">+$'+margin+' margin</div></div></div>';
+      }).join('') + '</div>' +
+      
+      '<div class="panel-card"><div class="panel-title">⚡ Quick Actions</div>' +
+        '<button class="quick-action" onclick="setTab(\'leads\');setTimeout(openLeadModal,100)"><div class="quick-action-icon" style="background:#fee2e2">🎯</div><div class="quick-action-text">Add New Lead</div></button>' +
+        '<button class="quick-action" onclick="setTab(\'outreach\')"><div class="quick-action-icon" style="background:#dbeafe">📧</div><div class="quick-action-text">View Outreach Templates</div></button>' +
+        '<button class="quick-action" onclick="setTab(\'intel\');setTimeout(showPPICompare,100)"><div class="quick-action-icon" style="background:#d1fae5">📊</div><div class="quick-action-text">PPI Price Compare</div></button>' +
+        '<button class="quick-action" onclick="setTab(\'tools\')"><div class="quick-action-icon" style="background:#f3e8ff">🧮</div><div class="quick-action-text">Profit Calculator</div></button>' +
+      '</div>' +
+    '</div>' +
+    
+    // Recent Activity
+    (state.activity.length ? '<div class="panel-card"><div class="panel-title">📋 Recent Activity</div>' + state.activity.slice(0,5).map(function(a){
+      var icon = a.type==='email'?'📧':a.type==='call'?'📞':a.type==='sms'?'💬':'📝';
+      var time = new Date(a.time);
+      var timeStr = time.toLocaleDateString() + ' ' + time.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+      return '<div class="activity-item"><div class="activity-icon" style="background:var(--bg)">'+icon+'</div><div class="activity-content"><div class="activity-title">'+a.desc+'</div><div class="activity-time">'+timeStr+'</div></div></div>';
+    }).join('') + '</div>' : '');
+}
+
+// ============================================
+// INTEL TAB
+// ============================================
+function renderIntel() {
+  return '<div style="margin-bottom:16px"><h2 style="font-size:22px;font-weight:800;color:var(--text)">📈 Market Intelligence</h2><p style="font-size:12px;color:var(--text-muted)">Commodity pricing data and analysis</p></div>' +
+    '<div class="intel-grid">' +
+      '<div class="intel-btn" onclick="showPPICompare()"><div class="intel-btn-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">📊</div><div class="intel-btn-title">'+t('ppiCompare')+'</div><div class="intel-btn-desc">PPI Index vs Market</div></div>' +
+      '<div class="intel-btn" onclick="showBestBuyers()"><div class="intel-btn-icon" style="background:linear-gradient(135deg,var(--warning),#d97706)">🏆</div><div class="intel-btn-title">'+t('bestBuyers')+'</div><div class="intel-btn-desc">Top price per grade</div></div>' +
+      '<div class="intel-btn" onclick="showReport()"><div class="intel-btn-icon" style="background:linear-gradient(135deg,var(--success),#059669)">📋</div><div class="intel-btn-title">'+t('report')+'</div><div class="intel-btn-desc">Volume & trends</div></div>' +
+      '<div class="intel-btn" onclick="setTab(\'tools\')"><div class="intel-btn-icon" style="background:linear-gradient(135deg,var(--purple),#7c3aed)">🧮</div><div class="intel-btn-title">'+t('calculator')+'</div><div class="intel-btn-desc">Margins & profit</div></div>' +
+    '</div>' +
+    '<div id="intelResults"></div>';
+}
+
+function showPPICompare() {
+  var data = [];
+  Object.keys(ppiData).forEach(function(c) {
+    var ppi = ppiData[c];
+    var best = getHighestPair(c);
+    var ourPrice = best ? best.price : 0;
+    var midMarket = (ppi.marketLow + ppi.marketHigh) / 2;
+    data.push({commodity:c, ppiIndex:ppi.index, marketRange:ppi.marketLow+'-'+ppi.marketHigh, ourPrice:ourPrice, gap:ourPrice-midMarket});
+  });
+  var html = '<div class="panel-card"><div class="panel-title">📊 '+t('ppiCompare')+'</div><div class="ppi-compare"><div class="ppi-row header"><div class="ppi-commodity">'+t('grade')+'</div><div class="ppi-value">PPI</div><div class="ppi-value">'+t('market')+'</div><div class="ppi-value">'+t('yours')+'</div><div class="ppi-gap">'+t('gap')+'</div></div>';
+  data.forEach(function(d) {
+    var gc = d.gap >= 0 ? 'gap-positive' : 'gap-negative';
+    html += '<div class="ppi-row"><div class="ppi-commodity"><strong>'+d.commodity+'</strong></div><div class="ppi-value">'+d.ppiIndex+'</div><div class="ppi-value">$'+d.marketRange+'</div><div class="ppi-value" style="color:var(--profit)">'+(d.ourPrice?'$'+d.ourPrice:'-')+'</div><div class="ppi-gap '+gc+'">'+(d.ourPrice?(d.gap>=0?'+':'')+d.gap.toFixed(0):'-')+'</div></div>';
+  });
+  html += '</div></div>';
+  document.getElementById('intelResults').innerHTML = html;
+}
+
+function getHighestPair(commodity) {
+  var best = null, hp = 0;
+  state.buyers.forEach(function(b) {
+    if (b.prices && b.prices[commodity] && b.prices[commodity] > hp) {
+      hp = b.prices[commodity]; best = b;
+    }
+  });
+  return best ? {buyer:best, price:hp} : null;
+}
+
+function showBestBuyers() {
+  var commodities = ['OCC','SWL','PM','CBS','HWEC','DLK'];
+  var html = '<div class="panel-card"><div class="panel-title">🏆 '+t('bestBuyers')+'</div>';
+  commodities.forEach(function(c) {
+    var pair = getHighestPair(c);
+    if (pair) {
+      html += '<div class="highest-pair"><div><div class="highest-pair-commodity">'+c+'</div><div class="highest-pair-buyer">'+pair.buyer.company+' ('+pair.buyer.type+')</div></div><div class="highest-pair-price">$'+pair.price+'</div></div>';
+    }
+  });
+  html += '</div>';
+  document.getElementById('intelResults').innerHTML = html;
+}
+
+function showReport() {
+  var vols = {OCC:85,SWL:45,PM:62,CBS:28,HWEC:15,DLK:32};
+  var totalVol = Object.values(vols).reduce(function(a,b){return a+b;},0);
+  var html = '<div class="report-section"><div class="report-header"><div class="report-title">📋 '+t('report')+'</div><div class="report-date">'+new Date().toLocaleDateString()+'</div></div>' +
+    '<div class="scorecard"><div class="scorecard-item"><div class="scorecard-value">'+totalVol+'%</div><div class="scorecard-label">Market Coverage</div></div><div class="scorecard-item"><div class="scorecard-value">$'+getStats().avgOCC+'</div><div class="scorecard-label">Avg OCC</div></div><div class="scorecard-item"><div class="scorecard-value">'+state.buyers.length+'</div><div class="scorecard-label">Active Buyers</div></div><div class="scorecard-item"><div class="scorecard-value">'+state.leads.length+'</div><div class="scorecard-label">Leads</div></div></div></div>' +
+    '<div class="panel-card"><div class="panel-title">📊 '+t('volume')+' Index</div><div class="bar-chart">';
+  Object.keys(vols).forEach(function(c) {
+    var p = vols[c];
+    var col = p > 70 ? 'var(--profit)' : p > 40 ? 'var(--warning)' : 'var(--loss)';
+    html += '<div class="bar-row"><div class="bar-label">'+c+'</div><div class="bar-container"><div class="bar-fill" style="width:'+p+'%;background:'+col+'"></div></div><div class="bar-value">'+p+'%</div></div>';
+  });
+  html += '</div></div><div class="forecast-box"><div class="forecast-title">🔮 '+t('forecast')+'</div><div class="forecast-text">'+t('forecastText')+'</div></div>';
+  document.getElementById('intelResults').innerHTML = html;
+}
+// ============================================
+// TOOLS TAB
+// ============================================
+function renderTools() {
+  var topBuyers = state.buyers.filter(function(b){return b.prices&&b.prices.OCC;}).sort(function(a,b){return b.prices.OCC-a.prices.OCC;}).slice(0,6);
+  return '<div style="margin-bottom:16px"><h2 style="font-size:22px;font-weight:800;color:var(--text)">🧮 '+t('tools')+'</h2></div>' +
+    
+    // Profit Calculator
+    '<div class="calc-section"><div class="calc-title">💰 '+t('calculator')+'</div><div class="calc-row"><label style="font-size:12px;color:var(--text)">'+t('yourCost')+' ($/ton):</label><input type="number" class="calc-input" id="calcCost" value="'+state.calcCost+'" onchange="state.calcCost=parseInt(this.value)||45;render()"></div><div class="calc-result"><table class="data-table"><thead><tr><th>'+t('company')+'</th><th>Price</th><th>'+t('margin')+'</th><th>'+t('profit')+'</th></tr></thead><tbody>' +
+    topBuyers.map(function(b) {
+      var margin = b.prices.OCC - state.calcCost;
+      var pct = ((margin / state.calcCost) * 100).toFixed(0);
+      return '<tr><td><strong>'+b.company+'</strong></td><td style="color:var(--profit)">$'+b.prices.OCC+'</td><td class="'+(margin>=0?'margin-positive':'margin-negative')+'">'+pct+'%</td><td class="'+(margin>=0?'margin-positive':'margin-negative')+'">$'+margin+'</td></tr>';
+    }).join('') +
+    '</tbody></table></div></div>' +
+    
+    // QR Code
+    '<div class="qr-section"><div class="qr-title">📱 '+t('qrCode')+'</div><p style="font-size:11px;color:var(--text-muted);margin-bottom:12px">Buyers scan to submit prices</p><div class="qr-code"><img src="'+getQRUrl()+'" alt="QR Code" style="width:150px;height:150px"></div><p style="font-size:10px;color:var(--text-muted);margin-top:10px;word-break:break-all">'+getShareLink()+'</p></div>' +
+    
+    // Price History
+    '<div class="panel-card"><div class="panel-title">📈 '+t('priceHistory')+' - OCC (15 days)</div>' + renderHistoryChart('OCC') + '</div>' +
+    '<div class="panel-card"><div class="panel-title">📈 '+t('priceHistory')+' - SWL (15 days)</div>' + renderHistoryChart('SWL') + '</div>';
+}
+
+function renderHistoryChart(commodity) {
+  if (!state.priceHistory.length) return '<p style="font-size:11px;color:var(--text-muted)">No history data</p>';
+  var prices = state.priceHistory.map(function(h){return h[commodity]||0;});
+  var max = Math.max.apply(null, prices);
+  var min = Math.min.apply(null, prices);
+  var range = max - min || 1;
+  var current = prices[prices.length-1];
+  var html = '<div class="history-chart">';
+  prices.slice(-15).forEach(function(p) {
+    var h = Math.max(12, ((p-min)/range)*60 + 20);
+    html += '<div class="history-bar" style="height:'+h+'px;background:'+(p>=current?'var(--profit)':'var(--primary)')+'" data-value="$'+p+'"></div>';
+  });
+  html += '</div><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-top:6px"><span>Low: $'+min+'</span><span>Current: $'+current+'</span><span>High: $'+max+'</span></div>';
+  return html;
+}
+
+// ============================================
+// FIND BUYERS (Resources)
+// ============================================
+function renderFindBuyers() {
+  return '<div style="margin-bottom:16px"><h2 style="font-size:22px;font-weight:800;color:var(--text)">📚 '+t('findBuyers')+'</h2><p style="font-size:12px;color:var(--text-muted)">Research resources to find verified buyer contacts</p></div>' +
+    
+    '<div class="panel-card" style="background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--warning)"><div style="display:flex;align-items:start;gap:14px"><div style="font-size:32px">💡</div><div><div style="font-size:14px;font-weight:700;color:#92400e;margin-bottom:6px">How This Works</div><div style="font-size:12px;color:#78350f;line-height:1.7">1. Use resources below to find REAL contacts<br>2. Add verified leads to "My Leads" tab<br>3. Use "Outreach" templates to contact them<br>4. When they submit prices, convert to "Buyers"</div></div></div></div>' +
+    
+    '<div class="company-list"><div class="company-list-title">🏭 Target Companies to Research</div>' +
+    companiesToResearch.map(function(c) {
+      return '<div class="company-item"><div><div class="company-name">'+c.name+'</div><div class="company-type">'+c.type+' • '+c.notes+'</div></div><div class="company-actions"><a href="https://www.google.com/search?q='+encodeURIComponent(c.name+' fiber buyer procurement contact')+'" target="_blank" class="company-action">🔍</a><a href="https://www.linkedin.com/search/results/people/?keywords='+encodeURIComponent(c.name+' fiber buyer')+'" target="_blank" class="company-action">💼</a>'+(c.website?'<a href="https://'+c.website+'" target="_blank" class="company-action">🌐</a>':'')+'</div></div>';
+    }).join('') + '</div>' +
+    
+    '<div style="display:grid;gap:14px">' +
+    resources.map(function(r) {
+      return '<div class="resource-card"><div class="resource-header"><div class="resource-icon" style="background:'+r.color+'">'+r.icon+'</div><div><div class="resource-title">'+r.title+'</div><div class="resource-type">'+r.type+'</div></div></div><div class="resource-desc">'+r.desc+'</div><div class="resource-tips"><div class="resource-tips-title">💡 Tips:</div><ul>'+r.tips.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul></div>'+(r.url?'<a href="'+r.url+'" target="_blank" class="resource-link">🔗 Open Resource</a>':'')+'</div>';
+    }).join('') + '</div>';
+}
+
+// ============================================
+// LEADS TAB
+// ============================================
+function getLeadStats() {
+  var s = {new:0,contacted:0,responded:0,converted:0};
+  state.leads.forEach(function(l){s[l.status]=(s[l.status]||0)+1;});
+  return s;
+}
+
+function renderLeads() {
+  var s = getLeadStats();
+  var filtered = state.leads.slice();
+  if (state.leadFilter !== 'all') filtered = filtered.filter(function(l){return l.status===state.leadFilter;});
+  if (state.searchTerm) filtered = filtered.filter(function(l){return l.company.toLowerCase().indexOf(state.searchTerm.toLowerCase())>-1;});
+  
+  var empty = '<div class="empty-state"><div class="empty-icon">🎯</div><div class="empty-title">No Leads Yet</div><div class="empty-desc">Use "Find Buyers" to research contacts, then add them here to track your outreach.</div><button class="btn btn-primary" onclick="openLeadModal()">➕ Add First Lead</button> <button class="btn btn-outline" onclick="setTab(\'findBuyers\')">📚 Find Buyers</button></div>';
+  
+  return '<div style="margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px"><div><h2 style="font-size:22px;font-weight:800;color:var(--text)">🎯 '+t('myLeads')+'</h2><p style="font-size:12px;color:var(--text-muted)">Track your prospect pipeline</p></div><button class="btn btn-primary" onclick="openLeadModal()">➕ Add Lead</button></div>' +
+    
+    '<div class="lead-stats"><div class="lead-stat new"><div class="lead-stat-value">'+s.new+'</div><div class="lead-stat-label">'+t('new')+'</div></div><div class="lead-stat contacted"><div class="lead-stat-value">'+s.contacted+'</div><div class="lead-stat-label">'+t('contacted')+'</div></div><div class="lead-stat responded"><div class="lead-stat-value">'+s.responded+'</div><div class="lead-stat-label">'+t('responded')+'</div></div><div class="lead-stat converted"><div class="lead-stat-value">'+s.converted+'</div><div class="lead-stat-label">'+t('converted')+'</div></div></div>' +
+    
+    (state.leads.length ? '<div class="contacts-header"><div class="search-box"><span>🔍</span><input type="text" placeholder="'+t('search')+'" value="'+state.searchTerm+'" oninput="state.searchTerm=this.value;render()"></div><div class="filter-btns"><button class="filter-btn '+(state.leadFilter==='all'?'active':'')+'" onclick="state.leadFilter=\'all\';render()">'+t('all')+'</button><button class="filter-btn '+(state.leadFilter==='new'?'active':'')+'" onclick="state.leadFilter=\'new\';render()">'+t('new')+'</button><button class="filter-btn '+(state.leadFilter==='contacted'?'active':'')+'" onclick="state.leadFilter=\'contacted\';render()">'+t('contacted')+'</button><button class="filter-btn '+(state.leadFilter==='responded'?'active':'')+'" onclick="state.leadFilter=\'responded\';render()">'+t('responded')+'</button></div></div>' : '') +
+    
+    (filtered.length ? '<div>' + filtered.map(function(l) {
+      return '<div class="lead-card '+l.status+'"><div class="lead-header"><div class="lead-company">'+l.company+'</div><span class="lead-status '+l.status+'">'+l.status+'</span></div><div class="lead-details">👤 '+(l.contact||'No contact')+(l.title?' - '+l.title:'')+(l.email?'<br>✉️ '+l.email:'')+(l.phone?'<br>📞 '+l.phone:'')+'<br>🏭 '+l.type+(l.region?' • 📍 '+l.region:'')+'</div>'+(l.materials&&l.materials.length?'<div class="lead-materials">'+l.materials.map(function(m){return '<span class="lead-material">'+m+'</span>';}).join('')+'</div>':'')+(l.notes?'<div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;font-style:italic">"'+l.notes+'"</div>':'')+'<div class="lead-actions">'+(l.email?'<button class="lead-action email" onclick="emailLead('+l.id+')">✉️ Email</button>':'')+(l.phone?'<button class="lead-action sms" onclick="smsLead('+l.id+')">💬 SMS</button><button class="lead-action call" onclick="callLead('+l.id+')">📞 Call</button>':'')+'<button class="lead-action" style="background:var(--bg)" onclick="cycleLeadStatus('+l.id+')">📊 Status</button>'+(l.status==='responded'?'<button class="lead-action convert" onclick="convertLead('+l.id+')">✓ Convert</button>':'')+'<button class="lead-action delete" onclick="deleteLead('+l.id+')">🗑️</button></div></div>';
+    }).join('') + '</div>' : empty);
+}
+
+function openLeadModal() {
+  state.editLeadId = null;
+  document.getElementById('leadModalTitle').textContent = 'Add New Lead';
+  ['lCompany','lContact','lTitle','lEmail','lPhone','lRegion','lMaterials','lNotes'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('lType').value = 'mill';
+  document.getElementById('leadModal').classList.add('active');
+}
+function closeLeadModal() { document.getElementById('leadModal').classList.remove('active'); }
+
+function saveLead() {
+  var company = document.getElementById('lCompany').value.trim();
+  if (!company) { toast('Company required'); return; }
+  var materials = document.getElementById('lMaterials').value.split(',').map(function(m){return m.trim().toUpperCase();}).filter(function(m){return m;});
+  var lead = {
+    id: Date.now(),
+    company: company,
+    contact: document.getElementById('lContact').value.trim(),
+    title: document.getElementById('lTitle').value.trim(),
+    email: document.getElementById('lEmail').value.trim(),
+    phone: document.getElementById('lPhone').value.trim(),
+    type: document.getElementById('lType').value,
+    region: document.getElementById('lRegion').value.trim(),
+    materials: materials,
+    notes: document.getElementById('lNotes').value.trim(),
+    status: 'new',
+    created: new Date().toISOString()
+  };
+  state.leads.unshift(lead);
+  saveData();
+  closeLeadModal();
+  renderNav();
+  render();
+  toast(t('saved'));
+}
+
+function emailLead(id) {
+  var l = state.leads.find(function(x){return x.id===id;});
+  if (!l || !l.email) return;
+  var name = l.contact ? l.contact.split(' ')[0] : 'there';
+  var body = 'Hi '+name+',\n\nI\'m Robert with Dalmex Recycling in Dallas-Fort Worth. We generate consistent volumes of recovered fiber (OCC, SWL, mixed paper).\n\nWould you share your current buying prices? You can submit here:\n'+getShareLink()+'\n\nThanks!\nRobert Vandling\nDalmex Recycling LLC';
+  window.location.href = 'mailto:'+l.email+'?subject='+encodeURIComponent('Price Request - Dalmex Recycling')+'&body='+encodeURIComponent(body);
+  updateLeadStatus(id, 'contacted');
+  logActivity('email', 'Emailed '+l.company);
+}
+
+function smsLead(id) {
+  var l = state.leads.find(function(x){return x.id===id;});
+  if (!l || !l.phone) return;
+  var name = l.contact ? l.contact.split(' ')[0] : '';
+  var msg = 'Hi'+(name?' '+name:'')+', this is Robert from Dalmex Recycling in Dallas. We have consistent fiber volumes (OCC, SWL, mixed paper). What are your current buying rates? Submit here: '+getShareLink();
+  window.location.href = 'sms:'+l.phone.replace(/[^0-9+]/g,'')+'?body='+encodeURIComponent(msg);
+  updateLeadStatus(id, 'contacted');
+  logActivity('sms', 'Texted '+l.company);
+}
+
+function callLead(id) {
+  var l = state.leads.find(function(x){return x.id===id;});
+  if (!l || !l.phone) return;
+  window.location.href = 'tel:'+l.phone.replace(/[^0-9+]/g,'');
+  updateLeadStatus(id, 'contacted');
+  logActivity('call', 'Called '+l.company);
+}
+
+function updateLeadStatus(id, status) {
+  var l = state.leads.find(function(x){return x.id===id;});
+  if (l && l.status === 'new') { l.status = status; saveData(); }
+}
+
+function cycleLeadStatus(id) {
+  var l = state.leads.find(function(x){return x.id===id;});
+  if (!l) return;
+  var statuses = ['new','contacted','responded','converted'];
+  var idx = statuses.indexOf(l.status);
+  l.status = statuses[(idx+1) % statuses.length];
+  saveData();
+  renderNav();
+  render();
+  toast('Status: ' + l.status);
+}
+
+function convertLead(id) {
+  var l = state.leads.find(function(x){return x.id===id;});
+  if (!l) return;
+  if (confirm('Convert '+l.company+' to active buyer?')) {
+    state.buyers.push({id:Date.now(),company:l.company,contact:l.contact||'',email:l.email||'',phone:l.phone||'',type:l.type==='recycler'?'broker':l.type,priority:false,prices:{}});
+    l.status = 'converted';
+    saveData();
+    renderNav();
+    render();
+    toast(l.company + ' converted!');
+  }
+}
+
+function deleteLead(id) {
+  if (!confirm('Delete this lead?')) return;
+  state.leads = state.leads.filter(function(x){return x.id!==id;});
+  saveData();
+  renderNav();
+  render();
+}
+// ============================================
+// OUTREACH TAB
+// ============================================
+function renderOutreach() {
+  var emailTpl = 'Subject: Price Request - Dalmex Recycling (OCC, SWL, Mixed Paper)\n\nHi [NAME],\n\nI\'m Robert with Dalmex Recycling in Dallas-Fort Worth. We\'re a waste management company generating consistent volumes of recovered fiber including OCC, SWL, mixed paper, and other grades.\n\nWe\'re looking for buyers who offer competitive pricing. I\'d love to get your current rates on:\n\n• OCC (Old Corrugated Containers)\n• SWL (Sorted White Ledger)\n• Mixed Paper\n• CBS (Coated Book Stock)\n• HWEC (High White Envelope Cuttings)\n\nYou can submit your pricing directly here:\n'+getShareLink()+'\n\nOr reply with your current rates.\n\nLooking forward to connecting!\n\nRobert Vandling\nDalmex Recycling LLC\nDallas-Fort Worth, TX\nrvandling@dalmex.com';
+  
+  var smsTpl = 'Hi [NAME], this is Robert from Dalmex Recycling in Dallas. We have consistent fiber volumes (OCC, SWL, mixed paper) and looking for buyers. What are your current rates? Submit here: '+getShareLink();
+  
+  var callScript = 'Hi, this is Robert Vandling calling from Dalmex Recycling in Dallas-Fort Worth.\n\nWe\'re a waste management company and we generate consistent volumes of recovered paper - OCC, sorted white ledger, mixed paper, and other grades.\n\nI\'m reaching out to see if you\'d be interested in receiving our material, or if you\'re buying, what your current rates are.\n\nQuestions to ask:\n• What grades are you currently buying?\n• What are your current prices per ton?\n• What\'s your minimum load requirement?\n• Do you pick up or do we deliver?\n\nClose: Great - I\'ll send you our pricing form. What\'s the best email?';
+  
+  return '<div style="margin-bottom:16px"><h2 style="font-size:22px;font-weight:800;color:var(--text)">📧 '+t('outreach')+'</h2><p style="font-size:12px;color:var(--text-muted)">Ready-to-use templates for contacting prospects</p></div>' +
+    
+    '<div class="outreach-template"><div class="outreach-title">📧 Email Template</div><div class="outreach-text" id="emailTpl">'+emailTpl+'</div><button class="btn btn-primary btn-sm" onclick="copyText(\'emailTpl\')">📋 Copy Email</button></div>' +
+    
+    '<div class="outreach-template" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:var(--success)"><div class="outreach-title" style="color:#166534">💬 SMS Template</div><div class="outreach-text" id="smsTpl">'+smsTpl+'</div><button class="btn btn-success btn-sm" onclick="copyText(\'smsTpl\')">📋 Copy SMS</button></div>' +
+    
+    '<div class="outreach-template" style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-color:var(--warning)"><div class="outreach-title" style="color:#92400e">📞 Call Script</div><div class="outreach-text">'+callScript+'</div></div>' +
+    
+    '<div class="share-section"><div class="share-title">🔗 '+t('shareLink')+'</div><p style="font-size:11px;color:var(--text-muted)">Send this link to buyers to submit their prices</p><div class="share-url" id="shareUrl">'+getShareLink()+'</div><div class="share-btns"><button class="btn btn-primary btn-sm" onclick="copyText(\'shareUrl\')">📋 Copy</button><button class="btn btn-success btn-sm" onclick="window.location.href=\'sms:?body=\'+encodeURIComponent(\'Submit fiber prices to Dalmex: \'+getShareLink())">📱 SMS</button><button class="btn btn-warning btn-sm" onclick="window.location.href=\'mailto:?subject=Price Request&body=\'+encodeURIComponent(\'Submit your pricing here: \'+getShareLink())">✉️ Email</button></div></div>' +
+    
+    '<div class="qr-section"><div class="qr-title">📱 '+t('qrCode')+'</div><p style="font-size:11px;color:var(--text-muted)">Print or show to buyers</p><div class="qr-code"><img src="'+getQRUrl()+'" alt="QR" style="width:150px;height:150px"></div></div>';
+}
+
+function copyText(id) {
+  var text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text);
+  toast(t('copied'));
+}
+
+// ============================================
+// BUYERS TAB
+// ============================================
+function renderBuyers() {
+  var filtered = state.buyers.slice().sort(function(a,b){return a.company.localeCompare(b.company);});
+  if (state.searchTerm) filtered = filtered.filter(function(b){return b.company.toLowerCase().indexOf(state.searchTerm.toLowerCase())>-1;});
+  if (state.filterType !== 'all') filtered = filtered.filter(function(b){return b.type===state.filterType;});
+  
+  return '<div style="margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px"><div><h2 style="font-size:22px;font-weight:800;color:var(--text)">👥 '+t('buyers')+'</h2><p style="font-size:12px;color:var(--text-muted)">Your active buyer contacts</p></div>'+(state.isAdmin?'<button class="btn btn-primary" onclick="openBuyerModal()">➕ Add Buyer</button>':'')+'</div>' +
+    
+    '<div class="contacts-header"><div class="search-box"><span>🔍</span><input type="text" placeholder="'+t('search')+'" value="'+state.searchTerm+'" oninput="state.searchTerm=this.value;render()"></div><div class="filter-btns"><button class="filter-btn '+(state.filterType==='all'?'active':'')+'" onclick="state.filterType=\'all\';render()">'+t('all')+'</button><button class="filter-btn '+(state.filterType==='mill'?'active':'')+'" onclick="state.filterType=\'mill\';render()">'+t('mills')+'</button><button class="filter-btn '+(state.filterType==='broker'?'active':'')+'" onclick="state.filterType=\'broker\';render()">'+t('brokers')+'</button><button class="filter-btn '+(state.filterType==='export'?'active':'')+'" onclick="state.filterType=\'export\';render()">'+t('exporters')+'</button></div></div>' +
+    
+    '<div>' + filtered.map(function(b) {
+      return '<div class="contact-card '+(b.priority?'priority':'')+'"><div class="contact-header"><div class="contact-name">'+b.company+'</div><span class="contact-type '+b.type+'">'+b.type+'</span></div><div class="contact-person">👤 '+(b.contact||'No contact')+'</div>'+(b.email?'<div class="contact-email">✉️ '+b.email+'</div>':'')+(b.prices&&Object.keys(b.prices).length?'<div class="contact-prices">'+Object.keys(b.prices).filter(function(k){return b.prices[k];}).map(function(k){return '<div class="price-item"><div class="price-label">'+k+'</div><div class="price-value">$'+b.prices[k]+'</div></div>';}).join('')+'</div>':'<div style="padding:12px;background:var(--bg);border-radius:10px;font-size:11px;color:var(--text-muted);margin-bottom:10px">No prices yet - send price request</div>')+'<div class="contact-actions">'+(b.phone?'<a href="tel:'+b.phone+'" class="contact-action call">📞</a>':'')+(b.email?'<a href="mailto:'+b.email+'?subject=Price%20Request&body='+encodeURIComponent('Please submit your pricing: '+getShareLink())+'" class="contact-action email">✉️ Request</a>':'')+(state.isAdmin?'<button class="contact-action" onclick="openBuyerModal('+b.id+')">✏️</button><button class="contact-action" style="color:var(--danger)" onclick="deleteBuyer('+b.id+')">🗑️</button>':'')+'</div></div>';
+    }).join('') + '</div>';
+}
+
+function openBuyerModal(id) {
+  state.editBuyerId = id || null;
+  document.getElementById('buyerModalTitle').textContent = id ? 'Edit Buyer' : 'Add Buyer';
+  if (id) {
+    var b = state.buyers.find(function(x){return x.id===id;});
+    if (b) {
+      document.getElementById('bCompany').value = b.company || '';
+      document.getElementById('bContact').value = b.contact || '';
+      document.getElementById('bEmail').value = b.email || '';
+      document.getElementById('bPhone').value = b.phone || '';
+      document.getElementById('bType').value = b.type || 'mill';
+      ['OCC','SWL','PM','CBS','HWEC','DLK'].forEach(function(c){
+        var inp = document.getElementById('p'+c);
+        if (inp) inp.value = b.prices && b.prices[c] || '';
+      });
+    }
+  } else {
+    ['bCompany','bContact','bEmail','bPhone'].forEach(function(id){document.getElementById(id).value='';});
+    ['pOCC','pSWL','pPM','pCBS','pHWEC','pDLK'].forEach(function(id){document.getElementById(id).value='';});
+    document.getElementById('bType').value = 'mill';
+  }
+  document.getElementById('buyerModal').classList.add('active');
+}
+function closeBuyerModal() { document.getElementById('buyerModal').classList.remove('active'); }
+
+function saveBuyer() {
+  var company = document.getElementById('bCompany').value.trim();
+  if (!company) { toast('Company required'); return; }
+  var prices = {};
+  ['OCC','SWL','PM','CBS','HWEC','DLK'].forEach(function(c){
+    var v = document.getElementById('p'+c).value;
+    if (v) prices[c] = parseInt(v);
+  });
+  var data = {
+    company: company,
+    contact: document.getElementById('bContact').value.trim(),
+    email: document.getElementById('bEmail').value.trim(),
+    phone: document.getElementById('bPhone').value.trim(),
+    type: document.getElementById('bType').value,
+    priority: false,
+    prices: prices
+  };
+  if (state.editBuyerId) {
+    var idx = state.buyers.findIndex(function(b){return b.id===state.editBuyerId;});
+    if (idx > -1) state.buyers[idx] = Object.assign({}, state.buyers[idx], data);
+  } else {
+    data.id = Date.now();
+    state.buyers.push(data);
+  }
+  saveData();
+  closeBuyerModal();
+  renderNav();
+  render();
+  toast(t('saved'));
+}
+
+function deleteBuyer(id) {
+  if (!confirm('Delete this buyer?')) return;
+  state.buyers = state.buyers.filter(function(x){return x.id!==id;});
+  saveData();
+  renderNav();
+  render();
+}
+
+// ============================================
+// PRICES TAB
+// ============================================
+function renderPrices() {
+  var sorted = state.buyers.filter(function(b){return b.prices&&Object.keys(b.prices).length;}).sort(function(a,b){return(b.prices.OCC||0)-(a.prices.OCC||0);});
+  
+  return '<div style="margin-bottom:16px"><h2 style="font-size:22px;font-weight:800;color:var(--text)">💰 '+t('marketPrices')+'</h2><p style="font-size:12px;color:var(--text-muted)">Current market ranges and buyer comparison</p></div>' +
+    
+    '<div class="prices-grid">' + Object.keys(marketPrices).map(function(c){
+      var p = marketPrices[c];
+      return '<div class="price-card"><div class="price-commodity">'+c+'</div><div class="price-current">$'+p.low+'-'+p.high+'</div><div class="price-range">'+t('perTon')+'</div></div>';
+    }).join('') + '</div>' +
+    
+    '<div class="panel-card" style="margin-top:18px"><div class="panel-title">📊 Buyer Price Comparison</div>' +
+    (sorted.length ? '<div class="table-container"><table class="data-table"><thead><tr><th>'+t('company')+'</th><th>Type</th><th>OCC</th><th>SWL</th><th>PM</th><th>HWEC</th></tr></thead><tbody>' +
+    sorted.map(function(b){
+      return '<tr><td><strong>'+b.company+'</strong></td><td>'+b.type+'</td><td style="color:var(--profit);font-weight:700">'+(b.prices.OCC?'$'+b.prices.OCC:'-')+'</td><td style="color:var(--profit);font-weight:700">'+(b.prices.SWL?'$'+b.prices.SWL:'-')+'</td><td style="color:var(--profit);font-weight:700">'+(b.prices.PM?'$'+b.prices.PM:'-')+'</td><td style="color:var(--profit);font-weight:700">'+(b.prices.HWEC?'$'+b.prices.HWEC:'-')+'</td></tr>';
+    }).join('') + '</tbody></table></div>' : '<p style="text-align:center;padding:30px;color:var(--text-muted)">No buyer prices yet</p>') + '</div>';
+}
+
+// ============================================
+// ADMIN TAB
+// ============================================
+function renderAdmin() {
+  if (!state.isAdmin) return '<p>Admin access required</p>';
+  var pending = JSON.parse(localStorage.getItem(CONFIG.storageKeys.pending) || '[]');
+  
+  return '<div style="margin-bottom:16px"><h2 style="font-size:22px;font-weight:800;color:var(--text)">⚙️ '+t('admin')+'</h2></div>' +
+    
+    '<div class="share-section"><div class="share-title">🔗 '+t('shareLink')+'</div><div class="share-url">'+getShareLink()+'</div><div class="share-btns"><button class="btn btn-primary btn-sm" onclick="navigator.clipboard.writeText(getShareLink());toast(t(\'copied\'))">📋 Copy</button></div></div>' +
+    
+    (pending.length ? '<div class="panel-card"><div class="panel-title">📥 Pending Submissions ('+pending.length+')</div>' +
+    pending.map(function(p, i){
+      return '<div style="padding:14px;background:var(--bg);border-radius:10px;margin-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:10px"><div><strong style="font-size:14px">'+p.company+'</strong><div style="font-size:11px;color:var(--text-muted)">'+(p.contact||'')+(p.email?' • '+p.email:'')+'</div><div style="font-size:12px;margin-top:6px;color:var(--profit);font-weight:600">'+Object.keys(p.prices).map(function(k){return k+': $'+p.prices[k];}).join(' • ')+'</div></div><div style="display:flex;gap:8px"><button class="btn btn-success btn-sm" onclick="approvePending('+i+')">✓ Approve</button><button class="btn btn-danger btn-sm" onclick="rejectPending('+i+')">✕ Reject</button></div></div></div>';
+    }).join('') + '</div>' : '<div class="panel-card"><div style="text-align:center;padding:30px;color:var(--text-muted)"><div style="font-size:40px;margin-bottom:12px">📭</div><div style="font-size:13px">No pending submissions</div></div></div>') +
+    
+    '<div class="admin-section"><div class="admin-section-title">👑 Admin Tools</div><div class="admin-grid"><button class="admin-btn" onclick="openBuyerModal()">➕ Add Buyer</button><button class="admin-btn" onclick="exportCSV()">📥 Export CSV</button><button class="admin-btn" onclick="printReport()">🖨️ Print Report</button><button class="admin-btn" onclick="clearData()">🗑️ Clear Data</button><button class="admin-btn" onclick="logout()">🚪 Logout</button></div></div>';
+}
+
+function approvePending(i) {
+  var pending = JSON.parse(localStorage.getItem(CONFIG.storageKeys.pending) || '[]');
+  var p = pending[i];
+  if (!p) return;
+  var existing = state.buyers.find(function(b){return b.company.toLowerCase()===p.company.toLowerCase();});
+  if (existing) {
+    Object.keys(p.prices).forEach(function(k){existing.prices[k]=p.prices[k];});
+    if (p.contact) existing.contact = p.contact;
+    if (p.email) existing.email = p.email;
+    if (p.phone) existing.phone = p.phone;
+  } else {
+    state.buyers.push({id:Date.now(),company:p.company,contact:p.contact||'',email:p.email||'',phone:p.phone||'',type:'mill',priority:false,prices:p.prices});
+  }
+  // Update lead if exists
+  var lead = state.leads.find(function(l){return l.company.toLowerCase()===p.company.toLowerCase();});
+  if (lead) lead.status = 'responded';
+  pending.splice(i,1);
+  localStorage.setItem(CONFIG.storageKeys.pending, JSON.stringify(pending));
+  saveData();
+  renderNav();
+  render();
+  toast(t('approved'));
+}
+
+function rejectPending(i) {
+  var pending = JSON.parse(localStorage.getItem(CONFIG.storageKeys.pending) || '[]');
+  pending.splice(i,1);
+  localStorage.setItem(CONFIG.storageKeys.pending, JSON.stringify(pending));
+  render();
+}
+
+function exportCSV() {
+  var csv = 'Company,Contact,Email,Phone,Type,OCC,SWL,PM,CBS,HWEC,DLK\n' +
+    state.buyers.map(function(b){
+      return [b.company,b.contact||'',b.email||'',b.phone||'',b.type,b.prices.OCC||'',b.prices.SWL||'',b.prices.PM||'',b.prices.CBS||'',b.prices.HWEC||'',b.prices.DLK||''].join(',');
+    }).join('\n');
+  var a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'dalmex_buyers_' + new Date().toISOString().split('T')[0] + '.csv';
+  a.click();
+  toast('CSV downloaded');
+}
+
+function printReport() { window.print(); }
+
+function clearData() {
+  if (confirm('Clear all leads and reset buyers to defaults? This cannot be undone.')) {
+    state.leads = [];
+    state.buyers = JSON.parse(JSON.stringify(defaultBuyers));
+    state.activity = [];
+    localStorage.removeItem(CONFIG.storageKeys.pending);
+    saveData();
+    renderNav();
+    render();
+    toast('Data cleared');
+  }
+}
+
+function logout() {
+  state.isAdmin = false;
+  state.currentTab = 'dashboard';
+  renderApp();
+}
+
+// Initialize
 init();
 </script>
 </body>
